@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProyectService } from "../proyect.service";
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-simulations',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SimulationsComponent implements OnInit {
 
-  constructor() { }
+  proyectStatus$: Observable<any>;
+
+  constructor(private proyectService: ProyectService) { }
 
   ngOnInit() {
+    this.proyectStatus$ = this.proyectService.getStatus();
   }
 
 }

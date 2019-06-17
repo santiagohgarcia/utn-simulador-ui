@@ -1,3 +1,18 @@
-<p>
-  simulations works!
-</p>
+<div class="card-container" *ngIf="proyectStatus$ | async as proyectStatus">
+  <div class="example-card">
+        <mat-toolbar color="secundary" >
+              <mat-icon style="margin-right: 10px;">whatshot</mat-icon>
+              <h4>Producto</h4>
+          </mat-toolbar>
+        <div class="list">
+          <div class="list-item">
+              <p>Descripcion</p>
+              <h4>{{ proyectStatus.producto.nombre }}</h4>
+          </div>
+          <div class="list-item">
+              <p>Precio</p>
+              <h4>ARS {{ proyectStatus.producto.precio }}</h4>
+          </div>
+        </div>        
+    </div> 
+</div>

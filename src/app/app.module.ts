@@ -52,6 +52,7 @@ import {
   MatTooltipModule,
   MatStepperModule,
 } from '@angular/material';
+import { ProyectService } from './proyect.service';
 
 @NgModule({
   exports: [
@@ -114,6 +115,9 @@ export class MaterialModule {}
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule
+  ],
+  providers: [
+    ProyectService
   ],
   entryComponents: [RegisterComponent],
   bootstrap: [AppComponent]
