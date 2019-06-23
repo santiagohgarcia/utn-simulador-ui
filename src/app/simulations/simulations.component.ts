@@ -14,7 +14,17 @@ export class SimulationsComponent implements OnInit {
   constructor(private proyectService: ProyectService) { }
 
   ngOnInit() {
+    this.updateStatus();
+  }
+
+  updateStatus() {
     this.proyectStatus$ = this.proyectService.getStatus();
+  }
+
+  onSimulate() {
+    this.proyectStatus$.subscribe(status => {
+      this.proyectService.simulate(status).subscribe(_ => this.updateStatus() )
+    });
   }
 
 }
