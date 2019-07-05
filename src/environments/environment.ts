@@ -13,5 +13,5 @@ export const environment = {
     storageBucket: "",
     messagingSenderId: "200338586891"
   },
-  proyectServiceHost: "http://localhost:8080"
+  proyectoServiceHost: "http://localhost:8080"
 };

@@ -4,11 +4,11 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class ProyectService {
+export class ProyectoService {
 
   constructor(private http: HttpClient) { }
 
-  decisions = [
+  decisiones = [
     {
       id: 1,
       descripcion: "Cuanto quiere invertir en publicidad?",
@@ -23,16 +23,16 @@ export class ProyectService {
 
   ]
 
-  getStatus() {
-    return this.http.get(`${environment.proyectServiceHost}/api/estado/actual`);
+  getEstado() {
+    return this.http.get(`${environment.proyectoServiceHost}/api/estado/actual`);
   }
 
-  simulate(status) {
-    return this.http.post(`${environment.proyectServiceHost}/api/estado`, status);
+  simular(status) {
+    return this.http.post(`${environment.proyectoServiceHost}/api/estado`, status);
   }
 
-  getDecisions() {
-    return Observable.of(this.decisions);
+  getDecisiones() {
+    return Observable.of(this.decisiones);
   }
 
   getDecision(id) {
@@ -40,24 +40,24 @@ export class ProyectService {
   }
 
   addDecision(decision){
-    this.decisions.push(decision);
+    this.decisiones.push(decision);
     return Observable.of(decision);
   }
 
   updateDecision(decision){
-    let index = this.decisions.indexOf(this._findDecisionById(decision.id));
-    this.decisions[index] = decision;
+    let index = this.decisiones.indexOf(this._findDecisionById(decision.id));
+    this.decisiones[index] = decision;
     return Observable.of(decision);
   }
 
   removeDecision(id){
-    var index = this.decisions.indexOf(this._findDecisionById(id));
-    this.decisions.splice(index, 1);
+    var index = this.decisiones.indexOf(this._findDecisionById(id));
+    this.decisiones.splice(index, 1);
     return Observable.of(null);
   }
 
   _findDecisionById(id){
-    return this.decisions.find( d => d.id === id);
+    return this.decisiones.find( d => d.id === id);
   }
 
 }

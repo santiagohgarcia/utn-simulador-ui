@@ -12,14 +12,15 @@ import { HttpClient, HttpClientModule }    from '@angular/common/http';
 import {CdkTableModule} from '@angular/cdk/table';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
-import { SimulationsComponent } from './simulations/simulations.component';
-import { AwardsComponent } from './awards/awards.component';
+import { SimulacionesComponent } from './simulaciones/simulaciones.component';
+import { PremiosComponent } from './premios/premios.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { RegisterComponent } from './login/components/register.component';
-import { DecisionsComponent } from './decisions/decisions.component';
-import { DecisionDetailComponent } from './decision-detail/decision-detail.component';
+import { DecisionesComponent } from './decisiones/decisiones.component';
+import { DecisionDetalleComponent } from './decision-detalle/decision-detalle.component';
+import { ProyectoService } from './proyecto.service';
 
 import {
   MatAutocompleteModule,
@@ -54,7 +55,7 @@ import {
   MatTooltipModule,
   MatStepperModule,
 } from '@angular/material';
-import { ProyectService } from './proyect.service';
+
 
 
 
@@ -101,13 +102,13 @@ export class MaterialModule {}
 @NgModule({
   declarations: [
     AppComponent,
-    SimulationsComponent,
-    AwardsComponent,
+    SimulacionesComponent,
+    PremiosComponent,
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    DecisionsComponent,
-    DecisionDetailComponent
+    DecisionesComponent,
+    DecisionDetalleComponent
   ],
   imports: [
     BrowserModule,
@@ -123,7 +124,7 @@ export class MaterialModule {}
     AngularFireAuthModule
   ],
   providers: [
-    ProyectService
+    ProyectoService
   ],
   entryComponents: [RegisterComponent],
   bootstrap: [AppComponent]
