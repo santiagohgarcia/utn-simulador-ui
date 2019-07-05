@@ -18,6 +18,8 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { RegisterComponent } from './login/components/register.component';
+import { DecisionsComponent } from './decisions/decisions.component';
+import { DecisionDetailComponent } from './decision-detail/decision-detail.component';
 
 import {
   MatAutocompleteModule,
@@ -53,6 +55,8 @@ import {
   MatStepperModule,
 } from '@angular/material';
 import { ProyectService } from './proyect.service';
+
+
 
 @NgModule({
   exports: [
@@ -101,7 +105,9 @@ export class MaterialModule {}
     AwardsComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    DecisionsComponent,
+    DecisionDetailComponent
   ],
   imports: [
     BrowserModule,

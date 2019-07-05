@@ -1,0 +1,24 @@
+<div class="card-container">
+
+  <div *ngFor="let decision of decisions$ | async" class="card">
+    <mat-toolbar color="secundary">
+      <mat-toolbar-row>
+        <h6>{{ decision.id }}. {{ decision.descripcion }}</h6>
+        <span class="spacer"></span>
+        <button mat-icon-button routerLink="/decisions/{{ decision.id }}">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="removeDecision(decision.id)">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <button mat-flat-button color="secundary" *ngFor="let response of decision.respuestas" class="response-button">{{response.descripcion}}</button>
+  </div>
+
+  
+</div>
+
+<a mat-fab color="primary" routerLink="/decisions/new" class="fab">
+  <mat-icon>add</mat-icon>
+</a>

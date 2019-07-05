@@ -1,95 +1,90 @@
-
-<div class="background-container" *ngIf="proyectStatus$ | async as proyectStatus"> 
-    <mat-toolbar color="secundary" >
-        <mat-icon style="margin-right: 20px;">date_range</mat-icon>
-        <h4>Estado Actual (Mes {{ proyectStatus.mes }} )</h4>
-        <span class="spacer"></span>
-        <mat-icon class="active-icon">verified_user</mat-icon>
-        <h3>Activo</h3>
-      </mat-toolbar>
+<div class="background-container" *ngIf="proyectStatus$ | async as proyectStatus">
+  <mat-toolbar color="secundary">
+    <mat-icon style="margin-right: 20px;">date_range</mat-icon>
+    <h4>Estado Actual (Mes {{ proyectStatus.mes }} )</h4>
+    <span class="spacer"></span>
+    <mat-icon class="active-icon">verified_user</mat-icon>
+    <h3>Activo</h3>
+  </mat-toolbar>
   <div class="content-container">
-  <div class="card-container" >
-    <div class="card">
-          <mat-toolbar color="secundary" >
-                <mat-icon style="margin-right: 10px;">whatshot</mat-icon>
-                <h4>Producto</h4>
-            </mat-toolbar>
-          <div class="list">
-            <div class="list-item">
-                <p>Descripcion</p>
-                <h4>{{ proyectStatus.producto.nombre }}</h4>
-            </div>
-            <div class="list-item">
-                <p>Costo Fijo</p>
-                <h4>ARS {{ proyectStatus.costoFijo }}</h4>
-            </div>
-            <div class="list-item">
-              <p>Costo Variable</p>
-              <h4>ARS {{ proyectStatus.costoVariable }}</h4>
+    <div class="card-container">
+      <div class="card">
+        <mat-toolbar color="secundary">
+          <mat-icon style="margin-right: 10px;">whatshot</mat-icon>
+          <h4>Producto</h4>
+        </mat-toolbar>
+        <div class="list">
+          <div class="list-item">
+            <p>Descripcion</p>
+            <h4>{{ proyectStatus.producto.nombre }}</h4>
+          </div>
+          <div class="list-item">
+            <p>Costo Fijo</p>
+            <h4>ARS {{ proyectStatus.costoFijo }}</h4>
+          </div>
+          <div class="list-item">
+            <p>Costo Variable</p>
+            <h4>ARS {{ proyectStatus.costoVariable }}</h4>
           </div>
           <div class="list-item">
             <p>Stock</p>
             <h4>{{ proyectStatus.stock }} u</h4>
+          </div>
+          <div class="list-item">
+            <p>Produccion Mensual</p>
+            <h4>{{ proyectStatus.produccionMensual }} u/mes</h4>
+          </div>
         </div>
-        <div class="list-item">
-          <p>Produccion Mensual</p>
-          <h4>{{ proyectStatus.produccionMensual }} u/mes</h4>
       </div>
-          </div>        
-      </div> 
 
 
       <div class="card">
-          <mat-toolbar color="secundary" >
-                <mat-icon style="margin-right: 10px;">attach_money</mat-icon>
-                <h4>Ventas</h4>
-            </mat-toolbar>
-          <div class="list">
-            <div class="list-item">
-                <p>Media</p>
-                <h4>ARS {{ proyectStatus.parametrosVentas.media }}</h4>
-            </div>
-            <div class="list-item">
-                <p>Desvio Estandar</p>
-                <h4>{{ proyectStatus.parametrosVentas.desvioEstandar * 100 }} %</h4>
-            </div>
-            
-          </div>        
-      </div> 
+        <mat-toolbar color="secundary">
+          <mat-icon style="margin-right: 10px;">attach_money</mat-icon>
+          <h4>Ventas</h4>
+        </mat-toolbar>
+        <div class="list">
+          <div class="list-item">
+            <p>Media</p>
+            <h4>ARS {{ proyectStatus.parametrosVentas.media }}</h4>
+          </div>
+          <div class="list-item">
+            <p>Desvio Estandar</p>
+            <h4>{{ proyectStatus.parametrosVentas.desvioEstandar * 100 }} %</h4>
+          </div>
+
+        </div>
+      </div>
 
       <div class="single-number-container">
-      <div class="single-number-card">
-          <mat-toolbar color="secundary" >
-              <mat-icon style="margin-right: 10px;">attach_money</mat-icon>
-              <h4>Caja</h4>
+        <div class="single-number-card">
+          <mat-toolbar color="secundary">
+            <mat-icon style="margin-right: 10px;">attach_money</mat-icon>
+            <h4>Caja</h4>
           </mat-toolbar>
-          
-          <h1 class="single-number">ARS {{ proyectStatus.caja }}</h1>  
-        </div> 
-          <div class="single-number-card">
-          <mat-toolbar color="secundary" >
-              <mat-icon style="margin-right: 10px;">attach_money</mat-icon>
-              <h4>VAN</h4> 
-          </mat-toolbar>
-       
-          <h1 class="single-number">15 %</h1>    
+
+          <h1 class="single-number">ARS {{ proyectStatus.caja }}</h1>
         </div>
         <div class="single-number-card">
-          <mat-toolbar color="secundary" >
-              <mat-icon style="margin-right: 10px;">attach_money</mat-icon>
-              <h4>TIR</h4>
+          <mat-toolbar color="secundary">
+            <mat-icon style="margin-right: 10px;">attach_money</mat-icon>
+            <h4>VAN</h4>
           </mat-toolbar>
-          <h1 class="single-number">18 %</h1>              
-      </div> 
+
+          <h1 class="single-number">15 %</h1>
+        </div>
+        <div class="single-number-card">
+          <mat-toolbar color="secundary">
+            <mat-icon style="margin-right: 10px;">attach_money</mat-icon>
+            <h4>TIR</h4>
+          </mat-toolbar>
+          <h1 class="single-number">18 %</h1>
+        </div>
+      </div>
     </div>
-
-
   </div>
-
-
-  <a mat-fab color="primary" (click)="onSimulate()" class="fab-button" >
-    <mat-icon>next_week</mat-icon>
-  </a>
-</div>
 </div>
 
+<a mat-fab color="primary" (click)="onNextDesition()" class="fab">
+  <mat-icon>skip_next</mat-icon>
+</a>

@@ -1,0 +1,25 @@
+<div class="background-container">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button routerLink="/decisions">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h1>Nueva Desicion</h1>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="form-container">
+    <form [formGroup]="decisionForm" class="form">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Descripcion" [formControl]="descripcion" [(ngModel)]="decision.descripcion"
+          [(value)]="decision.descripcion">
+        <mat-error *ngIf="description.invalid">Required field</mat-error>
+      </mat-form-field>
+    </form>
+  </div>
+ 
+</div>
+
+
+<button mat-fab color="primary" class="fab" (click)="save()">
+    <mat-icon>done</mat-icon>
+  </button>
