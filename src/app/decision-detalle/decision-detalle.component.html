@@ -4,7 +4,8 @@
       <button mat-icon-button routerLink="/decisiones">
         <mat-icon>arrow_back</mat-icon>
       </button>
-      <h1>Nueva Desicion</h1>
+      <h1 *ngIf="!decision.id">Nueva Decision</h1>
+      <h1 *ngIf="decision.id">Editar Decision</h1>
     </mat-toolbar-row>
   </mat-toolbar>
   <div class="content-container">
@@ -20,58 +21,83 @@
     <div class="respuestas-container">
       <mat-toolbar color="secundary">
         <h1>Respuestas</h1>
+        <span class="spacer"></span>
         <button mat-icon-button (click)="addRespuesta()">
           <mat-icon>add</mat-icon>
         </button>
       </mat-toolbar>
 
 
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <table mat-table [dataSource]="decision.respuestas" multiTemplateDataRows>
 
-          <!--- Note that these columns can be defined in any order.
-                The actual rendered columns are set as a property on the row definition" -->
-        
-          <!-- Position Column -->
-          <ng-container matColumnDef="position">
-            <th mat-header-cell *matHeaderCellDef> No. </th>
-            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-          </ng-container>
-        
-          <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-          </ng-container>
-        
-          <!-- Weight Column -->
-          <ng-container matColumnDef="weight">
-            <th mat-header-cell *matHeaderCellDef> Weight </th>
-            <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-          </ng-container>
-        
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="symbol">
-            <th mat-header-cell *matHeaderCellDef> Symbol </th>
-            <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-          </ng-container>
-        
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+        <!-- Descripcion Column -->
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+          <td mat-cell *matCellDef="let respuesta"> {{respuesta.descripcion}} </td>
+        </ng-container>
+
+        <!-- Edit Column -->
+        <ng-container matColumnDef="edit" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef style="table-header"></th>
+          <td mat-cell *matCellDef="let respuesta">
+            <div class="edit-column">
+              <button mat-icon-button (click)="editRespuesta(respuesta)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="removeRespuesta(respuesta)">
+                <mat-icon>clear</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+        <ng-container matColumnDef="expandedDetail">
+          <td mat-cell *matCellDef="let respuesta" [attr.colspan]="displayedColumns.length">
+            <div class="element-detail" [@detailExpand]="respuesta == expandedRespuesta ? 'expanded' : 'collapsed'">
+              <div class="consecuencias-container">
+                <div class="consecuencia-card" *ngFor="let consecuencia of respuesta.consecuencias">
+                  <div class="consecuencia-account-buttons">
+                    <span class="cuenta">{{ consecuencia.cuenta }}</span>
+                    <div>
+                      <button mat-icon-button (click)="editConsecuencia(consecuencia)">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                      <button mat-icon-button color="warn" (click)="removeConsecuencia(respuesta,consecuencia)">
+                        <mat-icon>clear</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="consecuencia-trend-container">
+                    <mat-icon class="trend trend-icon">trending_up</mat-icon>
+                    <span class="trend">{{ consecuencia.valor }}%</span>
+                  </div>
+                </div>
+                <div class="add-consecuencia-card">
+                  <button mat-icon-button color="primary" (click)="addConsecuencia(respuesta)">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </td>
+        </ng-container>
 
 
 
-      <mat-list role="list">
-        <mat-list-item *ngFor="let respuesta of decision.respuestas" role="listitem">
-          <span mat-line>{{ respuesta.descripcion }}</span>
-          <button mat-icon-button>
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button color="warn" (click)="showInfo(link)">
-            <mat-icon>clear</mat-icon>
-          </button>
-        </mat-list-item>
-      </mat-list>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let respuesta; columns: displayedColumns;" class="element-row"
+          [class.expanded-row]="expandedRespuesta === respuesta"
+          (click)="expandedRespuesta = expandedRespuesta === respuesta ? null : respuesta">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+
+
+
+      </table>
+
+
+
     </div>
   </div>
 </div>

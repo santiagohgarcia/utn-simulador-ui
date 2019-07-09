@@ -1,5 +1,5 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -88,7 +88,7 @@ export class LoginComponent implements OnInit {
   openSnackBar(message: string, action: string = "OK") {
     this.snackBar.open(message, action, {
       duration: 2000,
-      extraClasses: ['error-snack-bar']
+      //extraClasses: ['error-snack-bar']
     });
   }
 

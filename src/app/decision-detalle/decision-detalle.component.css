@@ -31,3 +31,92 @@
     flex-direction: column;
     box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 }
+
+.edit-column {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.spacer {
+    display: flex;
+    flex: 1 1;
+}
+
+
+.table-header{
+  visibility: hidden;
+}
+
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  background: #777;
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.consecuencias-container {
+  display: flex;
+  padding: 0.5rem;
+}
+
+.consecuencia-card {
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 220px;
+  height: 110px;
+  padding: 0.5rem;
+  margin-right: 1rem;
+}
+
+.consecuencia-account-buttons{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add-consecuencia-card{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 110px;
+  padding: 0.5rem;
+}
+
+.consecuencia-trend-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trend{
+  font-size: 50px;
+  font-weight: lighter;
+}
+
+.trend-icon {
+  height: 50px;
+  width: 50px;
+}
+
+.cuenta {
+  font-size: x-large;
+  font-weight: lighter;
+}

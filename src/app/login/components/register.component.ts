@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import { MatDialogRef, MatSnackBar } from '@angular/material';
 import { FormControl, Validators, FormGroup, AbstractControl, ValidationErrors } from '@angular/forms';
@@ -63,7 +63,7 @@ export class RegisterComponent implements OnInit {
   openSnackBar(message: string, action: string = "OK") {
     this.snackBar.open(message, action, {
       duration: 2000,
-      extraClasses: ['error-snack-bar']
+      //extraClasses: ['error-snack-bar']
     });
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +10,9 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 
 export class HomeComponent implements OnInit {
-  @ViewChild('sidenav') sidenav: MatSidenav;
+  @ViewChild('sidenav',{
+    static: true
+  }) sidenav: MatSidenav;
 
   constructor(private router: Router,
               private afAuth: AngularFireAuth) { }

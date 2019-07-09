@@ -1,5 +1,5 @@
 import {Component, ViewChild, OnInit} from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
 @Component({
