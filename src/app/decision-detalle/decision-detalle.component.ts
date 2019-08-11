@@ -3,7 +3,9 @@ import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { of } from 'rxjs';
 import { ProyectoService } from '../proyecto.service';
 import { ActivatedRoute } from '@angular/router';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { MatDialog } from '@angular/material';
+import { RespuestaDialogComponent } from './respuestas/respuesta-dialog.component';
 
 @Component({
   selector: 'app-decision-detalle',
@@ -11,8 +13,8 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   styleUrls: ['./decision-detalle.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ]
@@ -33,30 +35,37 @@ export class DecisionDetalleComponent implements OnInit {
     descripcion: this.descripcion
   });
 
-  displayedColumns: string[] = ['descripcion','edit'];
+  displayedColumns: string[] = ['descripcion', 'edit'];
 
-  constructor(private proyectoService: ProyectoService, private route: ActivatedRoute) { }
+  constructor(private proyectoService: ProyectoService, private route: ActivatedRoute, private dialog: MatDialog) { }
 
   ngOnInit() {
     var id = Number(this.route.snapshot.paramMap.get('id'));
-    this.getDecision(id).subscribe(d => this.decision = d );
+    this.getDecision(id).subscribe(d => this.decision = d);
   }
 
   getDecision(id) {
     return id ? this.proyectoService.getDecision(id) : of(this.templateDecision);
   }
 
-  addRespuesta(){
+  addRespuesta() {
     this.decision.respuestas = this.decision.respuestas.concat([{
       descripcion: "nueva resp",
       consecuencias: []
     }]);
   }
 
-  removeRespuesta(respuesta){
+  removeRespuesta(respuesta) {
     var index = this.decision.respuestas.indexOf(respuesta);
     this.decision.respuestas.splice(index, 1)
     this.decision.respuestas = this.decision.respuestas.concat([]);
+  }
+
+  editRespuesta(respuesta) {
+    this.dialog.open(RespuestaDialogComponent, {
+      width: '250px',
+      data: respuesta
+    });
   }
 
   addConsecuencia(respuesta) {
@@ -66,12 +75,10 @@ export class DecisionDetalleComponent implements OnInit {
     }])
   }
 
-  removeConsecuencia(respuesta,consecuencia){
+  removeConsecuencia(respuesta, consecuencia) {
     var index = respuesta.consecuencias.indexOf(consecuencia);
     respuesta.consecuencias.splice(index, 1);
     respuesta.consecuencias = respuesta.consecuencias.concat([]);
   }
-
-
 
 }

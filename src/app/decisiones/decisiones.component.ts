@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProyectoService } from '../proyecto.service';
 import { Observable } from 'rxjs/Observable';
 
+
 @Component({
   selector: 'app-decisiones',
   templateUrl: './decisiones.component.html',
@@ -24,5 +25,7 @@ export class DecisionesComponent implements OnInit {
   removeDecision(id){
       this.proyectoService.removeDecision(id);
   }
+
+
 
 }

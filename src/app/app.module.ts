@@ -18,7 +18,9 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/components/register.component';
 import { DecisionesComponent } from './decisiones/decisiones.component';
 import { DecisionDetalleComponent } from './decision-detalle/decision-detalle.component';
+import { FlujoFondosComponent } from './flujo-fondos/flujo-fondos.component';
 import { ProyectoService } from './proyecto.service';
+
 
 import {
   MatAutocompleteModule,
@@ -53,6 +55,7 @@ import {
   MatTooltipModule,
   MatStepperModule,
 } from '@angular/material';
+
 
 
 
@@ -106,7 +109,8 @@ export class MaterialModule { }
     LoginComponent,
     RegisterComponent,
     DecisionesComponent,
-    DecisionDetalleComponent
+    DecisionDetalleComponent,
+    FlujoFondosComponent
   ],
   imports: [
     BrowserModule,

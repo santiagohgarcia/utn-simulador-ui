@@ -6,12 +6,16 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { DecisionesComponent } from './decisiones/decisiones.component';
 import { DecisionDetalleComponent } from './decision-detalle/decision-detalle.component';
-import { AppComponent } from './app.component';
+import { FlujoFondosComponent } from './flujo-fondos/flujo-fondos.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'home', redirectTo: 'simulaciones' },
+  {
+    path: 'flujo-fondos', component: HomeComponent,
+    children: [{ path: '', component: FlujoFondosComponent, pathMatch: 'full' }]
+  },
   {
     path: 'simulaciones', component: HomeComponent,
     children: [{ path: '', component: SimulacionesComponent, pathMatch: 'full' }]

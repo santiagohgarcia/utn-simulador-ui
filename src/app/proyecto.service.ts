@@ -17,13 +17,13 @@ export class ProyectoService {
         consecuencias: [{
           cuenta: "Caja",
           valor: 20
-        },{
+        }, {
           cuenta: "Stock",
           valor: 20
-        },{
+        }, {
           cuenta: "Ventas",
           valor: 20
-        },{
+        }, {
           cuenta: "Caja",
           valor: 20
         }]
@@ -85,25 +85,235 @@ export class ProyectoService {
     return of(this._findDecisionById(id));
   }
 
-  addDecision(decision){
+  addDecision(decision) {
     this.decisiones.push(decision);
     return of(decision);
   }
 
-  updateDecision(decision){
+  updateDecision(decision) {
     let index = this.decisiones.indexOf(this._findDecisionById(decision.id));
     this.decisiones[index] = decision;
     return of(decision);
   }
 
-  removeDecision(id){
+  removeDecision(id) {
     var index = this.decisiones.indexOf(this._findDecisionById(id));
     this.decisiones.splice(index, 1);
     return of(null);
   }
 
-  _findDecisionById(id){
-    return this.decisiones.find( d => d.id === id);
+  _findDecisionById(id) {
+    return this.decisiones.find(d => d.id === id);
+  }
+
+  getFlujoFondos(id) : Observable<any> {
+    return of({
+      "INGRESOS_AFECTOS_A_IMPUESTOS": {
+        "descripcion": "Ingresos Afectos a Impuestos",
+        "cuentas": [
+          {
+            "id": "1",
+            "descripcion": "Venta Equipo",
+            "montosPeriodo": [
+              {
+                "periodo": 5,
+                "monto": 100
+              }
+            ]
+          }
+        ]
+      },
+      "EGRESOS_AFECTOS_A_IMPUESTOS": {
+        "descripcion": "Ingresos Afectos a Impuestos",
+        "cuentas": [
+          {
+            "id": "2",
+            "descripcion": "Costos de Operación",
+            "montosPeriodo": [
+              {
+                "periodo": 1,
+                "monto": 800
+              },
+              {
+                "periodo": 2,
+                "monto": 800
+              },
+              {
+                "periodo": 3,
+                "monto": 800
+              },
+              {
+                "periodo": 4,
+                "monto": 800
+              }
+            ]
+          }
+        ]
+      },
+      "GASTOS_NO_DESEMBOLSABLES": {
+        "descripcion": "Depreciación",
+        "cuentas": [
+          {
+            "id": "2",
+            "descripcion": "Costos de Operación",
+            "montosPeriodo": [
+              {
+                "periodo": 1,
+                "monto": 140
+              },
+              {
+                "periodo": 2,
+                "monto": 112
+              },
+              {
+                "periodo": 3,
+                "monto": 89.6
+              },
+              {
+                "periodo": 4,
+                "monto": 71.68
+              },
+              {
+                "periodo": 5,
+                "monto": 57.34
+              }
+            ]
+          }
+        ]
+      },
+      "UTILIDAD_NETA_ANTES_DE_IMPUESTOS": {
+        "descripcion": "Utilidad Neta Antes de Impuestos",
+        "montosPeriodo": [
+          {
+            "periodo": 1,
+            "monto": -940
+          },
+          {
+            "periodo": 2,
+            "monto": -912
+          },
+          {
+            "periodo": 3,
+            "monto": -889.6
+          },
+          {
+            "periodo": 4,
+            "monto": -871.68
+          },
+          {
+            "periodo": 5,
+            "monto": -757.34
+          }
+        ]
+      },
+      "IMPUESTOS": {
+        "descripcion": "Impuestos",
+        "montosPeriodo": [
+          {
+            "periodo": 1,
+            "monto": -329
+          },
+          {
+            "periodo": 2,
+            "monto": -319.2
+          },
+          {
+            "periodo": 3,
+            "monto": -311.36
+          },
+          {
+            "periodo": 4,
+            "monto": -305.09
+          },
+          {
+            "periodo": 5,
+            "monto": -265.07
+          }
+        ]
+      },
+      "UTILIDAD_DESPUES_DE_IMPUESTOS": {
+        "descripcion": "Utilidad Despues de Impuestos",
+        "montosPeriodo": [
+          {
+            "periodo": 1,
+            "monto": -611
+          },
+          {
+            "periodo": 2,
+            "monto": -592.8
+          },
+          {
+            "periodo": 3,
+            "monto": -578.24
+          },
+          {
+            "periodo": 4,
+            "monto": -566.59
+          },
+          {
+            "periodo": 5,
+            "monto": -492.27
+          }
+        ]
+      },
+      "AJUSTE_DE_GASTOS_NO_DESEMBOLSABLES": {
+        "descripcion": "Ajuste de Gastos No Desembolsables",
+        "cuentas": [
+          {
+            "id": "2",
+            "descripcion": "Costos de Operación",
+            "montosPeriodo": [
+              {
+                "periodo": 1,
+                "monto": 140
+              },
+              {
+                "periodo": 2,
+                "monto": 112
+              },
+              {
+                "periodo": 3,
+                "monto": 89.6
+              },
+              {
+                "periodo": 4,
+                "monto": 71.68
+              },
+              {
+                "periodo": 5,
+                "monto": 57.34
+              }
+            ]
+          }
+        ]
+      },
+      "FLUJO_DE_FONDOS": {
+        "descripcion": "FLUJO DE FONDOS",
+        "montosPeriodo": [
+          {
+            "periodo": 1,
+            "monto": -471
+          },
+          {
+            "periodo": 2,
+            "monto": -480.8
+          },
+          {
+            "periodo": 3,
+            "monto": -488.64
+          },
+          {
+            "periodo": 4,
+            "monto": -494.91
+          },
+          {
+            "periodo": 5,
+            "monto": -434.93
+          }
+        ]
+      }
+    }
+    )
   }
 
 }

@@ -14,7 +14,9 @@
   
       <mat-sidenav class="sidenav-container" #sidenav (keydown.escape)="close()" disableClose>
         <mat-nav-list>
-          <h3 mat-subheader>Entities</h3>
+          <mat-list-item>
+            <button mat-button mat-line class="button" routerLink="/flujo-fondos">Flujo de Fondos</button>
+          </mat-list-item>
           <mat-list-item>
             <button mat-button mat-line class="button" routerLink="/simulaciones">Simulaciones</button>
           </mat-list-item>

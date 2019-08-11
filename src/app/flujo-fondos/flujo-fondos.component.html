@@ -1,0 +1,136 @@
+<table mat-table [dataSource]="flujoFondos" multiTemplateDataRows class="table">
+
+  <!-- Descripcion Column -->
+  <ng-container matColumnDef="descripcion">
+    <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+    <td mat-cell *matCellDef="let flujo" class="flujo-column"> {{ flujo.descripcion }} </td>
+  </ng-container>
+
+  <!-- 0 Column -->
+  <ng-container matColumnDef="0">
+    <th mat-header-cell *matHeaderCellDef class="value-column">Periodo 0</th>
+    <td mat-cell *matCellDef="let flujo" class="value-column" [ngClass]="{
+      'flujo-column': flujo.key === 'FLUJO_DE_FONDOS'
+    }">
+      {{ getMontoPeriodo(flujo.montosPeriodo,0,!flujo.cuentas) }}
+    </td>
+  
+  </ng-container>
+
+  <!-- 1 Column -->
+  <ng-container matColumnDef="1">
+    <th mat-header-cell *matHeaderCellDef class="value-column">Periodo 1</th>
+    <td mat-cell *matCellDef="let flujo" class="value-column" [ngClass]="{
+      'flujo-column': flujo.key === 'FLUJO_DE_FONDOS'
+    }">
+      {{ getMontoPeriodo(flujo.montosPeriodo,1,!flujo.cuentas) }}
+    </td>
+    
+  </ng-container>
+
+  <!-- 2 Column -->
+  <ng-container matColumnDef="2">
+    <th mat-header-cell *matHeaderCellDef class="value-column">Periodo 2</th>
+    <td mat-cell *matCellDef="let flujo" class="value-column" [ngClass]="{
+      'flujo-column': flujo.key === 'FLUJO_DE_FONDOS'
+    }">
+      {{ getMontoPeriodo(flujo.montosPeriodo,2,!flujo.cuentas) }}
+    </td>
+  </ng-container>
+
+  <!-- 3 Column -->
+  <ng-container matColumnDef="3">
+    <th mat-header-cell *matHeaderCellDef class="value-column">Periodo 3</th>
+    <td mat-cell *matCellDef="let flujo" class="value-column" [ngClass]="{
+      'flujo-column': flujo.key === 'FLUJO_DE_FONDOS'
+    }">
+      {{ getMontoPeriodo(flujo.montosPeriodo,3,!flujo.cuentas) }}
+    </td>
+  </ng-container>
+
+  <!-- 4 Column -->
+  <ng-container matColumnDef="4">
+    <th mat-header-cell *matHeaderCellDef class="value-column">Periodo 4</th>
+    <td mat-cell *matCellDef="let flujo" class="value-column" [ngClass]="{
+      'flujo-column': flujo.key === 'FLUJO_DE_FONDOS'
+    }">
+      {{ getMontoPeriodo(flujo.montosPeriodo,4,!flujo.cuentas) }}
+    </td>
+  </ng-container>
+
+  <!-- 5 Column -->
+  <ng-container matColumnDef="5">
+    <th mat-header-cell *matHeaderCellDef class="value-column">Periodo 5</th>
+    <td mat-cell *matCellDef="let flujo" class="value-column" [ngClass]="{
+      'flujo-column': flujo.key === 'FLUJO_DE_FONDOS'
+    }">
+      {{ getMontoPeriodo(flujo.montosPeriodo,5,!flujo.cuentas) }}
+    </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="detailDescription">
+    <td mat-cell *matCellDef="let flujo">
+      <div *ngIf="flujo.cuentas as cuentas">
+        <p *ngFor="let cuenta of cuentas">{{cuenta.descripcion}}</p>
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="detail0">
+    <td mat-cell *matCellDef="let flujo">
+      <div *ngIf="flujo.cuentas as cuentas">
+        <p *ngFor="let cuenta of cuentas" class="value-column">{{ getMontoPeriodo(cuenta.montosPeriodo,0) }}</p>
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="detail1">
+    <td mat-cell *matCellDef="let flujo">
+      <div *ngIf="flujo.cuentas as cuentas">
+        <p *ngFor="let cuenta of cuentas" class="value-column">{{ getMontoPeriodo(cuenta.montosPeriodo,1) }}</p>
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="detail2">
+    <td mat-cell *matCellDef="let flujo">
+      <div *ngIf="flujo.cuentas as cuentas">
+        <p *ngFor="let cuenta of cuentas" class="value-column">{{ getMontoPeriodo(cuenta.montosPeriodo,2) }}</p>
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="detail3">
+    <td mat-cell *matCellDef="let flujo">
+      <div *ngIf="flujo.cuentas as cuentas">
+        <p *ngFor="let cuenta of cuentas" class="value-column">{{ getMontoPeriodo(cuenta.montosPeriodo,3) }}</p>
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="detail4">
+    <td mat-cell *matCellDef="let flujo">
+      <div *ngIf="flujo.cuentas as cuentas">
+        <p *ngFor="let cuenta of cuentas" class="value-column">{{ getMontoPeriodo(cuenta.montosPeriodo,4) }}</p>
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="detail5">
+    <td mat-cell *matCellDef="let flujo">
+      <div *ngIf="flujo.cuentas as cuentas">
+        <p *ngFor="let cuenta of cuentas" class="value-column">{{ getMontoPeriodo(cuenta.montosPeriodo,5) }}</p>
+      </div>
+    </td>
+  </ng-container>
+
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let flujo; columns: displayedColumns;" class="element-row" [class.expanded-row]="true">
+  </tr>
+  <tr mat-row
+    *matRowDef="let row; columns: ['detailDescription','detail0','detail1','detail2','detail3','detail4','detail5']"
+    class="detail-row"></tr>
+</table>

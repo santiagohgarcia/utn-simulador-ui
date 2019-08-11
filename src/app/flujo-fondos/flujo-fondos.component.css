@@ -1,0 +1,38 @@
+
+table {
+    width: 100%;
+}
+
+tr.mat-footer-row {
+    font-weight: bold;
+  }
+  
+tr.detail-row {
+    height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+    background: #777;
+}
+
+tr.element-row:not(.expanded-row):active {
+    background: #efefef;
+}
+
+.element-row td {
+    border-bottom-width: 0;
+}
+
+.element-detail {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.flujo-column {
+    font-weight: bold;
+}
+
+.value-column {
+    text-align: right;
+}
