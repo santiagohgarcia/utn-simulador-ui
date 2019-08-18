@@ -1,7 +1,7 @@
 <div class="background-container" *ngIf="estadoProyecto$ | async as estadoProyecto">
   <mat-toolbar color="secundary">
     <mat-icon style="margin-right: 20px;">date_range</mat-icon>
-    <h4>Estado Actual (Mes {{ estadoProyecto.mes }} )</h4>
+    <h4>Estado Actual (Mes {{ estadoProyecto.periodo }} )</h4>
     <span class="spacer"></span>
     <mat-icon class="active-icon">verified_user</mat-icon>
     <h3>Activo</h3>

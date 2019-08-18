@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TomaDesicionesComponent } from './toma-desiciones.component';
+import { TomaDecisionesComponent } from './toma-decisiones.component';
 
 describe('TomaDesicionesComponent', () => {
-  let component: TomaDesicionesComponent;
-  let fixture: ComponentFixture<TomaDesicionesComponent>;
+  let component: TomaDecisionesComponent;
+  let fixture: ComponentFixture<TomaDecisionesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TomaDesicionesComponent ]
+      declarations: [ TomaDecisionesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TomaDesicionesComponent);
+    fixture = TestBed.createComponent(TomaDecisionesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

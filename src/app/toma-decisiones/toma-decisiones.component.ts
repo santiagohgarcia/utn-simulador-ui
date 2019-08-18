@@ -3,11 +3,11 @@ import { ProyectoService } from '../proyecto.service';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
-  selector: 'app-toma-desiciones',
-  templateUrl: './toma-desiciones.component.html',
-  styleUrls: ['./toma-desiciones.component.css']
+  selector: 'app-toma-decisiones',
+  templateUrl: './toma-decisiones.component.html',
+  styleUrls: ['./toma-decisiones.component.css']
 })
-export class TomaDesicionesComponent implements OnInit {
+export class TomaDecisionesComponent implements OnInit {
 
 
   decisiones: Array<any>;
@@ -24,7 +24,7 @@ export class TomaDesicionesComponent implements OnInit {
   }
 
   getDecisionesTomadas(){
-    return this.decisiones.filter( d => d.opcionSeleccionada ).length;
+    return this.decisiones ? this.decisiones.filter( d => d.opcionSeleccionada ).length : 0;
   }
 
 

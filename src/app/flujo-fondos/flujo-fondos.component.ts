@@ -31,7 +31,7 @@ export class FlujoFondosComponent implements OnInit {
        {...ff.INGRESOS_AFECTOS_A_IMPUESTOS, ...{key: "INGRESOS_AFECTOS_A_IMPUESTOS"}},
        {...ff.EGRESOS_AFECTOS_A_IMPUESTOS, ...{key: "EGRESOS_AFECTOS_A_IMPUESTOS"}},
        {...ff.GASTOS_NO_DESEMBOLSABLES, ...{key: "GASTOS_NO_DESEMBOLSABLES"}},
-       {...ff.UTILIDAD_NETA_ANTES_DE_IMPUESTOS, ...{key: "UTILIDAD_NETA_ANTES_DE_IMPUESTOS"}},
+       {...ff.UTILIDAD_ANTES_DE_IMPUESTOS, ...{key: "UTILIDAD_NETA_ANTES_DE_IMPUESTOS"}},
        {...ff.IMPUESTOS, ...{key: "IMPUESTOS"}},
        {...ff.UTILIDAD_DESPUES_DE_IMPUESTOS, ...{key: "UTILIDAD_DESPUES_DE_IMPUESTOS"}},
        {...ff.AJUSTE_DE_GASTOS_NO_DESEMBOLSABLES, ...{key: "AJUSTE_DE_GASTOS_NO_DESEMBOLSABLES"}},
@@ -40,8 +40,8 @@ export class FlujoFondosComponent implements OnInit {
     })
   }
 
-  getMontoPeriodo(montosPeriodo,periodo,defaultCero = true){
-    var periodo = montosPeriodo && montosPeriodo.find(montoPeriodo => montoPeriodo.periodo === periodo )
+  getCuentaPeriodo(cuentasPeriodo,periodo,defaultCero = true){
+    var periodo = cuentasPeriodo && cuentasPeriodo.find(cuentaPeriodo => cuentaPeriodo.periodo === periodo )
     return periodo ? periodo.monto : ( defaultCero ? 0 : ""  );
   }
 }
