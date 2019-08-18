@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class DecisionesComponent implements OnInit {
 
-  decisiones$: Observable<any>;
+  decisiones: Array<any>;
 
   constructor(private proyectoService: ProyectoService) { }
 
@@ -19,11 +19,13 @@ export class DecisionesComponent implements OnInit {
   }
 
   getDecisiones() {
-    this.decisiones$ = this.proyectoService.getDecisiones();
+   this.proyectoService.getDecisionesByProyecto(1).subscribe( decisiones => {
+      this.decisiones = decisiones;
+   });
   }
 
   removeDecision(id){
-      this.proyectoService.removeDecision(id);
+      this.proyectoService.removeDecision(id).subscribe(_ => this.getDecisiones());
   }
 
 

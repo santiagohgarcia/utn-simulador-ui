@@ -93,10 +93,6 @@ export class ProyectoService {
     return this.http.post(`${environment.proyectoServiceHost}/api/estado`, status);
   }
 
-  getDecisiones() {
-    return of(this.decisiones);
-  }
-
   getDecision(id) {
     return of(this._findDecisionById(id));
   }
