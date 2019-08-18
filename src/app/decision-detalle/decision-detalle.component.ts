@@ -5,7 +5,7 @@ import { ProyectoService } from '../proyecto.service';
 import { ActivatedRoute } from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatDialog } from '@angular/material';
-import { RespuestaDialogComponent } from './respuestas/respuesta-dialog.component';
+import { OpcionDialogComponent } from './opciones/opcion-dialog.component';
 
 @Component({
   selector: 'app-decision-detalle',
@@ -25,7 +25,7 @@ export class DecisionDetalleComponent implements OnInit {
 
   templateDecision = {
     descripcion: "",
-    respuestas: []
+    opciones: []
   };
 
   saveFunction;
@@ -48,37 +48,37 @@ export class DecisionDetalleComponent implements OnInit {
     return id ? this.proyectoService.getDecision(id) : of(this.templateDecision);
   }
 
-  addRespuesta() {
-    this.decision.respuestas = this.decision.respuestas.concat([{
+  addOpcion() {
+    this.decision.opciones = this.decision.opciones.concat([{
       descripcion: "nueva resp",
       consecuencias: []
     }]);
   }
 
-  removeRespuesta(respuesta) {
-    var index = this.decision.respuestas.indexOf(respuesta);
-    this.decision.respuestas.splice(index, 1)
-    this.decision.respuestas = this.decision.respuestas.concat([]);
+  removeOpcion(opcion) {
+    var index = this.decision.opciones.indexOf(opcion);
+    this.decision.opciones.splice(index, 1)
+    this.decision.opciones = this.decision.opciones.concat([]);
   }
 
-  editRespuesta(respuesta) {
-    this.dialog.open(RespuestaDialogComponent, {
+  editOpcion(opcion) {
+    this.dialog.open(OpcionDialogComponent, {
       width: '250px',
-      data: respuesta
+      data: opcion
     });
   }
 
-  addConsecuencia(respuesta) {
-    respuesta.consecuencias = respuesta.consecuencias.concat([{
+  addConsecuencia(opcion) {
+    opcion.consecuencias = opcion.consecuencias.concat([{
       cuenta: "cuenta",
       valor: 10
     }])
   }
 
-  removeConsecuencia(respuesta, consecuencia) {
-    var index = respuesta.consecuencias.indexOf(consecuencia);
-    respuesta.consecuencias.splice(index, 1);
-    respuesta.consecuencias = respuesta.consecuencias.concat([]);
+  removeConsecuencia(opcion, consecuencia) {
+    var index = opcion.consecuencias.indexOf(consecuencia);
+    opcion.consecuencias.splice(index, 1);
+    opcion.consecuencias = opcion.consecuencias.concat([]);
   }
 
 }

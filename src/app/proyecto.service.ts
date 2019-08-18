@@ -12,7 +12,9 @@ export class ProyectoService {
     {
       id: 1,
       descripcion: "Cuanto quiere invertir en publicidad?",
-      respuestas: [{
+      opcionSeleccionada: 2,
+      opciones: [{
+        id: 1,
         descripcion: "Invertir $2000",
         consecuencias: [{
           cuenta: "Caja",
@@ -28,41 +30,52 @@ export class ProyectoService {
           valor: 20
         }]
       }, {
+        id:2,
         descripcion: "Invertir $3000"
       }, {
+        id:3,
         descripcion: "Invertir $4000"
       }]
     },
     {
       id: 2,
       descripcion: "Cuanto quiere invertir en cosas?",
-      respuestas: [{
+      opciones: [{
+        id: 1,
         descripcion: "Invertir $2000"
       }, {
+        id: 2,
         descripcion: "Invertir $3000"
       }, {
+        id: 3,
         descripcion: "Invertir $4000"
       }]
     },
     {
       id: 3,
       descripcion: "Cuanto quiere invertir en comida para perro?",
-      respuestas: [{
+      opciones: [{
+        id: 1,
         descripcion: "Invertir $2000"
       }, {
+        id: 2,
         descripcion: "Invertir $3000"
       }, {
+        id: 3,
         descripcion: "Invertir $4000"
       }]
     },
     {
       id: 3,
       descripcion: "Cuanto quiere invertir en otras cosas?",
-      respuestas: [{
+      opciones: [{
+        id: 1,
         descripcion: "Invertir $2000"
       }, {
+        id: 2,
         descripcion: "Invertir $3000"
       }, {
+        id: 3,
         descripcion: "Invertir $4000"
       }]
     }
@@ -314,6 +327,10 @@ export class ProyectoService {
       }
     }
     )
+  }
+
+  getDecisionesByProyecto(idProyecto){
+    return of(this.decisiones);
   }
 
 }

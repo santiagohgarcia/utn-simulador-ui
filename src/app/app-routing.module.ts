@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { DecisionesComponent } from './decisiones/decisiones.component';
 import { DecisionDetalleComponent } from './decision-detalle/decision-detalle.component';
 import { FlujoFondosComponent } from './flujo-fondos/flujo-fondos.component';
+import { TomaDesicionesComponent } from './toma-desiciones/toma-desiciones.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'decisiones', component: HomeComponent,
     children: [{ path: '', component: DecisionesComponent, pathMatch: 'full' }]
+  },
+  {
+    path: 'toma-decisiones', component: HomeComponent,
+    children: [{ path: '', component: TomaDesicionesComponent, pathMatch: 'full' }]
   },
   { path: 'decisiones/new', component: DecisionDetalleComponent, pathMatch: 'full' },
   { path: 'decisiones/:id', component: DecisionDetalleComponent }

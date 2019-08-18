@@ -1,0 +1,21 @@
+<mat-toolbar color="secundary">
+    <h4>Toma de Decisiones</h4>
+    <span class="spacer"></span>
+    <h4>{{ getDecisionesTomadas() }}/{{decisiones.length}}</h4>
+  </mat-toolbar>
+<div class="card-container">
+  
+
+  <div *ngFor="let decision of decisiones" class="card">
+    <mat-toolbar color="secundary">
+      <mat-toolbar-row>
+        <h6>{{ decision.id }}. {{ decision.descripcion }}</h6>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    
+    <mat-radio-group class="respuestas-container" [(ngModel)]="decision.opcionSeleccionada">
+      <mat-radio-button class="respuesta" *ngFor="let opcion of decision.opciones" [value]="opcion.id">{{opcion.descripcion}}</mat-radio-button>
+    </mat-radio-group>
+    
+  </div>
+</div>

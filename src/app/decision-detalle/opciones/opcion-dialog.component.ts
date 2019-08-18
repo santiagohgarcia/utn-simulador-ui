@@ -6,18 +6,18 @@ import { FormControl, Validators, FormGroup, AbstractControl, ValidationErrors }
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'respuesta-dialog',
-  templateUrl: './respuesta-dialog.component.html',
-  styleUrls: ['./respuesta-dialog.component.css']
+  selector: 'opcion-dialog',
+  templateUrl: './opcion-dialog.component.html',
+  styleUrls: ['./opcion-dialog.component.css']
 })
-export class RespuestaDialogComponent implements OnInit {
+export class OpcionDialogComponent implements OnInit {
 
   descripcion = new FormControl('', [Validators.required])
-  respuestaForm: FormGroup = new FormGroup({
+  opcionForm: FormGroup = new FormGroup({
     descripcion: this.descripcion,
   });
 
-  constructor(public dialogRef: MatDialogRef<RespuestaDialogComponent>,
+  constructor(public dialogRef: MatDialogRef<OpcionDialogComponent>,
     public snackBar: MatSnackBar) { }
 
   ngOnInit() {

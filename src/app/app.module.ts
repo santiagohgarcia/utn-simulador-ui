@@ -20,7 +20,7 @@ import { DecisionesComponent } from './decisiones/decisiones.component';
 import { DecisionDetalleComponent } from './decision-detalle/decision-detalle.component';
 import { FlujoFondosComponent } from './flujo-fondos/flujo-fondos.component';
 import { ProyectoService } from './proyecto.service';
-
+import { TomaDesicionesComponent } from './toma-desiciones/toma-desiciones.component';
 
 import {
   MatAutocompleteModule,
@@ -110,7 +110,8 @@ export class MaterialModule { }
     RegisterComponent,
     DecisionesComponent,
     DecisionDetalleComponent,
-    FlujoFondosComponent
+    FlujoFondosComponent,
+    TomaDesicionesComponent
   ],
   imports: [
     BrowserModule,
