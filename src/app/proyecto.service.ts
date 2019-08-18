@@ -2,7 +2,7 @@ import { Injectable, Component } from '@angular/core';
 import { environment } from '../environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators'; 
+import { map } from 'rxjs/operators'; 
 import { MatSnackBar } from '@angular/material';
 
 @Injectable()
@@ -85,7 +85,7 @@ export class ProyectoService {
 
   ]
 
-  getEstado() {
+  getEstado(): Observable<any>  {
     return this.http.get(`${environment.proyectoServiceHost}/api/estado/actual`);
   }
 
@@ -128,6 +128,10 @@ export class ProyectoService {
 
   getDecisionesByProyecto(idProyecto) : Observable<any>{
     return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/decisiones`);
+  }
+
+  getPeriodoActual(idProyecto){
+    return this.getEstado().pipe( map(estado => estado.periodo) );
   }
 //TODO: handle errors with snack bar
 /*  _openSnackBar() {

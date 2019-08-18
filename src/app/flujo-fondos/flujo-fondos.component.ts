@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProyectoService } from '../proyecto.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
+
+
 @Component({
   selector: 'app-flujo-fondos',
   templateUrl: './flujo-fondos.component.html',
@@ -16,27 +18,25 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class FlujoFondosComponent implements OnInit {
 
-  flujoFondos : Array<any>;
-  displayedColumns: string[] = ["descripcion","0","1","2","3","4","5"];
+  flujoFondos;
+  periodos;
 
   constructor(private proyectoService: ProyectoService) { }
 
   ngOnInit() {
+    this.getPeriodos();
     this.getFlujoFondos();
   }
 
   getFlujoFondos() {
     this.proyectoService.getFlujoFondos(1).subscribe( ff => {
-     this.flujoFondos = [
-       {...ff.INGRESOS_AFECTOS_A_IMPUESTOS, ...{key: "INGRESOS_AFECTOS_A_IMPUESTOS"}},
-       {...ff.EGRESOS_AFECTOS_A_IMPUESTOS, ...{key: "EGRESOS_AFECTOS_A_IMPUESTOS"}},
-       {...ff.GASTOS_NO_DESEMBOLSABLES, ...{key: "GASTOS_NO_DESEMBOLSABLES"}},
-       {...ff.UTILIDAD_ANTES_DE_IMPUESTOS, ...{key: "UTILIDAD_NETA_ANTES_DE_IMPUESTOS"}},
-       {...ff.IMPUESTOS, ...{key: "IMPUESTOS"}},
-       {...ff.UTILIDAD_DESPUES_DE_IMPUESTOS, ...{key: "UTILIDAD_DESPUES_DE_IMPUESTOS"}},
-       {...ff.AJUSTE_DE_GASTOS_NO_DESEMBOLSABLES, ...{key: "AJUSTE_DE_GASTOS_NO_DESEMBOLSABLES"}},
-       {...ff.FLUJO_DE_FONDOS, ...{key: "FLUJO_DE_FONDOS"}}
-     ]
+      this.flujoFondos = ff;
+    })
+  }
+
+  getPeriodos(){
+    this.proyectoService.getPeriodoActual(1).subscribe(periodoActual => {
+          this.periodos = [...Array(periodoActual).keys(),periodoActual];
     })
   }
 
