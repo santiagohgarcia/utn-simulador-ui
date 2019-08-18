@@ -1,7 +1,17 @@
 
 table {
     width: 100%;
-    padding: 10px;
+}
+
+table.mat-table {
+    border-spacing: 0;
+}
+
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+    padding-left: 15px;
+    padding-right: 15px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
 }
 
 tr.mat-header-row {
