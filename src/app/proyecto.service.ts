@@ -129,6 +129,11 @@ export class ProyectoService {
   getPeriodoActual(idProyecto){
     return this.getEstado().pipe( map(estado => estado.periodo) );
   }
+
+  tomarDecision(idProyecto,idOpcion){
+    return this.http.post(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/opcion/${idOpcion}/toma-decision`,{});
+  }
+
 //TODO: handle errors with snack bar
 /*  _openSnackBar() {
     this._snackBar.openFromComponent(ErrorSnackBarComponent, {

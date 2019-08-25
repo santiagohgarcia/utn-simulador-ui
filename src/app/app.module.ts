@@ -11,7 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CdkTableModule } from '@angular/cdk/table';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
-import { SimulacionesComponent } from './simulaciones/simulaciones.component';
+import { EstadoComponent } from './estado/estado.component';
 import { PremiosComponent } from './premios/premios.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -54,7 +54,9 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatStepperModule,
+  MatTabGroup
 } from '@angular/material';
+import { ResultadosComponent } from './resultados/resultados.component';
 
 
 
@@ -93,7 +95,7 @@ import {
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule,
+    MatTooltipModule
   ],
   imports: [AppRoutingModule]
 })
@@ -103,7 +105,7 @@ export class MaterialModule { }
 @NgModule({
   declarations: [
     AppComponent,
-    SimulacionesComponent,
+    EstadoComponent,
     PremiosComponent,
     HomeComponent,
     LoginComponent,
@@ -111,7 +113,8 @@ export class MaterialModule { }
     DecisionesComponent,
     DecisionDetalleComponent,
     FlujoFondosComponent,
-    TomaDecisionesComponent
+    TomaDecisionesComponent,
+    ResultadosComponent
   ],
   imports: [
     BrowserModule,

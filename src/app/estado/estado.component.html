@@ -1,11 +1,5 @@
 <div class="background-container" *ngIf="estadoProyecto$ | async as estadoProyecto">
-  <mat-toolbar color="secundary">
-    <mat-icon style="margin-right: 20px;">date_range</mat-icon>
-    <h4>Estado Actual (Mes {{ estadoProyecto.periodo }} )</h4>
-    <span class="spacer"></span>
-    <mat-icon class="active-icon">verified_user</mat-icon>
-    <h3>Activo</h3>
-  </mat-toolbar>
+
   <div class="content-container">
     <div class="card-container">
       <div class="card">
@@ -52,7 +46,6 @@
             <p>Desvio Estandar</p>
             <h4>{{ estadoProyecto.parametrosVentas.desvioEstandar * 100 }} %</h4>
           </div>
-
         </div>
       </div>
 
@@ -62,7 +55,6 @@
             <mat-icon style="margin-right: 10px;">attach_money</mat-icon>
             <h4>Caja</h4>
           </mat-toolbar>
-
           <h1 class="single-number">ARS {{ estadoProyecto.caja }}</h1>
         </div>
         <div class="single-number-card">
@@ -70,7 +62,6 @@
             <mat-icon style="margin-right: 10px;">attach_money</mat-icon>
             <h4>VAN</h4>
           </mat-toolbar>
-
           <h1 class="single-number">15 %</h1>
         </div>
         <div class="single-number-card">
@@ -84,7 +75,3 @@
     </div>
   </div>
 </div>
-
-<a mat-fab color="primary" (click)="onSimulate()" class="fab">
-  <mat-icon>skip_next</mat-icon>
-</a>

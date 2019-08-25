@@ -3,11 +3,11 @@ import { ProyectoService } from "../proyecto.service";
 import { Observable } from 'rxjs/Observable';
 
 @Component({
-  selector: 'app-simulaciones',
-  templateUrl: './simulaciones.component.html',
-  styleUrls: ['./simulaciones.component.css']
+  selector: 'app-estado',
+  templateUrl: './estado.component.html',
+  styleUrls: ['./estado.component.css']
 })
-export class SimulacionesComponent implements OnInit {
+export class EstadoComponent implements OnInit {
 
   estadoProyecto$: Observable<any>;
 

@@ -18,6 +18,10 @@ tr.mat-header-row {
     height: 36px;
 }
 
+.desc-cuenta{
+    margin-left: 5px;
+}
+
 .flujo-column {
     font-weight: bold;
 }

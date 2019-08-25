@@ -1,21 +1,116 @@
-<mat-toolbar color="secundary">
+<div class="content-container">
+
+  <mat-card class=" forecast">
+
+    <mat-card-header>
+      <mat-card-title>Forecast de Ventas</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <table class="mat-table table">
+
+        <tr class="mat-header-row">
+          <th class="mat-header-cell desc-column">Periodo</th>
+          <th class="mat-header-cell value-column">Cantidad</th>
+          <th class="mat-header-cell value-column">Precio Venta</th>
+        </tr>
+
+        <tr class="mat-row" *ngFor="let periodo of periodos">
+          <td class="mat-cell desc-column">Periodo {{periodo}}</td>
+          <td class="mat-cell value-column"> <input matInput placeholder="Cantidad a vender" value="" class="value-column"></td>
+          <td class="mat-cell value-column"> <input matInput placeholder="Precio de venta" value="" class="value-column"></td>
+        </tr>
+
+      </table>
+
+    </mat-card-content>
+
+  </mat-card>
+
+
+  <div class="kpis">
+
+    <mat-card class="single-number-card">
+      <mat-card-header>
+        <mat-card-title>Produccion</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h1 class="single-number">{{estado.produccionMensual}} <small>u/p</small></h1>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="single-number-card">
+      <mat-card-header>
+        <mat-card-title>Precio Producto</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h1 class="single-number">$ {{estado.producto.precio}}</h1>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="single-number-card">
+      <mat-card-header>
+        <mat-card-title>Caja</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h1 class="single-number">$ {{estado.caja}}</h1>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="single-number-card">
+      <mat-card-header>
+        <mat-card-title>Costo Fijo</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h1 class="single-number">$ {{estado.costoFijo}}</h1>
+      </mat-card-content>
+    </mat-card>
+
+
+    <mat-card class="single-number-card">
+      <mat-card-header>
+        <mat-card-title>Costo Variable</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h1 class="single-number">$ {{estado.costoVariable}}</h1>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="single-number-card">
+        <mat-card-header>
+          <mat-card-title>Costo Variable</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <h1 class="single-number">$ {{estado.costoVariable}}</h1>
+        </mat-card-content>
+      </mat-card>
+
+  </div>
+
+
+  <mat-toolbar color="secundary" class="decisiones-header">
     <h4>Toma de Decisiones</h4>
     <span class="spacer"></span>
-    <h4>{{ getDecisionesTomadas() }}</h4>
+    <h4>{{ getDecisionesTomadas() }} / {{decisiones.length}}</h4>
   </mat-toolbar>
-<div class="card-container">
-  
 
-  <div *ngFor="let decision of decisiones" class="card">
-    <mat-toolbar color="secundary">
-      <mat-toolbar-row>
-        <h6>{{ decision.id }}. {{ decision.descripcion }}</h6>
-      </mat-toolbar-row>
-    </mat-toolbar>
-    
-    <mat-radio-group class="respuestas-container" [(ngModel)]="decision.opcionSeleccionada">
-      <mat-radio-button class="respuesta" *ngFor="let opcion of decision.opciones" [value]="opcion.id">{{opcion.descripcion}}</mat-radio-button>
-    </mat-radio-group>
-    
-  </div>
 </div>
+
+<div class="decisiones-container">
+  <mat-card *ngFor="let decision of decisiones">
+    <mat-card-header>
+      <mat-card-title>{{ decision.id }}. {{ decision.descripcion }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-radio-group class="respuestas-container" [(ngModel)]="decision.opcionTomada"
+        (change)="tomarDecision($event)">
+        <mat-radio-button class="respuesta" *ngFor="let opcion of decision.opciones" [value]="opcion.id">
+          {{opcion.descripcion}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<a mat-fab color="primary" routerLink="/resultados" class="fab">
+  <mat-icon>skip_next</mat-icon>
+</a>

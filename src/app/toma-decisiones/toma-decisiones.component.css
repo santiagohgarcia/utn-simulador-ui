@@ -1,19 +1,48 @@
-.card-container{
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    padding: 10px;
+@media screen and (min-width: 769px) {
+.content-container{
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: "kpis forecast" "decisiones-header decisiones-header";
 }
 
-.card-container > * {
-    margin: 1rem ;
+.decisiones-container {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: 50% 50%;
+}
+
+.decisiones-container > * {
+    margin: 10px;
+}
+
 }
 
 .card {
-    max-width: 800px;
-    min-width: 500px;
-   
     box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+
+.forecast{
+    grid-area: forecast;
+    margin: 10px;
+}
+
+.kpis{
+    grid-area: kpis;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+.kpis > * {
+    margin: 10px;
+}
+
+.decisiones-header{
+    grid-area: decisiones-header
 }
 
 .respuestas-container{
@@ -28,4 +57,40 @@
 
 .spacer {
     flex: 1 1 auto;
+}
+
+.value-column {
+    text-align: right;
+}
+
+.single-number {
+    align-self: center;
+    margin:10px;
+}
+
+.desc-column {
+    text-align: left;
+}
+
+.table{
+    width: 100%;
+    background: transparent;
+    padding: 10px;
+}
+
+.table > * {
+    height: 30px;
+}
+
+.fab {
+    position: fixed;
+    right: 20px;
+    bottom: 15px;
+    margin-left: -28px;
+  }
+  
+.single-number-card {
+    max-width: 400px;
+    min-width: 200px;
+    flex-grow: 1;
 }
