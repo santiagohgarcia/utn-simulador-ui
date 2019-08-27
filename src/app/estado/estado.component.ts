@@ -21,10 +21,6 @@ export class EstadoComponent implements OnInit {
     this.estadoProyecto$ = this.proyectoService.getEstado();
   }
 
-  onSimulate() {
-    this.estadoProyecto$.subscribe(status => {
-      this.proyectoService.simular(status).subscribe(_ => this.updateEstado() )
-    });
-  }
+
 
 }

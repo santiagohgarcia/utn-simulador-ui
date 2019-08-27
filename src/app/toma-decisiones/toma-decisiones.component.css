@@ -2,8 +2,9 @@
 .content-container{
     display: grid;
     grid-template-rows: auto auto;
-    grid-template-columns: 50% 50%;
-    grid-template-areas: "kpis forecast" "decisiones-header decisiones-header";
+    grid-template-columns: 4fr 2fr 3fr;
+    grid-template-areas: "kpis politica-pago forecast" "decisiones-header decisiones-header decisiones-header";
+    grid-gap: 10px;
 }
 
 .decisiones-container {
@@ -42,7 +43,13 @@
 }
 
 .decisiones-header{
-    grid-area: decisiones-header
+    grid-area: decisiones-header;
+    
+}
+
+.politica-pago{
+    grid-area: politica-pago;
+    margin: 10px;
 }
 
 .respuestas-container{

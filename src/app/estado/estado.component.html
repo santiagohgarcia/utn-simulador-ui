@@ -2,75 +2,85 @@
 
   <div class="content-container">
     <div class="card-container">
-      <div class="card">
-        <mat-toolbar color="secundary">
-          <mat-icon style="margin-right: 10px;">whatshot</mat-icon>
-          <h4>Producto</h4>
-        </mat-toolbar>
-        <div class="list">
-          <div class="list-item">
-            <p>Descripcion</p>
-            <h4>{{ estadoProyecto.producto.nombre }}</h4>
+
+      <mat-card class="card">
+        <mat-card-header>
+          <mat-card-title>Producto</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="list">
+            <div class="list-item">
+              <p>Costo Fijo</p>
+              <h4>ARS {{ estadoProyecto.costoFijo }}</h4>
+            </div>
+            <div class="list-item">
+              <p>Costo Variable</p>
+              <h4>ARS {{ estadoProyecto.costoVariable }}</h4>
+            </div>
+            <div class="list-item">
+              <p>Stock</p>
+              <h4>{{ estadoProyecto.stock }} u</h4>
+            </div>
+            <div class="list-item">
+              <p>Produccion Mensual</p>
+              <h4>{{ estadoProyecto.produccionMensual }} u/mes</h4>
+            </div>
           </div>
-          <div class="list-item">
-            <p>Costo Fijo</p>
-            <h4>ARS {{ estadoProyecto.costoFijo }}</h4>
-          </div>
-          <div class="list-item">
-            <p>Costo Variable</p>
-            <h4>ARS {{ estadoProyecto.costoVariable }}</h4>
-          </div>
-          <div class="list-item">
-            <p>Stock</p>
-            <h4>{{ estadoProyecto.stock }} u</h4>
-          </div>
-          <div class="list-item">
-            <p>Produccion Mensual</p>
-            <h4>{{ estadoProyecto.produccionMensual }} u/mes</h4>
-          </div>
-        </div>
-      </div>
+        </mat-card-content>
+      </mat-card>
 
 
-      <div class="card">
-        <mat-toolbar color="secundary">
-          <mat-icon style="margin-right: 10px;">attach_money</mat-icon>
-          <h4>Ventas</h4>
-        </mat-toolbar>
-        <div class="list">
-          <div class="list-item">
-            <p>Media</p>
-            <h4>ARS {{ estadoProyecto.parametrosVentas.media }}</h4>
+      <mat-card class="card">
+        <mat-card-header>
+          <mat-card-title>Politica de Cobro</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="list">
+            <div *ngFor="let periodo of estadoProyecto.proyecto.modalidadCobro" class="list-item">
+              <p>X + {{periodo.offsetPeriodo}}</p>
+              <h4>{{periodo.porcentaje}} %</h4>
+            </div>
           </div>
-          <div class="list-item">
-            <p>Desvio Estandar</p>
-            <h4>{{ estadoProyecto.parametrosVentas.desvioEstandar * 100 }} %</h4>
-          </div>
-        </div>
-      </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="card">
+        <mat-card-header>
+          <mat-card-title>Ventas</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src="https://www.exceltip.com/wp-content/uploads/2015/02/img46.jpg" alt="Chart photo">
+        <mat-card-content>
+        
+        </mat-card-content>
+      </mat-card>
 
       <div class="single-number-container">
-        <div class="single-number-card">
-          <mat-toolbar color="secundary">
-            <mat-icon style="margin-right: 10px;">attach_money</mat-icon>
-            <h4>Caja</h4>
-          </mat-toolbar>
-          <h1 class="single-number">ARS {{ estadoProyecto.caja }}</h1>
-        </div>
-        <div class="single-number-card">
-          <mat-toolbar color="secundary">
-            <mat-icon style="margin-right: 10px;">attach_money</mat-icon>
-            <h4>VAN</h4>
-          </mat-toolbar>
-          <h1 class="single-number">15 %</h1>
-        </div>
-        <div class="single-number-card">
-          <mat-toolbar color="secundary">
-            <mat-icon style="margin-right: 10px;">attach_money</mat-icon>
-            <h4>TIR</h4>
-          </mat-toolbar>
-          <h1 class="single-number">18 %</h1>
-        </div>
+        <mat-card class="card">
+          <mat-card-header>
+            <mat-card-title>Caja</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <h1 class="single-number">ARS {{ estadoProyecto.caja }}</h1>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="card">
+          <mat-card-header>
+            <mat-card-title>VAN</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <h1 class="single-number">15 %</h1>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="card">
+          <mat-card-header>
+            <mat-card-title>TIR</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <h1 class="single-number">18 %</h1>
+          </mat-card-content>
+        </mat-card>
+
       </div>
     </div>
   </div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProyectoService } from '../proyecto.service';
 import { MatRadioChange } from '@angular/material';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-toma-decisiones',
@@ -14,7 +16,8 @@ export class TomaDecisionesComponent implements OnInit {
   estado;
   periodos: Array<any> = [];
 
-  constructor(private proyectoService: ProyectoService) { }
+  constructor(private proyectoService: ProyectoService,
+    private router: Router) { }
 
   ngOnInit() {
     this.getDecisionesByProyecto();
@@ -47,6 +50,10 @@ export class TomaDecisionesComponent implements OnInit {
         this.getDecisionesByProyecto()
         this.getEstado();
       }); 
+  }
+
+  simular() {
+    this.proyectoService.simular(this.estado).subscribe(_ => this.router.navigateByUrl("/resultados") )
   }
 
 

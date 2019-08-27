@@ -1,32 +1,5 @@
 <div class="content-container">
 
-  <mat-card class=" forecast">
-
-    <mat-card-header>
-      <mat-card-title>Forecast de Ventas</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <table class="mat-table table">
-
-        <tr class="mat-header-row">
-          <th class="mat-header-cell desc-column">Periodo</th>
-          <th class="mat-header-cell value-column">Cantidad</th>
-          <th class="mat-header-cell value-column">Precio Venta</th>
-        </tr>
-
-        <tr class="mat-row" *ngFor="let periodo of periodos">
-          <td class="mat-cell desc-column">Periodo {{periodo}}</td>
-          <td class="mat-cell value-column"> <input matInput placeholder="Cantidad a vender" value="" class="value-column"></td>
-          <td class="mat-cell value-column"> <input matInput placeholder="Precio de venta" value="" class="value-column"></td>
-        </tr>
-
-      </table>
-
-    </mat-card-content>
-
-  </mat-card>
-
-
   <div class="kpis">
 
     <mat-card class="single-number-card">
@@ -35,15 +8,6 @@
       </mat-card-header>
       <mat-card-content>
         <h1 class="single-number">{{estado.produccionMensual}} <small>u/p</small></h1>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="single-number-card">
-      <mat-card-header>
-        <mat-card-title>Precio Producto</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <h1 class="single-number">$ {{estado.producto.precio}}</h1>
       </mat-card-content>
     </mat-card>
 
@@ -75,16 +39,68 @@
       </mat-card-content>
     </mat-card>
 
-    <mat-card class="single-number-card">
-        <mat-card-header>
-          <mat-card-title>Costo Variable</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <h1 class="single-number">$ {{estado.costoVariable}}</h1>
-        </mat-card-content>
-      </mat-card>
 
   </div>
+
+
+
+  <mat-card class="politica-pago single-number-card">
+    <mat-card-header>
+      <mat-card-title>Politica de Pago</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <table class="mat-table table">
+
+        <tr class="mat-header-row">
+          <th class="mat-header-cell desc-column">Periodo</th>
+          <th class="mat-header-cell value-column">Porcentaje</th>
+        </tr>
+
+        <tr class="mat-row" *ngFor="let periodo of periodos">
+          <td class="mat-cell desc-column">Periodo {{periodo}}</td>
+          <td class="mat-cell value-column"> <input matInput placeholder="%" value=""
+              class="value-column"></td>
+        </tr>
+
+      </table>
+
+    </mat-card-content>
+  </mat-card>
+
+
+  <mat-card class=" forecast">
+
+    <mat-card-header>
+      <mat-card-title>Forecast de Ventas</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <table class="mat-table table">
+
+        <tr class="mat-header-row">
+          <th class="mat-header-cell desc-column">Periodo</th>
+          <th class="mat-header-cell value-column">Cantidad</th>
+          <th class="mat-header-cell value-column">Precio Venta</th>
+        </tr>
+
+        <tr class="mat-row" *ngFor="let periodo of periodos">
+          <td class="mat-cell desc-column">Periodo {{periodo}}</td>
+          <td class="mat-cell value-column"> <input matInput placeholder="Cantidad a vender" value=""
+              class="value-column"></td>
+          <td class="mat-cell value-column"> 
+              <mat-form-field  class="value-column">
+                  <input matInput placeholder="Precio de venta" value=""
+                  class="value-column">
+                </mat-form-field>
+            
+           </td>
+        </tr>
+
+      </table>
+
+    </mat-card-content>
+
+  </mat-card>
+
 
 
   <mat-toolbar color="secundary" class="decisiones-header">
@@ -111,6 +127,6 @@
   </mat-card>
 </div>
 
-<a mat-fab color="primary" routerLink="/resultados" class="fab">
+<a mat-fab color="primary" (click)="simular()" class="fab">
   <mat-icon>skip_next</mat-icon>
 </a>
