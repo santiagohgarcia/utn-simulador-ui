@@ -21,7 +21,7 @@
 .table{
     width: 100%;
     background: transparent;
-    padding: 10px;
+    padding: 20px;
 }
 
 .table > * {
@@ -34,4 +34,29 @@
 
 .desc-column {
     text-align: left;
+}
+
+.fab {
+    position: fixed;
+    right: 20px;
+    bottom: 15px;
+    margin-left: -28px;
+}
+
+.mat-card-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.acciones-container {
+    padding: 20px;
+}
+
+.jugadores-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    padding: 20px;
 }

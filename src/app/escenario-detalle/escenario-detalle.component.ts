@@ -9,8 +9,7 @@ import { Validators, FormControl, FormGroup } from '@angular/forms';
 export class EscenarioDetalleComponent implements OnInit {
   escenario = {
     titulo: "El renegado del 2001",
-    descripcion: `El Grupo Macri es uno de los grupos empresariales más importantes de la Argentina,2​ fundado por el magnate ítalo-argentino Franco Macri, padre del presidente argentino Mauricio Macri. El grupo posee empresas en Argentina, Brasil, Panamá y Uruguay.Las empresas que lo integran están relacionadas principalmente con las actividades de construcción, industria automotriz, correo, recolección de residuos e industria alimentaria.
-    La facturación del grupo alcanzaba a 2.300 millones de dólares en 1999. Desde ahí en adelante se desconoce el origen y paradero de sus fondos, se cree que esa cifra se quintuplicó solo en el 2003.3​`,
+    descripcion: `El Grupo Macri es uno de los grupos empresariales más importantes de la Argentina,2​ fundado por el magnate ítalo-argentino Franco Macri, padre del presidente argentino Mauricio Macri. El grupo posee empresas en Argentina, Brasil, Panamá y Uruguay.Las empresas que lo integran están relacionadas principalmente con las actividades de construcción, industria automotriz, correo, recolección de residuos e industria alimentaria.La facturación del grupo alcanzaba a 2.300 millones de dólares en 1999. Desde ahí en adelante se desconoce el origen y paradero de sus fondos, se cree que esa cifra se quintuplicó solo en el 2003.3​`,
     periodos: 5
   };
   descripcion = new FormControl('', [Validators.required]);
