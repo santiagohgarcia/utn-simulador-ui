@@ -1,0 +1,20 @@
+.card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    padding: 20px;
+}
+
+.fab {
+    position: fixed;
+    right: 20px;
+    bottom: 15px;
+    margin-left: -28px;
+}
+
+.mat-card-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}

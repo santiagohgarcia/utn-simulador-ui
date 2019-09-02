@@ -8,6 +8,8 @@ import { DecisionDetalleComponent } from './decision-detalle/decision-detalle.co
 import { FlujoFondosComponent } from './flujo-fondos/flujo-fondos.component';
 import { TomaDecisionesComponent } from './toma-decisiones/toma-decisiones.component';
 import { ResultadosComponent } from './resultados/resultados.component';
+import { EscenariosComponent } from './escenarios/escenarios.component';
+import { EscenarioDetalleComponent } from './escenario-detalle/escenario-detalle.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -26,11 +28,17 @@ const routes: Routes = [
     children: [{ path: '', component: DecisionesComponent, pathMatch: 'full' }]
   },
   {
+    path: 'escenarios', component: HomeComponent,
+    children: [{ path: '', component: EscenariosComponent, pathMatch: 'full' }]
+  },
+  {
     path: 'toma-decisiones', component: HomeComponent,
     children: [{ path: '', component: TomaDecisionesComponent, pathMatch: 'full' }]
   },
   { path: 'decisiones/new', component: DecisionDetalleComponent, pathMatch: 'full' },
-  { path: 'decisiones/:id', component: DecisionDetalleComponent }
+  { path: 'decisiones/:id', component: DecisionDetalleComponent },
+  { path: 'escenarios/new', component: EscenarioDetalleComponent, pathMatch: 'full' },
+  { path: 'escenarios/:id', component: EscenarioDetalleComponent }
 ];
 
 @NgModule({

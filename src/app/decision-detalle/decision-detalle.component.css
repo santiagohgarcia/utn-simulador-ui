@@ -19,6 +19,7 @@
 
 .form {
     flex-grow: 1;
+    padding: 20px;
 }
 
 .full-width {
@@ -41,12 +42,6 @@
     display: flex;
     flex: 1 1;
 }
-
-
-.table-header{
-  visibility: hidden;
-}
-
 
 tr.detail-row {
   height: 0;
@@ -119,4 +114,8 @@ tr.element-row:not(.expanded-row):active {
 .cuenta {
   font-size: x-large;
   font-weight: lighter;
+}
+
+.table{
+  width: 100%;
 }

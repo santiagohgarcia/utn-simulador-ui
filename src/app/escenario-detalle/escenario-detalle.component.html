@@ -1,0 +1,77 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button routerLink="/escenarios">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 *ngIf="!escenario.id">Nuevo Escenario</h1>
+    <h1 *ngIf="escenario.id">Editar Escenario</h1>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+
+<form [formGroup]="escenarioForm" class="form">
+  <mat-form-field class="form-field">
+    <input matInput placeholder="Titulo" [formControl]="titulo" [(ngModel)]="escenario.titulo"
+      [(value)]="escenario.titulo">
+    <mat-error *ngIf="escenario.invalid">Required field</mat-error>
+  </mat-form-field>
+  <mat-form-field class="form-field">
+    <input matInput placeholder="Cantidad de Periodos" [formControl]="periodos" [(ngModel)]="escenario.periodos"
+      [(value)]="escenario.periodos">
+    <mat-error *ngIf="escenario.invalid">Required field</mat-error>
+  </mat-form-field>
+  <mat-form-field class="form-field">
+    <textarea cdkTextareaAutosize matInput placeholder="Descripcion" [formControl]="descripcion"
+      [(ngModel)]="escenario.descripcion" [(value)]="escenario.descripcion"></textarea>
+    <mat-error *ngIf="escenario.invalid">Required field</mat-error>
+  </mat-form-field>
+</form>
+<div>
+</div>
+
+<mat-toolbar color="secundary" class="decisiones-header">
+  <h4>Ventas Reales</h4>
+</mat-toolbar>
+<table class="mat-table table">
+  <tr class="mat-header-row">
+    <th class="mat-header-cell desc-column">Periodo</th>
+    <th class="mat-header-cell value-column">Cantidad</th>
+    <th class="mat-header-cell value-column">Precio Venta</th>
+  </tr>
+  <tr class="mat-row" *ngFor="let periodo of getPeriodosArray()">
+    <td class="mat-cell desc-column">Periodo {{periodo}}</td>
+    <td class="mat-cell value-column"> <input matInput placeholder="Cantidad a vender" value="" class="value-column">
+    </td>
+    <td class="mat-cell value-column">
+      <input matInput placeholder="Precio de venta" value="" class="value-column">
+    </td>
+  </tr>
+</table>
+
+<mat-toolbar color="secundary" class="decisiones-header">
+  <h4>Archivos Adjuntos</h4>
+  <span class="spacer"></span>
+  <button mat-icon-button>
+    <mat-icon>add</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="archivos-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Archivo 1.pdf</mat-card-title>
+    </mat-card-header>
+    <mat-card-actions>
+      <button mat-button>ELIMINAR</button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Archivo 1.pdf</mat-card-title>
+    </mat-card-header>
+    <mat-card-actions>
+      <button mat-button>ELIMINAR</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

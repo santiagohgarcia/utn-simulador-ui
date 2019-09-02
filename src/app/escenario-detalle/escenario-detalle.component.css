@@ -1,0 +1,37 @@
+.form{
+    padding: 20px;
+}
+
+.form-field {
+    width: 100%;
+} 
+
+.archivos-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    padding: 20px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.table{
+    width: 100%;
+    background: transparent;
+    padding: 10px;
+}
+
+.table > * {
+    height: 30px;
+}
+
+.value-column {
+    text-align: right;
+}
+
+.desc-column {
+    text-align: left;
+}

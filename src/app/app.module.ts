@@ -57,9 +57,8 @@ import {
   MatTabGroup
 } from '@angular/material';
 import { ResultadosComponent } from './resultados/resultados.component';
-
-
-
+import { EscenariosComponent } from './escenarios/escenarios.component';
+import { EscenarioDetalleComponent } from './escenario-detalle/escenario-detalle.component';
 
 
 @NgModule({
@@ -114,7 +113,9 @@ export class MaterialModule { }
     DecisionDetalleComponent,
     FlujoFondosComponent,
     TomaDecisionesComponent,
-    ResultadosComponent
+    ResultadosComponent,
+    EscenariosComponent,
+    EscenarioDetalleComponent
   ],
   imports: [
     BrowserModule,

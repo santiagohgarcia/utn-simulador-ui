@@ -1,20 +1,22 @@
 <div class="card-container">
 
-  <div *ngFor="let decision of decisiones" class="card">
-    <mat-toolbar color="secundary">
-      <mat-toolbar-row>
-        <h6>{{ decision.id }}. {{ decision.descripcion }}</h6>
-        <span class="spacer"></span>
-        <button mat-icon-button routerLink="/decisiones/{{ decision.id }}">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button color="warn" (click)="removeDecision(decision.id)">
-          <mat-icon>clear</mat-icon>
-        </button>
-      </mat-toolbar-row>
-    </mat-toolbar>
-    <button mat-flat-button color="secundary" *ngFor="let opcion of decision.opciones" class="response-button">{{opcion.descripcion}}</button>
-  </div>
+
+
+  <mat-card *ngFor="let decision of decisiones">
+    <mat-card-header>
+      <mat-card-title>{{ decision.id }}. {{ decision.descripcion }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list dense>
+        <mat-list-item *ngFor="let opcion of decision.opciones"> {{opcion.descripcion}} </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button routerLink="/decisiones/{{ decision.id }}">EDITAR</button>
+      <button mat-button color="warn" (click)="removeDecision(decision.id)">ELIMIAR</button>
+    </mat-card-actions>
+  </mat-card>
+
 </div>
 
 <a mat-fab color="primary" routerLink="/decisiones/new" class="fab">
