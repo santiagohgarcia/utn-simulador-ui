@@ -10,6 +10,8 @@ import { TomaDecisionesComponent } from './toma-decisiones/toma-decisiones.compo
 import { ResultadosComponent } from './resultados/resultados.component';
 import { EscenariosComponent } from './escenarios/escenarios.component';
 import { EscenarioDetalleComponent } from './escenario-detalle/escenario-detalle.component';
+import { EstadoComponent } from './estado/estado.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },

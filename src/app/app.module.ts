@@ -21,6 +21,10 @@ import { DecisionDetalleComponent } from './decision-detalle/decision-detalle.co
 import { FlujoFondosComponent } from './flujo-fondos/flujo-fondos.component';
 import { ProyectoService } from './proyecto.service';
 import { TomaDecisionesComponent } from './toma-decisiones/toma-decisiones.component';
+import { ResultadosComponent } from './resultados/resultados.component';
+import { EscenariosComponent } from './escenarios/escenarios.component';
+import { EscenarioDetalleComponent } from './escenario-detalle/escenario-detalle.component';
+import { ChartsModule } from 'ng2-charts';
 
 import {
   MatAutocompleteModule,
@@ -56,9 +60,7 @@ import {
   MatStepperModule,
   MatTabGroup
 } from '@angular/material';
-import { ResultadosComponent } from './resultados/resultados.component';
-import { EscenariosComponent } from './escenarios/escenarios.component';
-import { EscenarioDetalleComponent } from './escenario-detalle/escenario-detalle.component';
+
 
 
 @NgModule({
@@ -127,7 +129,8 @@ export class MaterialModule { }
     AppRoutingModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    ChartsModule
   ],
   providers: [
     ProyectoService

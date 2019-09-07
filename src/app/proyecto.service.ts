@@ -89,6 +89,10 @@ export class ProyectoService {
     return this.http.get(`${environment.proyectoServiceHost}/api/estado/actual`);
   }
 
+  getEstados(proyectoId): Observable<any>  {
+    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${proyectoId}/estado`);
+  }
+
   simular(status) {
     return this.http.post(`${environment.proyectoServiceHost}/api/estado`, status);
   }

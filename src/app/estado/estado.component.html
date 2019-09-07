@@ -1,87 +1,92 @@
-<div class="background-container" *ngIf="estadoProyecto$ | async as estadoProyecto">
+<div class="card-container">
 
-  <div class="content-container">
-    <div class="card-container">
-
-      <mat-card class="card">
-        <mat-card-header>
-          <mat-card-title>Producto</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <div class="list">
-            <div class="list-item">
-              <p>Costo Fijo</p>
-              <h4>ARS {{ estadoProyecto.costoFijo }}</h4>
-            </div>
-            <div class="list-item">
-              <p>Costo Variable</p>
-              <h4>ARS {{ estadoProyecto.costoVariable }}</h4>
-            </div>
-            <div class="list-item">
-              <p>Stock</p>
-              <h4>{{ estadoProyecto.stock }} u</h4>
-            </div>
-            <div class="list-item">
-              <p>Produccion Mensual</p>
-              <h4>{{ estadoProyecto.produccionMensual }} u/mes</h4>
-            </div>
-          </div>
-        </mat-card-content>
-      </mat-card>
-
-
-      <mat-card class="card">
-        <mat-card-header>
-          <mat-card-title>Politica de Cobro</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <div class="list">
-            <div *ngFor="let periodo of estadoProyecto.proyecto.modalidadCobro" class="list-item">
-              <p>X + {{periodo.offsetPeriodo}}</p>
-              <h4>{{periodo.porcentaje}} %</h4>
-            </div>
-          </div>
-        </mat-card-content>
-      </mat-card>
-
-      <mat-card class="card">
-        <mat-card-header>
-          <mat-card-title>Ventas</mat-card-title>
-        </mat-card-header>
-        <img mat-card-image src="https://www.exceltip.com/wp-content/uploads/2015/02/img46.jpg" alt="Chart photo">
-        <mat-card-content>
-        
-        </mat-card-content>
-      </mat-card>
-
-      <div class="single-number-container">
-        <mat-card class="card">
-          <mat-card-header>
-            <mat-card-title>Caja</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <h1 class="single-number">ARS {{ estadoProyecto.caja }}</h1>
-          </mat-card-content>
-        </mat-card>
-
-        <mat-card class="card">
-          <mat-card-header>
-            <mat-card-title>VAN</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <h1 class="single-number">15 %</h1>
-          </mat-card-content>
-        </mat-card>
-        <mat-card class="card">
-          <mat-card-header>
-            <mat-card-title>TIR</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <h1 class="single-number">18 %</h1>
-          </mat-card-content>
-        </mat-card>
-
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>Producto</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="list">
+        <div class="list-item">
+          <p>Costo Fijo</p>
+          <h4>ARS {{ estadoActual.costoFijo }}</h4>
+        </div>
+        <div class="list-item">
+          <p>Costo Variable</p>
+          <h4>ARS {{ estadoActual.costoVariable }}</h4>
+        </div>
+        <div class="list-item">
+          <p>Produccion Mensual</p>
+          <h4>{{ estadoActual.produccionMensual }} u/mes</h4>
+        </div>
+        <div class="list-item">
+          <p>Precio de Venta</p>
+          <h4>ARS {{ estadoActual.producto.precio }}</h4>
+        </div>
       </div>
-    </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>Caja</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div style="display: block">
+        <canvas baseChart [datasets]="cajaChartProps.data" [labels]="cajaChartProps.labels"
+          [options]="cajaChartProps.options" [legend]="cajaChartProps.legend" [chartType]="cajaChartProps.type">
+        </canvas>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>Ventas</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div style="display: block">
+        <canvas baseChart [datasets]="ventasChartProps.data" [labels]="ventasChartProps.labels"
+          [options]="ventasChartProps.options" [legend]="ventasChartProps.legend" [chartType]="ventasChartProps.type">
+        </canvas>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>Politica de Cobro</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div style="display: block">
+        <canvas baseChart [datasets]="modCobroChartProps.data" [labels]="modCobroChartProps.labels"
+          [options]="modCobroChartProps.options" [legend]="modCobroChartProps.legend"
+          [chartType]="modCobroChartProps.type">
+        </canvas>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+
+
+
+  <div class="single-number-container">
+    <mat-card class="card">
+      <mat-card-header>
+        <mat-card-title>VAN</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h1 class="single-number">15 %</h1>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="card">
+      <mat-card-header>
+        <mat-card-title>TIR</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h1 class="single-number">18 %</h1>
+      </mat-card-content>
+    </mat-card>
+
   </div>
 </div>
