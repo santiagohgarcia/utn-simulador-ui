@@ -21,3 +21,11 @@
 .spacer {
   flex: 1 1 auto;
 }
+
+.title {
+  font-family: 'Coolvetica', Arial, sans-serif;
+  font-weight:normal;
+  font-style:normal;
+  font-size: xx-large;
+  margin-left: 15px;
+}
