@@ -14,11 +14,13 @@ export class HomeComponent implements OnInit {
     static: true
   }) sidenav: MatSidenav;
 
+  user: any;
+
   constructor(private router: Router,
               private afAuth: AngularFireAuth) { }
 
   ngOnInit() {
-
+      this.afAuth.user.subscribe(user => this.user = user);
   }
 
   close() {
