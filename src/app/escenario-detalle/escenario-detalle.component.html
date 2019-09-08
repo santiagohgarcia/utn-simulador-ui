@@ -8,8 +8,6 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-
-
 <form [formGroup]="escenarioForm" class="form">
   <mat-form-field class="form-field">
     <input matInput placeholder="Titulo" [formControl]="titulo" [(ngModel)]="escenario.titulo"
@@ -17,7 +15,7 @@
     <mat-error *ngIf="escenario.invalid">Required field</mat-error>
   </mat-form-field>
   <mat-form-field class="form-field">
-    <input matInput placeholder="Cantidad de Periodos" [formControl]="periodos" [(ngModel)]="escenario.periodos"
+    <input  type="number" matInput placeholder="Cantidad de Periodos" [formControl]="periodos" [(ngModel)]="escenario.periodos"
       [(value)]="escenario.periodos">
     <mat-error *ngIf="escenario.invalid">Required field</mat-error>
   </mat-form-field>
@@ -26,10 +24,15 @@
       [(ngModel)]="escenario.descripcion" [(value)]="escenario.descripcion"></textarea>
     <mat-error *ngIf="escenario.invalid">Required field</mat-error>
   </mat-form-field>
+  <mat-form-field class="form-field">
+      <input  type="number" matInput placeholder="Porcentaje de Impuestos" [formControl]="impuestoPorcentaje" [(ngModel)]="escenario.impuestoPorcentaje"
+        [(value)]="escenario.impuestoPorcentaje">
+      <mat-error *ngIf="escenario.invalid">Required field</mat-error>
+    </mat-form-field>
 </form>
 <div>
 </div>
-
+<!--
 <mat-toolbar color="secundary" class="decisiones-header">
   <h4>Ventas Reales</h4>
 </mat-toolbar>
@@ -81,7 +84,7 @@
     </mat-card-actions>
   </mat-card>
 </div>
-
+-->
 <button mat-fab color="primary" class="fab" (click)="save()">
   <mat-icon>done</mat-icon>
 </button>

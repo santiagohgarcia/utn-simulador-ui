@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProyectoService } from '../proyecto.service';
 
 @Component({
   selector: 'app-escenario-detalle',
@@ -8,28 +10,46 @@ import { Validators, FormControl, FormGroup } from '@angular/forms';
 })
 export class EscenarioDetalleComponent implements OnInit {
   escenario = {
-    titulo: "El renegado del 2001",
-    descripcion: `El Grupo Macri es uno de los grupos empresariales más importantes de la Argentina,2​ fundado por el magnate ítalo-argentino Franco Macri, padre del presidente argentino Mauricio Macri. El grupo posee empresas en Argentina, Brasil, Panamá y Uruguay.Las empresas que lo integran están relacionadas principalmente con las actividades de construcción, industria automotriz, correo, recolección de residuos e industria alimentaria.La facturación del grupo alcanzaba a 2.300 millones de dólares en 1999. Desde ahí en adelante se desconoce el origen y paradero de sus fondos, se cree que esa cifra se quintuplicó solo en el 2003.3​`,
-    periodos: 5
+    id: null,
+    titulo: '',
+    periodos: null,
+    descripcion: '',
+    impuestoPorcentaje: null
   };
   descripcion = new FormControl('', [Validators.required]);
   titulo = new FormControl('', [Validators.required]);
-  periodos = new FormControl('', [Validators.required]);
+  periodos = new FormControl(new Number(), [Validators.required]);
+  impuestoPorcentaje = new FormControl(new Number(), [Validators.required, Validators.min(0), Validators.max(99.9)]);
   escenarioForm: FormGroup = new FormGroup({
     descripcion: this.descripcion,
     titulo: this.titulo,
     periodos: this.periodos
   });
 
-  constructor() { }
+  constructor(private proyectoService: ProyectoService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    var id = Number(this.route.snapshot.paramMap.get('id'));
+    if (id) {
+      this.getEscenario(id).subscribe(escenario => this.escenario = escenario);
+    }
   }
 
+  getEscenario(id) {
+    return this.proyectoService.getEscenario(id);
+  }
 
-  getPeriodosArray(){
+  getPeriodosArray() {
     var periodos = Number(this.escenario.periodos);
-    return [...Array(periodos).keys(),periodos];
+    return [...Array(periodos).keys(), periodos];
   }
+
+  save() {
+    if (this.escenarioForm.valid) {
+      this.proyectoService[this.escenario.id ? 'modifyEscenario' : 'createEscenario'](this.escenario)
+        .subscribe(_ => this.router.navigate(['/escenarios']));
+    }
+  }
+
 
 }

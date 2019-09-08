@@ -138,6 +138,27 @@ export class ProyectoService {
     return this.http.post(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/opcion/${idOpcion}/toma-decision`,{});
   }
 
+  getEscenarios(): Observable<any>{
+    return this.http.get(`${environment.proyectoServiceHost}/api/escenarios`);
+  }
+
+  getEscenario(id): Observable<any>{
+    return this.http.get(`${environment.proyectoServiceHost}/api/escenarios/${id}`);
+  }
+
+  modifyEscenario(escenario) {
+    return this.http.put(`${environment.proyectoServiceHost}/api/escenarios/${escenario.id}`,escenario);
+  }
+
+  createEscenario(escenario) {
+    delete escenario.id;
+    return this.http.post(`${environment.proyectoServiceHost}/api/escenarios`,escenario);
+  }
+
+  deleteEscenario(id): Observable<any>{
+    return this.http.delete(`${environment.proyectoServiceHost}/api/escenarios/${id}`);
+  }
+
 //TODO: handle errors with snack bar
 /*  _openSnackBar() {
     this._snackBar.openFromComponent(ErrorSnackBarComponent, {

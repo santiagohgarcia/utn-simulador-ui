@@ -1,30 +1,13 @@
 <div class="card-container">
-  <mat-card>
+  <mat-card *ngFor="let escenario of escenarios;">
     <mat-card-header>
-      <mat-card-title>Escenario 1: La empresa de Macri</mat-card-title>
-      <mat-card-subtitle>El Grupo Macri es uno de los grupos empresariales más importantes de la Argentina,2​ fundado
-        por el magnate ítalo-argentino Franco Macri, padre del presidente argentino Mauricio Macri. El grupo posee
-        empresas en Argentina, Brasil, Panamá y Uruguay.Las empresas que lo integran están relacionadas principalmente
-        con las actividades de construcción, industria automotriz, correo, recolección de residuos e industria...
+      <mat-card-title>{{escenario.titulo}}</mat-card-title>
+      <mat-card-subtitle>{{escenario.descripcion}}
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-actions>
-      <button mat-button routerLink="/escenarios/new">EDITAR</button>
-      <button mat-button color="warn">ELIMINAR</button>
-    </mat-card-actions>
-  </mat-card>
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Escenario 2: El renegado del 2001</mat-card-title>
-      <mat-card-subtitle>El Grupo Macri es uno de los grupos empresariales más importantes de la Argentina,2​ fundado
-        por el magnate ítalo-argentino Franco Macri, padre del presidente argentino Mauricio Macri. El grupo posee
-        empresas en Argentina, Brasil, Panamá y Uruguay.Las empresas que lo integran están relacionadas principalmente
-        con las actividades de construcción, industria automotriz, correo, recolección de residuos e industria...
-      </mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-actions>
-      <button mat-button routerLink="/escenarios/new">EDITAR</button>
-      <button mat-button color="warn">ELIMINAR</button>
+      <button mat-button routerLink="/escenarios/{{escenario.id}}">EDITAR</button>
+      <button mat-button color="warn" (click)="deleteEscenario(escenario.id)">ELIMINAR</button>
     </mat-card-actions>
   </mat-card>
 </div>
