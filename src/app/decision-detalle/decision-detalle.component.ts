@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
-import { of } from 'rxjs';
-import { ProyectoService } from '../proyecto.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatDialog } from '@angular/material';
 import { OpcionDialogComponent } from './opciones/opcion-dialog.component';
+import { DecisionesService } from '../decisiones.service';
+import { ConsecuenciaDialogComponent } from './consecuencias/consecuencia-dialog.component';
 
 @Component({
   selector: 'app-decision-detalle',
@@ -21,14 +21,11 @@ import { OpcionDialogComponent } from './opciones/opcion-dialog.component';
 })
 export class DecisionDetalleComponent implements OnInit {
 
-  decision;
-
-  templateDecision = {
+  decision: any = {
+    escenarioId: null,
     descripcion: "",
     opciones: []
   };
-
-  saveFunction;
 
   descripcion = new FormControl('', [Validators.required]);
   decisionForm: FormGroup = new FormGroup({
@@ -37,48 +34,105 @@ export class DecisionDetalleComponent implements OnInit {
 
   displayedColumns: string[] = ['descripcion', 'edit'];
 
-  constructor(private proyectoService: ProyectoService, private route: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(private decisionesService: DecisionesService, private route: ActivatedRoute, private dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
+    var esenarioId = Number(this.route.snapshot.paramMap.get('escenarioId'));
     var id = Number(this.route.snapshot.paramMap.get('id'));
-    this.getDecision(id).subscribe(d => this.decision = d);
-  }
-
-  getDecision(id) {
-    return id ? this.proyectoService.getDecision(id) : of(this.templateDecision);
+    if (id) {
+      this.decisionesService.getDecision(esenarioId, id).subscribe(d => { 
+        this.decision = d; 
+        this.decision.escenarioId = esenarioId; 
+      });
+    } else {
+      this.decision.escenarioId = esenarioId;
+    }
   }
 
   addOpcion() {
-    this.decision.opciones = this.decision.opciones.concat([{
-      descripcion: "nueva resp",
-      consecuencias: []
-    }]);
+    const dialogRef = this.dialog.open(OpcionDialogComponent, {
+      width: '400px',
+      data: {
+        decisionId: this.decision.id
+      }
+    });
+    var that = this;
+    dialogRef.afterClosed().subscribe(updatedOpcion => {
+      if (updatedOpcion) {
+        that.decision.opciones.push(updatedOpcion);
+      }
+      that.refreshDecisiones();
+    });
+  }
+
+  editOpcion(opcion) {
+    const dialogRef = this.dialog.open(OpcionDialogComponent, {
+      width: '400px',
+      data: opcion
+    });
+    var that = this;
+    dialogRef.afterClosed().subscribe(updatedOpcion => {
+      var index = that.decision.opciones.indexOf(opcion);
+      if (index !== -1) {
+        that.decision.opciones[index] = updatedOpcion;
+      }
+      that.refreshDecisiones();
+    });
   }
 
   removeOpcion(opcion) {
     var index = this.decision.opciones.indexOf(opcion);
     this.decision.opciones.splice(index, 1)
-    this.decision.opciones = this.decision.opciones.concat([]);
-  }
-
-  editOpcion(opcion) {
-    this.dialog.open(OpcionDialogComponent, {
-      width: '250px',
-      data: opcion
-    });
+    this.refreshDecisiones();
   }
 
   addConsecuencia(opcion) {
-    opcion.consecuencias = opcion.consecuencias.concat([{
-      cuenta: "cuenta",
-      valor: 10
-    }])
+    const dialogRef = this.dialog.open(ConsecuenciaDialogComponent, {
+      width: '400px',
+      data: {
+        opcionId: opcion.id
+      }
+    });
+    dialogRef.afterClosed().subscribe(updatedConsecuencia => {
+      if (updatedConsecuencia) {
+        opcion.consecuencias.push(updatedConsecuencia);
+      }
+      this.refreshConsecuencias(opcion);
+    });
+  }
+
+  editConsecuencia(opcion, consecuencia) {
+    const dialogRef = this.dialog.open(ConsecuenciaDialogComponent, {
+      width: '400px',
+      data: consecuencia
+    });
+
+    dialogRef.afterClosed().subscribe(updatedConsecuencia => {
+      var index = opcion.consecuencias.indexOf(consecuencia);
+      if (index !== -1) {
+        opcion.consecuencias[index] = updatedConsecuencia;
+      }
+      this.refreshConsecuencias(opcion);
+    });
   }
 
   removeConsecuencia(opcion, consecuencia) {
     var index = opcion.consecuencias.indexOf(consecuencia);
     opcion.consecuencias.splice(index, 1);
-    opcion.consecuencias = opcion.consecuencias.concat([]);
+    this.refreshConsecuencias(opcion);
+  }
+
+  refreshDecisiones() {
+    this.decision.opciones = this.decision.opciones.slice(0);
+  }
+
+  refreshConsecuencias(opcion) {
+    opcion.consecuencias = opcion.consecuencias.slice(0);
+  }
+
+  save() {
+    this.decisionesService[this.decision.id ? 'modifyDecision' : 'createDecision'](this.decision)
+      .subscribe(_ => this.router.navigate([`/escenarios/${this.decision.escenarioId}`]))
   }
 
 }

@@ -24,7 +24,7 @@ export class EstadoComponent implements OnInit {
   }
 
   getEstadoActual() {
-    this.estadoActual = this.proyectoService.getEstado().subscribe(estadoActual => {
+    this.estadoActual = this.proyectoService.getEstado(1).subscribe(estadoActual => {
       this.estadoActual = estadoActual;
       this.setModCobroChartProps(estadoActual);
     })

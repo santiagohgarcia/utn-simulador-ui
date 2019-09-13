@@ -1,14 +1,15 @@
-<h1 mat-dialog-title>Editar Respuesta.</h1>
+<h1 mat-dialog-title>Editar Opcion</h1>
 
 <div mat-dialog-content>
-    <form [formGroup]="respuestaForm" class="form">
+    <form [formGroup]="opcionForm" class="form">
         <mat-form-field class="full-width">
-            <input matInput placeholder="Ingrese una descripcion" type="text" [formControl]="descripcion">
-            <mat-error *ngIf="descripcion.invalid">Insert a valid email</mat-error>
+            <input matInput placeholder="Descripcion" type="text" [formControl]="descripcion" [(ngModel)]="opcion.descripcion"
+            [(value)]="opcion.descripcion">
+            <mat-error *ngIf="descripcion.invalid">Required field</mat-error>
         </mat-form-field>
     </form>
 </div>
 <div mat-dialog-actions>
-    <button mat-raised-button color="warn" (click)="onClose()">Cancel</button>
-    <button mat-raised-button color="primary" (click)="onSave()">Guardar</button>
+    <button mat-button [mat-dialog-close]="data">CANCELAR</button>
+    <button mat-button [mat-dialog-close]="opcion">GUARDAR</button>
 </div>

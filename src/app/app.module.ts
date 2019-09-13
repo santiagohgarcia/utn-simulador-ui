@@ -25,6 +25,10 @@ import { ResultadosComponent } from './resultados/resultados.component';
 import { EscenariosComponent } from './escenarios/escenarios.component';
 import { EscenarioDetalleComponent } from './escenario-detalle/escenario-detalle.component';
 import { ChartsModule } from 'ng2-charts';
+import { EscenariosService } from './escenarios.service';
+import { DecisionesService } from './decisiones.service';
+import { OpcionDialogComponent } from './decision-detalle/opciones/opcion-dialog.component';
+import { ConsecuenciaDialogComponent } from './decision-detalle/consecuencias/consecuencia-dialog.component';
 
 import {
   MatAutocompleteModule,
@@ -60,8 +64,6 @@ import {
   MatStepperModule,
   MatTabGroup
 } from '@angular/material';
-
-
 
 @NgModule({
   exports: [
@@ -117,11 +119,13 @@ export class MaterialModule { }
     TomaDecisionesComponent,
     ResultadosComponent,
     EscenariosComponent,
-    EscenarioDetalleComponent
+    EscenarioDetalleComponent,
+    OpcionDialogComponent,
+    ConsecuenciaDialogComponent
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule, 
     FormsModule,
     HttpClientModule,
     MaterialModule,
@@ -133,9 +137,11 @@ export class MaterialModule { }
     ChartsModule
   ],
   providers: [
-    ProyectoService
+    ProyectoService,
+    EscenariosService,
+    DecisionesService
   ],
-  entryComponents: [RegisterComponent],
+  entryComponents: [RegisterComponent,OpcionDialogComponent,ConsecuenciaDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

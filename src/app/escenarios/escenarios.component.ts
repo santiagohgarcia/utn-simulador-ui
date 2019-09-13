@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProyectoService } from '../proyecto.service';
+import { EscenariosService } from '../escenarios.service';
 
 @Component({
   selector: 'app-escenarios',
@@ -10,18 +11,18 @@ export class EscenariosComponent implements OnInit {
 
   escenarios: Array<any>;
 
-  constructor(private proyectoService: ProyectoService) { }
+  constructor(private escenariosService: EscenariosService) { }
 
   ngOnInit() {
     this.getEscenarios();
   }
 
   getEscenarios(){
-    this.proyectoService.getEscenarios().subscribe(escenarios => this.escenarios = escenarios)
+    this.escenariosService.getEscenarios().subscribe(escenarios => this.escenarios = escenarios)
   }
 
   deleteEscenario(id){
-    this.proyectoService.deleteEscenario(id).subscribe(_ => this.getEscenarios())
+    this.escenariosService.deleteEscenario(id).subscribe(_ => this.getEscenarios())
   }
 
 }

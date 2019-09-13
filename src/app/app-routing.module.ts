@@ -26,10 +26,6 @@ const routes: Routes = [
     children: [{ path: '', component: PremiosComponent, pathMatch: 'full' }]
   },
   {
-    path: 'decisiones', component: HomeComponent,
-    children: [{ path: '', component: DecisionesComponent, pathMatch: 'full' }]
-  },
-  {
     path: 'escenarios', component: HomeComponent,
     children: [{ path: '', component: EscenariosComponent, pathMatch: 'full' }]
   },
@@ -37,8 +33,8 @@ const routes: Routes = [
     path: 'toma-decisiones', component: HomeComponent,
     children: [{ path: '', component: TomaDecisionesComponent, pathMatch: 'full' }]
   },
-  { path: 'decisiones/new', component: DecisionDetalleComponent, pathMatch: 'full' },
-  { path: 'decisiones/:id', component: DecisionDetalleComponent },
+  { path: 'escenarios/:escenarioId/decisiones/new', component: DecisionDetalleComponent, pathMatch: 'full' },
+  { path: 'escenarios/:escenarioId/decisiones/:id', component: DecisionDetalleComponent },
   { path: 'escenarios/new', component: EscenarioDetalleComponent, pathMatch: 'full' },
   { path: 'escenarios/:id', component: EscenarioDetalleComponent }
 ];

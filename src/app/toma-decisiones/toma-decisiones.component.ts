@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProyectoService } from '../proyecto.service';
 import { MatRadioChange } from '@angular/material';
 import { Router } from '@angular/router';
+import { DecisionesService } from '../decisiones.service';
 
 
 @Component({
@@ -11,49 +12,61 @@ import { Router } from '@angular/router';
 })
 export class TomaDecisionesComponent implements OnInit {
 
-
   decisiones: Array<any> = [];
   estado;
-  periodos: Array<any> = [];
+  forecasts: Array<any> = [];
 
   constructor(private proyectoService: ProyectoService,
+    private decisionesService: DecisionesService,
     private router: Router) { }
 
   ngOnInit() {
     this.getDecisionesByProyecto();
     this.getEstado();
-    this.getPeriodos();
+    this.buildForecast();
   }
 
-  getEstado(){
-    this.proyectoService.getEstado().subscribe( estado => this.estado = estado );
+  getEstado() {
+    this.proyectoService.getEstado(1).subscribe(estado => this.estado = estado);
   }
 
   getDecisionesByProyecto() {
-    this.proyectoService.getDecisionesByProyecto(1)
-      .subscribe( decisiones => this.decisiones = decisiones);
+    this.decisionesService.getDecisiones(1)
+      .subscribe(decisiones => this.decisiones = decisiones);
   }
 
-  getPeriodos(){
+  buildForecast() {
     this.proyectoService.getPeriodoActual(1).subscribe(periodoActual => {
-          this.periodos = [...Array(periodoActual).keys(),periodoActual];
+      this.forecasts = [...Array(periodoActual).keys(), periodoActual].map(periodo => {
+        return {
+          proyectoId: 1,
+          periodo: periodo,
+          cantidadUnidades: 0
+        }
+      });
     })
   }
 
-  getDecisionesTomadas(){
-    return this.decisiones ? this.decisiones.filter( d => d.opcionTomada ).length : 0;
+  getCantidadDecisionesTomadas() {
+    return this.decisiones ? this.decisiones.filter(d => d.opcionTomada).length : 0;
   }
 
-  tomarDecision(evt: MatRadioChange){
-    this.proyectoService.tomarDecision(1,evt.value)
-      .subscribe( _ => {
-        this.getDecisionesByProyecto()
-        this.getEstado();
-      }); 
+  getOpcionesTomadas() {
+    return this.decisiones.map(d => d.opciones.find(o => o.id === d.opcionTomada));
   }
 
   simular() {
-    this.proyectoService.simular(this.estado).subscribe(_ => this.router.navigateByUrl("/resultados") )
+    //TODO: ver decisiones y forecast
+    this.proyectoService.forecast(1, this.forecasts)
+      .subscribe(_ => {
+        var opcionesTomadas = this.getOpcionesTomadas();
+        if (opcionesTomadas.length === this.decisiones.length) {
+          this.proyectoService.simular(1, opcionesTomadas)
+            .subscribe(_ => this.router.navigateByUrl("/resultados"))
+        }
+      }
+      );
+
   }
 
 

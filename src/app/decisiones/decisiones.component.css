@@ -12,6 +12,12 @@
     justify-content: flex-end;
 }
 
+.mat-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 
 .mat-card-content {
     margin-bottom: 0px;

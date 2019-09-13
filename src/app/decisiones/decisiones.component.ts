@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ProyectoService } from '../proyecto.service';
-import { Observable } from 'rxjs/Observable';
+import { Component, OnInit, Input } from '@angular/core';
+import { DecisionesService } from '../decisiones.service';
 
 
 @Component({
@@ -9,23 +8,23 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./decisiones.component.css']
 })
 export class DecisionesComponent implements OnInit {
-
+  @Input() escenario: any;
   decisiones: Array<any>;
 
-  constructor(private proyectoService: ProyectoService) { }
+  constructor(private decisionesService: DecisionesService) { }
 
   ngOnInit() {
     this.getDecisiones();
   }
 
   getDecisiones() {
-   this.proyectoService.getDecisionesByProyecto(1).subscribe( decisiones => {
+   this.decisionesService.getDecisiones(this.escenario.id).subscribe( decisiones => {
       this.decisiones = decisiones;
    });
   }
 
   removeDecision(id){
-      this.proyectoService.removeDecision(id).subscribe(_ => this.getDecisiones());
+      this.decisionesService.removeDecision(id).subscribe(_ => this.getDecisiones());
   }
 
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProyectoService } from '../proyecto.service';
+import { EscenariosService } from '../escenarios.service';
 
 @Component({
   selector: 'app-escenario-detalle',
@@ -26,7 +26,7 @@ export class EscenarioDetalleComponent implements OnInit {
     periodos: this.periodos
   });
 
-  constructor(private proyectoService: ProyectoService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private escenariosService: EscenariosService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     var id = Number(this.route.snapshot.paramMap.get('id'));
@@ -36,7 +36,7 @@ export class EscenarioDetalleComponent implements OnInit {
   }
 
   getEscenario(id) {
-    return this.proyectoService.getEscenario(id);
+    return this.escenariosService.getEscenario(id);
   }
 
   getPeriodosArray() {
@@ -46,7 +46,7 @@ export class EscenarioDetalleComponent implements OnInit {
 
   save() {
     if (this.escenarioForm.valid) {
-      this.proyectoService[this.escenario.id ? 'modifyEscenario' : 'createEscenario'](this.escenario)
+      this.escenariosService[this.escenario.id ? 'modifyEscenario' : 'createEscenario'](this.escenario)
         .subscribe(_ => this.router.navigate(['/escenarios']));
     }
   }

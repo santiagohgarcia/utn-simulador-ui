@@ -1,7 +1,12 @@
+<mat-toolbar color="secundary">
+  <h1>Decisiones</h1>
+  <span class="spacer"></span>
+  <button mat-icon-button routerLink="/escenarios/{{escenario.id}}/decisiones/new">
+    <mat-icon>add</mat-icon>
+  </button>
+</mat-toolbar>
+
 <div class="card-container">
-
-
-
   <mat-card *ngFor="let decision of decisiones">
     <mat-card-header>
       <mat-card-title>{{ decision.id }}. {{ decision.descripcion }}</mat-card-title>
@@ -12,13 +17,9 @@
       </mat-list>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button routerLink="/decisiones/{{ decision.id }}">EDITAR</button>
+      <button mat-button routerLink="/escenarios/{{escenario.id}}/decisiones/{{ decision.id }}">EDITAR</button>
       <button mat-button color="warn" (click)="removeDecision(decision.id)">ELIMIAR</button>
     </mat-card-actions>
   </mat-card>
 
 </div>
-
-<a mat-fab color="primary" routerLink="/decisiones/new" class="fab">
-  <mat-icon>add</mat-icon>
-</a>

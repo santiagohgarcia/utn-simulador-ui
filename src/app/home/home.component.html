@@ -1,48 +1,44 @@
 <div class="container">
-    <mat-toolbar color="primary" class="toolbar">
-      <button mat-icon-button (click)="sidenav.toggle()">
-        <mat-icon>menu</mat-icon>
+  <mat-toolbar color="primary" class="toolbar">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="title">Augure</h1>
+    <span class="spacer"></span>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <img src="{{user.photoURL}}" style="height: 40px; border-radius: 50%">
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <span>Profile</span>
       </button>
-      <h1 class="title">Augure</h1>
-      <span class="spacer"></span>
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-        <img src="{{user.photoURL}}" style="height: 40px; border-radius: 50%">
+      <button mat-menu-item color="warn" (click)="logout()">
+        <span>Log Out</span>
       </button>
-      <mat-menu #menu="matMenu">
-          <button mat-menu-item >
-              <span>Profile</span>
-           </button>
-          <button mat-menu-item color="warn" (click)="logout()">
-            <span>Log Out</span>
-         </button>
-      </mat-menu>
-    </mat-toolbar>
-  
-    <mat-sidenav-container class="sidenav-container" (backdropClick)="close()">
-  
-      <mat-sidenav-content>
-        <router-outlet></router-outlet>
-      </mat-sidenav-content>
-  
-      <mat-sidenav class="sidenav-container" #sidenav (keydown.escape)="close()" disableClose>
-        <mat-nav-list>
-          <mat-list-item>
-            <button mat-button mat-line class="button" routerLink="/toma-decisiones">Toma de Desiciones</button>
-          </mat-list-item>
-          <mat-divider></mat-divider>
-          <mat-list-item>
-            <button mat-button mat-line class="button" routerLink="/decisiones">Desiciones</button>
-          </mat-list-item>
-          <mat-divider></mat-divider>
-          <mat-list-item>
-            <button mat-button mat-line class="button" routerLink="/premios">Premios</button>
-          </mat-list-item>
-          <mat-divider></mat-divider>
-          <mat-list-item>
-            <button mat-button mat-line class="button" routerLink="/escenarios">Escenarios</button>
-          </mat-list-item>
-          
-        </mat-nav-list>
-      </mat-sidenav>
-    </mat-sidenav-container>
-  </div>
+    </mat-menu>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="sidenav-container" (backdropClick)="close()">
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+
+    <mat-sidenav class="sidenav-container" #sidenav (keydown.escape)="close()" disableClose>
+      <mat-nav-list>
+        <mat-list-item>
+          <button mat-button mat-line class="button" routerLink="/toma-decisiones">Toma de Desiciones</button>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <button mat-button mat-line class="button" routerLink="/premios">Premios</button>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <button mat-button mat-line class="button" routerLink="/escenarios">Escenarios</button>
+        </mat-list-item>
+
+      </mat-nav-list>
+    </mat-sidenav>
+  </mat-sidenav-container>
+</div>
