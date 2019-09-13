@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EscenariosService } from '../escenarios.service';
+import { MessagesService } from '../messages.service';
 
 @Component({
   selector: 'app-escenario-detalle',
@@ -12,21 +13,24 @@ export class EscenarioDetalleComponent implements OnInit {
   escenario = {
     id: null,
     titulo: '',
-    periodos: null,
+    maximosPeriodos: null,
     descripcion: '',
     impuestoPorcentaje: null
   };
   descripcion = new FormControl('', [Validators.required]);
   titulo = new FormControl('', [Validators.required]);
-  periodos = new FormControl(new Number(), [Validators.required]);
+  maximosPeriodos = new FormControl(new Number(), [Validators.required]);
   impuestoPorcentaje = new FormControl(new Number(), [Validators.required, Validators.min(0), Validators.max(99.9)]);
   escenarioForm: FormGroup = new FormGroup({
     descripcion: this.descripcion,
     titulo: this.titulo,
-    periodos: this.periodos
+    maximosPeriodos: this.maximosPeriodos
   });
 
-  constructor(private escenariosService: EscenariosService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private escenariosService: EscenariosService, 
+    private route: ActivatedRoute, 
+    private router: Router,
+    private messageService: MessagesService) { }
 
   ngOnInit() {
     var id = Number(this.route.snapshot.paramMap.get('id'));
@@ -40,14 +44,17 @@ export class EscenarioDetalleComponent implements OnInit {
   }
 
   getPeriodosArray() {
-    var periodos = Number(this.escenario.periodos);
-    return [...Array(periodos).keys(), periodos];
+    var maximosPeriodos = Number(this.escenario.maximosPeriodos);
+    return [...Array(maximosPeriodos).keys(), maximosPeriodos];
   }
 
   save() {
     if (this.escenarioForm.valid) {
       this.escenariosService[this.escenario.id ? 'modifyEscenario' : 'createEscenario'](this.escenario)
-        .subscribe(_ => this.router.navigate(['/escenarios']));
+        .subscribe(_ => {
+          this.messageService.openSnackBar("Escenario modificado");
+          this.router.navigate(['/escenarios'])
+        });
     }
   }
 

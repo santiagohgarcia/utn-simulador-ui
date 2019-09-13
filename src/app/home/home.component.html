@@ -5,7 +5,7 @@
     </button>
     <h1 class="title">Augure</h1>
     <span class="spacer"></span>
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <button *ngIf="user" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
       <img src="{{user.photoURL}}" style="height: 40px; border-radius: 50%">
     </button>
     <mat-menu #menu="matMenu">

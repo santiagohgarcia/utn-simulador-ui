@@ -29,6 +29,7 @@ import { EscenariosService } from './escenarios.service';
 import { DecisionesService } from './decisiones.service';
 import { OpcionDialogComponent } from './decision-detalle/opciones/opcion-dialog.component';
 import { ConsecuenciaDialogComponent } from './decision-detalle/consecuencias/consecuencia-dialog.component';
+import { MessagesService } from './messages.service';
 
 import {
   MatAutocompleteModule,
@@ -64,6 +65,7 @@ import {
   MatStepperModule,
   MatTabGroup
 } from '@angular/material';
+
 
 @NgModule({
   exports: [
@@ -139,7 +141,8 @@ export class MaterialModule { }
   providers: [
     ProyectoService,
     EscenariosService,
-    DecisionesService
+    DecisionesService,
+    MessagesService
   ],
   entryComponents: [RegisterComponent,OpcionDialogComponent,ConsecuenciaDialogComponent],
   bootstrap: [AppComponent]

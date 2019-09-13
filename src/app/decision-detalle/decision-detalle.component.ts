@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material';
 import { OpcionDialogComponent } from './opciones/opcion-dialog.component';
 import { DecisionesService } from '../decisiones.service';
 import { ConsecuenciaDialogComponent } from './consecuencias/consecuencia-dialog.component';
+import { MessagesService } from '../messages.service';
 
 @Component({
   selector: 'app-decision-detalle',
@@ -34,15 +35,19 @@ export class DecisionDetalleComponent implements OnInit {
 
   displayedColumns: string[] = ['descripcion', 'edit'];
 
-  constructor(private decisionesService: DecisionesService, private route: ActivatedRoute, private dialog: MatDialog, private router: Router) { }
+  constructor(private decisionesService: DecisionesService, 
+    private route: ActivatedRoute, 
+    private dialog: MatDialog,
+    private router: Router,
+    private messageService: MessagesService) { }
 
   ngOnInit() {
     var esenarioId = Number(this.route.snapshot.paramMap.get('escenarioId'));
     var id = Number(this.route.snapshot.paramMap.get('id'));
     if (id) {
-      this.decisionesService.getDecision(esenarioId, id).subscribe(d => { 
-        this.decision = d; 
-        this.decision.escenarioId = esenarioId; 
+      this.decisionesService.getDecision(esenarioId, id).subscribe(d => {
+        this.decision = d;
+        this.decision.escenarioId = esenarioId;
       });
     } else {
       this.decision.escenarioId = esenarioId;
@@ -53,15 +58,18 @@ export class DecisionDetalleComponent implements OnInit {
     const dialogRef = this.dialog.open(OpcionDialogComponent, {
       width: '400px',
       data: {
-        decisionId: this.decision.id
+        id: null,
+        decisionId: this.decision.id,
+        descripcion: "",
+        consecuencias: []
       }
     });
     var that = this;
     dialogRef.afterClosed().subscribe(updatedOpcion => {
       if (updatedOpcion) {
         that.decision.opciones.push(updatedOpcion);
+        that.refreshDecisiones();
       }
-      that.refreshDecisiones();
     });
   }
 
@@ -72,11 +80,13 @@ export class DecisionDetalleComponent implements OnInit {
     });
     var that = this;
     dialogRef.afterClosed().subscribe(updatedOpcion => {
-      var index = that.decision.opciones.indexOf(opcion);
-      if (index !== -1) {
-        that.decision.opciones[index] = updatedOpcion;
+      if (updatedOpcion) {
+        var index = that.decision.opciones.indexOf(opcion);
+        if (index !== -1) {
+          that.decision.opciones[index] = updatedOpcion;
+        }
+        that.refreshDecisiones();
       }
-      that.refreshDecisiones();
     });
   }
 
@@ -90,14 +100,19 @@ export class DecisionDetalleComponent implements OnInit {
     const dialogRef = this.dialog.open(ConsecuenciaDialogComponent, {
       width: '400px',
       data: {
-        opcionId: opcion.id
+        opcionId: opcion.id,
+        descripcion: "",
+        monto: null,
+        periodoInicio: 0,
+        cantidadPeriodos: 1,
+        tipoCuenta: "ECONOMICO"
       }
     });
     dialogRef.afterClosed().subscribe(updatedConsecuencia => {
       if (updatedConsecuencia) {
         opcion.consecuencias.push(updatedConsecuencia);
+        this.refreshConsecuencias(opcion);
       }
-      this.refreshConsecuencias(opcion);
     });
   }
 
@@ -108,11 +123,13 @@ export class DecisionDetalleComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(updatedConsecuencia => {
-      var index = opcion.consecuencias.indexOf(consecuencia);
-      if (index !== -1) {
-        opcion.consecuencias[index] = updatedConsecuencia;
+      if (updatedConsecuencia) {
+        var index = opcion.consecuencias.indexOf(consecuencia);
+        if (index !== -1) {
+          opcion.consecuencias[index] = updatedConsecuencia;
+        }
+        this.refreshConsecuencias(opcion);
       }
-      this.refreshConsecuencias(opcion);
     });
   }
 
@@ -131,8 +148,13 @@ export class DecisionDetalleComponent implements OnInit {
   }
 
   save() {
-    this.decisionesService[this.decision.id ? 'modifyDecision' : 'createDecision'](this.decision)
-      .subscribe(_ => this.router.navigate([`/escenarios/${this.decision.escenarioId}`]))
+    if (this.decisionForm.valid) {
+      this.decisionesService[this.decision.id ? 'modifyDecision' : 'createDecision'](this.decision)
+        .subscribe(_ => {
+          this.messageService.openSnackBar("Decision modificada");
+          this.router.navigate([`/escenarios/${this.decision.escenarioId}`])
+        })
+    }
   }
 
 }

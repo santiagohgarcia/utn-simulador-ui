@@ -11,7 +11,7 @@
 
 <form [formGroup]="decisionForm" class="form">
   <mat-form-field class="full-width">
-    <input matInput placeholder="Descripcion" [formControl]="descripcion" [(ngModel)]="decision.descripcion"
+    <input autofocus matInput placeholder="Descripcion" [formControl]="descripcion" [(ngModel)]="decision.descripcion"
       [(value)]="decision.descripcion">
     <mat-error *ngIf="descripcion.invalid">Required field</mat-error>
   </mat-form-field>

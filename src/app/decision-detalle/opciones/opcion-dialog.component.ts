@@ -8,11 +8,7 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
   styleUrls: ['./opcion-dialog.component.css']
 })
 export class OpcionDialogComponent implements OnInit {
-  opcion = {
-    decisionId: null,
-    descripcion: "",
-    consecuencias: []
-  }
+  opcion;
   descripcion = new FormControl('', [Validators.required])
   opcionForm: FormGroup = new FormGroup({
     descripcion: this.descripcion,
@@ -22,10 +18,16 @@ export class OpcionDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data) { }
 
   ngOnInit() {
-    if(this.data.id){
       this.opcion = JSON.parse(JSON.stringify(this.data));
-    }else{
-      this.opcion.decisionId = this.data.decisionId;
+  }
+
+  cancel(){
+      this.dialogRef.close();
+  }
+
+  save(){
+    if(this.opcionForm.valid){
+      this.dialogRef.close(this.opcion);
     }
   }
 

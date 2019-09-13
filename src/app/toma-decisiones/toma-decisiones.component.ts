@@ -52,7 +52,7 @@ export class TomaDecisionesComponent implements OnInit {
   }
 
   getOpcionesTomadas() {
-    return this.decisiones.map(d => d.opciones.find(o => o.id === d.opcionTomada));
+    return this.decisiones.map(d => d.opciones.find(o => o.id === d.opcionTomada)).filter(d => d);
   }
 
   simular() {

@@ -9,14 +9,14 @@
 </mat-toolbar>
 
 <form [formGroup]="escenarioForm" class="form">
-  <mat-form-field class="form-field">
-    <input matInput placeholder="Titulo" [formControl]="titulo" [(ngModel)]="escenario.titulo"
-      [(value)]="escenario.titulo">
+  <mat-form-field  class="form-field">
+    <input autofocus matInput placeholder="Titulo" [formControl]="titulo" [(ngModel)]="escenario.titulo"
+      [(value)]="escenario.titulo"  >
     <mat-error *ngIf="escenario.invalid">Required field</mat-error>
   </mat-form-field>
   <mat-form-field class="form-field">
-    <input  type="number" matInput placeholder="Cantidad de Periodos" [formControl]="periodos" [(ngModel)]="escenario.periodos"
-      [(value)]="escenario.periodos">
+    <input  type="number" matInput placeholder="Cantidad de Periodos" [formControl]="maximosPeriodos" [(ngModel)]="escenario.maximosPeriodos"
+      [(value)]="escenario.maximosPeriodos">
     <mat-error *ngIf="escenario.invalid">Required field</mat-error>
   </mat-form-field>
   <mat-form-field class="form-field">
