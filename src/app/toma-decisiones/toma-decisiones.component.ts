@@ -3,6 +3,7 @@ import { ProyectoService } from '../proyecto.service';
 import { MatRadioChange } from '@angular/material';
 import { Router } from '@angular/router';
 import { DecisionesService } from '../decisiones.service';
+import { MessagesService } from '../messages.service';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class TomaDecisionesComponent implements OnInit {
 
   constructor(private proyectoService: ProyectoService,
     private decisionesService: DecisionesService,
-    private router: Router) { }
+    private router: Router,
+    private messageService: MessagesService) { }
 
   ngOnInit() {
     this.getDecisionesByProyecto();
@@ -63,6 +65,8 @@ export class TomaDecisionesComponent implements OnInit {
         if (opcionesTomadas.length === this.decisiones.length) {
           this.proyectoService.simular(1, opcionesTomadas)
             .subscribe(_ => this.router.navigateByUrl("/resultados"))
+        }else{
+          this.messageService.openSnackBar("Toma todas las decisiones antes de simular!");
         }
       }
       );
