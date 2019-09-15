@@ -58,7 +58,7 @@ export class TomaDecisionesComponent implements OnInit {
   }
 
   simular() {
-    //TODO: ver decisiones y forecast
+   
     this.proyectoService.forecast(1, this.forecasts)
       .subscribe(_ => {
         var opcionesTomadas = this.getOpcionesTomadas();
