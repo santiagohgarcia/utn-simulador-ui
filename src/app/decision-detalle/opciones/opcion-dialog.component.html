@@ -3,9 +3,27 @@
 <div mat-dialog-content>
     <form [formGroup]="opcionForm" class="form">
         <mat-form-field class="full-width">
-            <input matInput placeholder="Descripcion" type="text" [formControl]="descripcion" [(ngModel)]="opcion.descripcion"
-            [(value)]="opcion.descripcion">
+            <input matInput placeholder="Descripcion" type="text" [formControl]="descripcion"
+                [(ngModel)]="opcion.descripcion" [(value)]="opcion.descripcion">
             <mat-error *ngIf="descripcion.invalid">Required field</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input type="number" matInput placeholder="Variacion de Costo Fijo" type="text"
+                [formControl]="variacionCostoFijo" [(ngModel)]="opcion.variacionCostoFijo"
+                [(value)]="opcion.variacionCostoFijo">
+            <mat-error *ngIf="variacionCostoFijo.invalid">Required field</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input type="number" matInput placeholder="Variacion de Costo Variable" type="text"
+                [formControl]="variacionCostoVariable" [(ngModel)]="opcion.variacionCostoVariable"
+                [(value)]="opcion.variacionCostoVariable">
+            <mat-error *ngIf="variacionCostoVariable.invalid">Required field</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input type="number" matInput placeholder="Variacion de Produccion" type="text"
+                [formControl]="variacionProduccion" [(ngModel)]="opcion.variacionProduccion"
+                [(value)]="opcion.variacionProduccion">
+            <mat-error *ngIf="variacionProduccion.invalid">Required field</mat-error>
         </mat-form-field>
     </form>
 </div>

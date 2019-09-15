@@ -62,6 +62,9 @@ export class DecisionDetalleComponent implements OnInit {
       data: {
         decisionId: this.decision.id,
         descripcion: "",
+        variacionCostoFijo: 0,
+        variacionCostoVariable: 0,
+        variacionProduccion: 0, 
         consecuencias: []
       }
     });

@@ -10,8 +10,14 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 export class OpcionDialogComponent implements OnInit {
   opcion;
   descripcion = new FormControl('', [Validators.required])
+  variacionCostoFijo = new FormControl('', [Validators.required])
+  variacionCostoVariable = new FormControl('', [Validators.required])
+  variacionProduccion = new FormControl('', [Validators.required])
   opcionForm: FormGroup = new FormGroup({
     descripcion: this.descripcion,
+    variacionCostoFijo: this.variacionCostoFijo,
+    variacionCostoVariable: this.variacionCostoVariable,
+    variacionProduccion: this.variacionProduccion
   });
 
   constructor( public dialogRef: MatDialogRef<OpcionDialogComponent>,
