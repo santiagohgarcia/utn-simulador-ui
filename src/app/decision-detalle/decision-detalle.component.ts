@@ -58,7 +58,6 @@ export class DecisionDetalleComponent implements OnInit {
     const dialogRef = this.dialog.open(OpcionDialogComponent, {
       width: '400px',
       data: {
-        id: null,
         decisionId: this.decision.id,
         descripcion: "",
         consecuencias: []
