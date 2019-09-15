@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DecisionesService } from '../decisiones.service';
+import { EscenariosService } from '../escenarios.service';
 
 
 @Component({
@@ -11,14 +12,14 @@ export class DecisionesComponent implements OnInit {
   @Input() escenario: any;
   decisiones: Array<any>;
 
-  constructor(private decisionesService: DecisionesService) { }
+  constructor(private decisionesService: DecisionesService, private escenariosService: EscenariosService) { }
 
   ngOnInit() {
     this.getDecisiones();
   }
 
   getDecisiones() {
-   this.decisionesService.getDecisiones(this.escenario.id).subscribe( decisiones => {
+   this.escenariosService.getDecisiones(this.escenario.id).subscribe( decisiones => {
       this.decisiones = decisiones;
    });
   }

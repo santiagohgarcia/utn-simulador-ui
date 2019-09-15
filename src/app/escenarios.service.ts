@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from '../environments/environment';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { MessagesService } from './messages.service';
 
 @Injectable({
@@ -36,5 +36,17 @@ export class EscenariosService {
   deleteEscenario(id): Observable<any> {
     return this.http.delete(`${environment.proyectoServiceHost}/api/escenarios/${id}`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+
+  getDecisiones(idEscenario): Observable<any> {
+    return this.http.get(`${environment.proyectoServiceHost}/api/escenario/${idEscenario}/decisiones`)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+
+  getDecision(idEscenario, idDecision) {
+    return this.http.get(`${environment.proyectoServiceHost}/api/escenario/${idEscenario}/decisiones`)
+      .pipe(map((decisiones: Array<any>) => {
+        return decisiones.find(d => d.id === idDecision);
+      }));
   }
 }

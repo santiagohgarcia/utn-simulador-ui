@@ -37,7 +37,7 @@ export class TomaDecisionesComponent implements OnInit {
   }
 
   getDecisionesByProyecto() {
-    this.decisionesService.getDecisiones(1)
+    this.proyectoService.getDecisiones(1)
       .subscribe(decisiones => this.decisiones = decisiones);
   }
 
@@ -56,19 +56,19 @@ export class TomaDecisionesComponent implements OnInit {
     this.modalidadCobro = [{
       proyectoId: 1,
       offsetPeriodo: 0,
-      porcentaje: null
+      porcentaje: 0
     }, {
       proyectoId: 1,
       offsetPeriodo: 1,
-      porcentaje: null
+      porcentaje: 0
     }, {
       proyectoId: 1,
       offsetPeriodo: 2,
-      porcentaje: null
+      porcentaje: 0
     }, {
       proyectoId: 1,
       offsetPeriodo: 3,
-      porcentaje: null
+      porcentaje: 0
     }]
   }
 

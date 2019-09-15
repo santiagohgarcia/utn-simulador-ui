@@ -12,18 +12,6 @@ export class DecisionesService {
 
   constructor(private http: HttpClient, private messageService: MessagesService) { }
 
-  getDecisiones(idProyecto): Observable<any> {
-    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/decisiones`)
-      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
-  }
-
-  getDecision(idProyecto, idDecision) {
-    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/decisiones`)
-      .pipe(map((decisiones: Array<any>) => {
-        return decisiones.find(d => d.id === idDecision);
-      }));
-  }
-
   createDecision(decision) {
     return this.http.post(`${environment.proyectoServiceHost}/api/decisiones`, decision)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));

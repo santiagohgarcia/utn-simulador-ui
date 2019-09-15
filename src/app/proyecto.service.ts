@@ -51,5 +51,10 @@ export class ProyectoService {
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
+  getDecisiones(idProyecto): Observable<any> {
+    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/decisiones`)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+
 }
 

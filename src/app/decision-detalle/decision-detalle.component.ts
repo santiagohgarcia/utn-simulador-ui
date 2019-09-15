@@ -7,6 +7,7 @@ import { OpcionDialogComponent } from './opciones/opcion-dialog.component';
 import { DecisionesService } from '../decisiones.service';
 import { ConsecuenciaDialogComponent } from './consecuencias/consecuencia-dialog.component';
 import { MessagesService } from '../messages.service';
+import { EscenariosService } from '../escenarios.service';
 
 @Component({
   selector: 'app-decision-detalle',
@@ -39,13 +40,14 @@ export class DecisionDetalleComponent implements OnInit {
     private route: ActivatedRoute, 
     private dialog: MatDialog,
     private router: Router,
-    private messageService: MessagesService) { }
+    private messageService: MessagesService,
+    private escenariosService: EscenariosService) { }
 
   ngOnInit() {
     var esenarioId = Number(this.route.snapshot.paramMap.get('escenarioId'));
     var id = Number(this.route.snapshot.paramMap.get('id'));
     if (id) {
-      this.decisionesService.getDecision(esenarioId, id).subscribe(d => {
+      this.escenariosService.getDecision(esenarioId, id).subscribe(d => {
         this.decision = d;
         this.decision.escenarioId = esenarioId;
       });
