@@ -1,9 +1,9 @@
 @media screen and (min-width: 769px) {
 .content-container{
     display: grid;
-    grid-template-rows: auto auto;
-    grid-template-columns: 4fr 2fr 3fr;
-    grid-template-areas: "kpis politica-pago forecast" "decisiones-header decisiones-header decisiones-header";
+    grid-template-rows: auto;
+    grid-template-columns: 2fr 2fr 2fr 1fr;
+    grid-template-areas: "forecast modalidad-cobro modalidad-pago kpis"  ;
     grid-gap: 10px;
 }
 
@@ -17,7 +17,10 @@
     margin: 10px;
 }
 
+
+
 }
+
 
 .card {
     box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
@@ -26,6 +29,11 @@
 
 .forecast{
     grid-area: forecast;
+    margin: 10px;
+}
+
+.modalidad-pago {
+    grid-area: modalidad-pago;
     margin: 10px;
 }
 
@@ -44,11 +52,11 @@
 
 .decisiones-header{
     grid-area: decisiones-header;
-    
+
 }
 
-.politica-pago{
-    grid-area: politica-pago;
+.modalidad-cobro{
+    grid-area: modalidad-cobro;
     margin: 10px;
 }
 
@@ -68,6 +76,12 @@
 
 .value-column {
     text-align: right;
+    width: 50px;
+}
+
+.value-column-cantidad{
+    text-align: right;
+    width: 100px;
 }
 
 .single-number {

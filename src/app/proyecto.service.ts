@@ -16,6 +16,11 @@ export class ProyectoService {
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
+  getEstadoBase(idProyecto): Observable<any> {
+    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/estado/base`)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+  
   getEstados(proyectoId): Observable<any> {
     return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${proyectoId}/estado`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
@@ -23,6 +28,11 @@ export class ProyectoService {
 
   forecast(idProyecto, forecast) {
     return this.http.post(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/forecast`, forecast)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+
+  modalidadCobro(idProyecto, modalidadCobro) {
+    return this.http.post(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/modalidadCobro`, modalidadCobro)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
@@ -37,7 +47,7 @@ export class ProyectoService {
   }
 
   getPeriodoActual(idProyecto) {
-    return this.getEstado(idProyecto).pipe(map(estado => estado.proyecto.escenario.maximosPeriodos))
+    return this.getEstadoBase(idProyecto).pipe(map(estado => estado.proyecto.escenario.maximosPeriodos))
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
