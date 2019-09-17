@@ -42,34 +42,39 @@ export class TomaDecisionesComponent implements OnInit {
   }
 
   buildForecast() {
-    var periodos = this.estado.proyecto.escenario.maximosPeriodos;
-      this.forecasts = [...Array(periodos).keys(), periodos].map(periodo => {
+    this.proyectoService.getForecast(1).subscribe(forecasts => {
+      var periodos = this.estado.proyecto.escenario.maximosPeriodos;
+      this.forecasts = forecasts || [...Array(periodos).keys(), periodos].map(periodo => {
         return {
           proyectoId: 1,
           periodo: periodo,
           cantidadUnidades: 0
         }
       });
+    })
+
   }
 
   buildModalidadDeCobro() {
-    this.modalidadCobro = [{
-      proyectoId: 1,
-      offsetPeriodo: 0,
-      porcentaje: 0
-    }, {
-      proyectoId: 1,
-      offsetPeriodo: 1,
-      porcentaje: 0
-    }, {
-      proyectoId: 1,
-      offsetPeriodo: 2,
-      porcentaje: 0
-    }, {
-      proyectoId: 1,
-      offsetPeriodo: 3,
-      porcentaje: 0
-    }]
+    this.proyectoService.getModalidadCobro(1).subscribe(modalidadCobro => {
+      this.modalidadCobro = modalidadCobro || [{
+        proyectoId: 1,
+        offsetPeriodo: 0,
+        porcentaje: 0
+      }, {
+        proyectoId: 1,
+        offsetPeriodo: 1,
+        porcentaje: 0
+      }, {
+        proyectoId: 1,
+        offsetPeriodo: 2,
+        porcentaje: 0
+      }, {
+        proyectoId: 1,
+        offsetPeriodo: 3,
+        porcentaje: 0
+      }]
+    })
   }
 
   getModalidadDeCobroDescr(offsetPeriodo) {
@@ -115,21 +120,21 @@ export class TomaDecisionesComponent implements OnInit {
     }
 
     //Validar si el porcentaje de cobro es 100% en total entre todos los periodos
-    var modalidadCobroPorcentajeTotal = this.modalidadCobro.filter(elem => elem.porcentaje > 0 ) 
-                                                           .reduce((acum, elem) => acum + elem.porcentaje, 0)
+    var modalidadCobroPorcentajeTotal = this.modalidadCobro.filter(elem => elem.porcentaje > 0)
+      .reduce((acum, elem) => acum + elem.porcentaje, 0)
     if (modalidadCobroPorcentajeTotal !== 100) {
       this.messageService.openSnackBar("Los porcentajes en su modalidad de cobro deben sumar 100%!");
       return false;
     }
 
-     //Validar si los valores de forecast de venta son correctos
-     var forecastNegativos = this.forecasts.filter(forecast => forecast.cantidadUnidades !== null && forecast.cantidadUnidades < 0)
-     if (forecastNegativos.length > 0) {
-       this.messageService.openSnackBar("Todas las cantidades vendidas del forecast de venta deben ser numeros positivos");
-       return false;
-     }
-    
-     return true;
+    //Validar si los valores de forecast de venta son correctos
+    var forecastNegativos = this.forecasts.filter(forecast => forecast.cantidadUnidades !== null && forecast.cantidadUnidades < 0)
+    if (forecastNegativos.length > 0) {
+      this.messageService.openSnackBar("Todas las cantidades vendidas del forecast de venta deben ser numeros positivos");
+      return false;
+    }
+
+    return true;
   }
 
 

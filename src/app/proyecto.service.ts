@@ -20,7 +20,7 @@ export class ProyectoService {
     return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/estado/base`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
-  
+
   getEstados(proyectoId): Observable<any> {
     return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${proyectoId}/estado`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
@@ -53,6 +53,16 @@ export class ProyectoService {
 
   getDecisiones(idProyecto): Observable<any> {
     return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/decisiones`)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+
+  getForecast(idProyecto) {
+    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/forecast`)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+
+  getModalidadCobro(idProyecto) {
+    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/modalidadCobro`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
