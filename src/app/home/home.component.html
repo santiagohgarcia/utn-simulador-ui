@@ -26,20 +26,23 @@
 
     <mat-sidenav opened mode="side" class="sidenav-container" #sidenav (keydown.escape)="close()" disableClose>
       <div class="img-container">
-          <img src="{{user.photoURL}}" style="height: 150px; border-radius: 50%">
+        <img src="{{user.photoURL}}" style="height: 150px; border-radius: 50%">
       </div>
 
       <mat-nav-list>
-          <mat-divider></mat-divider>
+        <mat-divider></mat-divider>
         <mat-list-item>
-          <button mat-button mat-line class="button" routerLink="/toma-decisiones">Toma de Desiciones</button>
+          <mat-icon mat-list-icon>play_circle_outline</mat-icon>
+          <button mat-button mat-line class="button" routerLink="/toma-decisiones">Simulacion</button>
         </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item>
+          <mat-icon mat-list-icon>grade</mat-icon>
           <button mat-button mat-line class="button" routerLink="/premios">Premios</button>
         </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item>
+          <mat-icon mat-list-icon>build</mat-icon>
           <button mat-button mat-line class="button" routerLink="/escenarios">Escenarios</button>
         </mat-list-item>
 
