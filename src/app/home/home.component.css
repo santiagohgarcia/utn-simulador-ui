@@ -10,12 +10,19 @@
 
 .sidenav-container {
   flex: 1;
-  min-width: 200px;
+  min-width: 300px;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+  z-index: 2; 
 }
 
 .button {
   text-align: left;
   text-indent: 10px;
+}
+
+.toolbar{
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+  z-index: 2;
 }
 
 .spacer {
@@ -28,4 +35,11 @@
   font-style:normal;
   font-size: xx-large;
   margin-left: 15px;
+}
+
+.img-container{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  padding: 20px;
 }
