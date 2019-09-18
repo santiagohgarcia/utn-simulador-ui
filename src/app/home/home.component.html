@@ -25,7 +25,7 @@
     </mat-sidenav-content>
 
     <mat-sidenav opened mode="side" class="sidenav-container" #sidenav (keydown.escape)="close()" disableClose>
-      <div class="img-container">
+      <div class="img-container" *ngIf="user">
         <img src="{{user.photoURL}}" style="height: 150px; border-radius: 50%">
       </div>
 
@@ -33,7 +33,7 @@
         <mat-divider></mat-divider>
         <mat-list-item>
           <mat-icon mat-list-icon>play_circle_outline</mat-icon>
-          <button mat-button mat-line class="button" routerLink="/toma-decisiones">Simulacion</button>
+          <button mat-button mat-line class="button" routerLink="/toma-decisiones">Simulación</button>
         </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item>
@@ -45,6 +45,7 @@
           <mat-icon mat-list-icon>build</mat-icon>
           <button mat-button mat-line class="button" routerLink="/escenarios">Escenarios</button>
         </mat-list-item>
+        <mat-divider></mat-divider>
 
       </mat-nav-list>
     </mat-sidenav>

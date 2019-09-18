@@ -44,7 +44,7 @@ export class TomaDecisionesComponent implements OnInit {
   buildForecast() {
     this.proyectoService.getForecast(1).subscribe(forecasts => {
       var periodos = this.estado.proyecto.escenario.maximosPeriodos;
-      this.forecasts = forecasts || [...Array(periodos).keys(), periodos].map(periodo => {
+      this.forecasts = forecasts.length > 0 ? forecasts : [...Array(periodos).keys(), periodos].map(periodo => {
         return {
           proyectoId: 1,
           periodo: periodo,
@@ -56,24 +56,31 @@ export class TomaDecisionesComponent implements OnInit {
   }
 
   buildModalidadDeCobro() {
+    var modalidadCobroTemplate = [{
+      proyectoId: 1,
+      offsetPeriodo: 0,
+      porcentaje: 0
+    }, {
+      proyectoId: 1,
+      offsetPeriodo: 1,
+      porcentaje: 0
+    }, {
+      proyectoId: 1,
+      offsetPeriodo: 2,
+      porcentaje: 0
+    }, {
+      proyectoId: 1,
+      offsetPeriodo: 3,
+      porcentaje: 0
+    }];
     this.proyectoService.getModalidadCobro(1).subscribe(modalidadCobro => {
-      this.modalidadCobro = modalidadCobro || [{
-        proyectoId: 1,
-        offsetPeriodo: 0,
-        porcentaje: 0
-      }, {
-        proyectoId: 1,
-        offsetPeriodo: 1,
-        porcentaje: 0
-      }, {
-        proyectoId: 1,
-        offsetPeriodo: 2,
-        porcentaje: 0
-      }, {
-        proyectoId: 1,
-        offsetPeriodo: 3,
-        porcentaje: 0
-      }]
+      if (modalidadCobro) {
+        this.modalidadCobro = modalidadCobroTemplate.map(mct => {
+          return { ...mct, ...modalidadCobro.find(mc => mc.offsetPeriodo === mct.offsetPeriodo) };
+        });
+      } else {
+        this.modalidadCobro = modalidadCobroTemplate;
+      }
     })
   }
 
