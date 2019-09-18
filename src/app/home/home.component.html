@@ -29,25 +29,34 @@
         <img src="{{user.photoURL}}" style="height: 150px; border-radius: 50%">
       </div>
 
-      <mat-nav-list>
-        <mat-divider></mat-divider>
-        <mat-list-item>
-          <mat-icon mat-list-icon>play_circle_outline</mat-icon>
-          <button mat-button mat-line class="button" routerLink="/toma-decisiones">Simulación</button>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>
-          <mat-icon mat-list-icon>grade</mat-icon>
-          <button mat-button mat-line class="button" routerLink="/premios">Premios</button>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>
-          <mat-icon mat-list-icon>build</mat-icon>
-          <button mat-button mat-line class="button" routerLink="/escenarios">Escenarios</button>
-        </mat-list-item>
-        <mat-divider></mat-divider>
+        <mat-nav-list>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <mat-icon mat-list-icon>play_circle_outline</mat-icon>
+            <button mat-button mat-line class="button" routerLink="/toma-decisiones">Simulación</button>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <mat-icon mat-list-icon>grade</mat-icon>
+            <button mat-button mat-line class="button" routerLink="/premios">Premios</button>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <mat-icon mat-list-icon>build</mat-icon>
+            <button mat-button mat-line class="button" routerLink="/escenarios">Escenarios</button>
+          </mat-list-item>
+          <mat-divider></mat-divider>
 
-      </mat-nav-list>
+        </mat-nav-list>
+
+        <mat-nav-list class="logout">
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <button mat-button mat-line class="button" (click)="logout()">Salir</button>
+          </mat-list-item>
+        </mat-nav-list>
+    
+
     </mat-sidenav>
   </mat-sidenav-container>
 </div>

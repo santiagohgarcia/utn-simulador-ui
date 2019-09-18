@@ -9,7 +9,7 @@
   }
 
 .sidenav-container {
-  flex: 1;
+  height: 100%;
   min-width: 300px;
   box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
   z-index: 2; 
@@ -42,4 +42,17 @@
   justify-content: center;
   flex-direction: row;
   padding: 20px;
+}
+
+.options-container{
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.logout{
+  position: fixed;
+  bottom: 0px;
+  width: 300px;
 }
