@@ -68,8 +68,8 @@ export class EstadoComponent implements OnInit {
           label: 'Ventas'
         },
         {
-          data: estados.map(estado => estado.stock * estado.producto.precio),
-          label: 'Stock * Precio Venta',
+          data: estados.map(estado => estado.demandaInsatisfecha ),
+          label: 'Demanda Insatisfecha',
           fill: false,
           backgroundColor: 'rgb(75, 192, 192)',
           borderColor: 'rgb(75, 192, 192)',
