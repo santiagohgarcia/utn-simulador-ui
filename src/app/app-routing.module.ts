@@ -16,7 +16,7 @@ import { SimulacionesComponent } from './simulaciones/simulaciones.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'home', redirectTo: 'toma-decisiones' },
+  { path: 'home', redirectTo: 'simulaciones' },
   {
     path: 'simulaciones/escenario/:escenarioId/resultados', component: HomeComponent,
     children: [{ path: '', component: ResultadosComponent, pathMatch: 'full' }]
