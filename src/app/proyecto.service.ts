@@ -46,6 +46,11 @@ export class ProyectoService {
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
+  getPresupuestoFinanciero(idProyecto): Observable<any> {
+    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/presupuesto-financiero-forecast`)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }  
+
   getPeriodoActual(idProyecto) {
     return this.getEstadoBase(idProyecto).pipe(map(estado => estado.proyecto.escenario.maximosPeriodos))
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
