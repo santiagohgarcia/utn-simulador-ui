@@ -32,6 +32,7 @@ import { ConsecuenciaDialogComponent } from './decision-detalle/consecuencias/co
 import { MessagesService } from './messages.service';
 import { SimulacionesComponent } from './simulaciones/simulaciones.component';
 import { PresupuestoFinancieroComponent } from './presupuesto-financiero/presupuesto-financiero.component';
+import { PresupuestoEconomicoComponent } from './presupuesto-economico/presupuesto-economico.component';
 
 import {
   MatAutocompleteModule,
@@ -67,6 +68,7 @@ import {
   MatStepperModule,
   MatTabGroup
 } from '@angular/material';
+
 
 
 @NgModule({
@@ -127,7 +129,8 @@ export class MaterialModule { }
     OpcionDialogComponent,
     ConsecuenciaDialogComponent,
     SimulacionesComponent,
-    PresupuestoFinancieroComponent
+    PresupuestoFinancieroComponent,
+    PresupuestoEconomicoComponent
   ],
   imports: [
     BrowserModule,

@@ -31,7 +31,7 @@ export class EstadoComponent implements OnInit {
   }
 
   getEstados() {
-   this.proyectoService.getEstados(1).subscribe(estados => {
+    this.proyectoService.getEstados(1).subscribe(estados => {
       this.estados = estados.filter(e => e.esForecast);
       this.setCajaChartProps(this.estados);
       this.setVentasChartProps(this.estados);
@@ -61,9 +61,20 @@ export class EstadoComponent implements OnInit {
       },
       labels: estados.map(estado => `Periodo ${estado.periodo}`),
       type: 'line',
-      legend: false,
+      legend: true,
       data: [
-        { data: estados.map(estado => estado.ventas), label: 'Ventas' }
+        {
+          data: estados.map(estado => estado.ventas),
+          label: 'Ventas'
+        },
+        {
+          data: estados.map(estado => estado.stock * estado.producto.precio),
+          label: 'Stock * Precio Venta',
+          fill: false,
+          backgroundColor: 'rgb(75, 192, 192)',
+          borderColor: 'rgb(75, 192, 192)',
+          borderDash: [5, 5]
+        }
       ]
     }
   }

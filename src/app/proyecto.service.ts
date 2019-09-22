@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { MessagesService } from './messages.service';
+import { descripcionesTipoCuentas, descripcionesTipoFlujoFondos } from './valores-dominio';
 
 @Injectable()
 export class ProyectoService {
@@ -49,7 +50,7 @@ export class ProyectoService {
   getPresupuestoFinanciero(idProyecto): Observable<any> {
     return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/presupuesto-financiero-forecast`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
-  }  
+  }
 
   getPeriodoActual(idProyecto) {
     return this.getEstadoBase(idProyecto).pipe(map(estado => estado.proyecto.escenario.maximosPeriodos))
@@ -70,6 +71,29 @@ export class ProyectoService {
     return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/modalidadCobro`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
+
+  getTipoCuentas() {
+    return this.http.get(`${environment.proyectoServiceHost}/api/tipoCuentas`)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)),
+        map(tipoCuentas => tipoCuentas.map(tipoCuenta => {
+          return {
+            key: tipoCuenta,
+            descripcion: descripcionesTipoCuentas[tipoCuenta]
+          }
+        })));
+  }
+
+  getTipoFlujoFondos() {
+    return this.http.get(`${environment.proyectoServiceHost}/api/tipoFlujoFondos`)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)),
+        map(tipoFlujoFondos => tipoFlujoFondos.map(tipoFlujoFondo => {
+          return {
+            key: tipoFlujoFondo,
+            descripcion: descripcionesTipoFlujoFondos[tipoFlujoFondo]
+          }
+        })));
+  }
+
 
 }
 

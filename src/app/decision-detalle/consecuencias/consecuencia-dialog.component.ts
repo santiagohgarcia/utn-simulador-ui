@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
-import { tiposCuenta, tiposFlujoFondo } from '../valores-dominio';
+import { ProyectoService } from '../../proyecto.service';
+
 
 @Component({
   selector: 'consecuencia-dialog',
@@ -9,8 +10,8 @@ import { tiposCuenta, tiposFlujoFondo } from '../valores-dominio';
   styleUrls: ['./consecuencia-dialog.component.css']
 })
 export class ConsecuenciaDialogComponent implements OnInit {
-  tiposCuenta;
-  tiposFlujoFondo;
+  tipoCuentas;
+  tipoFlujoFondos;
   consecuencia;
   descripcion = new FormControl('', [Validators.required])
   monto = new FormControl('', [Validators.required])
@@ -28,12 +29,21 @@ export class ConsecuenciaDialogComponent implements OnInit {
   });
 
   constructor(public dialogRef: MatDialogRef<ConsecuenciaDialogComponent>,
+    private proyectoService: ProyectoService,
     @Inject(MAT_DIALOG_DATA) public data) { }
 
   ngOnInit() {
-    this.tiposCuenta = tiposCuenta;
-    this.tiposFlujoFondo = tiposFlujoFondo;
+    this.getTipoCuentas();
+    this.getTipoFlujoFondos();
     this.consecuencia = JSON.parse(JSON.stringify(this.data));
+  }
+
+  getTipoCuentas(){
+      this.proyectoService.getTipoCuentas().subscribe(tipoCuentas => this.tipoCuentas = tipoCuentas)
+  }
+
+  getTipoFlujoFondos(){
+    this.proyectoService.getTipoFlujoFondos().subscribe(tipoFlujoFondos => this.tipoFlujoFondos = tipoFlujoFondos)
   }
 
   cancel(){
