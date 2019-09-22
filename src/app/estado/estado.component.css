@@ -82,3 +82,37 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
+.caja-avatar{
+    background-image: url('../../assets/img/caja.png');
+    background-size: cover;
+}
+
+.ventas-avatar{
+    background-image: url('../../assets/img/ventas.png');
+    background-size: cover;
+}
+
+.produccion-avatar{
+    background-image: url('../../assets/img/produccion.png');
+    background-size: cover;
+}
+
+.costos-avatar{
+    background-image: url('../../assets/img/costos.png');
+    background-size: cover;
+}
+
+.proveedor-avatar{
+    background-image: url('../../assets/img/proveedor.png');
+    background-size: cover;
+}
+
+.cobro-avatar{
+    background-image: url('../../assets/img/cobro.png');
+    background-size: cover;
+}
+
+.mat-card-content {
+    padding-top: 12px;
+}

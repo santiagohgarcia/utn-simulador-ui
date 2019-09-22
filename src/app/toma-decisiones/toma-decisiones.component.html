@@ -11,54 +11,62 @@
           {{escenario.descripcion}}
       </mat-card-content>
     </mat-card>
+
+    <div class="kpis" *ngIf="estado">
+
+        <mat-card class="single-number-card">
+          <mat-card-header>
+              <div mat-card-avatar class="produccion-avatar"></div>
+            <mat-card-title>Produccion</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <h1 class="single-number">{{estado.produccionMensual}} <small>u/p</small></h1>
+          </mat-card-content>
+        </mat-card>
+    
+        <mat-card class="single-number-card">
+          <mat-card-header>
+              <div mat-card-avatar class="caja-avatar"></div>
+            <mat-card-title>Caja</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <h1 class="single-number">$ {{estado.caja}}</h1>
+          </mat-card-content>
+        </mat-card>
+    
+        <mat-card class="single-number-card">
+          <mat-card-header>
+              <div mat-card-avatar class="costos-avatar"></div>
+            <mat-card-title>Costo Fijo</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <h1 class="single-number">$ {{estado.costoFijo}}</h1>
+          </mat-card-content>
+        </mat-card>
+    
+    
+        <mat-card class="single-number-card">
+          <mat-card-header>
+              <div mat-card-avatar class="costos-avatar"></div>
+            <mat-card-title>Costo Variable</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <h1 class="single-number">$ {{estado.costoVariable}}</h1>
+          </mat-card-content>
+        </mat-card>
+    
+    
+      </div>
+    
+
+
 <div class="content-container">
 
-  <div class="kpis" *ngIf="estado">
-
-    <mat-card class="single-number-card">
-      <mat-card-header>
-        <mat-card-title>Produccion</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <h1 class="single-number">{{estado.produccionMensual}} <small>u/p</small></h1>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="single-number-card">
-      <mat-card-header>
-        <mat-card-title>Caja</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <h1 class="single-number">$ {{estado.caja}}</h1>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="single-number-card">
-      <mat-card-header>
-        <mat-card-title>Costo Fijo</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <h1 class="single-number">$ {{estado.costoFijo}}</h1>
-      </mat-card-content>
-    </mat-card>
-
-
-    <mat-card class="single-number-card">
-      <mat-card-header>
-        <mat-card-title>Costo Variable</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <h1 class="single-number">$ {{estado.costoVariable}}</h1>
-      </mat-card-content>
-    </mat-card>
-
-
-  </div>
-
-
+ 
 
   <mat-card class="modalidad-cobro">
     <mat-card-header>
+        <div mat-card-avatar class="cobro-avatar"></div>
       <mat-card-title>Modalidad de Cobro</mat-card-title>
     </mat-card-header>
     <mat-card-content>
@@ -89,6 +97,7 @@
   <mat-card class="forecast">
 
     <mat-card-header>
+        <div mat-card-avatar class="ventas-avatar"></div>
       <mat-card-title>Forecast de Ventas</mat-card-title>
     </mat-card-header>
     <mat-card-content>
@@ -131,7 +140,8 @@
   <mat-card class="modalidad-pago">
 
     <mat-card-header>
-      <mat-card-title>Modalidad de Pago</mat-card-title>
+        <div mat-card-avatar class="proveedor-avatar"></div>
+      <mat-card-title>Proveedor</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <span>work in progress</span>
@@ -143,6 +153,10 @@
 
 
 </div>
+
+
+
+
 <mat-toolbar color="secundary" class="decisiones-header">
   <h4>Toma de Decisiones</h4>
   <span class="spacer"></span>

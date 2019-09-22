@@ -2,8 +2,8 @@
 .content-container{
     display: grid;
     grid-template-rows: auto;
-    grid-template-columns: 3fr 2fr 2fr 1fr;
-    grid-template-areas: "forecast modalidad-cobro modalidad-pago kpis"  ;
+    grid-template-columns: 2fr 2fr 2fr;
+    grid-template-areas: "forecast modalidad-cobro modalidad-pago"  ;
     grid-gap: 20px;
     padding: 20px;
 }
@@ -43,6 +43,8 @@
     align-items: center;
     flex-wrap: wrap;
     align-content: space-between;
+    margin-right: 20px;
+    margin-top:20px;
 }
 
 
@@ -80,8 +82,8 @@
 }
 
 .single-number {
+    text-align: center;
     align-self: center;
-    margin:10px;
 }
 
 .desc-column {
@@ -94,9 +96,6 @@
     padding: 10px;
 }
 
-.table > * {
-    height: 30px;
-}
 
 .fab {
     position: fixed;
@@ -109,11 +108,46 @@
     max-width: 400px;
     min-width: 200px;
     flex-grow: 1;
-    max-height: 80px;
+    margin-left:20px;
 }
 
 .escenario-card{
     margin-left: 20px;
     margin-right: 20px;
     margin-top: 20px;
+}
+
+.caja-avatar{
+    background-image: url('../../assets/img/caja.png');
+    background-size: cover;
+}
+
+.ventas-avatar{
+    background-image: url('../../assets/img/ventas.png');
+    background-size: cover;
+}
+
+.produccion-avatar{
+    background-image: url('../../assets/img/produccion.png');
+    background-size: cover;
+}
+
+.costos-avatar{
+    background-image: url('../../assets/img/costos.png');
+    background-size: cover;
+}
+
+.proveedor-avatar{
+    background-image: url('../../assets/img/proveedor.png');
+    background-size: cover;
+}
+
+.precio-avatar{
+    background-image: url('../../assets/img/precio.png');
+    background-size: cover;
+}
+
+.cobro-avatar{
+    background-image: url('../../assets/img/cobro.png');
+    background-size: cover;
 }

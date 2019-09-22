@@ -11,9 +11,9 @@ import * as Chart from 'chart.js';
 export class EstadoComponent implements OnInit {
   estadoActual: any;
   estados: any;
-  cajaChartProps = {};
-  ventasChartProps = {};
-  modCobroChartProps = {};
+  cajaChartProps;
+  ventasChartProps;
+  modCobroChartProps;
 
   constructor(private proyectoService: ProyectoService) {
   }
