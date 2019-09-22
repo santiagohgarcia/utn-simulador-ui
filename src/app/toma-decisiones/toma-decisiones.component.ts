@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProyectoService } from '../proyecto.service';
-import { MatRadioChange } from '@angular/material';
-import { Router } from '@angular/router';
-import { DecisionesService } from '../decisiones.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MessagesService } from '../messages.service';
+import { EscenariosService } from '../escenarios.service';
 
 
 @Component({
@@ -14,19 +13,28 @@ import { MessagesService } from '../messages.service';
 export class TomaDecisionesComponent implements OnInit {
 
   decisiones: Array<any> = [];
+  escenario;
   estado;
   modalidadCobro: Array<any> = [];
   forecasts: Array<any> = [];
 
-  constructor(private proyectoService: ProyectoService,
-    private decisionesService: DecisionesService,
+  constructor(
+    private proyectoService: ProyectoService,
+    private escenarioService: EscenariosService,
     private router: Router,
+    private route: ActivatedRoute, 
     private messageService: MessagesService) { }
 
   ngOnInit() {
-    this.getDecisionesByProyecto();
+    var escenarioId = Number(this.route.snapshot.paramMap.get('escenarioId'));
+    this.getEscenario(escenarioId);
     this.getEstadoBase();
     this.buildModalidadDeCobro();
+    this.getDecisionesByProyecto();
+  }
+
+  getEscenario(escenarioId){
+    this.escenarioService.getEscenario(escenarioId).subscribe(escenario => this.escenario = escenario);
   }
 
   getEstadoBase() {
@@ -48,7 +56,8 @@ export class TomaDecisionesComponent implements OnInit {
         return {
           proyectoId: 1,
           periodo: periodo,
-          cantidadUnidades: 0
+          cantidadUnidades: 0,
+          precioVenta: 0
         }
       });
     })
@@ -110,7 +119,7 @@ export class TomaDecisionesComponent implements OnInit {
           this.proyectoService.modalidadCobro(1, this.modalidadCobro).subscribe(_ => {
             //SIMULAR
             this.proyectoService.simular(1, this.getOpcionesTomadas())
-              .subscribe(_ => this.router.navigateByUrl("/resultados"))
+              .subscribe(_ => this.router.navigateByUrl(`/simulaciones/escenario/${this.escenario.id}/resultados`))
           })
         }
         );

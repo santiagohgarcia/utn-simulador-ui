@@ -10,7 +10,7 @@ import { TomaDecisionesComponent } from './toma-decisiones/toma-decisiones.compo
 import { ResultadosComponent } from './resultados/resultados.component';
 import { EscenariosComponent } from './escenarios/escenarios.component';
 import { EscenarioDetalleComponent } from './escenario-detalle/escenario-detalle.component';
-import { EstadoComponent } from './estado/estado.component';
+import { SimulacionesComponent } from './simulaciones/simulaciones.component';
 
 
 const routes: Routes = [
@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', redirectTo: 'toma-decisiones' },
   {
-    path: 'resultados', component: HomeComponent,
+    path: 'simulaciones/escenario/:escenarioId/resultados', component: HomeComponent,
     children: [{ path: '', component: ResultadosComponent, pathMatch: 'full' }]
   },
   {
@@ -30,7 +30,11 @@ const routes: Routes = [
     children: [{ path: '', component: EscenariosComponent, pathMatch: 'full' }]
   },
   {
-    path: 'toma-decisiones', component: HomeComponent,
+    path: 'simulaciones', component: HomeComponent,
+    children: [{ path: '', component: SimulacionesComponent, pathMatch: 'full' }]
+  },
+  {
+    path: 'simulaciones/escenario/:escenarioId', component: HomeComponent,
     children: [{ path: '', component: TomaDecisionesComponent, pathMatch: 'full' }]
   },
   { path: 'escenarios/:escenarioId/decisiones/new', component: DecisionDetalleComponent, pathMatch: 'full' },

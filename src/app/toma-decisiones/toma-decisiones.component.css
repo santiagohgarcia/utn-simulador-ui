@@ -2,7 +2,7 @@
 .content-container{
     display: grid;
     grid-template-rows: auto;
-    grid-template-columns: 2fr 2fr 2fr 1fr;
+    grid-template-columns: 3fr 2fr 2fr 1fr;
     grid-template-areas: "forecast modalidad-cobro modalidad-pago kpis"  ;
     grid-gap: 20px;
     padding: 20px;
@@ -110,4 +110,10 @@
     min-width: 200px;
     flex-grow: 1;
     max-height: 80px;
+}
+
+.escenario-card{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
 }

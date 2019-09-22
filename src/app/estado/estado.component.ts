@@ -31,11 +31,10 @@ export class EstadoComponent implements OnInit {
   }
 
   getEstados() {
-    this.estados = this.proyectoService.getEstados(1).subscribe(estados => {
-      this.estados = estados;
-      this.setCajaChartProps(estados);
-      this.setVentasChartProps(estados);
-
+   this.proyectoService.getEstados(1).subscribe(estados => {
+      this.estados = estados.filter(e => e.esForecast);
+      this.setCajaChartProps(this.estados);
+      this.setVentasChartProps(this.estados);
     })
   }
 

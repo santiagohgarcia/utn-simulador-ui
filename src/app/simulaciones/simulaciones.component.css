@@ -6,16 +6,23 @@
     padding: 20px;
 }
 
-.fab {
-    position: fixed;
-    right: 20px;
-    bottom: 15px;
-    margin-left: -28px;
-}
-
 .mat-card-actions {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
 }
 
+.mat-card-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.status-icon{
+    color: gold;
+    margin-right: 5px;
+}
+.mat-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

@@ -30,6 +30,7 @@ import { DecisionesService } from './decisiones.service';
 import { OpcionDialogComponent } from './decision-detalle/opciones/opcion-dialog.component';
 import { ConsecuenciaDialogComponent } from './decision-detalle/consecuencias/consecuencia-dialog.component';
 import { MessagesService } from './messages.service';
+import { SimulacionesComponent } from './simulaciones/simulaciones.component';
 
 import {
   MatAutocompleteModule,
@@ -65,7 +66,6 @@ import {
   MatStepperModule,
   MatTabGroup
 } from '@angular/material';
-
 
 @NgModule({
   exports: [
@@ -123,7 +123,8 @@ export class MaterialModule { }
     EscenariosComponent,
     EscenarioDetalleComponent,
     OpcionDialogComponent,
-    ConsecuenciaDialogComponent
+    ConsecuenciaDialogComponent,
+    SimulacionesComponent
   ],
   imports: [
     BrowserModule,

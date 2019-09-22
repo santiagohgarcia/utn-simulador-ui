@@ -5,7 +5,7 @@
     </button>
     <h1 class="title">Augure</h1>
     <span class="spacer"></span>
-    <button *ngIf="user" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <button *ngIf="user" mat-icon-button [matMenuTriggerFor]="menu">
 
     </button>
     <mat-menu #menu="matMenu">
@@ -18,13 +18,13 @@
     </mat-menu>
   </mat-toolbar>
 
-  <mat-sidenav-container class="sidenav-container" (backdropClick)="close()">
+  <mat-sidenav-container class="sidenav-container" >
 
     <mat-sidenav-content>
       <router-outlet></router-outlet>
     </mat-sidenav-content>
 
-    <mat-sidenav opened mode="side" class="sidenav-container" #sidenav (keydown.escape)="close()" disableClose>
+    <mat-sidenav opened mode="side" class="sidenav-container" #sidenav disableClose>
       <div class="img-container" *ngIf="user">
         <img src="{{user.photoURL}}" style="height: 150px; border-radius: 50%">
       </div>
@@ -33,7 +33,7 @@
           <mat-divider></mat-divider>
           <mat-list-item>
             <mat-icon mat-list-icon>play_circle_outline</mat-icon>
-            <button mat-button mat-line class="button" routerLink="/toma-decisiones">Simulación</button>
+            <button mat-button mat-line class="button" routerLink="/simulaciones">Simulaciones</button>
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item>
