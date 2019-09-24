@@ -1,0 +1,51 @@
+
+.balance-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: auto;
+    grid-template-areas: "activo pasivo" "activo patrimonio-neto"  ;
+    grid-gap: 20px;
+    padding: 20px;
+}
+
+.activo {
+    grid-area: activo;
+}
+
+.pasivo {
+    grid-area: pasivo;
+}
+
+.patrimonio-neto {
+    grid-area: patrimonio-neto;
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.activo-avatar{
+    background-image: url('../../assets/img/activo.png');
+    background-size: cover;
+}
+
+
+.pasivo-avatar{
+    background-image: url('../../assets/img/pasivo.png');
+    background-size: cover;
+}
+
+
+.patrimonio-neto-avatar{
+    background-image: url('../../assets/img/patrimonio-neto.png');
+    background-size: cover;
+}
+

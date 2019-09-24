@@ -33,6 +33,7 @@ import { MessagesService } from './messages.service';
 import { SimulacionesComponent } from './simulaciones/simulaciones.component';
 import { PresupuestoFinancieroComponent } from './presupuesto-financiero/presupuesto-financiero.component';
 import { PresupuestoEconomicoComponent } from './presupuesto-economico/presupuesto-economico.component';
+import { BalanceFinalComponent } from './balance-final/balance-final.component';
 
 import {
   MatAutocompleteModule,
@@ -68,8 +69,6 @@ import {
   MatStepperModule,
   MatTabGroup
 } from '@angular/material';
-
-
 
 @NgModule({
   exports: [
@@ -130,7 +129,8 @@ export class MaterialModule { }
     ConsecuenciaDialogComponent,
     SimulacionesComponent,
     PresupuestoFinancieroComponent,
-    PresupuestoEconomicoComponent
+    PresupuestoEconomicoComponent,
+    BalanceFinalComponent
   ],
   imports: [
     BrowserModule,

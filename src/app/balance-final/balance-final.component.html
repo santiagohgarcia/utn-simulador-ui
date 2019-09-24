@@ -1,0 +1,67 @@
+<div *ngIf="balanceFinal" class="balance-container">
+    <mat-card class="activo">
+        <mat-card-header>
+                <div mat-card-avatar class="activo-avatar"></div>
+            <mat-card-title>Activo</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="list">
+                <div class="list-item">
+                    <p>Caja</p>
+                    <h3>$ {{ balanceFinal.activo.caja }}</h3>
+                </div>
+                <div class="list-item">
+                    <p>Cuentas a Cobrar</p>
+                    <h3>$ {{ balanceFinal.activo.cuentasACobrar }}</h3>
+                </div>
+                <div class="list-item">
+                    <p>Inventario</p>
+                    <h3>$ {{ balanceFinal.activo.inventario }}</h3>
+                </div>
+                <div class="list-item">
+                    <p>Maquinaria</p>
+                    <h3>$ {{ balanceFinal.activo.maquinaria }}</h3>
+                </div>
+                <div class="list-item">
+                    <p>Amortizacion Acumulada</p>
+                    <h3>$ {{ balanceFinal.activo.amortizacionAcumulada }}</h3>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="pasivo">
+        <mat-card-header>
+                <div mat-card-avatar class="pasivo-avatar"></div>
+            <mat-card-title>Pasivo</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="list">
+                <div class="list-item">
+                    <p>Proveedores</p>
+                    <h3>$ {{ balanceFinal.pasivo.proveedores }}</h3>
+                </div>
+                <div class="list-item">
+                    <p>Deudas Bancarias</p>
+                    <h3>$ {{ balanceFinal.pasivo.deudasBancarias }}</h3>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+
+    <mat-card class="patrimonio-neto">
+        <mat-card-header>
+                <div mat-card-avatar class="patrimonio-neto-avatar"></div>
+            <mat-card-title>Patrimonio Neto</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="list">
+                <div class="list-item">
+                    <p>Capital Social</p>
+                    <h3>$ {{ balanceFinal.patrimonioNeto.capitalSocial }}</h3>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -94,6 +94,11 @@ export class ProyectoService {
         })));
   }
 
+  getBalanceFinal(idProyecto) {
+    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/balance_final`)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+
 
 }
 
