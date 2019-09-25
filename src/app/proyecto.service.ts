@@ -37,6 +37,11 @@ export class ProyectoService {
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
+  proveedorSeleccionado(idProyecto, proveedor) {
+    return this.http.post(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/proveedor`, proveedor)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+
   simular(idProyecto, opciones) {
     return this.http.post(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/simularOpciones`, opciones)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
@@ -69,6 +74,11 @@ export class ProyectoService {
 
   getModalidadCobro(idProyecto) {
     return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/modalidadCobro`)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+  
+  getProveedorSeleccionado(idProyecto): Observable<any> {
+    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/proveedor`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 

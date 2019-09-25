@@ -17,6 +17,8 @@ export class TomaDecisionesComponent implements OnInit {
   estado;
   modalidadCobro: Array<any> = [];
   forecasts: Array<any> = [];
+  proveedores: Array<any> = [];
+  proveedorSeleccionado;
 
   constructor(
     private proyectoService: ProyectoService,
@@ -30,6 +32,7 @@ export class TomaDecisionesComponent implements OnInit {
     this.getEscenario(escenarioId);
     this.getEstadoBase();
     this.buildModalidadDeCobro();
+    this.getProveedorSeleccionado();
     this.getDecisionesByProyecto();
   }
 
@@ -93,6 +96,13 @@ export class TomaDecisionesComponent implements OnInit {
     })
   }
 
+  getProveedorSeleccionado() {
+    this.proyectoService.getProveedorSeleccionado(1).subscribe(proveedores => {
+      this.proveedores = proveedores;
+    })
+
+  }
+
   getModalidadDeCobroDescr(offsetPeriodo) {
     return {
       0: "Contado",
@@ -117,12 +127,14 @@ export class TomaDecisionesComponent implements OnInit {
         .subscribe(_ => {
           //Grabar MODALIDAD COBRO
           this.proyectoService.modalidadCobro(1, this.modalidadCobro).subscribe(_ => {
-            //SIMULAR
-            this.proyectoService.simular(1, this.getOpcionesTomadas())
-              .subscribe(_ => this.router.navigateByUrl(`/simulaciones/escenario/${this.escenario.id}/resultados`))
+            //Grabar PROVEEDOR SELECCIONADO
+            this.proyectoService.proveedorSeleccionado(1, this.proveedorSeleccionado).subscribe(_ => {
+              //SIMULAR
+              this.proyectoService.simular(1, this.getOpcionesTomadas())
+                .subscribe(_ => this.router.navigateByUrl(`/simulaciones/escenario/${this.escenario.id}/resultados`))
+            })
           })
-        }
-        );
+        });
     }
   }
 

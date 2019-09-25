@@ -43,6 +43,11 @@ export class EscenariosService {
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
+  getProveedores(idEscenario): Observable<any> {
+    return this.http.get(`${environment.proyectoServiceHost}/api/escenario/${idEscenario}/proveedores`)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+
   getDecision(idEscenario, idDecision) {
     return this.http.get(`${environment.proyectoServiceHost}/api/escenario/${idEscenario}/decisiones`)
       .pipe(map((decisiones: Array<any>) => {

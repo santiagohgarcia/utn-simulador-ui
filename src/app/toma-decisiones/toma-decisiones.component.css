@@ -57,6 +57,16 @@
     grid-area: modalidad-cobro;
 }
 
+.proveedor-container{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+ }
+
+.proveedor{
+    margin-bottom: 5px;
+}
+
 .respuestas-container{
   display: flex;
   flex-direction: column;
