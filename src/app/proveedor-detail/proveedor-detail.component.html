@@ -1,0 +1,55 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button routerLink="/escenarios/{{proveedor.escenarioId}}">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 *ngIf="!proveedor.id">Nuevo Proveedor</h1>
+    <h1 *ngIf="proveedor.id">Editar Proveedor</h1>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+<form [formGroup]="proveedorForm" class="form">
+  <mat-form-field class="full-width">
+    <input autofocus matInput placeholder="Nombre" [formControl]="nombre" [(ngModel)]="proveedor.nombre"
+      [(value)]="proveedor.nombre">
+    <mat-error *ngIf="nombre.invalid">Required field</mat-error>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <input type="number" matInput placeholder="Variacion Costo Variable" [formControl]="variacionCostoVariable"
+      [(ngModel)]="proveedor.variacionCostoVariable" [(value)]="proveedor.variacionCostoVariable">
+    <mat-error *ngIf="variacionCostoVariable.invalid">Required field</mat-error>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <input type="number" matInput placeholder="Variacion Calidad" [formControl]="variacionCalidad"
+      [(ngModel)]="proveedor.variacionCalidad" [(value)]="proveedor.variacionCalidad">
+    <mat-error *ngIf="variacionCalidad.invalid">Required field</mat-error>
+  </mat-form-field>
+</form>
+
+<mat-toolbar color="secundary">
+  <h1>Modalidad de Pago</h1>
+</mat-toolbar>
+
+<div class="card-container">
+  <mat-card *ngFor="let modalidadPago of proveedor.modalidadPago">
+    <mat-card-header class="modalidad-pago-container">
+      <mat-card-title *ngIf="modalidadPago.offsetPeriodo === 0">Contado</mat-card-title>
+      <mat-card-title *ngIf="modalidadPago.offsetPeriodo === 1">30 dias</mat-card-title>
+      <mat-card-title *ngIf="modalidadPago.offsetPeriodo === 2">60 dias</mat-card-title>
+      <mat-card-title *ngIf="modalidadPago.offsetPeriodo === 3">90 dias</mat-card-title>
+      <mat-form-field class="full-width" style="text-align: right; width:100px;">
+        <input type="number" matInput placeholder="Porcentaje" style="text-align: right; width:100px;"
+          [(ngModel)]="modalidadPago.porcentaje" [(value)]="modalidadPago.porcentaje">
+          <span matSuffix>%</span>
+      </mat-form-field>
+    </mat-card-header>
+  </mat-card>
+
+</div>
+
+
+
+<button mat-fab color="primary" class="fab" (click)="save()">
+  <mat-icon>save</mat-icon>
+</button>

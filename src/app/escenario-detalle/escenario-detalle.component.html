@@ -33,7 +33,9 @@
 <div>
 </div>
 
+<app-proveedores *ngIf="escenario.id" [escenario]="escenario"></app-proveedores>
 <app-decisiones *ngIf="escenario.id" [escenario]="escenario"></app-decisiones>
+
 
 <button mat-fab color="primary" class="fab" (click)="save()">
   <mat-icon>save</mat-icon>

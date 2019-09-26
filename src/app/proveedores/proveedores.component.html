@@ -1,0 +1,19 @@
+<mat-toolbar color="secundary">
+  <h1>Proveedores</h1>
+  <span class="spacer"></span>
+  <button mat-icon-button routerLink="/escenarios/{{escenario.id}}/proveedores/new">
+    <mat-icon>add</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="card-container">
+  <mat-card *ngFor="let proveedor of proveedores">
+    <mat-card-header>
+      <mat-card-title>{{ proveedor.nombre }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-actions>
+      <button mat-button routerLink="/escenarios/{{escenario.id}}/proveedores/{{ proveedor.id }}">EDITAR</button>
+      <button mat-button color="warn" (click)="removeProveedor(proveedor)">ELIMINAR</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

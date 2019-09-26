@@ -1,79 +1,79 @@
 <mat-toolbar color="secundary" *ngIf="escenario">
-    <button mat-icon-button routerLink="/simulaciones">
-        <mat-icon>arrow_back</mat-icon>
-      </button>
-    <h4>{{escenario.titulo}}</h4>
-    <span class="spacer"></span>
-    <button mat-raised-button color="primary" (click)="simular()">SIMULAR</button>
-  </mat-toolbar>
-  <mat-card *ngIf="escenario" class="escenario-card">
-      <mat-card-content>
-          {{escenario.descripcion}}
-      </mat-card-content>
-    </mat-card>
+  <button mat-icon-button routerLink="/simulaciones">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h4>{{escenario.titulo}}</h4>
+  <span class="spacer"></span>
+  <button mat-raised-button color="primary" (click)="simular()">SIMULAR</button>
+</mat-toolbar>
+<mat-card *ngIf="escenario" class="escenario-card">
+  <mat-card-content>
+    {{escenario.descripcion}}
+  </mat-card-content>
+</mat-card>
 
-    <div class="kpis" *ngIf="estado">
+<div class="kpis" *ngIf="estado">
 
-        <mat-card class="single-number-card">
-          <mat-card-header>
-              <div mat-card-avatar class="produccion-avatar"></div>
-            <mat-card-title>Produccion</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <h1 class="single-number">{{estado.produccionMensual}} <small>u/p</small></h1>
-          </mat-card-content>
-        </mat-card>
-    
-        <mat-card class="single-number-card">
-          <mat-card-header>
-              <div mat-card-avatar class="caja-avatar"></div>
-            <mat-card-title>Caja</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <h1 class="single-number">$ {{estado.caja}}</h1>
-          </mat-card-content>
-        </mat-card>
-    
-        <mat-card class="single-number-card">
-          <mat-card-header>
-              <div mat-card-avatar class="costos-avatar"></div>
-            <mat-card-title>Costo Fijo</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <h1 class="single-number">$ {{estado.costoFijo}}</h1>
-          </mat-card-content>
-        </mat-card>
-    
-    
-        <mat-card class="single-number-card">
-          <mat-card-header>
-              <div mat-card-avatar class="costos-avatar"></div>
-            <mat-card-title>Costo Variable</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <h1 class="single-number">$ {{estado.costoVariable}}</h1>
-          </mat-card-content>
-        </mat-card>
-    
-    
-      </div>
-    
+  <mat-card class="single-number-card">
+    <mat-card-header>
+      <div mat-card-avatar class="produccion-avatar"></div>
+      <mat-card-title>Produccion</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <h1 class="single-number">{{estado.produccionMensual}} <small>u/p</small></h1>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="single-number-card">
+    <mat-card-header>
+      <div mat-card-avatar class="caja-avatar"></div>
+      <mat-card-title>Caja</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <h1 class="single-number">$ {{estado.caja}}</h1>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="single-number-card">
+    <mat-card-header>
+      <div mat-card-avatar class="costos-avatar"></div>
+      <mat-card-title>Costo Fijo</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <h1 class="single-number">$ {{estado.costoFijo}}</h1>
+    </mat-card-content>
+  </mat-card>
+
+
+  <mat-card class="single-number-card">
+    <mat-card-header>
+      <div mat-card-avatar class="costos-avatar"></div>
+      <mat-card-title>Costo Variable</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <h1 class="single-number">$ {{estado.costoVariable}}</h1>
+    </mat-card-content>
+  </mat-card>
+
+
+</div>
+
 
 
 <div class="content-container">
 
- 
+
 
   <mat-card class="modalidad-cobro">
     <mat-card-header>
-        <div mat-card-avatar class="cobro-avatar"></div>
+      <div mat-card-avatar class="cobro-avatar"></div>
       <mat-card-title>Modalidad de Cobro</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <table class="mat-table table">
 
         <tr class="mat-header-row">
-          <th class="mat-header-cell desc-column">Periodo</th>
+          <th class="mat-header-cell desc-column" >Periodo</th>
           <th class="mat-header-cell value-column">Porcentaje</th>
         </tr>
 
@@ -97,7 +97,7 @@
   <mat-card class="forecast">
 
     <mat-card-header>
-        <div mat-card-avatar class="ventas-avatar"></div>
+      <div mat-card-avatar class="ventas-avatar"></div>
       <mat-card-title>Forecast de Ventas</mat-card-title>
     </mat-card-header>
     <mat-card-content>
@@ -140,22 +140,50 @@
   <mat-card class="modalidad-pago">
 
     <mat-card-header>
-        <div mat-card-avatar class="proveedor-avatar"></div>
+      <div mat-card-avatar class="proveedor-avatar"></div>
       <mat-card-title>Proveedor</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <span>work in progress</span>
-      <mat-radio-group class="proveedor-container" [(ngModel)]="proveedorSeleccionado">
-        <mat-radio-button class="proveedor" *ngFor="let proveedor of proveedores" [value]="proveedor.id">
-          {{proveedor.nombre}}
-          , costoVariable: {{proveedor.variacionCostoVariable}}
-          , calidad: {{proveedor.variacionCalidad}}
-          <br/>
-          <ng-container *ngFor="let modalidadPago of proveedor.modalidadesPago">
-            {{modalidadPago.porcentaje}}% en periodo: {{modalidadPago.offsetPeriodo}}<br/>
-          </ng-container>
-        </mat-radio-button>
-      </mat-radio-group>
+
+
+      <table class="mat-table table">
+
+        <tr class="mat-header-row">
+          <th class="mat-header-cell desc-column header-proveedor" >Proveedor</th>
+          <th class="mat-header-cell proveedor-value-column">Contado</th>
+          <th class="mat-header-cell proveedor-value-column">30 D</th>
+          <th class="mat-header-cell proveedor-value-column">60 D</th>
+          <th class="mat-header-cell proveedor-value-column">90 D</th>
+        </tr>
+        <ng-container *ngFor="let proveedor of proveedores">
+          <tr class="mat-row poveedor-row">
+            <td class="mat-cell desc-column ">
+              <span class="proveedor-column">
+                <mat-radio-button name="prov" (change)="onSeleccionarProveedor(proveedor)" [checked]="proveedor.seleccionado" ></mat-radio-button>
+                <span class="proveedor-desc-container">
+                  <span style="font-weight: bold; margin-bottom: 5px;">{{proveedor.nombre}}</span>
+                  <span  style="margin-bottom: 5px;">Costo Variable: {{proveedor.variacionCostoVariable}}</span>
+                  <span  style="margin-bottom: 5px;">Calidad:  {{proveedor.variacionCalidad}}</span>
+                </span>
+              </span>
+            </td>
+            <td class="mat-cell proveedor-value-column">
+              <span>{{ getModalidadDePagoParaPeriodo(proveedor.modalidadesPago,0) }}</span>
+            </td>
+            <td class="mat-cell proveedor-value-column">
+              <span>{{ getModalidadDePagoParaPeriodo(proveedor.modalidadesPago,1) }}</span>
+            </td>
+            <td class="mat-cell proveedor-value-column">
+              <span>{{ getModalidadDePagoParaPeriodo(proveedor.modalidadesPago,2) }}</span>
+            </td>
+            <td class="mat-cell proveedor-value-column">
+              <span>{{ getModalidadDePagoParaPeriodo(proveedor.modalidadesPago,3) }}</span>
+            </td>
+          </tr>
+
+        </ng-container>
+
+      </table>
 
     </mat-card-content>
 

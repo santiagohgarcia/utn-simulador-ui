@@ -1,0 +1,31 @@
+.fab {
+    position: fixed;
+    right: 20px;
+    bottom: 15px;
+    margin-left: -28px;
+}
+
+.form {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    padding: 20px;
+}
+
+.modalidad-pago-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-right:10px;
+}

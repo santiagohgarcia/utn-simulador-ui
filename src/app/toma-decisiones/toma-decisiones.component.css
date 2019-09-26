@@ -2,7 +2,7 @@
 .content-container{
     display: grid;
     grid-template-rows: auto;
-    grid-template-columns: 2fr 2fr 2fr;
+    grid-template-columns: 4fr 3fr 4fr;
     grid-template-areas: "forecast modalidad-cobro modalidad-pago"  ;
     grid-gap: 20px;
     padding: 20px;
@@ -160,4 +160,29 @@
 .cobro-avatar{
     background-image: url('../../assets/img/cobro.png');
     background-size: cover;
+}
+
+.proveedor-column{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.proveedor-value-column {
+    text-align: right;
+    width: 40px;
+}
+
+.poveedor-row {
+    height: 100px;
+}
+
+.proveedor-desc-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.header-proveedor{
+    padding-left: 28px;
 }

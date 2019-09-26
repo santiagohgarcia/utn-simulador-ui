@@ -37,8 +37,8 @@ export class ProyectoService {
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
-  proveedorSeleccionado(idProyecto, proveedor) {
-    return this.http.post(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/proveedor`, proveedor)
+  proveedorSeleccionado(idProyecto, proveedorSeleccionadoId) {
+    return this.http.post(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/proveedor`, proveedorSeleccionadoId)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
@@ -77,7 +77,7 @@ export class ProyectoService {
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
   
-  getProveedorSeleccionado(idProyecto): Observable<any> {
+  getProveedores(idProyecto): Observable<any> {
     return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/proveedor`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }

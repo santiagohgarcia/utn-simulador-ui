@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { ProyectoService } from '../proyecto.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MessagesService } from '../messages.service';
 import { EscenariosService } from '../escenarios.service';
+import { MatRadioChange } from '@angular/material';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class TomaDecisionesComponent implements OnInit {
     private proyectoService: ProyectoService,
     private escenarioService: EscenariosService,
     private router: Router,
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private messageService: MessagesService) { }
 
   ngOnInit() {
@@ -32,11 +33,11 @@ export class TomaDecisionesComponent implements OnInit {
     this.getEscenario(escenarioId);
     this.getEstadoBase();
     this.buildModalidadDeCobro();
-    this.getProveedorSeleccionado();
+    this.getProveedores();
     this.getDecisionesByProyecto();
   }
 
-  getEscenario(escenarioId){
+  getEscenario(escenarioId) {
     this.escenarioService.getEscenario(escenarioId).subscribe(escenario => this.escenario = escenario);
   }
 
@@ -50,6 +51,13 @@ export class TomaDecisionesComponent implements OnInit {
   getDecisionesByProyecto() {
     this.proyectoService.getDecisiones(1)
       .subscribe(decisiones => this.decisiones = decisiones);
+  }
+
+  
+  getProveedores() {
+    this.proyectoService.getProveedores(1).subscribe(proveedores => {
+      this.proveedores = proveedores;
+    })
   }
 
   buildForecast() {
@@ -96,11 +104,11 @@ export class TomaDecisionesComponent implements OnInit {
     })
   }
 
-  getProveedorSeleccionado() {
-    this.proyectoService.getProveedorSeleccionado(1).subscribe(proveedores => {
-      this.proveedores = proveedores;
-    })
-
+  getModalidadDePagoParaPeriodo(modalidadPago, periodo) {
+    if (modalidadPago) {
+      var modalidadDePagoParaPeriodo = modalidadPago.find(mp => mp.offsetPeriodo === periodo);
+    }
+    return modalidadDePagoParaPeriodo && `${modalidadDePagoParaPeriodo.porcentaje}%`;
   }
 
   getModalidadDeCobroDescr(offsetPeriodo) {
@@ -127,7 +135,7 @@ export class TomaDecisionesComponent implements OnInit {
         .subscribe(_ => {
           //Grabar MODALIDAD COBRO
           this.proyectoService.modalidadCobro(1, this.modalidadCobro).subscribe(_ => {
-            //Grabar PROVEEDOR SELECCIONADO
+            //Grabar PROVEEDORES
             this.proyectoService.proveedorSeleccionado(1, this.proveedorSeleccionado).subscribe(_ => {
               //SIMULAR
               this.proyectoService.simular(1, this.getOpcionesTomadas())
@@ -162,9 +170,18 @@ export class TomaDecisionesComponent implements OnInit {
       return false;
     }
 
+    //Validar Proveedor seleccionado
+    if(!this.proveedorSeleccionado){
+      this.messageService.openSnackBar("Por favor seleccione un proveedor");
+      return false;
+    }
+
     return true;
   }
 
+  onSeleccionarProveedor(proveedor){
+   this.proveedorSeleccionado = proveedor.id;
+  }
 
 
 }

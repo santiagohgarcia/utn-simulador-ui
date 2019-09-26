@@ -11,6 +11,7 @@ import { ResultadosComponent } from './resultados/resultados.component';
 import { EscenariosComponent } from './escenarios/escenarios.component';
 import { EscenarioDetalleComponent } from './escenario-detalle/escenario-detalle.component';
 import { SimulacionesComponent } from './simulaciones/simulaciones.component';
+import { ProveedorDetailComponent } from './proveedor-detail/proveedor-detail.component';
 
 
 const routes: Routes = [
@@ -38,7 +39,9 @@ const routes: Routes = [
     children: [{ path: '', component: TomaDecisionesComponent, pathMatch: 'full' }]
   },
   { path: 'escenarios/:escenarioId/decisiones/new', component: DecisionDetalleComponent, pathMatch: 'full' },
-  { path: 'escenarios/:escenarioId/decisiones/:id', component: DecisionDetalleComponent },
+  { path: 'escenarios/:escenarioId/decisiones/:id', component: DecisionDetalleComponent, pathMatch: 'full' },
+  { path: 'escenarios/:escenarioId/proveedores/new', component: ProveedorDetailComponent, pathMatch: 'full' },
+  { path: 'escenarios/:escenarioId/proveedores/:id', component: ProveedorDetailComponent, pathMatch: 'full' },
   { path: 'escenarios/new', component: EscenarioDetalleComponent, pathMatch: 'full' },
   { path: 'escenarios/:id', component: EscenarioDetalleComponent }
 ];

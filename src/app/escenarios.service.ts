@@ -54,4 +54,11 @@ export class EscenariosService {
         return decisiones.find(d => d.id === idDecision);
       }));
   }
+
+  getProveedor(idEscenario, idProveedor) {
+    return this.http.get(`${environment.proyectoServiceHost}/api/escenario/${idEscenario}/proveedores`)
+      .pipe(map((proveedores: Array<any>) => {
+        return proveedores.find(p => p.id === idProveedor);
+      }));
+  }
 }

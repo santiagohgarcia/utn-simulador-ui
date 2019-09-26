@@ -34,6 +34,9 @@ import { SimulacionesComponent } from './simulaciones/simulaciones.component';
 import { PresupuestoFinancieroComponent } from './presupuesto-financiero/presupuesto-financiero.component';
 import { PresupuestoEconomicoComponent } from './presupuesto-economico/presupuesto-economico.component';
 import { BalanceFinalComponent } from './balance-final/balance-final.component';
+import { ProveedoresComponent } from './proveedores/proveedores.component';
+import { ProveedorDetailComponent } from './proveedor-detail/proveedor-detail.component';
+import { ProveedoresService } from './proveedores.service';
 
 import {
   MatAutocompleteModule,
@@ -69,6 +72,8 @@ import {
   MatStepperModule,
   MatTabGroup
 } from '@angular/material';
+
+
 
 @NgModule({
   exports: [
@@ -130,11 +135,13 @@ export class MaterialModule { }
     SimulacionesComponent,
     PresupuestoFinancieroComponent,
     PresupuestoEconomicoComponent,
-    BalanceFinalComponent
+    BalanceFinalComponent,
+    ProveedoresComponent, 
+    ProveedorDetailComponent
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     MaterialModule,
@@ -149,9 +156,10 @@ export class MaterialModule { }
     ProyectoService,
     EscenariosService,
     DecisionesService,
-    MessagesService
+    MessagesService,
+    ProveedoresService
   ],
-  entryComponents: [RegisterComponent,OpcionDialogComponent,ConsecuenciaDialogComponent],
+  entryComponents: [RegisterComponent, OpcionDialogComponent, ConsecuenciaDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
