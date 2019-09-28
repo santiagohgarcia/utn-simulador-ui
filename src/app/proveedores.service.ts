@@ -17,37 +17,19 @@ export class ProveedoresService {
     return this.escenarioService.getProveedores(idEscenario);
   }
 
-  _saveProveedores(idEscenario, proveedores) {
-    return this.http.post(`${environment.proyectoServiceHost}/api/escenario/${idEscenario}/proveedores`, proveedores)
+  removeProveedor(proveedor) {
+    return this.http.delete(`${environment.proyectoServiceHost}/api/proveedores/${proveedor.id}`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
-  removeProveedor(proveedor) {
-    return this._getProveedores(proveedor.escenarioId).pipe(
-      switchMap(proveedores => {
-        let nuevosProveedores = proveedores.filter(p => p.id !== proveedor.id)
-        return this._saveProveedores(proveedor.escenarioId, nuevosProveedores);
-      })
-    );
-  }
-
   createProveedor(proveedor) {
-    return this._getProveedores(proveedor.escenarioId).pipe(
-      switchMap(proveedores => {
-        proveedores.push(proveedor)
-        return this._saveProveedores(proveedor.escenarioId, proveedores);
-      })
-    );
+    return this.http.post(`${environment.proyectoServiceHost}/api/proveedor`, proveedor)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
   modifyProveedor(proveedor) {
-    return this._getProveedores(proveedor.escenarioId).pipe(
-      switchMap(proveedores => {
-        var oldProveedor = proveedores.find( p => p.id === proveedor.id)
-        proveedores.splice(proveedores.indexOf(oldProveedor),1,proveedor)
-        return this._saveProveedores(proveedor.escenarioId, proveedores);
-      })
-    );
+    return this.http.put(`${environment.proyectoServiceHost}/api/proveedores/${proveedor.id}`, proveedor)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
 
