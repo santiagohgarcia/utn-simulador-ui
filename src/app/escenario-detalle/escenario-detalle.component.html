@@ -20,6 +20,11 @@
     <mat-error *ngIf="escenario.invalid">Required field</mat-error>
   </mat-form-field>
   <mat-form-field class="form-field">
+    <input  matInput placeholder="Nombre Periodos" [formControl]="nombrePeriodos" [(ngModel)]="escenario.nombrePeriodos"
+      [(value)]="escenario.nombrePeriodos">
+    <mat-error *ngIf="escenario.invalid">Required field</mat-error>
+  </mat-form-field>
+  <mat-form-field class="form-field">
     <textarea cdkTextareaAutosize matInput placeholder="Descripcion" [formControl]="descripcion"
       [(ngModel)]="escenario.descripcion" [(value)]="escenario.descripcion"></textarea>
     <mat-error *ngIf="escenario.invalid">Required field</mat-error>
