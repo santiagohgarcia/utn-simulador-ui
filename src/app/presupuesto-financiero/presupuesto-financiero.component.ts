@@ -30,9 +30,15 @@ export class PresupuestoFinancieroComponent implements OnInit {
     })
   }
 
-  getCuentaPeriodo(cuentasPeriodo,periodo,defaultCero = true){
+  getCuentaPeriodo(cuentasPeriodo,periodo,defaultCero = true, signoInvertido = false){
     var periodo = cuentasPeriodo && cuentasPeriodo.find(cuentaPeriodo => cuentaPeriodo.periodo === periodo )
-    return periodo ? periodo.monto : ( defaultCero ? 0 : ""  );
+    var montoCrudo = periodo ? periodo.monto : ( defaultCero ? 0 : ""  );
+    montoCrudo = signoInvertido ? -montoCrudo : montoCrudo;
+    if(montoCrudo < 0 ){
+      return "(" + Math.abs(montoCrudo) + ")";
+    } else {
+      return montoCrudo;
+    }
   }
 
 }
