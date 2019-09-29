@@ -37,8 +37,8 @@ export class ProyectoService {
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
-  proveedorSeleccionado(idProyecto, proveedorSeleccionadoId) {
-    return this.http.post(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/proveedor`, proveedorSeleccionadoId)
+  proveedorSeleccionado(idProyecto, proveedorSeleccionado) {
+    return this.http.post(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/proveedor`, proveedorSeleccionado.id)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 

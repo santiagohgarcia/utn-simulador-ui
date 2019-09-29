@@ -51,6 +51,7 @@ export class TomaDecisionesComponent implements OnInit {
       this.estado = estado;
       this.escenario = estado.proyecto.escenario;
       this.proveedores = estado.proyecto.escenario.proveedores;
+      this.proveedorSeleccionado = estado.proyecto.proveedorSeleccionado;
       this.buildModalidadDeCobro(estado.proyecto.modalidadCobro);
       this.buildForecast();
     });
@@ -193,7 +194,7 @@ export class TomaDecisionesComponent implements OnInit {
   }
 
   onSeleccionarProveedor(proveedor){
-   this.proveedorSeleccionado = proveedor.id;
+   this.proveedorSeleccionado = proveedor;
   }
 
 
