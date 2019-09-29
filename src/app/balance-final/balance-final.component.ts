@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ProyectoService } from '../proyecto.service';
 
 @Component({
@@ -7,13 +7,13 @@ import { ProyectoService } from '../proyecto.service';
   styleUrls: ['./balance-final.component.css']
 })
 export class BalanceFinalComponent implements OnInit {
-
+  @Input() proyecto: any;
   balanceFinal;
 
   constructor(private proyectoService: ProyectoService) { }
 
   ngOnInit() {
-    this.getBalanceFinal(1);
+    this.getBalanceFinal(this.proyecto.id);
   }
 
   getBalanceFinal(idProyecto){

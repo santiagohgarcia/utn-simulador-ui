@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ProyectoService } from '../proyecto.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { ActivatedRoute } from '@angular/router';
+import { UsuarioService } from '../usuario.service';
 
 
 
@@ -17,25 +19,25 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   ]
 })
 export class FlujoFondosComponent implements OnInit {
-
+  @Input() proyecto: any;
   flujoFondos;
   periodos;
 
   constructor(private proyectoService: ProyectoService) { }
 
   ngOnInit() {
-    this.getPeriodos();
-    this.getFlujoFondos();
+    this.getPeriodos(this.proyecto.id);
+    this.getFlujoFondos(this.proyecto.id);
   }
 
-  getFlujoFondos() {
-    this.proyectoService.getFlujoFondos(1).subscribe( ff => {
+  getFlujoFondos(proyectoId) {
+    this.proyectoService.getFlujoFondos(proyectoId).subscribe( ff => {
       this.flujoFondos = ff;
     })
   }
 
-  getPeriodos(){
-    this.proyectoService.getPeriodoActual(1).subscribe(periodoActual => {
+  getPeriodos(proyectoId){
+    this.proyectoService.getPeriodoActual(proyectoId).subscribe(periodoActual => {
           this.periodos = [...Array(periodoActual).keys(),periodoActual];
     })
   }

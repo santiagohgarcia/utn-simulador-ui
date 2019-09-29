@@ -17,6 +17,7 @@ export class TomaDecisionesComponent implements OnInit {
   decisiones: Array<any> = [];
   escenario;
   estado;
+  proyecto;
   modalidadCobro: Array<any> = [];
   forecasts: Array<any> = [];
   proveedores: Array<any> = [];
@@ -33,54 +34,48 @@ export class TomaDecisionesComponent implements OnInit {
 
   ngOnInit() {
     var escenarioId = Number(this.route.snapshot.paramMap.get('escenarioId'));
-    this.getUsuario('tatoviviani@gmail.com');
-    this.getProyectoUsuario(escenarioId, 1);
-    this.getDecisionesByProyecto();
+    this.getProyecto(escenarioId, this.usuarioService.usuario.id);
   }
 
   getEscenario(escenarioId) {
     this.escenarioService.getEscenario(escenarioId).subscribe(escenario => this.escenario = escenario);
   }
 
-  getUsuario(email){
-    this.usuarioService.getUsuario(email).subscribe(usuario => this.usuario = usuario);
-  }
 
-  getProyectoUsuario(escenarioId, usuarioId) {
-    this.usuarioService.getProyectoUsuario(escenarioId, usuarioId).subscribe(estado => {
+  getProyecto(escenarioId, usuarioId) {
+    this.usuarioService.getProyecto(escenarioId, usuarioId).subscribe(estado => {
       this.estado = estado;
+      this.proyecto = estado.proyecto;
       this.escenario = estado.proyecto.escenario;
-      this.proveedores = estado.proyecto.escenario.proveedores;
-      this.buildModalidadDeCobro(estado.proyecto.modalidadCobro);
-      this.buildForecast();
+      this.getProveedores(this.proyecto.id)
+      this.getDecisiones(this.proyecto.id)
+      this.buildModalidadDeCobro(this.proyecto.id, estado.proyecto.modalidadCobro);
+      this.buildForecast(this.proyecto.id);
     });
   }
 
-  getEstadoBase() {
-    this.proyectoService.getEstadoBase(1).subscribe(estado => {
-      this.estado = estado;
-      this.buildForecast();
-    });
-  }
-
-  getDecisionesByProyecto() {
-    this.proyectoService.getDecisiones(1)
+  getDecisiones(proyectoId) {
+    this.proyectoService.getDecisiones(proyectoId)
       .subscribe(decisiones => this.decisiones = decisiones);
   }
 
-  
-  getProveedores() {
-    this.proyectoService.getProveedores(1).subscribe(proveedores => {
+
+  getProveedores(proyectoId) {
+    this.proyectoService.getProveedores(proyectoId).subscribe(proveedores => {
       this.proveedores = proveedores;
+      var proveedorSeleccionado = proveedores.find(p => p.seleccionado)
+      if(proveedorSeleccionado){
+        this.proveedorSeleccionado = proveedorSeleccionado.id;
+      }
     })
   }
 
-  buildForecast() {
-    this.proyectoService.getForecast(1).subscribe(forecasts => {
+  buildForecast(proyectoId) {
+    this.proyectoService.getForecast(proyectoId).subscribe(forecasts => {
       var periodos = this.estado.proyecto.escenario.maximosPeriodos;
       this.forecasts = forecasts.length > 0 ? forecasts : [...Array(periodos).keys(), periodos].map(periodo => {
         return {
-          proyectoId: 1,
+          proyectoId: proyectoId,
           periodo: periodo,
           cantidadUnidades: 0,
           precioVenta: 0
@@ -90,21 +85,21 @@ export class TomaDecisionesComponent implements OnInit {
 
   }
 
-  buildModalidadDeCobro(modalidadCobro) {
+  buildModalidadDeCobro(proyectoId, modalidadCobro) {
     var modalidadCobroTemplate = [{
-      proyectoId: 1,
+      proyectoId: this.proyecto.id,
       offsetPeriodo: 0,
       porcentaje: 0
     }, {
-      proyectoId: 1,
+      proyectoId: this.proyecto.id,
       offsetPeriodo: 1,
       porcentaje: 0
     }, {
-      proyectoId: 1,
+      proyectoId: this.proyecto.id,
       offsetPeriodo: 2,
       porcentaje: 0
     }, {
-      proyectoId: 1,
+      proyectoId: this.proyecto.id,
       offsetPeriodo: 3,
       porcentaje: 0
     }];
@@ -121,7 +116,8 @@ export class TomaDecisionesComponent implements OnInit {
     if (modalidadPago) {
       var modalidadDePagoParaPeriodo = modalidadPago.find(mp => mp.offsetPeriodo === periodo);
     }
-    return modalidadDePagoParaPeriodo && `${modalidadDePagoParaPeriodo.porcentaje}%`;
+    return (modalidadDePagoParaPeriodo && modalidadDePagoParaPeriodo.porcentaje > 0) ?
+      `${modalidadDePagoParaPeriodo.porcentaje}%` : "";
   }
 
   getModalidadDeCobroDescr(offsetPeriodo) {
@@ -144,14 +140,14 @@ export class TomaDecisionesComponent implements OnInit {
   simular() {
     if (this.inputsValidos()) {
       //Grabar FORECAST
-      this.proyectoService.forecast(1, this.forecasts)
+      this.proyectoService.forecast(this.proyecto.id, this.forecasts)
         .subscribe(_ => {
           //Grabar MODALIDAD COBRO
-          this.proyectoService.modalidadCobro(1, this.modalidadCobro).subscribe(_ => {
+          this.proyectoService.modalidadCobro(this.proyecto.id, this.modalidadCobro).subscribe(_ => {
             //Grabar PROVEEDORES
-            this.proyectoService.proveedorSeleccionado(1, this.proveedorSeleccionado).subscribe(_ => {
+            this.proyectoService.proveedorSeleccionado(this.proyecto.id, this.proveedorSeleccionado).subscribe(_ => {
               //SIMULAR
-              this.proyectoService.simular(1, this.getOpcionesTomadas())
+              this.proyectoService.simular(this.proyecto.id, this.getOpcionesTomadas())
                 .subscribe(_ => this.router.navigateByUrl(`/simulaciones/escenario/${this.escenario.id}/resultados`))
             })
           })
@@ -184,7 +180,7 @@ export class TomaDecisionesComponent implements OnInit {
     }
 
     //Validar Proveedor seleccionado
-    if(!this.proveedorSeleccionado){
+    if (!this.proveedorSeleccionado) {
       this.messageService.openSnackBar("Por favor seleccione un proveedor");
       return false;
     }
@@ -192,8 +188,8 @@ export class TomaDecisionesComponent implements OnInit {
     return true;
   }
 
-  onSeleccionarProveedor(proveedor){
-   this.proveedorSeleccionado = proveedor.id;
+  onSeleccionarProveedor(proveedor) {
+    this.proveedorSeleccionado = proveedor.id;
   }
 
 

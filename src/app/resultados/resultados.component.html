@@ -4,20 +4,20 @@
   </button>
   <h4>Resultados</h4>
 </mat-toolbar>
-<mat-tab-group>
+<mat-tab-group *ngIf="proyecto">
   <mat-tab label="Estado">
-    <app-estado></app-estado>
+    <app-estado [proyecto]="proyecto"></app-estado>
   </mat-tab>
   <mat-tab label="Flujo de Fondos">
-    <app-flujo-fondos></app-flujo-fondos>
+    <app-flujo-fondos [proyecto]="proyecto"></app-flujo-fondos>
   </mat-tab>
   <mat-tab label="Presupuesto Financiero">
-    <app-presupuesto-financiero></app-presupuesto-financiero>
+    <app-presupuesto-financiero [proyecto]="proyecto"></app-presupuesto-financiero>
   </mat-tab>
   <mat-tab label="Presupuesto Economico">
-    <app-presupuesto-economico></app-presupuesto-economico>
+    <app-presupuesto-economico [proyecto]="proyecto"></app-presupuesto-economico>
   </mat-tab>
   <mat-tab label="Balance Final">
-    <app-balance-final></app-balance-final>
+    <app-balance-final [proyecto]="proyecto"></app-balance-final>
   </mat-tab>
 </mat-tab-group>
