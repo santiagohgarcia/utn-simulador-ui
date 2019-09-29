@@ -20,6 +20,7 @@ import { DecisionesComponent } from './decisiones/decisiones.component';
 import { DecisionDetalleComponent } from './decision-detalle/decision-detalle.component';
 import { FlujoFondosComponent } from './flujo-fondos/flujo-fondos.component';
 import { ProyectoService } from './proyecto.service';
+import { UsuarioService } from './usuario.service';
 import { TomaDecisionesComponent } from './toma-decisiones/toma-decisiones.component';
 import { ResultadosComponent } from './resultados/resultados.component';
 import { EscenariosComponent } from './escenarios/escenarios.component';
@@ -155,6 +156,7 @@ export class MaterialModule { }
   providers: [
     ProyectoService,
     EscenariosService,
+    UsuarioService,
     DecisionesService,
     MessagesService,
     ProveedoresService

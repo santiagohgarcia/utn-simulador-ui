@@ -3,6 +3,7 @@ import { ProyectoService } from '../proyecto.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MessagesService } from '../messages.service';
 import { EscenariosService } from '../escenarios.service';
+import { UsuarioService } from '../usuario.service';
 import { MatRadioChange } from '@angular/material';
 
 
@@ -20,25 +21,39 @@ export class TomaDecisionesComponent implements OnInit {
   forecasts: Array<any> = [];
   proveedores: Array<any> = [];
   proveedorSeleccionado;
+  usuario;
 
   constructor(
     private proyectoService: ProyectoService,
     private escenarioService: EscenariosService,
+    private usuarioService: UsuarioService,
     private router: Router,
     private route: ActivatedRoute,
     private messageService: MessagesService) { }
 
   ngOnInit() {
     var escenarioId = Number(this.route.snapshot.paramMap.get('escenarioId'));
-    this.getEscenario(escenarioId);
-    this.getEstadoBase();
-    this.buildModalidadDeCobro();
-    this.getProveedores();
+    this.getUsuario('tatoviviani@gmail.com');
+    this.getProyectoUsuario(escenarioId, 1);
     this.getDecisionesByProyecto();
   }
 
   getEscenario(escenarioId) {
     this.escenarioService.getEscenario(escenarioId).subscribe(escenario => this.escenario = escenario);
+  }
+
+  getUsuario(email){
+    this.usuarioService.getUsuario(email).subscribe(usuario => this.usuario = usuario);
+  }
+
+  getProyectoUsuario(escenarioId, usuarioId) {
+    this.usuarioService.getProyectoUsuario(escenarioId, usuarioId).subscribe(estado => {
+      this.estado = estado;
+      this.escenario = estado.proyecto.escenario;
+      this.proveedores = estado.proyecto.escenario.proveedores;
+      this.buildModalidadDeCobro(estado.proyecto.modalidadCobro);
+      this.buildForecast();
+    });
   }
 
   getEstadoBase() {
@@ -75,7 +90,7 @@ export class TomaDecisionesComponent implements OnInit {
 
   }
 
-  buildModalidadDeCobro() {
+  buildModalidadDeCobro(modalidadCobro) {
     var modalidadCobroTemplate = [{
       proyectoId: 1,
       offsetPeriodo: 0,
@@ -93,15 +108,13 @@ export class TomaDecisionesComponent implements OnInit {
       offsetPeriodo: 3,
       porcentaje: 0
     }];
-    this.proyectoService.getModalidadCobro(1).subscribe(modalidadCobro => {
-      if (modalidadCobro) {
-        this.modalidadCobro = modalidadCobroTemplate.map(mct => {
-          return { ...mct, ...modalidadCobro.find(mc => mc.offsetPeriodo === mct.offsetPeriodo) };
-        });
-      } else {
-        this.modalidadCobro = modalidadCobroTemplate;
-      }
-    })
+    if (modalidadCobro) {
+      this.modalidadCobro = modalidadCobroTemplate.map(mct => {
+        return { ...mct, ...modalidadCobro.find(mc => mc.offsetPeriodo === mct.offsetPeriodo) };
+      });
+    } else {
+      this.modalidadCobro = modalidadCobroTemplate;
+    }
   }
 
   getModalidadDePagoParaPeriodo(modalidadPago, periodo) {
