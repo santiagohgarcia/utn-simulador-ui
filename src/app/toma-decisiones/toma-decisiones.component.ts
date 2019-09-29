@@ -78,7 +78,7 @@ export class TomaDecisionesComponent implements OnInit {
           proyectoId: proyectoId,
           periodo: periodo,
           cantidadUnidades: 0,
-          precioVenta: 0
+          precio: 0
         }
       });
     })
