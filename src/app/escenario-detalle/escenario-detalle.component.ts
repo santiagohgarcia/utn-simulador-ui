@@ -14,17 +14,20 @@ export class EscenarioDetalleComponent implements OnInit {
     id: null,
     titulo: '',
     maximosPeriodos: null,
+    nombrePeriodos: '',
     descripcion: '',
     impuestoPorcentaje: null
   };
   descripcion = new FormControl('', [Validators.required]);
   titulo = new FormControl('', [Validators.required]);
   maximosPeriodos = new FormControl(new Number(), [Validators.required]);
+  nombrePeriodos = new FormControl('', [Validators.required]);
   impuestoPorcentaje = new FormControl(new Number(), [Validators.required, Validators.min(0), Validators.max(99.9)]);
   escenarioForm: FormGroup = new FormGroup({
     descripcion: this.descripcion,
     titulo: this.titulo,
-    maximosPeriodos: this.maximosPeriodos
+    maximosPeriodos: this.maximosPeriodos,
+    nombrePeriodos: this.nombrePeriodos
   });
 
   constructor(private escenariosService: EscenariosService, 
