@@ -20,7 +20,7 @@
           &nbsp;
         </p>
         <p *ngFor="let cuenta of flujo.cuentas;">
-          {{ getCuentaPeriodo(cuenta.cuentasPeriodo,periodo,true) }}
+          {{ getCuentaPeriodo(cuenta.cuentasPeriodo,periodo,true, false) }}
         </p>
       </td>
     </tr>
@@ -40,7 +40,7 @@
           &nbsp;
         </p>
         <p *ngFor="let cuenta of flujo.cuentas;">
-          {{ getCuentaPeriodo(cuenta.cuentasPeriodo,periodo,true) }}
+          {{ getCuentaPeriodo(cuenta.cuentasPeriodo,periodo,true, false) }}
         </p>
       </td>
     </tr>
@@ -60,7 +60,7 @@
           &nbsp;
         </p>
         <p *ngFor="let cuenta of flujo.cuentas;">
-          {{ getCuentaPeriodo(cuenta.cuentasPeriodo,periodo,true) }}
+          {{ getCuentaPeriodo(cuenta.cuentasPeriodo,periodo,true, true) }}
         </p>
       </td>
     </tr>
@@ -80,7 +80,7 @@
           &nbsp;
         </p>
         <p *ngFor="let cuenta of flujo.cuentas;">
-          {{ getCuentaPeriodo(cuenta.cuentasPeriodo,periodo,true) }}
+          {{ getCuentaPeriodo(cuenta.cuentasPeriodo,periodo,true, true) }}
         </p>
       </td>
     </tr>
@@ -166,7 +166,7 @@
         </p>
       </td>
       <td *ngFor="let periodo of periodos;" class="mat-cell value-column flujo-column">
-        {{ getCuentaPeriodo(flujo.montosPeriodo,periodo,true) }}
+        {{ getCuentaPeriodo(flujo.montosPeriodo,periodo,true, false) }}
       </td>
     </tr>
   </table>
