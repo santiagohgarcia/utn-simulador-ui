@@ -110,7 +110,7 @@
     </td>
     <td *ngFor="let periodo of periodos;" class="mat-cell value-column">
       <p *ngFor="let cuenta of flujo.cuentas;">
-        {{ getCuentaPeriodo(cuenta.cuentasPeriodo,periodo,true, true) }}
+        {{ getCuentaPeriodo(cuenta.cuentasPeriodo,periodo,true, false) }}
       </p>
     </td>
   </tr>
@@ -154,7 +154,7 @@
       </p>
     </td>
   </tr>
-  
+
   <!--INVERSIONES-->
   <tr *ngIf="flujoFondos.INVERSIONES as flujo" class="mat-row">
     <td class="mat-cell ">
