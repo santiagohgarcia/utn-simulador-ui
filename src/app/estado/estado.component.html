@@ -16,11 +16,15 @@
         </div>
         <div class="list-item">
           <p>Produccion Mensual</p>
-          <h3>{{ estadoActual.produccionMensual }} u/mes</h3>
+          <h3>{{ estadoActual.produccionMensual }} u/periodo</h3>
         </div>
         <div class="list-item">
           <p>Precio Producto</p>
-          <h3 *ngIf="ultimoPrecioProducto">$ {{ ultimoPrecioProducto }}</h3>
+          <h3>$ {{ ultimoPrecioProducto }}</h3>
+        </div>
+        <div class="list-item">
+          <p>Stock Final</p>
+          <h3>{{ estadoActual.stock }}</h3>
         </div>
       </div>
     </mat-card-content>
