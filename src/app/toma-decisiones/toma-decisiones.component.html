@@ -159,7 +159,7 @@
           <tr class="mat-row poveedor-row">
             <td class="mat-cell desc-column ">
               <span class="proveedor-column">
-                <mat-radio-button name="prov" (change)="onSeleccionarProveedor(proveedor)" [checked]="proveedor.id == proveedorSeleccionado.id" ></mat-radio-button>
+                <mat-radio-button name="prov" (change)="onSeleccionarProveedor(proveedor)" [checked]="proveedor.seleccionado" ></mat-radio-button>
                 <span class="proveedor-desc-container">
                   <span style="font-weight: bold; margin-bottom: 5px;">{{proveedor.nombre}}</span>
                   <span  style="margin-bottom: 5px;">Costo Variable: {{proveedor.variacionCostoVariable}}</span>
