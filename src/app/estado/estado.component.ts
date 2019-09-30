@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class EstadoComponent implements OnInit {
   @Input() proyecto: any;
   estadoActual: any;
+  ultimoPrecioProducto;
   estados: any;
   cajaChartProps;
   ventasChartProps;
@@ -26,15 +27,14 @@ export class EstadoComponent implements OnInit {
   ngOnInit() {
     this.getEstadoActual(this.proyecto.id);
     this.getEstados(this.proyecto.id);
-    //var escenarioId = Number(this.route.snapshot.paramMap.get('escenarioId'));
-    //this.getProyecto(escenarioId, this.usuarioService.usuario.id);
+    this.getUltimoPrecioProducto(this.proyecto.id);
   }
 
-  getProyecto(escenarioId, usuarioId) {
-    this.usuarioService.getProyecto(escenarioId, usuarioId).subscribe(estado => {
-      this.getEstadoActual(estado.proyecto.id);
-      this.getEstados(estado.proyecto.id);
+  getUltimoPrecioProducto(proyectoId){
+    this.proyectoService.getForecast(proyectoId).subscribe(forecasts => {
+      this.ultimoPrecioProducto = forecasts.pop().precio;
     })
+
   }
 
   getEstadoActual(proyectoId) {
