@@ -61,12 +61,12 @@ export class TomaDecisionesComponent implements OnInit {
     });
   }
 
-  getCredito(proyectoId){
+  getCredito(proyectoId) {
     this.proyectoService.getCredito(proyectoId)
-    .subscribe(credito => this.credito = credito || {
-      monto: 0,
-      proyectoId: this.proyecto.id
-    });
+      .subscribe(credito => this.credito = credito || {
+        monto: 0,
+        proyectoId: this.proyecto.id
+      });
   }
 
   getDecisiones(proyectoId) {
@@ -79,7 +79,7 @@ export class TomaDecisionesComponent implements OnInit {
     this.proyectoService.getProveedores(proyectoId).subscribe(proveedores => {
       this.proveedores = proveedores;
       var proveedorSeleccionado = proveedores.find(p => p.seleccionado)
-      if(proveedorSeleccionado){
+      if (proveedorSeleccionado) {
         this.proveedorSeleccionado = proveedorSeleccionado.id;
       }
     })
@@ -161,26 +161,20 @@ export class TomaDecisionesComponent implements OnInit {
           this.proyectoService.modalidadCobro(this.proyecto.id, this.modalidadCobro).subscribe(_ => {
             //Grabar PROVEEDORES
             this.proyectoService.proveedorSeleccionado(this.proyecto.id, this.proveedorSeleccionado).subscribe(_ => {
-
-              if(this.credito.monto > 0){
-                this.proyectoService.tomarCredito(this.credito).subscribe(_ =>           this._simular());
-              }else{
-                this._simular();
-           
-              }
-
-            
-            
+              //Grabar Credito
+              this.proyectoService.tomarCredito(this.credito).subscribe(_ => {
+                //SIMULAR
+                this.proyectoService.simular(this.proyecto.id, this.getOpcionesTomadas())
+                  .subscribe(_ => this.router.navigateByUrl(`/simulaciones/escenario/${this.escenario.id}/resultados`))
+              })
             })
           })
         });
     }
   }
 
-  _simular(){
-  //SIMULAR
-  this.proyectoService.simular(this.proyecto.id, this.getOpcionesTomadas())
-  .subscribe(_ => this.router.navigateByUrl(`/simulaciones/escenario/${this.escenario.id}/resultados`))
+  _simular() {
+
   }
 
   inputsValidos() {
@@ -212,7 +206,7 @@ export class TomaDecisionesComponent implements OnInit {
       this.messageService.openSnackBar("Por favor seleccione un proveedor");
       return false;
     }
-    
+
     //Validar Credito seleccionado
     if (this.credito.monto > 0 && !this.credito.financiacionId) {
       this.messageService.openSnackBar("Usted ha dispuesto un monto de financiacion. Por favor seleccione un tipo de credito");
