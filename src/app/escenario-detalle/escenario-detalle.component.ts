@@ -16,7 +16,8 @@ export class EscenarioDetalleComponent implements OnInit {
     maximosPeriodos: null,
     nombrePeriodos: '',
     descripcion: '',
-    impuestoPorcentaje: null
+    impuestoPorcentaje: null,
+    invalid: null
   };
   descripcion = new FormControl('', [Validators.required]);
   titulo = new FormControl('', [Validators.required]);

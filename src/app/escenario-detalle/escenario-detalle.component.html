@@ -51,9 +51,10 @@
               M4857
               <mat-icon matChipRemove>cancel</mat-icon>
             </mat-chip>
-            <input placeholder="Cursos" [matChipInputFor]="chipList"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-              (matChipInputTokenEnd)="add($event)">
+              <!--
+            <input placeholder="Cursos" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+              -->
+            <input placeholder="Cursos" [matChipInputFor]="chipList">
           </mat-chip-list>
         </mat-form-field>
       </form>

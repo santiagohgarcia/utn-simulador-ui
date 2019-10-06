@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  rememberMe(evt) {
+  rememberMe() {
     if(this.rememberMeChecked){
       this.persistance = firebase.auth.Auth.Persistence.LOCAL;
     }else{

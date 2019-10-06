@@ -7,6 +7,7 @@ export const environment = {
     projectId: "todoapp-82375",
     storageBucket: "",
     messagingSenderId: "200338586891"
-  }
+  },
+  proyectoServiceHost: "http://localhost:8080"
 };
 
