@@ -109,6 +109,15 @@ export class ProyectoService {
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
+  getCredito(idProyecto): Observable<any> {
+    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/financiacionTomado`)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+
+  tomarCredito(credito){
+    return this.http.post(`${environment.proyectoServiceHost}/api/proyecto/${credito.proyectoId}/credito`, credito)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
 
 }
 

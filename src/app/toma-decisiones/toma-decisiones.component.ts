@@ -23,6 +23,8 @@ export class TomaDecisionesComponent implements OnInit {
   proveedores: Array<any> = [];
   proveedorSeleccionado;
   usuario;
+  financiaciones;
+  credito;
 
   constructor(
     private proyectoService: ProyectoService,
@@ -35,12 +37,16 @@ export class TomaDecisionesComponent implements OnInit {
   ngOnInit() {
     var escenarioId = Number(this.route.snapshot.paramMap.get('escenarioId'));
     this.getProyecto(escenarioId, this.usuarioService.usuario.id);
+    this.getFinanciaciones(escenarioId);
   }
 
   getEscenario(escenarioId) {
     this.escenarioService.getEscenario(escenarioId).subscribe(escenario => this.escenario = escenario);
   }
 
+  getFinanciaciones(escenarioId) {
+    this.escenarioService.getFinanciaciones(escenarioId).subscribe(financiaciones => this.financiaciones = financiaciones);
+  }
 
   getProyecto(escenarioId, usuarioId) {
     this.usuarioService.getProyecto(escenarioId, usuarioId).subscribe(estado => {
@@ -48,9 +54,18 @@ export class TomaDecisionesComponent implements OnInit {
       this.proyecto = estado.proyecto;
       this.escenario = estado.proyecto.escenario;
       this.getProveedores(this.proyecto.id)
+      this.getCredito(this.proyecto.id)
       this.getDecisiones(this.proyecto.id)
       this.buildModalidadDeCobro(this.proyecto.id, estado.proyecto.modalidadCobro);
       this.buildForecast(this.proyecto.id);
+    });
+  }
+
+  getCredito(proyectoId){
+    this.proyectoService.getCredito(proyectoId)
+    .subscribe(credito => this.credito = credito || {
+      monto: 0,
+      proyectoId: this.proyecto.id
     });
   }
 
@@ -146,13 +161,26 @@ export class TomaDecisionesComponent implements OnInit {
           this.proyectoService.modalidadCobro(this.proyecto.id, this.modalidadCobro).subscribe(_ => {
             //Grabar PROVEEDORES
             this.proyectoService.proveedorSeleccionado(this.proyecto.id, this.proveedorSeleccionado).subscribe(_ => {
-              //SIMULAR
-              this.proyectoService.simular(this.proyecto.id, this.getOpcionesTomadas())
-                .subscribe(_ => this.router.navigateByUrl(`/simulaciones/escenario/${this.escenario.id}/resultados`))
+
+              if(this.credito.monto > 0){
+                this.proyectoService.tomarCredito(this.credito).subscribe(_ =>           this._simular());
+              }else{
+                this._simular();
+           
+              }
+
+            
+            
             })
           })
         });
     }
+  }
+
+  _simular(){
+  //SIMULAR
+  this.proyectoService.simular(this.proyecto.id, this.getOpcionesTomadas())
+  .subscribe(_ => this.router.navigateByUrl(`/simulaciones/escenario/${this.escenario.id}/resultados`))
   }
 
   inputsValidos() {
@@ -184,12 +212,22 @@ export class TomaDecisionesComponent implements OnInit {
       this.messageService.openSnackBar("Por favor seleccione un proveedor");
       return false;
     }
+    
+    //Validar Credito seleccionado
+    if (this.credito.monto > 0 && !this.credito.financiacionId) {
+      this.messageService.openSnackBar("Usted ha dispuesto un monto de financiacion. Por favor seleccione un tipo de credito");
+      return false;
+    }
 
     return true;
   }
 
   onSeleccionarProveedor(proveedor) {
     this.proveedorSeleccionado = proveedor.id;
+  }
+
+  onSeleccionarFinanciacion(financiacion) {
+    this.credito.financiacionId = financiacion.id;
   }
 
 

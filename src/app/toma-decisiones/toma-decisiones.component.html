@@ -193,18 +193,19 @@
   </mat-card>
 
 
-  <mat-card class="creditos">
+  <mat-card class="creditos" *ngIf="credito">
 
     <mat-card-header>
       <div mat-card-avatar class="credito-avatar"></div>
-      <mat-card-title>Credito</mat-card-title>
+      <mat-card-title>Financiacion</mat-card-title>
 
     </mat-card-header>
     <mat-card-content>
       <div class="monto-cont">
         <mat-form-field class="monto">
           <span matPrefix>$ &nbsp;</span>
-          <input type="number" matInput style="text-align: right" placeholder="Monto" value="0">
+          <input type="number" matInput style="text-align: right" placeholder="Monto" 
+          [(ngModel)]="credito.monto" [(value)]="credito.monto">
         </mat-form-field>
       </div>
 
@@ -212,42 +213,21 @@
 
         <tr class="mat-header-row">
           <th class="mat-header-cell desc-column">Credito</th>
+          <th class="mat-header-cell value-column">TNA</th>
           <th class="mat-header-cell value-column">Cuotas</th>
-          <th class="mat-header-cell value-column">Taza</th>
         </tr>
 
-        <tr class="mat-row credito-row">
+        <tr class="mat-row credito-row" *ngFor="let financiacion of financiaciones;">
           <td class="mat-cell desc-column">
-            <mat-radio-button>Credito </mat-radio-button>
-
+            <mat-radio-button [disabled]="credito.monto < 0 || credito.monto === 0" 
+            (change)="onSeleccionarFinanciacion(financiacion)" 
+            [checked]="credito.monto > 0  && credito.financiacionId === financiacion.id">{{financiacion.descripcion}} </mat-radio-button>
           </td>
           <td class="mat-cell value-column">
-            14
+            {{financiacion.tna}}%
           </td>
           <td class="mat-cell value-column">
-            9%
-          </td>
-        </tr>
-        <tr class="mat-row credito-row">
-          <td class="mat-cell desc-column">
-            <mat-radio-button>Banco Hipotecario </mat-radio-button>
-          </td>
-          <td class="mat-cell value-column">
-            14
-          </td>
-          <td class="mat-cell value-column">
-            18%
-          </td>
-        </tr>
-        <tr class="mat-row credito-row">
-          <td class="mat-cell desc-column">
-              <mat-radio-button>Banco Macro </mat-radio-button>
-          </td>
-          <td class="mat-cell value-column">
-            15
-          </td>
-          <td class="mat-cell value-column">
-            12%
+            {{financiacion.cantidadCuotas}}
           </td>
         </tr>
 
