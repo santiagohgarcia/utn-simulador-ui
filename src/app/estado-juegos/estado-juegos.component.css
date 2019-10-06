@@ -1,0 +1,56 @@
+.escenarios-cont{
+    padding:20px;
+}
+
+.escenario-headers-align .mat-expansion-panel-header-title,
+.escenario-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.escenario-headers-align .mat-expansion-panel-header-description {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+
+.jugadores-container{
+    margin-left: 20px;
+    margin-right: 200px;
+    grid-area: jugadores;
+}
+
+.ventas-container{
+    width: 400px;
+    grid-area: ventas
+}
+
+.table{
+    width: 450px;
+    background: transparent;
+    padding: 10px;
+}
+
+.desc-column {
+    text-align: left;
+}
+
+
+.value-column {
+    text-align: right;
+    width: 50px;
+}
+
+.value-column-cantidad{
+    text-align: right;
+    width: 100px;
+}
+
+.escenario-title{
+    font-size: larger;
+}
+
+.jugadores-list{
+    display:grid; 
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; 
+    grid-template-rows: auto;
+}

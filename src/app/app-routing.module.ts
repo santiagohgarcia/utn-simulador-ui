@@ -12,6 +12,7 @@ import { EscenariosComponent } from './escenarios/escenarios.component';
 import { EscenarioDetalleComponent } from './escenario-detalle/escenario-detalle.component';
 import { SimulacionesComponent } from './simulaciones/simulaciones.component';
 import { ProveedorDetailComponent } from './proveedor-detail/proveedor-detail.component';
+import { EstadoJuegosComponent } from './estado-juegos/estado-juegos.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: 'simulaciones', component: HomeComponent,
     children: [{ path: '', component: SimulacionesComponent, pathMatch: 'full' }]
+  },
+  {
+    path: 'estado-juegos', component: HomeComponent,
+    children: [{ path: '', component: EstadoJuegosComponent, pathMatch: 'full' }]
   },
   {
     path: 'simulaciones/escenario/:escenarioId', component: HomeComponent,

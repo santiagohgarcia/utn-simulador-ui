@@ -1,10 +1,12 @@
 .form{
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    padding:20px;
 }
 
-.form-field {
-    width: 100%;
-} 
+.form-card{
+    grid-area: form;
+}
 
 .archivos-container {
     display: grid;
@@ -64,3 +66,50 @@
     grid-gap: 10px;
     padding: 20px;
 }
+
+.ventas-avatar{
+    background-image: url('../../assets/img/ventas.png');
+    background-size: cover;
+}
+
+.desc-column {
+    text-align: left;
+}
+
+.value-column {
+    text-align: right;
+    width: 50px;
+}
+
+.value-column-cantidad{
+    text-align: right;
+    width: 100px;
+}
+
+.form-container{
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "form balance";
+    grid-gap: 20px;
+    padding:20px;
+}
+
+.mat-card-header {
+    align-items: end;
+    justify-content: space-between;
+}
+
+.balance-form{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    padding: 10px 16px;
+}
+
+.balance-inicial-card{
+    grid-area: balance;
+    padding:20px;
+}
+

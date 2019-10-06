@@ -6,63 +6,65 @@
   <span class="spacer"></span>
   <button mat-raised-button color="primary" (click)="simular()">SIMULAR</button>
 </mat-toolbar>
-<mat-card *ngIf="escenario" class="escenario-card">
-  <mat-card-content>
-    {{escenario.descripcion}}
-  </mat-card-content>
-</mat-card>
-
-<div class="kpis" *ngIf="estado">
-
-  <mat-card class="single-number-card">
-    <mat-card-header>
-      <div mat-card-avatar class="produccion-avatar"></div>
-      <mat-card-title>Produccion</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <h1 class="single-number">{{estado.produccionMensual}} <small>u/p</small></h1>
-    </mat-card-content>
-  </mat-card>
-
-  <mat-card class="single-number-card">
-    <mat-card-header>
-      <div mat-card-avatar class="caja-avatar"></div>
-      <mat-card-title>Caja</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <h1 class="single-number">$ {{estado.caja}}</h1>
-    </mat-card-content>
-  </mat-card>
-
-  <mat-card class="single-number-card">
-    <mat-card-header>
-      <div mat-card-avatar class="costos-avatar"></div>
-      <mat-card-title>Costo Fijo</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <h1 class="single-number">$ {{estado.costoFijo}}</h1>
-    </mat-card-content>
-  </mat-card>
 
 
-  <mat-card class="single-number-card">
-    <mat-card-header>
-      <div mat-card-avatar class="costos-avatar"></div>
-      <mat-card-title>Costo Variable</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <h1 class="single-number">$ {{estado.costoVariable}}</h1>
-    </mat-card-content>
-  </mat-card>
 
-
-</div>
 
 
 
 <div class="content-container">
 
+    <div class="kpis" *ngIf="estado">
 
+        <mat-card *ngIf="escenario" class="escenario-card">
+            <mat-card-content>
+              {{escenario.descripcion}}
+            </mat-card-content>
+          </mat-card>
+
+        <mat-card class="single-number-card produccion">
+          <mat-card-header>
+            <div mat-card-avatar class="produccion-avatar"></div>
+            <mat-card-title>Produccion</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <h1 class="single-number">{{estado.produccionMensual}} <small>u/p</small></h1>
+          </mat-card-content>
+        </mat-card>
+      
+        <mat-card class="single-number-card caja">
+          <mat-card-header>
+            <div mat-card-avatar class="caja-avatar"></div>
+            <mat-card-title>Caja</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <h1 class="single-number">$ {{estado.caja}}</h1>
+          </mat-card-content>
+        </mat-card>
+      
+        <mat-card class="single-number-card costo-fijo">
+          <mat-card-header>
+            <div mat-card-avatar class="costos-avatar"></div>
+            <mat-card-title>Costo Fijo</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <h1 class="single-number">$ {{estado.costoFijo}}</h1>
+          </mat-card-content>
+        </mat-card>
+      
+      
+        <mat-card class="single-number-card costo-variable">
+          <mat-card-header>
+            <div mat-card-avatar class="costos-avatar"></div>
+            <mat-card-title>Costo Variable</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <h1 class="single-number">$ {{estado.costoVariable}}</h1>
+          </mat-card-content>
+        </mat-card>
+      
+      
+      </div>
 
   <mat-card class="modalidad-cobro">
     <mat-card-header>
@@ -73,7 +75,7 @@
       <table class="mat-table table">
 
         <tr class="mat-header-row">
-          <th class="mat-header-cell desc-column" >Periodo</th>
+          <th class="mat-header-cell desc-column">Periodo</th>
           <th class="mat-header-cell value-column">Porcentaje</th>
         </tr>
 
@@ -149,7 +151,7 @@
       <table class="mat-table table">
 
         <tr class="mat-header-row">
-          <th class="mat-header-cell desc-column header-proveedor" >Proveedor</th>
+          <th class="mat-header-cell desc-column header-proveedor">Proveedor</th>
           <th class="mat-header-cell proveedor-value-column">Contado</th>
           <th class="mat-header-cell proveedor-value-column">30 D</th>
           <th class="mat-header-cell proveedor-value-column">60 D</th>
@@ -159,11 +161,12 @@
           <tr class="mat-row poveedor-row">
             <td class="mat-cell desc-column ">
               <span class="proveedor-column">
-                <mat-radio-button name="prov" (change)="onSeleccionarProveedor(proveedor)" [checked]="proveedor.seleccionado" ></mat-radio-button>
+                <mat-radio-button name="prov" (change)="onSeleccionarProveedor(proveedor)"
+                  [checked]="proveedor.seleccionado"></mat-radio-button>
                 <span class="proveedor-desc-container">
                   <span style="font-weight: bold; margin-bottom: 5px;">{{proveedor.nombre}}</span>
-                  <span  style="margin-bottom: 5px;">Costo Variable: {{proveedor.variacionCostoVariable}}</span>
-                  <span  style="margin-bottom: 5px;">Calidad:  {{proveedor.variacionCalidad}}</span>
+                  <span style="margin-bottom: 5px;">Costo Variable: {{proveedor.variacionCostoVariable}}</span>
+                  <span style="margin-bottom: 5px;">Calidad: {{proveedor.variacionCalidad}}</span>
                 </span>
               </span>
             </td>
@@ -182,6 +185,71 @@
           </tr>
 
         </ng-container>
+
+      </table>
+
+    </mat-card-content>
+
+  </mat-card>
+
+
+  <mat-card class="creditos">
+
+    <mat-card-header>
+      <div mat-card-avatar class="credito-avatar"></div>
+      <mat-card-title>Credito</mat-card-title>
+
+    </mat-card-header>
+    <mat-card-content>
+      <div class="monto-cont">
+        <mat-form-field class="monto">
+          <span matPrefix>$ &nbsp;</span>
+          <input type="number" matInput style="text-align: right" placeholder="Monto" value="0">
+        </mat-form-field>
+      </div>
+
+      <table class="mat-table table">
+
+        <tr class="mat-header-row">
+          <th class="mat-header-cell desc-column">Credito</th>
+          <th class="mat-header-cell value-column">Cuotas</th>
+          <th class="mat-header-cell value-column">Taza</th>
+        </tr>
+
+        <tr class="mat-row credito-row">
+          <td class="mat-cell desc-column">
+            <mat-radio-button>Credito </mat-radio-button>
+
+          </td>
+          <td class="mat-cell value-column">
+            14
+          </td>
+          <td class="mat-cell value-column">
+            9%
+          </td>
+        </tr>
+        <tr class="mat-row credito-row">
+          <td class="mat-cell desc-column">
+            <mat-radio-button>Banco Hipotecario </mat-radio-button>
+          </td>
+          <td class="mat-cell value-column">
+            14
+          </td>
+          <td class="mat-cell value-column">
+            18%
+          </td>
+        </tr>
+        <tr class="mat-row credito-row">
+          <td class="mat-cell desc-column">
+              <mat-radio-button>Banco Macro </mat-radio-button>
+          </td>
+          <td class="mat-cell value-column">
+            15
+          </td>
+          <td class="mat-cell value-column">
+            12%
+          </td>
+        </tr>
 
       </table>
 

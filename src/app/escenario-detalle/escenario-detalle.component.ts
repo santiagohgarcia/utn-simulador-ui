@@ -30,6 +30,28 @@ export class EscenarioDetalleComponent implements OnInit {
     nombrePeriodos: this.nombrePeriodos
   });
 
+  forecasts= [{
+    proyectoId: 1,
+    periodo: 0,
+    cantidadUnidades: 0,
+    precio: 0
+  },{
+    proyectoId: 1,
+    periodo: 1,
+    cantidadUnidades: 0,
+    precio: 0
+  },{
+    proyectoId: 1,
+    periodo: 2,
+    cantidadUnidades: 0,
+    precio: 0
+  },{
+    proyectoId: 1,
+    periodo: 3,
+    cantidadUnidades: 0,
+    precio: 0
+  }]
+
   constructor(private escenariosService: EscenariosService, 
     private route: ActivatedRoute, 
     private router: Router,

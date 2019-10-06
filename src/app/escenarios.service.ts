@@ -61,4 +61,10 @@ export class EscenariosService {
         return proveedores.find(p => p.id === idProveedor);
       }));
   }
+
+  getFinanciaciones(idEscenario): Observable<any> {
+    return this.http.get(`${environment.proyectoServiceHost}/api/escenario/${idEscenario}/financiacion`)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+
 }

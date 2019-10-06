@@ -1,0 +1,17 @@
+.full-width {
+    width: 100%;
+  }
+  
+.button-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+.register-button {
+    margin: auto;
+}
+
+.mat-dialog-actions {
+  justify-content: flex-end;
+}

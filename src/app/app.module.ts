@@ -38,6 +38,9 @@ import { BalanceFinalComponent } from './balance-final/balance-final.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { ProveedorDetailComponent } from './proveedor-detail/proveedor-detail.component';
 import { ProveedoresService } from './proveedores.service';
+import { EstadoJuegosComponent } from './estado-juegos/estado-juegos.component';
+import { FinanciacionesComponent } from './financiaciones/financiaciones.component';
+import { FinanciacionService } from './financiacion.service';
 
 import {
   MatAutocompleteModule,
@@ -73,7 +76,7 @@ import {
   MatStepperModule,
   MatTabGroup
 } from '@angular/material';
-
+import { FinanciacionDialogComponent } from './financiaciones/financiacion-dialog/financiacion-dialog.component';
 
 
 @NgModule({
@@ -111,7 +114,8 @@ import {
     MatToolbarModule,
     MatTooltipModule
   ],
-  imports: [AppRoutingModule]
+  imports: [AppRoutingModule],
+  declarations: []
 })
 export class MaterialModule { }
 
@@ -133,12 +137,15 @@ export class MaterialModule { }
     EscenarioDetalleComponent,
     OpcionDialogComponent,
     ConsecuenciaDialogComponent,
+    FinanciacionDialogComponent,
     SimulacionesComponent,
     PresupuestoFinancieroComponent,
     PresupuestoEconomicoComponent,
     BalanceFinalComponent,
     ProveedoresComponent, 
-    ProveedorDetailComponent
+    ProveedorDetailComponent,
+    EstadoJuegosComponent,
+    FinanciacionesComponent
   ],
   imports: [
     BrowserModule,
@@ -159,9 +166,10 @@ export class MaterialModule { }
     UsuarioService,
     DecisionesService,
     MessagesService,
-    ProveedoresService
+    ProveedoresService,
+    FinanciacionService
   ],
-  entryComponents: [RegisterComponent, OpcionDialogComponent, ConsecuenciaDialogComponent],
+  entryComponents: [RegisterComponent, OpcionDialogComponent, ConsecuenciaDialogComponent, FinanciacionDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -7,37 +7,106 @@
     <h1 *ngIf="escenario.id">Editar Escenario</h1>
   </mat-toolbar-row>
 </mat-toolbar>
+<div class="form-container">
 
-<form [formGroup]="escenarioForm" class="form">
-  <mat-form-field  class="form-field">
-    <input autofocus matInput placeholder="Titulo" [formControl]="titulo" [(ngModel)]="escenario.titulo"
-      [(value)]="escenario.titulo"  >
-    <mat-error *ngIf="escenario.invalid">Required field</mat-error>
-  </mat-form-field>
-  <mat-form-field class="form-field">
-    <input  type="number" matInput placeholder="Cantidad de Periodos" [formControl]="maximosPeriodos" [(ngModel)]="escenario.maximosPeriodos"
-      [(value)]="escenario.maximosPeriodos">
-    <mat-error *ngIf="escenario.invalid">Required field</mat-error>
-  </mat-form-field>
-  <mat-form-field class="form-field">
-    <input  matInput placeholder="Nombre Periodos" [formControl]="nombrePeriodos" [(ngModel)]="escenario.nombrePeriodos"
-      [(value)]="escenario.nombrePeriodos">
-    <mat-error *ngIf="escenario.invalid">Required field</mat-error>
-  </mat-form-field>
-  <mat-form-field class="form-field">
-    <textarea cdkTextareaAutosize matInput placeholder="Descripcion" [formControl]="descripcion"
-      [(ngModel)]="escenario.descripcion" [(value)]="escenario.descripcion"></textarea>
-    <mat-error *ngIf="escenario.invalid">Required field</mat-error>
-  </mat-form-field>
-  <mat-form-field class="form-field">
-      <input  type="number" matInput placeholder="Porcentaje de Impuestos" [formControl]="impuestoPorcentaje" [(ngModel)]="escenario.impuestoPorcentaje"
-        [(value)]="escenario.impuestoPorcentaje">
-      <mat-error *ngIf="escenario.invalid">Required field</mat-error>
-    </mat-form-field>
-</form>
-<div>
+  <mat-card class="form-card">
+    <mat-card-content>
+      <form [formGroup]="escenarioForm" class="form">
+        <mat-form-field class="form-field">
+          <input autofocus matInput placeholder="Titulo" [formControl]="titulo" [(ngModel)]="escenario.titulo"
+            [(value)]="escenario.titulo">
+          <mat-error *ngIf="escenario.invalid">Required field</mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input type="number" matInput placeholder="Cantidad de Periodos" [formControl]="maximosPeriodos"
+            [(ngModel)]="escenario.maximosPeriodos" [(value)]="escenario.maximosPeriodos">
+          <mat-error *ngIf="escenario.invalid">Required field</mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input matInput placeholder="Nombre Periodos" [formControl]="nombrePeriodos"
+            [(ngModel)]="escenario.nombrePeriodos" [(value)]="escenario.nombrePeriodos">
+          <mat-error *ngIf="escenario.invalid">Required field</mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <textarea cdkTextareaAutosize matInput placeholder="Descripcion" [formControl]="descripcion"
+            [(ngModel)]="escenario.descripcion" [(value)]="escenario.descripcion"></textarea>
+          <mat-error *ngIf="escenario.invalid">Required field</mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input type="number" matInput placeholder="Porcentaje de Impuestos" [formControl]="impuestoPorcentaje"
+            [(ngModel)]="escenario.impuestoPorcentaje" [(value)]="escenario.impuestoPorcentaje">
+          <mat-error *ngIf="escenario.invalid">Required field</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-chip-list">
+          <mat-chip-list #chipList>
+            <mat-chip>
+              Z1234
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <mat-chip>
+              L4567
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <mat-chip>
+              M4857
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="Cursos" [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="add($event)">
+          </mat-chip-list>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="balance-inicial-card">
+    <mat-card-header>
+      <mat-card-title>Balance Inicial</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div style="margin-left:16px;">Activo</div>
+      <form [formGroup]="escenarioForm" class="balance-form">
+        <mat-form-field class="form-field">
+          <input autofocus matInput placeholder="Caja">
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input autofocus matInput placeholder="Cuentas a Cobrar">
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input autofocus matInput placeholder="Inventario">
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input autofocus matInput placeholder="Maquinaria">
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input autofocus matInput placeholder="Amortizacion Acumulada">
+        </mat-form-field>
+      </form>
+      <div style="margin-left:16px;">Pasivo</div>
+      <form [formGroup]="escenarioForm" class="balance-form">
+        <mat-form-field class="form-field">
+          <input autofocus matInput placeholder="Proveedores">
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input autofocus matInput placeholder="Deudas Bancarias">
+        </mat-form-field>
+      </form>
+      <div style="margin-left:16px;">Patrimonio Neto</div>
+      <form [formGroup]="escenarioForm" class="balance-form">
+        <mat-form-field class="form-field">
+          <input autofocus matInput placeholder="Capital Social">
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input autofocus matInput placeholder="Resultado del Ejercicio">
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
 </div>
 
+<app-financiaciones *ngIf="escenario.id" [escenario]="escenario"></app-financiaciones>
 <app-proveedores *ngIf="escenario.id" [escenario]="escenario"></app-proveedores>
 <app-decisiones *ngIf="escenario.id" [escenario]="escenario"></app-decisiones>
 
