@@ -1,3 +1,32 @@
-<p>
-  presupuesto-economico works!
-</p>
+<table class="mat-table table" *ngIf="presupuestoEconomico">
+
+  <tr class="mat-header-row">
+    <th class="mat-header-cell desc-column">Descripcion</th>
+    <th *ngFor="let periodo of periodos" class="mat-header-cell value-column"> Periodo {{periodo}} </th>
+  </tr>
+
+  <tr *ngIf="presupuestoEconomico.cuentas as flujo" class="mat-row">
+    <td class="mat-cell">
+      <p *ngFor="let cuenta of flujo.cuentas;" class="desc-cuenta">
+        {{ cuenta.descripcion }}
+      </p>
+    </td>
+    <td *ngFor="let periodo of periodos;" class="mat-cell value-column">
+      <p *ngFor="let cuenta of flujo.cuentas;">
+        {{ getCuentaPeriodo(cuenta.cuentasPeriodo,periodo,true, false) }}
+      </p>
+    </td>
+  </tr>
+
+  <!--FLUJO_DE_FONDOS-->
+  <tr *ngIf="presupuestoEconomico.TOTAL as flujo" class="mat-row">
+    <td class="mat-cell ">
+      <p class="flujo-column">
+        {{ flujo.descripcion }}
+      </p>
+    </td>
+    <td *ngFor="let periodo of periodos;" class="mat-cell value-column flujo-column">
+      {{ getCuentaPeriodo(flujo.montosPeriodo,periodo,true, false) }}
+    </td>
+  </tr>
+</table>
