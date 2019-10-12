@@ -1,0 +1,35 @@
+
+table {
+    width: 100%;
+}
+
+table.mat-table {
+    border-spacing: 0;
+}
+
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+    padding-left: 15px;
+    padding-right: 15px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+
+tr.mat-header-row {
+    height: 36px;
+}
+
+.desc-cuenta{
+    margin-left: 5px;
+}
+
+.flujo-column {
+    font-weight: bold;
+}
+
+.value-column {
+    text-align: right;
+}
+
+.desc-column {
+    text-align: left;
+}

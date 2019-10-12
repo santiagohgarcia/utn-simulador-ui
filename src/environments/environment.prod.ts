@@ -1,12 +1,13 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: "AIzaSyCOS9_wUPRciBqi7DQv1cZaS2WQUIbbXjQ",
-    authDomain: "todoapp-82375.firebaseapp.com",
-    databaseURL: "https://todoapp-82375.firebaseio.com",
-    projectId: "todoapp-82375",
+    apiKey: "AIzaSyDim_UyTp9g7X4YvOrP5teQf-qKuHYcfEA",
+    authDomain: "augure-8db58.firebaseapp.com",
+    databaseURL: "https://augure-8db58.firebaseio.com",
+    projectId: "augure-8db58",
     storageBucket: "",
-    messagingSenderId: "200338586891"
-  }
+    messagingSenderId: "30865807746"
+  },
+  proyectoServiceHost: ""
 };
-
+   

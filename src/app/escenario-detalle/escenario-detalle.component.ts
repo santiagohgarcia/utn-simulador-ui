@@ -36,7 +36,8 @@ export class EscenarioDetalleComponent implements OnInit {
         capitalSocial: 0,
         resultadoDelEjercicio: 0
       }
-    }
+    },
+    invalid: null
   };
 
   descripcion = new FormControl('', [Validators.required]);
