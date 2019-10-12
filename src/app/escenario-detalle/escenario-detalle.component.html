@@ -60,45 +60,77 @@
     </mat-card-content>
   </mat-card>
 
-  <mat-card class="balance-inicial-card">
+  <mat-card class="balance-inicial-card" *ngIf="escenario.balanceInicial">
     <mat-card-header>
       <mat-card-title>Balance Inicial</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div style="margin-left:16px;">Activo</div>
-      <form [formGroup]="escenarioForm" class="balance-form">
+      <form [formGroup]="activoForm" class="balance-form" *ngIf="escenario.balanceInicial.activo">
         <mat-form-field class="form-field">
-          <input autofocus matInput placeholder="Caja">
+          <input autofocus matInput placeholder="Caja" [formControl]="caja"
+            [(ngModel)]="escenario.balanceInicial.activo.caja" [(value)]="escenario.balanceInicial.activo.caja">
         </mat-form-field>
         <mat-form-field class="form-field">
-          <input autofocus matInput placeholder="Cuentas a Cobrar">
+          <input autofocus matInput placeholder="Cuentas a Cobrar" [formControl]="cuentasPorCobrar"
+            [(ngModel)]="escenario.balanceInicial.activo.cuentasPorCobrar"
+            [(value)]="escenario.balanceInicial.activo.cuentasPorCobrar">
         </mat-form-field>
         <mat-form-field class="form-field">
-          <input autofocus matInput placeholder="Inventario">
+          <input autofocus matInput placeholder="Periodos Cuentas a Cobrar" [formControl]="cuentasPorCobrarPeriodos"
+            [(ngModel)]="escenario.balanceInicial.activo.cuentasPorCobrarPeriodos"
+            [(value)]="escenario.balanceInicial.activo.cuentasPorCobrarPeriodos">
         </mat-form-field>
         <mat-form-field class="form-field">
-          <input autofocus matInput placeholder="Maquinaria">
+          <input autofocus matInput placeholder="Maquinaria" [formControl]="maquinaria"
+            [(ngModel)]="escenario.balanceInicial.activo.maquinaria"
+            [(value)]="escenario.balanceInicial.activo.maquinaria">
         </mat-form-field>
         <mat-form-field class="form-field">
-          <input autofocus matInput placeholder="Amortizacion Acumulada">
+          <input autofocus matInput placeholder="Inventario" [formControl]="inventario"
+            [(ngModel)]="escenario.balanceInicial.activo.inventario"
+            [(value)]="escenario.balanceInicial.activo.inventario">
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input autofocus matInput placeholder="Amortizacion Acumulada" [formControl]="amortizacionAcumulada"
+          [(ngModel)]="escenario.balanceInicial.activo.amortizacionAcumulada"
+          [(value)]="escenario.balanceInicial.activo.amortizacionAcumulada">
         </mat-form-field>
       </form>
       <div style="margin-left:16px;">Pasivo</div>
-      <form [formGroup]="escenarioForm" class="balance-form">
+      <form [formGroup]="pasivoForm" class="balance-form" *ngIf="escenario.balanceInicial.pasivo">
         <mat-form-field class="form-field">
-          <input autofocus matInput placeholder="Proveedores">
+          <input autofocus matInput placeholder="Proveedores" [formControl]="proveedores"
+          [(ngModel)]="escenario.balanceInicial.pasivo.proveedores"
+          [(value)]="escenario.balanceInicial.pasivo.proveedores">
         </mat-form-field>
         <mat-form-field class="form-field">
-          <input autofocus matInput placeholder="Deudas Bancarias">
+          <input autofocus matInput placeholder="Periodos Proveedores" [formControl]="proveedoresPeriodos"
+          [(ngModel)]="escenario.balanceInicial.pasivo.proveedoresPeriodos"
+          [(value)]="escenario.balanceInicial.pasivo.proveedoresPeriodos">
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input autofocus matInput placeholder="Deudas Bancarias" [formControl]="deudasBancarias"
+          [(ngModel)]="escenario.balanceInicial.pasivo.deudasBancarias"
+          [(value)]="escenario.balanceInicial.pasivo.deudasBancarias">
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input autofocus matInput placeholder="Periodos Deudas Bancarias" [formControl]="deudasBancariasPeriodos"
+          [(ngModel)]="escenario.balanceInicial.pasivo.deudasBancariasPeriodos"
+          [(value)]="escenario.balanceInicial.pasivo.deudasBancariasPeriodos">
         </mat-form-field>
       </form>
       <div style="margin-left:16px;">Patrimonio Neto</div>
-      <form [formGroup]="escenarioForm" class="balance-form">
+      <form [formGroup]="patrimonioNetoForm" class="balance-form" *ngIf="escenario.balanceInicial.patrimonioNeto">
         <mat-form-field class="form-field">
-          <input autofocus matInput placeholder="Capital Social">
+          <input autofocus matInput placeholder="Capital Social"  [formControl]="capitalSocial"
+          [(ngModel)]="escenario.balanceInicial.patrimonioNeto.capitalSocial"
+          [(value)]="escenario.balanceInicial.patrimonioNeto.capitalSocial">
         </mat-form-field>
         <mat-form-field class="form-field">
-          <input autofocus matInput placeholder="Resultado del Ejercicio">
+          <input autofocus matInput placeholder="Capital Social"  [formControl]="resultadoDelEjercicio"
+          [(ngModel)]="escenario.balanceInicial.patrimonioNeto.resultadoDelEjercicio"
+          [(value)]="escenario.balanceInicial.patrimonioNeto.resultadoDelEjercicio">
         </mat-form-field>
       </form>
     </mat-card-content>

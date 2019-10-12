@@ -13,58 +13,174 @@
 
 
 <div class="content-container">
+  <mat-card *ngIf="escenario" class="escenario-card">
+    <mat-card-content>
+      {{escenario.descripcion}}
+    </mat-card-content>
+  </mat-card>
 
-    <div class="kpis" *ngIf="estado">
+  <!--<div class="kpis" *ngIf="escenario.balanceInicial">
 
-        <mat-card *ngIf="escenario" class="escenario-card">
-            <mat-card-content>
-              {{escenario.descripcion}}
-            </mat-card-content>
-          </mat-card>
+    
+    <mat-card class="single-number-card">
+      <mat-card-header>
+        <div mat-card-avatar class="caja-avatar"></div>
+        <mat-card-title>Caja</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h1 class="single-number">$ {{escenario.balanceInicial.activo.caja}}</h1>
+      </mat-card-content>
+    </mat-card>
 
-        <mat-card class="single-number-card produccion">
-          <mat-card-header>
-            <div mat-card-avatar class="produccion-avatar"></div>
-            <mat-card-title>Produccion</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <h1 class="single-number">{{estado.produccionMensual}} <small>u/p</small></h1>
-          </mat-card-content>
-        </mat-card>
-      
-        <mat-card class="single-number-card caja">
-          <mat-card-header>
-            <div mat-card-avatar class="caja-avatar"></div>
-            <mat-card-title>Caja</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <h1 class="single-number">$ {{estado.caja}}</h1>
-          </mat-card-content>
-        </mat-card>
-      
-        <mat-card class="single-number-card costo-fijo">
-          <mat-card-header>
-            <div mat-card-avatar class="costos-avatar"></div>
-            <mat-card-title>Costo Fijo</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <h1 class="single-number">$ {{estado.costoFijo}}</h1>
-          </mat-card-content>
-        </mat-card>
-      
-      
-        <mat-card class="single-number-card costo-variable">
-          <mat-card-header>
-            <div mat-card-avatar class="costos-avatar"></div>
-            <mat-card-title>Costo Variable</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <h1 class="single-number">$ {{estado.costoVariable}}</h1>
-          </mat-card-content>
-        </mat-card>
-      
-      
-      </div>
+    <mat-card class="single-number-card">
+      <mat-card-header>
+        <div mat-card-avatar class="costos-avatar"></div>
+        <mat-card-title>Cuentas por Cobrar</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h1 class="single-number">$ {{escenario.balanceInicial.activo.cuentasPorCobrar}}</h1>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="single-number-card">
+      <mat-card-header>
+       
+        <mat-card-title>Inventario</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h1 class="single-number">$ {{escenario.balanceInicial.activo.inventario}}</h1>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="single-number-card">
+      <mat-card-header>
+       
+        <mat-card-title>Maquinaria</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h1 class="single-number">$ {{escenario.balanceInicial.activo.maquinaria}}</h1>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="single-number-card">
+      <mat-card-header>
+       
+        <mat-card-title>Amortizacion Acumulada</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h1 class="single-number">$ {{escenario.balanceInicial.activo.amortizacionAcumulada}}</h1>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="single-number-card">
+      <mat-card-header>
+       
+        <mat-card-title>Proveedores</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h1 class="single-number">$ {{escenario.balanceInicial.pasivo.proveedores}}</h1>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="single-number-card">
+      <mat-card-header>
+        <mat-card-title>Deudas Bancarias</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h1 class="single-number">$ {{escenario.balanceInicial.pasivo.deudasBancarias}}</h1>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="single-number-card">
+      <mat-card-header>
+        <mat-card-title>Capital Social</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h1 class="single-number">$ {{escenario.balanceInicial.patrimonioNeto.capitalSocial}}</h1>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="single-number-card">
+      <mat-card-header>
+        <mat-card-title>Resultado del Ejercicio</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h1 class="single-number">$ {{escenario.balanceInicial.patrimonioNeto.resultadoDelEjercicio}}</h1>
+      </mat-card-content>
+    </mat-card>
+  </div>
+-->
+<div *ngIf="escenario.balanceInicial" class="balance-container">
+  <mat-card class="activo">
+      <mat-card-header>
+              <div mat-card-avatar class="activo-avatar"></div>
+          <mat-card-title>Activo</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+          <div class="list">
+              <div class="list-item">
+                  <p>Caja</p>
+                  <h3>$ {{ escenario.balanceInicial.activo.caja }}</h3>
+              </div>
+              <div class="list-item">
+                  <p>Cuentas por Cobrar</p>
+                  <h3>$ {{ escenario.balanceInicial.activo.cuentasPorCobrar }}</h3>
+              </div>
+              <div class="list-item">
+                  <p>Inventario</p>
+                  <h3>$ {{ escenario.balanceInicial.activo.inventario }}</h3>
+              </div>
+              <div class="list-item">
+                  <p>Maquinaria</p>
+                  <h3>$ {{ escenario.balanceInicial.activo.maquinaria }}</h3>
+              </div>
+              <div class="list-item">
+                  <p>Amortizacion Acumulada</p>
+                  <h3>$ {{ escenario.balanceInicial.activo.amortizacionAcumulada }}</h3>
+              </div>
+          </div>
+      </mat-card-content>
+  </mat-card>
+
+  <mat-card class="pasivo">
+      <mat-card-header>
+              <div mat-card-avatar class="pasivo-avatar"></div>
+          <mat-card-title>Pasivo</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+          <div class="list">
+              <div class="list-item">
+                  <p>Proveedores</p>
+                  <h3>$ {{ escenario.balanceInicial.pasivo.proveedores }}</h3>
+              </div>
+              <div class="list-item">
+                  <p>Deudas Bancarias</p>
+                  <h3>$ {{ escenario.balanceInicial.pasivo.deudasBancarias }}</h3>
+              </div>
+          </div>
+      </mat-card-content>
+  </mat-card>
+
+
+  <mat-card class="patrimonio-neto">
+      <mat-card-header>
+              <div mat-card-avatar class="patrimonio-neto-avatar"></div>
+          <mat-card-title>Patrimonio Neto</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+          <div class="list">
+              <div class="list-item">
+                  <p>Capital Social</p>
+                  <h3>$ {{ escenario.balanceInicial.patrimonioNeto.capitalSocial }}</h3>
+              </div>
+              <div class="list-item">
+                  <p>Resultado del Ejercicio</p>
+                  <h3>$ {{ escenario.balanceInicial.patrimonioNeto.resultadoDelEjercicio }}</h3>
+              </div>
+          </div>
+      </mat-card-content>
+  </mat-card>
+</div>
 
   <mat-card class="modalidad-cobro">
     <mat-card-header>
@@ -204,8 +320,8 @@
       <div class="monto-cont">
         <mat-form-field class="monto">
           <span matPrefix>$ &nbsp;</span>
-          <input type="number" matInput style="text-align: right" placeholder="Monto" 
-          [(ngModel)]="credito.monto" [(value)]="credito.monto">
+          <input type="number" matInput style="text-align: right" placeholder="Monto" [(ngModel)]="credito.monto"
+            [(value)]="credito.monto">
         </mat-form-field>
       </div>
 
@@ -219,9 +335,10 @@
 
         <tr class="mat-row credito-row" *ngFor="let financiacion of financiaciones;">
           <td class="mat-cell desc-column">
-            <mat-radio-button [disabled]="credito.monto < 0 || credito.monto === 0" 
-            (change)="onSeleccionarFinanciacion(financiacion)" 
-            [checked]="credito.monto > 0  && credito.financiacionId === financiacion.id">{{financiacion.descripcion}} </mat-radio-button>
+            <mat-radio-button [disabled]="credito.monto < 0 || credito.monto === 0"
+              (change)="onSeleccionarFinanciacion(financiacion)"
+              [checked]="credito.monto > 0  && credito.financiacionId === financiacion.id">{{financiacion.descripcion}}
+            </mat-radio-button>
           </td>
           <td class="mat-cell value-column">
             {{financiacion.tna}}%

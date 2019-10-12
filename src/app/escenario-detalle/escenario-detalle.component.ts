@@ -16,8 +16,29 @@ export class EscenarioDetalleComponent implements OnInit {
     maximosPeriodos: null,
     nombrePeriodos: '',
     descripcion: '',
-    impuestoPorcentaje: null
+    impuestoPorcentaje: null,
+    balanceInicial: {
+      activo: {
+        caja: 0,
+        cuentasPorCobrar: 0,
+        cuentasPorCobrarPeriodos: 0,
+        inventario: 0,
+        maquinaria: 0,
+        amortizacionAcumulada: 0
+      },
+      pasivo: {
+        proveedores: 0,
+        proveedoresPeriodos: 0,
+        deudasBancarias: 0,
+        deudasBancariasPeriodos: 0
+      },
+      patrimonioNeto: {
+        capitalSocial: 0,
+        resultadoDelEjercicio: 0
+      }
+    }
   };
+
   descripcion = new FormControl('', [Validators.required]);
   titulo = new FormControl('', [Validators.required]);
   maximosPeriodos = new FormControl(new Number(), [Validators.required]);
@@ -30,30 +51,62 @@ export class EscenarioDetalleComponent implements OnInit {
     nombrePeriodos: this.nombrePeriodos
   });
 
-  forecasts= [{
+  caja = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
+  cuentasPorCobrar = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
+  cuentasPorCobrarPeriodos = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
+  inventario = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
+  maquinaria = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
+  amortizacionAcumulada = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
+  activoForm: FormGroup = new FormGroup({
+    caja: this.caja,
+    cuentasPorCobrar: this.cuentasPorCobrar,
+    inventario: this.inventario,
+    maquinaria: this.maquinaria,
+    amortizacionAcumulada: this.amortizacionAcumulada
+  });
+
+  proveedores = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
+  proveedoresPeriodos = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
+  deudasBancarias = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
+  deudasBancariasPeriodos = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
+  pasivoForm: FormGroup = new FormGroup({
+    proveedores: this.proveedores,
+    proveedoresPeriodos: this.proveedoresPeriodos,
+    deudasBancarias: this.deudasBancarias,
+    deudasBancariasPeriodos: this.deudasBancariasPeriodos
+  });
+
+  capitalSocial = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
+  resultadoDelEjercicio = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
+  patrimonioNetoForm: FormGroup = new FormGroup({
+    capitalSocial: this.capitalSocial,
+    resultadoDelEjercicio: this.resultadoDelEjercicio
+  });
+
+  forecasts = [{
     proyectoId: 1,
     periodo: 0,
     cantidadUnidades: 0,
     precio: 0
-  },{
+  }, {
     proyectoId: 1,
     periodo: 1,
     cantidadUnidades: 0,
     precio: 0
-  },{
+  }, {
     proyectoId: 1,
     periodo: 2,
     cantidadUnidades: 0,
     precio: 0
-  },{
+  }, {
     proyectoId: 1,
     periodo: 3,
     cantidadUnidades: 0,
     precio: 0
   }]
 
-  constructor(private escenariosService: EscenariosService, 
-    private route: ActivatedRoute, 
+  constructor(private escenariosService: EscenariosService,
+    private route: ActivatedRoute,
     private router: Router,
     private messageService: MessagesService) { }
 
@@ -74,7 +127,7 @@ export class EscenarioDetalleComponent implements OnInit {
   }
 
   save() {
-    if (this.escenarioForm.valid) {
+    if (this.escenarioForm.valid && this.activoForm.valid && this.pasivoForm.valid && this.patrimonioNetoForm.valid) {
       this.escenariosService[this.escenario.id ? 'modifyEscenario' : 'createEscenario'](this.escenario)
         .subscribe(_ => {
           this.messageService.openSnackBar("Escenario modificado");
