@@ -8,7 +8,7 @@
 </mat-toolbar>
 
 
-<mat-tab-group>
+<mat-tab-group mat-stretch-tabs >
 
   <mat-tab label="Enunciado">
     <div class="tab-content">
@@ -31,7 +31,7 @@
                   <mat-card-title>Costo Fijo</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                  <h1 class="single-number">$ ...</h1>
+                  <h1 class="single-number">$ {{estado.costoFijo}}</h1>
                 </mat-card-content>
               </mat-card>
               <mat-card class="single-number-card">
@@ -40,7 +40,7 @@
                   <mat-card-title>Costo Variable</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                  <h1 class="single-number">$ ...</h1>
+                  <h1 class="single-number">$ {{estado.costoVariable}}</h1>
                 </mat-card-content>
               </mat-card>
               <mat-card class="single-number-card">
@@ -49,7 +49,7 @@
                   <mat-card-title>Produccion</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                  <h1 class="single-number">...</h1>
+                  <h1 class="single-number">{{estado.produccionMensual}}</h1>
                 </mat-card-content>
               </mat-card>
               <mat-card class="single-number-card">
@@ -58,7 +58,7 @@
                   <mat-card-title>Stock</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                  <h1 class="single-number">...</h1>
+                  <h1 class="single-number">{{estado.stock}}</h1>
                 </mat-card-content>
               </mat-card>
             </div>

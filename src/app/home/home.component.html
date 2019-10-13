@@ -27,28 +27,34 @@
     <mat-sidenav opened mode="side" class="sidenav-container" #sidenav disableClose>
       <div class="img-container" *ngIf="user">
         <img src="{{user.photoURL}}" style="height: 150px; border-radius: 50%">
+        <span>{{user.displayName}}</span>
+        <span style="font-weight:100;">K8127</span>
       </div>
-
       <mat-nav-list>
         <mat-divider></mat-divider>
         <mat-list-item>
           <mat-icon mat-list-icon>play_circle_outline</mat-icon>
-          <button mat-button mat-line class="button" routerLink="/simulaciones">Simulaciones</button>
+          <a mat-list-item class="button" routerLink="/simulaciones">Simulaciones</a>
         </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item>
           <mat-icon mat-list-icon>grade</mat-icon>
-          <button mat-button mat-line class="button" routerLink="/premios">Premios</button>
+          <a mat-list-item class="button" routerLink="/premios">Premios</a>
         </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item>
           <mat-icon mat-list-icon>build</mat-icon>
-          <button mat-button mat-line class="button" routerLink="/escenarios">Escenarios</button>
+          <a mat-list-item class="button" routerLink="/escenarios">Escenarios</a>
         </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item>
           <mat-icon mat-list-icon>games</mat-icon>
-          <button mat-button mat-line class="button" routerLink="/estado-juegos">Estado de Juegos</button>
+          <a mat-list-item class="button" routerLink="/estado-juegos">Estado de Juegos</a>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <mat-icon mat-list-icon>group</mat-icon>
+          <a mat-list-item class="button" routerLink="/cursos">Cursos</a>
         </mat-list-item>
         <mat-divider></mat-divider>
 

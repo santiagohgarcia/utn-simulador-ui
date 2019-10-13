@@ -39,9 +39,10 @@
 
 .img-container{
   display: flex;
-  justify-content: center;
-  flex-direction: row;
-  padding: 20px;
+  height: 250px;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
 }
 
 .options-container{

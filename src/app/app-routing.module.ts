@@ -13,6 +13,7 @@ import { EscenarioDetalleComponent } from './escenario-detalle/escenario-detalle
 import { SimulacionesComponent } from './simulaciones/simulaciones.component';
 import { ProveedorDetailComponent } from './proveedor-detail/proveedor-detail.component';
 import { EstadoJuegosComponent } from './estado-juegos/estado-juegos.component';
+import { CursosComponent } from './cursos/cursos.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'escenarios', component: HomeComponent,
     children: [{ path: '', component: EscenariosComponent, pathMatch: 'full' }]
+  }, 
+  {
+    path: 'cursos', component: HomeComponent,
+    children: [{ path: '', component: CursosComponent, pathMatch: 'full' }]
   },
   {
     path: 'simulaciones', component: HomeComponent,
@@ -52,7 +57,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{ useHash : true})],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

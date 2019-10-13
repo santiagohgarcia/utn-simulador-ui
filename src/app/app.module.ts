@@ -41,6 +41,9 @@ import { ProveedoresService } from './proveedores.service';
 import { EstadoJuegosComponent } from './estado-juegos/estado-juegos.component';
 import { FinanciacionesComponent } from './financiaciones/financiaciones.component';
 import { FinanciacionService } from './financiacion.service';
+import { FinanciacionDialogComponent } from './financiaciones/financiacion-dialog/financiacion-dialog.component';
+import { CursosComponent } from './cursos/cursos.component';
+import { CursoDialogComponent } from './cursos/curso-dialog/curso-dialog.component';
 
 import {
   MatAutocompleteModule,
@@ -76,7 +79,6 @@ import {
   MatStepperModule,
   MatTabGroup
 } from '@angular/material';
-import { FinanciacionDialogComponent } from './financiaciones/financiacion-dialog/financiacion-dialog.component';
 
 
 @NgModule({
@@ -114,8 +116,7 @@ import { FinanciacionDialogComponent } from './financiaciones/financiacion-dialo
     MatToolbarModule,
     MatTooltipModule
   ],
-  imports: [AppRoutingModule],
-  declarations: []
+  imports: [AppRoutingModule]
 })
 export class MaterialModule { }
 
@@ -138,6 +139,7 @@ export class MaterialModule { }
     OpcionDialogComponent,
     ConsecuenciaDialogComponent,
     FinanciacionDialogComponent,
+    CursoDialogComponent,
     SimulacionesComponent,
     PresupuestoFinancieroComponent,
     PresupuestoEconomicoComponent,
@@ -145,7 +147,8 @@ export class MaterialModule { }
     ProveedoresComponent, 
     ProveedorDetailComponent,
     EstadoJuegosComponent,
-    FinanciacionesComponent
+    FinanciacionesComponent,
+    CursosComponent
   ],
   imports: [
     BrowserModule,
@@ -169,7 +172,7 @@ export class MaterialModule { }
     ProveedoresService,
     FinanciacionService
   ],
-  entryComponents: [RegisterComponent, OpcionDialogComponent, ConsecuenciaDialogComponent, FinanciacionDialogComponent],
+  entryComponents: [RegisterComponent, OpcionDialogComponent, ConsecuenciaDialogComponent, FinanciacionDialogComponent,CursoDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
