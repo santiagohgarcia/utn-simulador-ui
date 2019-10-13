@@ -8,18 +8,298 @@
 </mat-toolbar>
 
 
+<mat-tab-group>
+
+  <mat-tab label="Enunciado">
+    <div class="tab-content">
+      <mat-card *ngIf="escenario" class="escenario-card">
+        <mat-card-content>
+          {{escenario.descripcion}}
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Datos Iniciales">
+    <div class="tab-content">
+      <div *ngIf="escenario.balanceInicial" class="balance-container">
+        <mat-card class="activo">
+          <mat-card-header>
+            <div mat-card-avatar class="activo-avatar"></div>
+            <mat-card-title>Activo</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="list">
+              <div class="list-item">
+                <p>Caja</p>
+                <h3>$ {{ escenario.balanceInicial.activo.caja }}</h3>
+              </div>
+              <div class="list-item">
+                <p>Cuentas por Cobrar</p>
+                <h3>$ {{ escenario.balanceInicial.activo.cuentasPorCobrar }}</h3>
+              </div>
+              <div class="list-item">
+                <p>Inventario</p>
+                <h3>$ {{ escenario.balanceInicial.activo.inventario }}</h3>
+              </div>
+              <div class="list-item">
+                <p>Maquinaria</p>
+                <h3>$ {{ escenario.balanceInicial.activo.maquinaria }}</h3>
+              </div>
+              <div class="list-item">
+                <p>Amortizacion Acumulada</p>
+                <h3>$ {{ escenario.balanceInicial.activo.amortizacionAcumulada }}</h3>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="pasivo">
+          <mat-card-header>
+            <div mat-card-avatar class="pasivo-avatar"></div>
+            <mat-card-title>Pasivo</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="list">
+              <div class="list-item">
+                <p>Proveedores</p>
+                <h3>$ {{ escenario.balanceInicial.pasivo.proveedores }}</h3>
+              </div>
+              <div class="list-item">
+                <p>Deudas Bancarias</p>
+                <h3>$ {{ escenario.balanceInicial.pasivo.deudasBancarias }}</h3>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+
+        <mat-card class="patrimonio-neto">
+          <mat-card-header>
+            <div mat-card-avatar class="patrimonio-neto-avatar"></div>
+            <mat-card-title>Patrimonio Neto</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="list">
+              <div class="list-item">
+                <p>Capital Social</p>
+                <h3>$ {{ escenario.balanceInicial.patrimonioNeto.capitalSocial }}</h3>
+              </div>
+              <div class="list-item">
+                <p>Resultado del Ejercicio</p>
+                <h3>$ {{ escenario.balanceInicial.patrimonioNeto.resultadoDelEjercicio }}</h3>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Parametrizacion">
+    <div class="tab-content parametrizacion-container">
+      <mat-card class="modalidad-cobro">
+        <mat-card-header>
+          <div mat-card-avatar class="cobro-avatar"></div>
+          <mat-card-title>Modalidad de Cobro</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <table class="mat-table table">
+
+            <tr class="mat-header-row">
+              <th class="mat-header-cell desc-column">Periodo</th>
+              <th class="mat-header-cell value-column">Porcentaje</th>
+            </tr>
+
+            <tr class="mat-row" *ngFor="let modalidadCobroItem of modalidadCobro">
+              <td class="mat-cell desc-column">{{ getModalidadDeCobroDescr(modalidadCobroItem.offsetPeriodo) }}</td>
+              <td class="mat-cell value-column">
+                <mat-form-field class="value-column">
+                  <input type="number" matInput [(ngModel)]="modalidadCobroItem.porcentaje"
+                    [(value)]="modalidadCobroItem.porcentaje" class="value-column">
+                  <span matSuffix>%</span>
+                </mat-form-field>
+              </td>
+            </tr>
+
+          </table>
+
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="forecast">
+
+        <mat-card-header>
+          <div mat-card-avatar class="ventas-avatar"></div>
+          <mat-card-title>Forecast de Ventas</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <table class="mat-table table">
+
+            <tr class="mat-header-row">
+              <th class="mat-header-cell desc-column">Periodo</th>
+              <th class="mat-header-cell value-column-cantidad">Cantidad</th>
+              <th class="mat-header-cell value-column-cantidad">Precio Venta</th>
+            </tr>
+            <ng-container *ngFor="let forecast of forecasts">
+
+              <tr class="mat-row" *ngIf="forecast.periodo > 0">
+                <td class="mat-cell desc-column">{{escenario.nombrePeriodos}} {{forecast.periodo}}</td>
+                <td class="mat-cell value-column-cantidad">
+                  <mat-form-field style="text-align: right;width: 80px;">
+                    <input type="number" matInput [(ngModel)]="forecast.cantidadUnidades"
+                      [(value)]="forecast.cantidadUnidades" style="text-align: right;width: 80px;">
+                    <span matSuffix>u.</span>
+                  </mat-form-field>
+                </td>
+                <td class="mat-cell value-column-cantidad">
+                  <mat-form-field style="text-align: right;width: 80px;">
+                    <span matPrefix>$ &nbsp;</span>
+                    <input type="number" matInput [(ngModel)]="forecast.precio" [(value)]="forecast.precio"
+                      style="text-align: right;width: 80px;">
+                  </mat-form-field>
+                </td>
+              </tr>
+
+            </ng-container>
+
+          </table>
+
+        </mat-card-content>
+
+      </mat-card>
+
+      <mat-card class="modalidad-pago">
+
+        <mat-card-header>
+          <div mat-card-avatar class="proveedor-avatar"></div>
+          <mat-card-title>Proveedor</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+
+          <table class="mat-table table">
+
+            <tr class="mat-header-row">
+              <th class="mat-header-cell desc-column header-proveedor">Proveedor</th>
+              <th class="mat-header-cell proveedor-value-column">Contado</th>
+              <th class="mat-header-cell proveedor-value-column">30 D</th>
+              <th class="mat-header-cell proveedor-value-column">60 D</th>
+              <th class="mat-header-cell proveedor-value-column">90 D</th>
+            </tr>
+            <ng-container *ngFor="let proveedor of proveedores">
+              <tr class="mat-row poveedor-row">
+                <td class="mat-cell desc-column ">
+                  <span class="proveedor-column">
+                    <mat-radio-button name="prov" (change)="onSeleccionarProveedor(proveedor)"
+                      [checked]="proveedor.seleccionado"></mat-radio-button>
+                    <span class="proveedor-desc-container">
+                      <span style="font-weight: bold; margin-bottom: 5px;">{{proveedor.nombre}}</span>
+                      <span style="margin-bottom: 5px;">Costo Variable: {{proveedor.variacionCostoVariable}}</span>
+                      <span style="margin-bottom: 5px;">Calidad: {{proveedor.variacionCalidad}}</span>
+                    </span>
+                  </span>
+                </td>
+                <td class="mat-cell proveedor-value-column">
+                  <span>{{ getModalidadDePagoParaPeriodo(proveedor.modalidadesPago,0) }}</span>
+                </td>
+                <td class="mat-cell proveedor-value-column">
+                  <span>{{ getModalidadDePagoParaPeriodo(proveedor.modalidadesPago,1) }}</span>
+                </td>
+                <td class="mat-cell proveedor-value-column">
+                  <span>{{ getModalidadDePagoParaPeriodo(proveedor.modalidadesPago,2) }}</span>
+                </td>
+                <td class="mat-cell proveedor-value-column">
+                  <span>{{ getModalidadDePagoParaPeriodo(proveedor.modalidadesPago,3) }}</span>
+                </td>
+              </tr>
+
+            </ng-container>
+
+          </table>
+
+        </mat-card-content>
+
+      </mat-card>
+
+      <mat-card class="creditos" *ngIf="credito">
+
+        <mat-card-header>
+          <div mat-card-avatar class="credito-avatar"></div>
+          <mat-card-title>Financiacion</mat-card-title>
+
+        </mat-card-header>
+        <mat-card-content>
+          <div class="monto-cont">
+            <mat-form-field class="monto">
+              <span matPrefix>$ &nbsp;</span>
+              <input type="number" matInput style="text-align: right" placeholder="Monto" [(ngModel)]="credito.monto"
+                [(value)]="credito.monto">
+            </mat-form-field>
+          </div>
+
+          <table class="mat-table table">
+
+            <tr class="mat-header-row">
+              <th class="mat-header-cell desc-column">Credito</th>
+              <th class="mat-header-cell value-column">TNA</th>
+              <th class="mat-header-cell value-column">Cuotas</th>
+            </tr>
+
+            <tr class="mat-row credito-row" *ngFor="let financiacion of financiaciones;">
+              <td class="mat-cell desc-column">
+                <mat-radio-button [disabled]="credito.monto < 0 || credito.monto === 0"
+                  (change)="onSeleccionarFinanciacion(financiacion)"
+                  [checked]="credito.monto > 0  && credito.financiacionId === financiacion.id">
+                  {{financiacion.descripcion}}
+                </mat-radio-button>
+              </td>
+              <td class="mat-cell value-column">
+                {{financiacion.tna}}%
+              </td>
+              <td class="mat-cell value-column">
+                {{financiacion.cantidadCuotas}}
+              </td>
+            </tr>
+
+          </table>
+
+        </mat-card-content>
+
+      </mat-card>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Toma de Decisiones">
+    <div class="decisiones-container">
+      <mat-card *ngFor="let decision of decisiones">
+        <mat-card-header>
+          <mat-card-title>{{ decision.id }}. {{ decision.descripcion }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-radio-group class="respuestas-container" [(ngModel)]="decision.opcionTomada">
+            <mat-radio-button class="respuesta" *ngFor="let opcion of decision.opciones" [value]="opcion.id">
+              {{opcion.descripcion}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-tab>
+</mat-tab-group>
 
 
 
 
-<div class="content-container">
-  <mat-card *ngIf="escenario" class="escenario-card">
-    <mat-card-content>
-      {{escenario.descripcion}}
-    </mat-card-content>
-  </mat-card>
+<!--
+    
+    <div class="content-container">
 
-  <!--<div class="kpis" *ngIf="escenario.balanceInicial">
+
+
+</div>
+
+    
+    <div class="kpis" *ngIf="escenario.balanceInicial">
 
     
     <mat-card class="single-number-card">
@@ -109,271 +389,12 @@
       </mat-card-content>
     </mat-card>
   </div>
--->
-<div *ngIf="escenario.balanceInicial" class="balance-container">
-  <mat-card class="activo">
-      <mat-card-header>
-              <div mat-card-avatar class="activo-avatar"></div>
-          <mat-card-title>Activo</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-          <div class="list">
-              <div class="list-item">
-                  <p>Caja</p>
-                  <h3>$ {{ escenario.balanceInicial.activo.caja }}</h3>
-              </div>
-              <div class="list-item">
-                  <p>Cuentas por Cobrar</p>
-                  <h3>$ {{ escenario.balanceInicial.activo.cuentasPorCobrar }}</h3>
-              </div>
-              <div class="list-item">
-                  <p>Inventario</p>
-                  <h3>$ {{ escenario.balanceInicial.activo.inventario }}</h3>
-              </div>
-              <div class="list-item">
-                  <p>Maquinaria</p>
-                  <h3>$ {{ escenario.balanceInicial.activo.maquinaria }}</h3>
-              </div>
-              <div class="list-item">
-                  <p>Amortizacion Acumulada</p>
-                  <h3>$ {{ escenario.balanceInicial.activo.amortizacionAcumulada }}</h3>
-              </div>
-          </div>
-      </mat-card-content>
-  </mat-card>
-
-  <mat-card class="pasivo">
-      <mat-card-header>
-              <div mat-card-avatar class="pasivo-avatar"></div>
-          <mat-card-title>Pasivo</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-          <div class="list">
-              <div class="list-item">
-                  <p>Proveedores</p>
-                  <h3>$ {{ escenario.balanceInicial.pasivo.proveedores }}</h3>
-              </div>
-              <div class="list-item">
-                  <p>Deudas Bancarias</p>
-                  <h3>$ {{ escenario.balanceInicial.pasivo.deudasBancarias }}</h3>
-              </div>
-          </div>
-      </mat-card-content>
-  </mat-card>
-
-
-  <mat-card class="patrimonio-neto">
-      <mat-card-header>
-              <div mat-card-avatar class="patrimonio-neto-avatar"></div>
-          <mat-card-title>Patrimonio Neto</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-          <div class="list">
-              <div class="list-item">
-                  <p>Capital Social</p>
-                  <h3>$ {{ escenario.balanceInicial.patrimonioNeto.capitalSocial }}</h3>
-              </div>
-              <div class="list-item">
-                  <p>Resultado del Ejercicio</p>
-                  <h3>$ {{ escenario.balanceInicial.patrimonioNeto.resultadoDelEjercicio }}</h3>
-              </div>
-          </div>
-      </mat-card-content>
-  </mat-card>
-</div>
-
-  <mat-card class="modalidad-cobro">
-    <mat-card-header>
-      <div mat-card-avatar class="cobro-avatar"></div>
-      <mat-card-title>Modalidad de Cobro</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <table class="mat-table table">
-
-        <tr class="mat-header-row">
-          <th class="mat-header-cell desc-column">Periodo</th>
-          <th class="mat-header-cell value-column">Porcentaje</th>
-        </tr>
-
-        <tr class="mat-row" *ngFor="let modalidadCobroItem of modalidadCobro">
-          <td class="mat-cell desc-column">{{ getModalidadDeCobroDescr(modalidadCobroItem.offsetPeriodo) }}</td>
-          <td class="mat-cell value-column">
-            <mat-form-field class="value-column">
-              <input type="number" matInput [(ngModel)]="modalidadCobroItem.porcentaje"
-                [(value)]="modalidadCobroItem.porcentaje" class="value-column">
-              <span matSuffix>%</span>
-            </mat-form-field>
-          </td>
-        </tr>
-
-      </table>
-
-    </mat-card-content>
-  </mat-card>
-
-
-  <mat-card class="forecast">
-
-    <mat-card-header>
-      <div mat-card-avatar class="ventas-avatar"></div>
-      <mat-card-title>Forecast de Ventas</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <table class="mat-table table">
-
-        <tr class="mat-header-row">
-          <th class="mat-header-cell desc-column">Periodo</th>
-          <th class="mat-header-cell value-column-cantidad">Cantidad</th>
-          <th class="mat-header-cell value-column-cantidad">Precio Venta</th>
-        </tr>
-        <ng-container *ngFor="let forecast of forecasts">
-
-          <tr class="mat-row" *ngIf="forecast.periodo > 0">
-            <td class="mat-cell desc-column">{{escenario.nombrePeriodos}} {{forecast.periodo}}</td>
-            <td class="mat-cell value-column-cantidad">
-              <mat-form-field style="text-align: right;width: 80px;">
-                <input type="number" matInput [(ngModel)]="forecast.cantidadUnidades"
-                  [(value)]="forecast.cantidadUnidades" style="text-align: right;width: 80px;">
-                <span matSuffix>u.</span>
-              </mat-form-field>
-            </td>
-            <td class="mat-cell value-column-cantidad">
-              <mat-form-field style="text-align: right;width: 80px;">
-                <span matPrefix>$ &nbsp;</span>
-                <input type="number" matInput [(ngModel)]="forecast.precio" [(value)]="forecast.precio"
-                  style="text-align: right;width: 80px;">
-              </mat-form-field>
-            </td>
-          </tr>
-
-        </ng-container>
-
-      </table>
-
-    </mat-card-content>
-
-  </mat-card>
-
-
-  <mat-card class="modalidad-pago">
-
-    <mat-card-header>
-      <div mat-card-avatar class="proveedor-avatar"></div>
-      <mat-card-title>Proveedor</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-
-
-      <table class="mat-table table">
-
-        <tr class="mat-header-row">
-          <th class="mat-header-cell desc-column header-proveedor">Proveedor</th>
-          <th class="mat-header-cell proveedor-value-column">Contado</th>
-          <th class="mat-header-cell proveedor-value-column">30 D</th>
-          <th class="mat-header-cell proveedor-value-column">60 D</th>
-          <th class="mat-header-cell proveedor-value-column">90 D</th>
-        </tr>
-        <ng-container *ngFor="let proveedor of proveedores">
-          <tr class="mat-row poveedor-row">
-            <td class="mat-cell desc-column ">
-              <span class="proveedor-column">
-                <mat-radio-button name="prov" (change)="onSeleccionarProveedor(proveedor)"
-                  [checked]="proveedor.seleccionado"></mat-radio-button>
-                <span class="proveedor-desc-container">
-                  <span style="font-weight: bold; margin-bottom: 5px;">{{proveedor.nombre}}</span>
-                  <span style="margin-bottom: 5px;">Costo Variable: {{proveedor.variacionCostoVariable}}</span>
-                  <span style="margin-bottom: 5px;">Calidad: {{proveedor.variacionCalidad}}</span>
-                </span>
-              </span>
-            </td>
-            <td class="mat-cell proveedor-value-column">
-              <span>{{ getModalidadDePagoParaPeriodo(proveedor.modalidadesPago,0) }}</span>
-            </td>
-            <td class="mat-cell proveedor-value-column">
-              <span>{{ getModalidadDePagoParaPeriodo(proveedor.modalidadesPago,1) }}</span>
-            </td>
-            <td class="mat-cell proveedor-value-column">
-              <span>{{ getModalidadDePagoParaPeriodo(proveedor.modalidadesPago,2) }}</span>
-            </td>
-            <td class="mat-cell proveedor-value-column">
-              <span>{{ getModalidadDePagoParaPeriodo(proveedor.modalidadesPago,3) }}</span>
-            </td>
-          </tr>
-
-        </ng-container>
-
-      </table>
-
-    </mat-card-content>
-
-  </mat-card>
-
-
-  <mat-card class="creditos" *ngIf="credito">
-
-    <mat-card-header>
-      <div mat-card-avatar class="credito-avatar"></div>
-      <mat-card-title>Financiacion</mat-card-title>
-
-    </mat-card-header>
-    <mat-card-content>
-      <div class="monto-cont">
-        <mat-form-field class="monto">
-          <span matPrefix>$ &nbsp;</span>
-          <input type="number" matInput style="text-align: right" placeholder="Monto" [(ngModel)]="credito.monto"
-            [(value)]="credito.monto">
-        </mat-form-field>
-      </div>
-
-      <table class="mat-table table">
-
-        <tr class="mat-header-row">
-          <th class="mat-header-cell desc-column">Credito</th>
-          <th class="mat-header-cell value-column">TNA</th>
-          <th class="mat-header-cell value-column">Cuotas</th>
-        </tr>
-
-        <tr class="mat-row credito-row" *ngFor="let financiacion of financiaciones;">
-          <td class="mat-cell desc-column">
-            <mat-radio-button [disabled]="credito.monto < 0 || credito.monto === 0"
-              (change)="onSeleccionarFinanciacion(financiacion)"
-              [checked]="credito.monto > 0  && credito.financiacionId === financiacion.id">{{financiacion.descripcion}}
-            </mat-radio-button>
-          </td>
-          <td class="mat-cell value-column">
-            {{financiacion.tna}}%
-          </td>
-          <td class="mat-cell value-column">
-            {{financiacion.cantidadCuotas}}
-          </td>
-        </tr>
-
-      </table>
-
-    </mat-card-content>
-
-  </mat-card>
-
-</div>
-
-
+  
 <mat-toolbar color="secundary" class="decisiones-header">
   <h4>Toma de Decisiones</h4>
   <span class="spacer"></span>
   <h4>{{ getCantidadDecisionesTomadas() }} / {{decisiones.length}}</h4>
 </mat-toolbar>
 
-<div class="decisiones-container">
-  <mat-card *ngFor="let decision of decisiones">
-    <mat-card-header>
-      <mat-card-title>{{ decision.id }}. {{ decision.descripcion }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-radio-group class="respuestas-container" [(ngModel)]="decision.opcionTomada">
-        <mat-radio-button class="respuesta" *ngFor="let opcion of decision.opciones" [value]="opcion.id">
-          {{opcion.descripcion}}
-        </mat-radio-button>
-      </mat-radio-group>
-    </mat-card-content>
-  </mat-card>
-</div>
+
+-->

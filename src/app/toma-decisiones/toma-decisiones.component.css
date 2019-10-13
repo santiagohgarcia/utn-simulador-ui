@@ -1,14 +1,4 @@
 @media screen and (min-width: 769px) {
-.content-container{
-    display: grid;
-    grid-template-rows: auto auto auto;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-areas: "escenario escenario escenario escenario escenario escenario" 
-    "balance balance balance forecast forecast forecast" 
-    "modalidad-cobro modalidad-cobro modalidad-pago modalidad-pago creditos creditos"  ;
-    grid-gap: 20px;
-    padding: 20px;
-}
 
 .decisiones-container {
     display: grid;
@@ -17,8 +7,6 @@
     grid-gap: 20px;
     padding: 20px;
 }
-
-
 
 
 }
@@ -276,3 +264,14 @@
     background-size: cover;
 }
 
+.tab-content{
+    padding:20px;
+}
+
+.parametrizacion-container{
+    display: grid;
+    grid-template-rows:  auto auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "modalidad-cobro forecast" "modalidad-pago creditos";
+    grid-gap: 20px;
+}
