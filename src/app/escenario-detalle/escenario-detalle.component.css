@@ -88,9 +88,9 @@
 
 .form-container{
     display: grid;
-    grid-template-rows: auto;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: "form balance";
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas: "form balance balance balance" "form estado estado estado";
     grid-gap: 20px;
     padding:20px;
 }
@@ -102,7 +102,7 @@
 
 .balance-form{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr ;
     grid-template-rows: auto;
     grid-gap: 20px;
     padding: 10px 16px;
@@ -113,3 +113,28 @@
     padding:20px;
 }
 
+.estado-inicial-card{
+    grid-area: estado;
+    padding:20px;
+}
+
+.balance-inicial-content{
+    display: flex;
+    flex-direction: row;
+}
+
+.estado-form{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr ;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    padding: 10px 16px;
+}
+
+.patrimonio-form{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    padding: 10px 16px;
+}

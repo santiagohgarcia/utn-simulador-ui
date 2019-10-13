@@ -29,11 +29,11 @@
     grid-area: modalidad-pago;
 }
 
-.kpis{
-    grid-area: kpis;
+.estado-inicial{
+    grid-area: estado-inicial;
     display: grid;
     grid-auto-rows: auto;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-gap: 20px;
 }
 
@@ -168,6 +168,11 @@
     background-size: cover;
 }
 
+.stock-avatar{
+    background-image: url('../../assets/img/stock.png');
+    background-size: cover;
+}
+
 .proveedor-column{
     display: flex;
     flex-direction: row;
@@ -217,9 +222,9 @@
 .balance-container {
     grid-area: balance;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-auto-rows: auto;
-    grid-template-areas: "activo pasivo" "activo patrimonio-neto"  ;
+    grid-template-columns: 3fr 3fr 2fr ;
+    grid-auto-rows: auto auto auto auto;
+    grid-template-areas: "activo pasivo estado-inicial" "activo pasivo estado-inicial" "activo pasivo estado-inicial" "activo patrimonio-neto estado-inicial"  ;
     grid-gap: 20px;
 }
 

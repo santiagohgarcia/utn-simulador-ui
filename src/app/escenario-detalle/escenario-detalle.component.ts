@@ -84,6 +84,19 @@ export class EscenarioDetalleComponent implements OnInit {
     resultadoDelEjercicio: this.resultadoDelEjercicio
   });
 
+  calidad = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
+  costoFijo = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
+  costoVariable = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
+  produccionMensual = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
+  stock = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
+  estadoInicialForm: FormGroup = new FormGroup({
+    calidad: this.calidad,
+    costoFijo: this.costoFijo,
+    costoVariable: this.costoVariable,
+    produccionMensual: this.produccionMensual,
+    stock: this.stock
+  });
+
   forecasts = [{
     proyectoId: 1,
     periodo: 0,

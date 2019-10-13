@@ -22,7 +22,46 @@
 
   <mat-tab label="Datos Iniciales">
     <div class="tab-content">
+     
       <div *ngIf="escenario.balanceInicial" class="balance-container">
+          <div class="estado-inicial">
+              <mat-card class="single-number-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="costos-avatar"></div>
+                  <mat-card-title>Costo Fijo</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <h1 class="single-number">$ ...</h1>
+                </mat-card-content>
+              </mat-card>
+              <mat-card class="single-number-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="costos-avatar"></div>
+                  <mat-card-title>Costo Variable</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <h1 class="single-number">$ ...</h1>
+                </mat-card-content>
+              </mat-card>
+              <mat-card class="single-number-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="produccion-avatar"></div>
+                  <mat-card-title>Produccion</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <h1 class="single-number">...</h1>
+                </mat-card-content>
+              </mat-card>
+              <mat-card class="single-number-card">
+                <mat-card-header>
+                  <div mat-card-avatar class="stock-avatar"></div>
+                  <mat-card-title>Stock</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <h1 class="single-number">...</h1>
+                </mat-card-content>
+              </mat-card>
+            </div>
         <mat-card class="activo">
           <mat-card-header>
             <div mat-card-avatar class="activo-avatar"></div>
