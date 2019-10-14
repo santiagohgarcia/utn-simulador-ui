@@ -72,4 +72,14 @@ export class EscenariosService {
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
+  getCursosEscenario(idEscenario) {
+    return this.http.get(`${environment.proyectoServiceHost}/api/escenarios/${idEscenario}/cursos`)
+    .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+
+  updateCursosEscenario(idEscenario, cursos) {
+    return this.http.put(`${environment.proyectoServiceHost}/api/escenarios/${idEscenario}/cursos`, cursos)
+    .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+
 }

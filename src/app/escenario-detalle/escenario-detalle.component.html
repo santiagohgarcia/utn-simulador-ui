@@ -60,36 +60,10 @@
               matChipInputAddOnBlur="true">
           </mat-chip-list>
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedCurso($event)">
-            <mat-option *ngFor="let curso of filtredCursos | async;" [value]="curso.nombre">
+            <mat-option *ngFor="let curso of filtredCursos | async;" [value]="curso">
               {{curso.nombre}}
             </mat-option>
           </mat-autocomplete>
-        </mat-form-field>
-
-
-
-
-
-
-        <mat-form-field class="example-chip-list">
-          <mat-chip-list #chipList>
-            <mat-chip>
-              Z1234
-              <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-            <mat-chip>
-              L4567
-              <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-            <mat-chip>
-              M4857
-              <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-            <!--
-            <input placeholder="Cursos" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
-              -->
-            <input placeholder="Cursos" [matChipInputFor]="chipList">
-          </mat-chip-list>
         </mat-form-field>
       </form>
     </mat-card-content>

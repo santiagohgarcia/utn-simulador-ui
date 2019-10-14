@@ -151,6 +151,9 @@ export class EscenarioDetalleComponent implements OnInit {
     var id = Number(this.route.snapshot.paramMap.get('id'));
     if (id) {
       this.getEscenario(id).subscribe(escenario => this.escenario = escenario);
+      this.escenariosService.getCursosEscenario(id).subscribe(cursosEscenario => {
+        this.escenario.cursos = cursosEscenario;
+      })
     }
     this.getCursos();
   }
@@ -163,9 +166,9 @@ export class EscenarioDetalleComponent implements OnInit {
   }
 
   selectedCurso(event: MatAutocompleteSelectedEvent){
-    this.escenario.cursos.push({
-      nombre: event.option.viewValue
-    });
+    this.escenario.cursos.push(
+      event.option.value
+    );
     this.cursosInput.nativeElement.value = '';
     this.cursos.setValue(null);
   }
@@ -195,8 +198,15 @@ export class EscenarioDetalleComponent implements OnInit {
     if (this.escenarioForm.valid && this.activoForm.valid && this.pasivoForm.valid && this.patrimonioNetoForm.valid) {
       this.escenariosService[this.escenario.id ? 'modifyEscenario' : 'createEscenario'](this.escenario)
         .subscribe(_ => {
-          this.messageService.openSnackBar("Escenario modificado");
-          this.router.navigate(['/escenarios'])
+          if(this.escenario.id) {
+            this.escenariosService.updateCursosEscenario(this.escenario.id, this.escenario.cursos).subscribe(_ => {
+              this.messageService.openSnackBar("Escenario modificado");
+              this.router.navigate(['/escenarios'])
+            })
+          } else {
+            this.messageService.openSnackBar("Escenario modificado");
+            this.router.navigate(['/escenarios'])
+          }
         });
     }
   }
