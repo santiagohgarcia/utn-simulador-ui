@@ -233,8 +233,11 @@
                       [checked]="proveedor.seleccionado"></mat-radio-button>
                     <span class="proveedor-desc-container">
                       <span style="font-weight: bold; margin-bottom: 5px;">{{proveedor.nombre}}</span>
-                      <span style="margin-bottom: 5px;">Costo Variable: {{proveedor.variacionCostoVariable}}</span>
-                      <span style="margin-bottom: 5px;">Calidad: {{proveedor.variacionCalidad}}</span>
+                      <span style="margin-bottom: 5px;">Costo Variable: +{{proveedor.variacionCostoVariable}}</span>
+                      <span style="margin-bottom: 5px;">Calidad: 
+                          <i class="material-icons mat-icon-star-size" *ngFor="let calidad of getEvenNumber(proveedor.variacionCalidad)">star</i>
+                          <i class="material-icons mat-icon-star-size" *ngIf="getOddNumber(proveedor.variacionCalidad)">star_half</i></span>
+                      
                     </span>
                   </span>
                 </td>

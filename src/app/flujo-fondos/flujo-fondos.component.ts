@@ -22,12 +22,14 @@ export class FlujoFondosComponent implements OnInit {
   @Input() proyecto: any;
   flujoFondos;
   periodos;
+  escenario;
 
   constructor(private proyectoService: ProyectoService) { }
 
   ngOnInit() {
     this.getPeriodos(this.proyecto.id);
     this.getFlujoFondos(this.proyecto.id);
+    this.escenario = this.proyecto.escenario;
   }
 
   getFlujoFondos(proyectoId) {

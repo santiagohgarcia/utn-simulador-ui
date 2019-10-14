@@ -280,3 +280,7 @@
     grid-template-areas: "modalidad-cobro forecast" "modalidad-pago creditos";
     grid-gap: 20px;
 }
+
+.mat-icon-star-size{
+    font-size: 15px;
+}

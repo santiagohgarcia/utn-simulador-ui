@@ -74,7 +74,7 @@
               <ng-container *ngFor="let forecast of forecasts">
   
                 <tr class="mat-row" *ngIf="forecast.periodo > 0">
-                  <td class="mat-cell desc-column">Periodo {{forecast.periodo}}</td>
+                  <td class="mat-cell desc-column">{{escenario.nombrePeriodos}} {{forecast.periodo}}</td>
                   <td class="mat-cell value-column-cantidad">
                     <mat-form-field style="text-align: right;width: 80px;">
                       <input type="number" matInput [(ngModel)]="forecast.cantidadUnidades"

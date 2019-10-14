@@ -18,6 +18,7 @@ export class EstadoComponent implements OnInit {
   cajaChartProps;
   ventasChartProps;
   modCobroChartProps;
+  escenario;
 
   constructor(private proyectoService: ProyectoService,
     private route: ActivatedRoute,
@@ -40,6 +41,7 @@ export class EstadoComponent implements OnInit {
   getEstadoActual(proyectoId) {
     this.estadoActual = this.proyectoService.getEstado(proyectoId).subscribe(estadoActual => {
       this.estadoActual = estadoActual;
+      this.escenario = estadoActual.proyecto.escenario;
       this.setModCobroChartProps(estadoActual);
     })
   }
@@ -58,7 +60,7 @@ export class EstadoComponent implements OnInit {
         scaleShowVerticalLines: false,
         responsive: true
       },
-      labels: estados.map(estado => `Periodo ${estado.periodo}`),
+      labels: estados.map(estado => `${this.escenario.nombrePeriodos} ${estado.periodo}`),
       type: 'line',
       legend: false,
       data: [
@@ -73,7 +75,7 @@ export class EstadoComponent implements OnInit {
         scaleShowVerticalLines: false,
         responsive: true
       },
-      labels: estados.map(estado => `Periodo ${estado.periodo}`),
+      labels: estados.map(estado => `${this.escenario.nombrePeriodos} ${estado.periodo}`),
       type: 'line',
       legend: true,
       data: [
@@ -82,8 +84,8 @@ export class EstadoComponent implements OnInit {
           label: 'Ventas'
         },
         {
-          data: estados.map(estado => estado.demandaInsatisfecha),
-          label: 'Demanda Insatisfecha',
+          data: estados.map(estado => estado.demandaPotencial),
+          label: 'Demanda Potencial',
           fill: false,
           backgroundColor: 'rgb(75, 192, 192)',
           borderColor: 'rgb(75, 192, 192)',
@@ -99,7 +101,7 @@ export class EstadoComponent implements OnInit {
         scaleShowVerticalLines: false,
         responsive: true
       },
-      labels: estadoActual.proyecto.modalidadCobro.map(modCobro => `X${modCobro.offsetPeriodo > 0 ? ' + ' + modCobro.offsetPeriodo : ''}`),
+      labels: estadoActual.proyecto.modalidadCobro.map(modCobro => `${this.escenario.nombrePeriodos} ${modCobro.offsetPeriodo > 0 ? ' + ' + modCobro.offsetPeriodo : ''}`),
       type: 'bar',
       legend: false,
       data: [

@@ -12,12 +12,14 @@ export class PresupuestoFinancieroComponent implements OnInit {
   @Input() proyecto: any;
   presupuestoFinanciero;
   periodos;
+  escenario;
 
   constructor(private proyectoService: ProyectoService) { }
 
   ngOnInit() {
     this.getPeriodos(this.proyecto.id);
     this.getPresupuestoFinanciero(this.proyecto.id);
+    this.escenario = this.proyecto.escenario;
   }
 
   getPresupuestoFinanciero(proyectoId) {

@@ -177,6 +177,14 @@ export class TomaDecisionesComponent implements OnInit {
 
   }
 
+  getEvenNumber = function(num) {
+    return new Array(Math.floor(Number(num)/2));
+  }
+
+  getOddNumber = function(num) {
+    return Number(num) % 2 != 0;
+  }
+
   inputsValidos() {
 
     //Validar si se tomaron todas las opciones

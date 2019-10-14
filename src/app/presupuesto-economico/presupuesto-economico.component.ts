@@ -12,12 +12,14 @@ export class PresupuestoEconomicoComponent implements OnInit {
   @Input() proyecto: any;
   presupuestoEconomico;
   periodos;
+  escenario;
 
   constructor(private proyectoService: ProyectoService) { }
 
   ngOnInit() {
     this.getPeriodos(this.proyecto.id);
     this.getPresupuestoEconomico(this.proyecto.id);
+    this.escenario = this.proyecto.escenario;
   }
 
   getPresupuestoEconomico(proyectoId) {
