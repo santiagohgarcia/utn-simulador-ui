@@ -38,7 +38,8 @@ export class MatriculacionDialogComponent implements OnInit {
 
   matricular() {
     if (this.cursoForm.valid) {
-      this.usuarioService.matricular(this.usuario, this.curso).subscribe(_ => {
+      let cursoSend = {nombre: this.curso.nombre, clave: btoa(this.curso.clave)};
+      this.usuarioService.matricular(this.usuario, cursoSend).subscribe(_ => {
         
         this.dialogRef.close()
       });
