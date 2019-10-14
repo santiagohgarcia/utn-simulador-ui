@@ -28,5 +28,10 @@ export class UsuarioService {
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
+  matricular(usuario,curso){
+    return this.http.post(`${environment.proyectoServiceHost}/api/usuario/${usuario.id}/matricular`, curso)
+    .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+
 }
 

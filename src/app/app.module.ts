@@ -79,6 +79,7 @@ import {
   MatStepperModule,
   MatTabGroup
 } from '@angular/material';
+import { MatriculacionDialogComponent } from './matriculacion-dialog/matriculacion-dialog.component';
 
 
 @NgModule({
@@ -139,12 +140,13 @@ export class MaterialModule { }
     OpcionDialogComponent,
     ConsecuenciaDialogComponent,
     FinanciacionDialogComponent,
+    MatriculacionDialogComponent,
     CursoDialogComponent,
     SimulacionesComponent,
     PresupuestoFinancieroComponent,
     PresupuestoEconomicoComponent,
     BalanceFinalComponent,
-    ProveedoresComponent, 
+    ProveedoresComponent,
     ProveedorDetailComponent,
     EstadoJuegosComponent,
     FinanciacionesComponent,
@@ -172,7 +174,8 @@ export class MaterialModule { }
     ProveedoresService,
     FinanciacionService
   ],
-  entryComponents: [RegisterComponent, OpcionDialogComponent, ConsecuenciaDialogComponent, FinanciacionDialogComponent,CursoDialogComponent],
+  entryComponents: [RegisterComponent, OpcionDialogComponent, ConsecuenciaDialogComponent, 
+                    FinanciacionDialogComponent, CursoDialogComponent, MatriculacionDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
