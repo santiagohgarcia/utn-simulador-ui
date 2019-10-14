@@ -51,7 +51,10 @@ export class HomeComponent implements OnInit {
       width: '400px',
       data:  usuario
     });
-    dialogRef.afterClosed().subscribe(_ => this.getUsuario(usuario.mail));
+    dialogRef.afterClosed().subscribe(_ => {
+      this.router.navigateByUrl('/simulaciones', { skipLocationChange: true })
+      this.getUsuario(usuario.mail)
+    });
   }
 
   close() {

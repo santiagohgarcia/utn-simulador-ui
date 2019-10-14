@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProyectoService } from '../proyecto.service';
 import { EscenariosService } from '../escenarios.service';
+import { UsuarioService } from '../usuario.service';
 
 @Component({
   selector: 'app-escenarios',
@@ -8,12 +9,13 @@ import { EscenariosService } from '../escenarios.service';
   styleUrls: ['./escenarios.component.css']
 })
 export class EscenariosComponent implements OnInit {
-
+  usuario;
   escenarios: Array<any>;
 
-  constructor(private escenariosService: EscenariosService) { }
+  constructor(private escenariosService: EscenariosService,private usuarioService: UsuarioService) { }
 
   ngOnInit() {
+    this.usuario = this.usuarioService.usuario;
     this.getEscenarios();
   }
 

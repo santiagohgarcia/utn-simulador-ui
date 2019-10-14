@@ -1,7 +1,7 @@
 <mat-toolbar color="secundary">
   <h4>Escenarios</h4>
 </mat-toolbar>
-<div class="card-container">
+<div class="card-container" *ngIf="usuario">
   <mat-card *ngFor="let escenario of escenarios;">
     <mat-card-header>
       
