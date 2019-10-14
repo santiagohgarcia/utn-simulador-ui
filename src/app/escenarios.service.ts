@@ -12,6 +12,11 @@ export class EscenariosService {
 
   constructor(private http: HttpClient, private messageService: MessagesService) { }
 
+  getEscenariosParaUsuario(idUsuario){
+    return this.http.get(`${environment.proyectoServiceHost}/api/escenarios/usuario/${idUsuario}`)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+
   getEscenarios(): Observable<any> {
     return this.http.get(`${environment.proyectoServiceHost}/api/escenarios`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));

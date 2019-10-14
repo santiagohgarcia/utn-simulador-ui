@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EscenariosService } from '../escenarios.service';
+import { UsuarioService } from '../usuario.service';
 
 @Component({
   selector: 'app-simulaciones',
@@ -7,17 +8,18 @@ import { EscenariosService } from '../escenarios.service';
   styleUrls: ['./simulaciones.component.css']
 })
 export class SimulacionesComponent implements OnInit {
-
+  usuario;
   escenarios;
 
-  constructor(private escenariosService: EscenariosService) { }
+  constructor(private escenariosService: EscenariosService, private usuarioService: UsuarioService) { }
 
   ngOnInit() {
-    this.getEscenarios();
+    this.usuario = this.usuarioService.usuario;
+    this.getEscenarios(this.usuario.id);
   }
 
-  getEscenarios(){
-    this.escenariosService.getEscenarios().subscribe(escenarios => this.escenarios = escenarios)
+  getEscenarios(idUsuario){
+    this.escenariosService.getEscenariosParaUsuario(idUsuario).subscribe(escenarios => this.escenarios = escenarios)
   }
 
 }

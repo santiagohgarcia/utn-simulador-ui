@@ -28,7 +28,12 @@
       <div class="img-container" *ngIf="user">
         <img src="{{user.photoURL}}" style="height: 150px; border-radius: 50%">
         <span>{{user.displayName}}</span>
-        <span style="font-weight:100;">K8127</span>
+        <div>
+          <span style="font-weight:100;" *ngIf="usuario.curso">{{usuario.curso.nombre}}</span> 
+          <button style="margin-left: 10px;" class="edit-icon-small" mat-icon-button (click)="matricularUsuario(usuario)">
+            <mat-icon class="edit-icon-small">edit</mat-icon>
+          </button>
+        </div>
       </div>
       <mat-nav-list>
         <mat-divider></mat-divider>

@@ -40,6 +40,37 @@
             [(ngModel)]="escenario.impuestoPorcentaje" [(value)]="escenario.impuestoPorcentaje">
           <mat-error *ngIf="escenario.invalid">Required field</mat-error>
         </mat-form-field>
+
+        <mat-form-field class="example-chip-list">
+          <mat-chip-list #chipList>
+            <mat-chip
+              *ngFor="let curso of escenario.cursos;"
+              removable="true"
+              (removed)="removeCurso(curso)">
+              {{curso.nombre}}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <input
+              placeholder="Curso..."
+              #cursosInput
+              [formControl]="cursos"
+              [matAutocomplete]="auto"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              matChipInputAddOnBlur="true">
+          </mat-chip-list>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedCurso($event)">
+            <mat-option *ngFor="let curso of filtredCursos | async;" [value]="curso.nombre">
+              {{curso.nombre}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+
+
+
+
+
         <mat-form-field class="example-chip-list">
           <mat-chip-list #chipList>
             <mat-chip>

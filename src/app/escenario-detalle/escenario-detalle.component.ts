@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EscenariosService } from '../escenarios.service';
 import { MessagesService } from '../messages.service';
+import { CursosService } from '../cursos.service';
+import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material';
+import { startWith, map } from 'rxjs/operators';
+import { of, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-escenario-detalle',
@@ -10,6 +15,9 @@ import { MessagesService } from '../messages.service';
   styleUrls: ['./escenario-detalle.component.css']
 })
 export class EscenarioDetalleComponent implements OnInit {
+  separatorKeysCodes: number[] = [ENTER, COMMA]; 
+  filtredCursos: Observable<string[]>;
+  allCursos;
   escenario = {
     id: null,
     titulo: '',
@@ -37,6 +45,7 @@ export class EscenarioDetalleComponent implements OnInit {
         resultadoDelEjercicio: 0
       }
     },
+    cursos: [],
     invalid: null
   };
 
@@ -45,11 +54,13 @@ export class EscenarioDetalleComponent implements OnInit {
   maximosPeriodos = new FormControl(new Number(), [Validators.required]);
   nombrePeriodos = new FormControl('', [Validators.required]);
   impuestoPorcentaje = new FormControl(new Number(), [Validators.required, Validators.min(0), Validators.max(99.9)]);
+  cursos = new FormControl();
   escenarioForm: FormGroup = new FormGroup({
     descripcion: this.descripcion,
     titulo: this.titulo,
     maximosPeriodos: this.maximosPeriodos,
-    nombrePeriodos: this.nombrePeriodos
+    nombrePeriodos: this.nombrePeriodos,
+    cursos: this.cursos
   });
 
   caja = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
@@ -122,13 +133,53 @@ export class EscenarioDetalleComponent implements OnInit {
   constructor(private escenariosService: EscenariosService,
     private route: ActivatedRoute,
     private router: Router,
-    private messageService: MessagesService) { }
+    private cursosService: CursosService,
+    private messageService: MessagesService) { 
+
+      this.filtredCursos = this.cursos.valueChanges.pipe(
+        startWith(null),
+        map((curso: string | null) => {
+          return curso ? this._filterCurso(curso) : this.allCursos.slice()
+        }));
+
+    }
+
+    @ViewChild('cursosInput', {static: false}) cursosInput: ElementRef<HTMLInputElement>;
+    @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
   ngOnInit() {
     var id = Number(this.route.snapshot.paramMap.get('id'));
     if (id) {
       this.getEscenario(id).subscribe(escenario => this.escenario = escenario);
     }
+    this.getCursos();
+  }
+
+  getCursos(){
+    this.cursosService.getCursos().subscribe(cursos => {
+      this.allCursos = cursos;
+      this.filtredCursos = of(cursos);
+    })
+  }
+
+  selectedCurso(event: MatAutocompleteSelectedEvent){
+    this.escenario.cursos.push({
+      nombre: event.option.viewValue
+    });
+    this.cursosInput.nativeElement.value = '';
+    this.cursos.setValue(null);
+  }
+
+  removeCurso(curso): void {
+    const index = this.escenario.cursos.indexOf(curso);
+    if (index >= 0) {
+      this.escenario.cursos.splice(index, 1);
+    }
+  }
+
+  private _filterCurso(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.allCursos.filter(curso => curso.nombre.toLowerCase().indexOf(filterValue) === 0);
   }
 
   getEscenario(id) {
