@@ -5,14 +5,14 @@
 <div class="card-container">
   <mat-card  *ngFor="let curso of cursosTree;">
     <mat-card-header>
-      <mat-card-title>{{curso.nombre}}</mat-card-title>
+      <mat-card-title>{{curso.nombre | titlecase }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <mat-nav-list>
         <a mat-list-item *ngFor="let escenario of curso.escenarios" 
         routerLink="/estado-juego/curso/{{curso.id}}/escenario/{{escenario.id}}" > 
           <div class="list-item-cont">
-            <span>{{escenario.titulo}}</span>
+            <span>{{escenario.titulo | titlecase}}</span>
             <mat-chip-list>
               <mat-chip color="primary" selected>ABIERTO</mat-chip>
             </mat-chip-list>
