@@ -1,108 +1,134 @@
 <mat-toolbar color="secundary">
   <h4>Estado de Juegos</h4>
 </mat-toolbar>
-<div class="escenarios-cont">
-  <mat-accordion class="escenario-headers-align" hideToggle>
-    <mat-expansion-panel *ngFor="let escenario of escenarios;">
-      <mat-expansion-panel-header>
-        <mat-panel-title class="escenario-title">
-          {{escenario.titulo | titlecase}}
-        </mat-panel-title>
-        <mat-panel-description>
-          <mat-chip-list>
-            <mat-chip color="warn" selected>CERRADO</mat-chip>
-          </mat-chip-list>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
 
-      <div class="escenario-content">
-
-
-        <mat-tab-group>
-          <mat-tab label="Jugadores">
-            <mat-list class="jugadores-list">
-              <mat-list-item>
-                <img matListAvatar src="../../assets/img/gold-medal.png">
-                <h4 mat-line>Ron Swanson</h4>
-                <p mat-line> 12357 puntos </p>
-              </mat-list-item>
-              <mat-list-item>
-                <img matListAvatar src="../../assets/img/silver-medal.png">
-                <h4 mat-line>Leslie Knope</h4>
-                <p mat-line> 12357 puntos </p>
-              </mat-list-item>
-              <mat-list-item>
-                <img matListAvatar src="../../assets/img/bronze-medal.png">
-                <h4 mat-line>Tom Havenford</h4>
-                <p mat-line> 12357 puntos </p>
-              </mat-list-item>
-              <mat-list-item>
-                <img matListAvatar src="../../assets/img/medal.png">
-                <h4 mat-line>Pam Beasley</h4>
-                <p mat-line> 12357 puntos </p>
-              </mat-list-item>
-              <mat-list-item>
-                <img matListAvatar src="../../assets/img/medal.png">
-                <h4 mat-line>Andy Dwiyer</h4>
-                <p mat-line> 12357 puntos </p>
-              </mat-list-item>
-              <mat-list-item>
-                <img matListAvatar src="../../assets/img/medal.png">
-                <h4 mat-line>Ann Perkins</h4>
-                <p mat-line> 12357 puntos </p>
-              </mat-list-item>
-              <mat-list-item>
-                <img matListAvatar src="../../assets/img/medal.png">
-                <h4 mat-line>Ben Wyatt</h4>
-                <p mat-line> 12357 puntos </p>
-              </mat-list-item>
-              <mat-list-item>
-                <img matListAvatar src="../../assets/img/medal.png">
-                <h4 mat-line>Chris Teager</h4>
-                <p mat-line> 12357 puntos </p>
-              </mat-list-item>
-            </mat-list>
-          </mat-tab>
-          <mat-tab label="Ventas Reales">
-            <table class="mat-table table">
-
-              <tr class="mat-header-row">
-                <th class="mat-header-cell desc-column">Periodo</th>
-                <th class="mat-header-cell value-column-cantidad">Cantidad</th>
-                <th class="mat-header-cell value-column-cantidad">Precio Venta</th>
-              </tr>
-              <ng-container *ngFor="let forecast of forecasts">
-  
-                <tr class="mat-row" *ngIf="forecast.periodo > 0">
-                  <td class="mat-cell desc-column">{{escenario.nombrePeriodos}} {{forecast.periodo}}</td>
-                  <td class="mat-cell value-column-cantidad">
-                    <mat-form-field style="text-align: right;width: 80px;">
-                      <input type="number" matInput [(ngModel)]="forecast.cantidadUnidades"
-                        [(value)]="forecast.cantidadUnidades" style="text-align: right;width: 80px;">
-                      <span matSuffix>u.</span>
-                    </mat-form-field>
-                  </td>
-                  <td class="mat-cell value-column-cantidad">
-                    <mat-form-field style="text-align: right;width: 80px;">
-                      <span matPrefix>$ &nbsp;</span>
-                      <input type="number" matInput [(ngModel)]="forecast.precio" [(value)]="forecast.precio"
-                        style="text-align: right;width: 80px;">
-                    </mat-form-field>
-                  </td>
-                </tr>
-  
-              </ng-container>
-  
-            </table>
-  </mat-tab>
-
-        </mat-tab-group>
-      </div>
-      <mat-action-row>
-        <button mat-button color="primary" (click)="nextStep()">ABRIR ESCENARIO</button>
-      </mat-action-row>
-    </mat-expansion-panel>
-
-  </mat-accordion>
-
+<div class="card-container">
+  <mat-card  *ngFor="let curso of cursosTree;">
+    <mat-card-header>
+      <mat-card-title>{{curso.nombre | titlecase }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-nav-list>
+        <a mat-list-item *ngFor="let escenario of curso.escenarios" 
+        routerLink="/estado-juego/curso/{{curso.id}}/escenario/{{escenario.id}}" > 
+          <div class="list-item-cont">
+            <span>{{escenario.titulo | titlecase}}</span>
+            <mat-chip-list>
+              <mat-chip color="primary" selected>ABIERTO</mat-chip>
+            </mat-chip-list>
+          </div>
+        </a>
+     </mat-nav-list>
+    </mat-card-content>
+  </mat-card>
 </div>
+
+
+<!--<mat-tab-group *ngFor="let curso of cursosTree">
+  <mat-tab label="{{curso.nombre}}">
+    <mat-accordion class="escenario-headers-align" hideToggle>
+      <mat-expansion-panel *ngFor="let escenario of escenarios;">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="escenario-title">
+            {{escenario.titulo | titlecase}}
+          </mat-panel-title>
+          <mat-panel-description>
+            <mat-chip-list>
+              <mat-chip color="warn" selected>CERRADO</mat-chip>
+            </mat-chip-list>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="escenario-content">
+          <mat-tab-group>
+            <mat-tab label="Jugadores">
+              <mat-list class="jugadores-list">
+                <mat-list-item>
+                  <img matListAvatar src="../../assets/img/gold-medal.png">
+                  <h4 mat-line>Ron Swanson</h4>
+                  <p mat-line> 12357 puntos </p>
+                </mat-list-item>
+                <mat-list-item>
+                  <img matListAvatar src="../../assets/img/silver-medal.png">
+                  <h4 mat-line>Leslie Knope</h4>
+                  <p mat-line> 12357 puntos </p>
+                </mat-list-item>
+                <mat-list-item>
+                  <img matListAvatar src="../../assets/img/bronze-medal.png">
+                  <h4 mat-line>Tom Havenford</h4>
+                  <p mat-line> 12357 puntos </p>
+                </mat-list-item>
+                <mat-list-item>
+                  <img matListAvatar src="../../assets/img/medal.png">
+                  <h4 mat-line>Pam Beasley</h4>
+                  <p mat-line> 12357 puntos </p>
+                </mat-list-item>
+                <mat-list-item>
+                  <img matListAvatar src="../../assets/img/medal.png">
+                  <h4 mat-line>Andy Dwiyer</h4>
+                  <p mat-line> 12357 puntos </p>
+                </mat-list-item>
+                <mat-list-item>
+                  <img matListAvatar src="../../assets/img/medal.png">
+                  <h4 mat-line>Ann Perkins</h4>
+                  <p mat-line> 12357 puntos </p>
+                </mat-list-item>
+                <mat-list-item>
+                  <img matListAvatar src="../../assets/img/medal.png">
+                  <h4 mat-line>Ben Wyatt</h4>
+                  <p mat-line> 12357 puntos </p>
+                </mat-list-item>
+                <mat-list-item>
+                  <img matListAvatar src="../../assets/img/medal.png">
+                  <h4 mat-line>Chris Teager</h4>
+                  <p mat-line> 12357 puntos </p>
+                </mat-list-item>
+              </mat-list>
+            </mat-tab>
+            <mat-tab label="Ventas Reales">
+              <table class="mat-table table">
+
+                <tr class="mat-header-row">
+                  <th class="mat-header-cell desc-column">Periodo</th>
+                  <th class="mat-header-cell value-column-cantidad">Cantidad</th>
+                  <th class="mat-header-cell value-column-cantidad">Precio Venta</th>
+                </tr>
+                <ng-container *ngFor="let forecast of forecasts">
+
+                  <tr class="mat-row" *ngIf="forecast.periodo > 0">
+                    <td class="mat-cell desc-column">{{escenario.nombrePeriodos}} {{forecast.periodo}}</td>
+                    <td class="mat-cell value-column-cantidad">
+                      <mat-form-field style="text-align: right;width: 80px;">
+                        <input type="number" matInput [(ngModel)]="forecast.cantidadUnidades"
+                          [(value)]="forecast.cantidadUnidades" style="text-align: right;width: 80px;">
+                        <span matSuffix>u.</span>
+                      </mat-form-field>
+                    </td>
+                    <td class="mat-cell value-column-cantidad">
+                      <mat-form-field style="text-align: right;width: 80px;">
+                        <span matPrefix>$ &nbsp;</span>
+                        <input type="number" matInput [(ngModel)]="forecast.precio" [(value)]="forecast.precio"
+                          style="text-align: right;width: 80px;">
+                      </mat-form-field>
+                    </td>
+                  </tr>
+
+                </ng-container>
+
+              </table>
+            </mat-tab>
+
+          </mat-tab-group>
+        </div>
+        <mat-action-row>
+          <button mat-button color="primary" (click)="nextStep()">ABRIR ESCENARIO</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+
+  </mat-tab>
+</mat-tab-group>
+<div class="escenarios-cont">
+
+</div>-->

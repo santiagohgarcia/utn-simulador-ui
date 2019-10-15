@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EscenariosService } from '../escenarios.service';
@@ -15,7 +15,7 @@ import { of, Observable } from 'rxjs';
   styleUrls: ['./escenario-detalle.component.css']
 })
 export class EscenarioDetalleComponent implements OnInit {
-  separatorKeysCodes: number[] = [ENTER, COMMA]; 
+  separatorKeysCodes: number[] = [ENTER, COMMA];
   filtredCursos: Observable<string[]>;
   allCursos;
   escenario = {
@@ -134,18 +134,12 @@ export class EscenarioDetalleComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private cursosService: CursosService,
-    private messageService: MessagesService) { 
+    private messageService: MessagesService) {
 
-      this.filtredCursos = this.cursos.valueChanges.pipe(
-        startWith(null),
-        map((curso: string | null) => {
-          return curso ? this._filterCurso(curso) : this.allCursos.slice()
-        }));
+  }
 
-    }
-
-    @ViewChild('cursosInput', {static: false}) cursosInput: ElementRef<HTMLInputElement>;
-    @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
+  @ViewChild('cursosInput', { static: false }) cursosInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
 
   ngOnInit() {
     var id = Number(this.route.snapshot.paramMap.get('id'));
@@ -158,14 +152,21 @@ export class EscenarioDetalleComponent implements OnInit {
     this.getCursos();
   }
 
-  getCursos(){
+  getCursos() {
     this.cursosService.getCursos().subscribe(cursos => {
       this.allCursos = cursos;
       this.filtredCursos = of(cursos);
+
+      this.filtredCursos = this.cursos.valueChanges.pipe(
+        startWith(null),
+        map((curso: string | null) => {
+          return curso ? this._filterCurso(curso) : this.allCursos.slice()
+        }));
+
     })
   }
 
-  selectedCurso(event: MatAutocompleteSelectedEvent){
+  selectedCurso(event: MatAutocompleteSelectedEvent) {
     this.escenario.cursos.push(
       event.option.value
     );
@@ -198,7 +199,7 @@ export class EscenarioDetalleComponent implements OnInit {
     if (this.escenarioForm.valid && this.activoForm.valid && this.pasivoForm.valid && this.patrimonioNetoForm.valid) {
       this.escenariosService[this.escenario.id ? 'modifyEscenario' : 'createEscenario'](this.escenario)
         .subscribe(_ => {
-          if(this.escenario.id) {
+          if (this.escenario.id) {
             this.escenariosService.updateCursosEscenario(this.escenario.id, this.escenario.cursos).subscribe(_ => {
               this.messageService.openSnackBar("Escenario modificado");
               this.router.navigate(['/escenarios'])

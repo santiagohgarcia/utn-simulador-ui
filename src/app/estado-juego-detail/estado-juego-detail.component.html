@@ -1,0 +1,111 @@
+<mat-toolbar color="secundary" *ngIf="escenario && curso">
+  <mat-toolbar-row>
+    <button mat-icon-button routerLink="/estado-juegos">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h4>{{escenario.titulo | titlecase}}</h4>
+    <span class="spacer"></span>
+    <mat-chip-list>
+      <mat-chip color="primary" selected>ABIERTO</mat-chip>
+    </mat-chip-list>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-tab-group *ngIf="escenario && curso">
+  <mat-tab label="Jugadores">
+    <div class="jugadores-container">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Ranking General</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-list class="jugadores-list">
+            <mat-list-item>
+              <img matListAvatar src="../../assets/img/gold-medal.png">
+              <h4 mat-line>Ron Swanson</h4>
+              <p mat-line> 12357 puntos </p>
+            </mat-list-item>
+            <mat-list-item>
+              <img matListAvatar src="../../assets/img/silver-medal.png">
+              <h4 mat-line>Leslie Knope</h4>
+              <p mat-line> 12357 puntos </p>
+            </mat-list-item>
+            <mat-list-item>
+              <img matListAvatar src="../../assets/img/bronze-medal.png">
+              <h4 mat-line>Tom Havenford</h4>
+              <p mat-line> 12357 puntos </p>
+            </mat-list-item>
+            <mat-list-item>
+              <img matListAvatar src="../../assets/img/medal.png">
+              <h4 mat-line>Pam Beasley</h4>
+              <p mat-line> 12357 puntos </p>
+            </mat-list-item>
+            <mat-list-item>
+              <img matListAvatar src="../../assets/img/medal.png">
+              <h4 mat-line>Andy Dwiyer</h4>
+              <p mat-line> 12357 puntos </p>
+            </mat-list-item>
+            <mat-list-item>
+              <img matListAvatar src="../../assets/img/medal.png">
+              <h4 mat-line>Ann Perkins</h4>
+              <p mat-line> 12357 puntos </p>
+            </mat-list-item>
+            <mat-list-item>
+              <img matListAvatar src="../../assets/img/medal.png">
+              <h4 mat-line>Ben Wyatt</h4>
+              <p mat-line> 12357 puntos </p>
+            </mat-list-item>
+            <mat-list-item>
+              <img matListAvatar src="../../assets/img/medal.png">
+              <h4 mat-line>Chris Teager</h4>
+              <p mat-line> 12357 puntos </p>
+            </mat-list-item>
+          </mat-list>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-tab>
+  <mat-tab label="Ventas Reales">
+    <div class="ventas-reales-content">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Ventas Reales</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <table class="mat-table table">
+            <tr class="mat-header-row">
+              <th class="mat-header-cell desc-column">Periodo</th>
+              <th class="mat-header-cell value-column-cantidad">Cantidad</th>
+              <th class="mat-header-cell value-column-cantidad">Precio Venta</th>
+            </tr>
+            <ng-container *ngFor="let forecast of forecasts">
+
+              <tr class="mat-row" *ngIf="forecast.periodo > 0">
+                <td class="mat-cell desc-column">{{escenario.nombrePeriodos}} {{forecast.periodo}}</td>
+                <td class="mat-cell value-column-cantidad">
+                  <mat-form-field style="text-align: right;width: 80px;">
+                    <input type="number" matInput [(ngModel)]="forecast.cantidadUnidades"
+                      [(value)]="forecast.cantidadUnidades" style="text-align: right;width: 80px;">
+                    <span matSuffix>u.</span>
+                  </mat-form-field>
+                </td>
+                <td class="mat-cell value-column-cantidad">
+                  <mat-form-field style="text-align: right;width: 80px;">
+                    <span matPrefix>$ &nbsp;</span>
+                    <input type="number" matInput [(ngModel)]="forecast.precio" [(value)]="forecast.precio"
+                      style="text-align: right;width: 80px;">
+                  </mat-form-field>
+                </td>
+              </tr>
+
+            </ng-container>
+          </table>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="warn">CERRAR ESCENARIO</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-tab>
+</mat-tab-group>

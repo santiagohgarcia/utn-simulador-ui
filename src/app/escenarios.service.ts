@@ -9,6 +9,9 @@ import { MessagesService } from './messages.service';
   providedIn: 'root'
 })
 export class EscenariosService {
+  getCursosPorEscenario(id: any) {
+    throw new Error("Method not implemented.");
+  }
 
   constructor(private http: HttpClient, private messageService: MessagesService) { }
 

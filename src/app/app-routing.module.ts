@@ -14,6 +14,7 @@ import { SimulacionesComponent } from './simulaciones/simulaciones.component';
 import { ProveedorDetailComponent } from './proveedor-detail/proveedor-detail.component';
 import { EstadoJuegosComponent } from './estado-juegos/estado-juegos.component';
 import { CursosComponent } from './cursos/cursos.component';
+import { EstadoJuegoDetailComponent } from './estado-juego-detail/estado-juego-detail.component';
 
 
 const routes: Routes = [
@@ -47,6 +48,10 @@ const routes: Routes = [
   {
     path: 'simulaciones/escenario/:escenarioId', component: HomeComponent,
     children: [{ path: '', component: TomaDecisionesComponent, pathMatch: 'full' }]
+  },
+  {
+    path: 'estado-juego/curso/:cursoId/escenario/:escenarioId', component: HomeComponent,
+    children: [{ path: '', component: EstadoJuegoDetailComponent, pathMatch: 'full' }]
   },
   { path: 'escenarios/:escenarioId/decisiones/new', component: DecisionDetalleComponent, pathMatch: 'full' },
   { path: 'escenarios/:escenarioId/decisiones/:id', component: DecisionDetalleComponent, pathMatch: 'full' },

@@ -23,7 +23,7 @@
   <mat-tab label="Datos Iniciales">
     <div class="tab-content">
      
-      <div *ngIf="escenario.balanceInicial" class="balance-container">
+      <div *ngIf="escenario && escenario.balanceInicial" class="balance-container">
           <div class="estado-inicial">
               <mat-card class="single-number-card">
                 <mat-card-header>
