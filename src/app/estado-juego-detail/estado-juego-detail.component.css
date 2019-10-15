@@ -1,0 +1,40 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+.value-column-cantidad{
+    text-align: right;
+    width: 100px;
+}
+
+.desc-column {
+    text-align: left;
+}
+
+.table{
+    width: 100%;
+    background: transparent;
+    padding: 10px;
+}
+
+.ventas-reales-content{
+    padding:20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.mat-card-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.jugadores-list{
+    display:grid; 
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; 
+    grid-template-rows: auto;
+}
+
+.jugadores-container{
+    padding: 20px;
+}

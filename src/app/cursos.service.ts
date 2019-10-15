@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { MessagesService } from './messages.service';
 import { environment } from '../environments/environment';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,13 @@ export class CursosService {
   getCursos() {
     return this.http.get(`${environment.proyectoServiceHost}/api/curso`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+
+  getCurso(cursoId) {
+    return this.http.get(`${environment.proyectoServiceHost}/api/curso`)
+      .pipe(
+        map((cursos: Array<any>) => cursos.find(c => c.id === cursoId)),
+        catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
   removeCurso(curso) {

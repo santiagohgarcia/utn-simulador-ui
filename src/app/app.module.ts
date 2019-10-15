@@ -80,6 +80,7 @@ import {
   MatTabGroup
 } from '@angular/material';
 import { MatriculacionDialogComponent } from './matriculacion-dialog/matriculacion-dialog.component';
+import { EstadoJuegoDetailComponent } from './estado-juego-detail/estado-juego-detail.component';
 
 
 @NgModule({
@@ -150,7 +151,8 @@ export class MaterialModule { }
     ProveedorDetailComponent,
     EstadoJuegosComponent,
     FinanciacionesComponent,
-    CursosComponent
+    CursosComponent,
+    EstadoJuegoDetailComponent
   ],
   imports: [
     BrowserModule,
