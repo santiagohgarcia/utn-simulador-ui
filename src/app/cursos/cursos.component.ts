@@ -19,7 +19,20 @@ export class CursosComponent implements OnInit {
   }
 
   getCursos() {
-    this.cursosService.getCursos().subscribe(cursos => this.cursos = cursos);
+    this.cursosService.getCursos().subscribe(cursos => this.cursos = cursos.map(
+      c => {
+        const curso={
+          id: c.id,
+          nombre: c.nombre,
+          clave: atob(c.clave)
+        };
+        return curso;
+      }
+    ));
+  }
+
+  decodeBase64() {
+
   }
 
   editCurso(curso) {

@@ -34,7 +34,8 @@ export class CursoDialogComponent implements OnInit {
 
   save() {
     if (this.cursoForm.valid) {
-      this.cursosService[this.curso.id ? 'modifyCurso' : 'createCurso'](this.curso)
+      let cursoSend = {id: this.curso.id, nombre: this.curso.nombre, clave: btoa(this.curso.clave)};
+      this.cursosService[this.curso.id ? 'modifyCurso' : 'createCurso'](cursoSend)
         .subscribe(_ => {
           this.messageService.openSnackBar("Curso modificado");
           this.dialogRef.close();
