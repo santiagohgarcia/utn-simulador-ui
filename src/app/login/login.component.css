@@ -1,8 +1,16 @@
 
 .back {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+    top: 64px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position:absolute;
+    background-image: url("../../assets/img/login-background.png");
+    background-size: 100% 100%;
 }
 .button-row {
     display: flex;
@@ -27,9 +35,7 @@
 }
 
 .card {
-    margin: auto;
-    padding: 15% 0;
-    max-width: 325px;
+    max-width: 400px;
 }
 
   
@@ -49,4 +55,16 @@
 
   .signUpRow{
     margin-top: 20px;
+  }
+
+  .title {
+    font-family: 'Coolvetica', Arial, sans-serif;
+    font-weight:normal;
+    font-style:normal;
+    font-size: xx-large;
+    margin-left: 15px;
+  }
+
+  .toolbar{
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
   }
