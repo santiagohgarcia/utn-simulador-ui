@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   user: any;
   usuario;
   opened = true;
+  pendingRequests;
 
   constructor(private router: Router,
     private afAuth: AngularFireAuth,
