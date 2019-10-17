@@ -8,9 +8,59 @@
     padding: 20px;
 }
 
+.tab-content{
+    padding:20px;
+}
+
+.balance-container {
+    grid-area: balance;
+    display: grid;
+    grid-template-columns: 3fr 3fr 2fr ;
+    grid-auto-rows: auto auto auto auto;
+    grid-template-areas: "activo pasivo estado-inicial" "activo pasivo estado-inicial" "activo pasivo estado-inicial" "activo patrimonio-neto estado-inicial"  ;
+    grid-gap: 20px;
+}
+
+.parametrizacion-container{
+    display: grid;
+    grid-template-rows:  auto auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "modalidad-cobro forecast" "modalidad-pago creditos";
+    grid-gap: 20px;
+}
+
+
 
 }
 
+
+@media screen and (max-width: 768px) {
+
+    .decisiones-container > * {
+        margin-top:10px;
+        margin-left:10px;
+        margin-right:10px;
+    }
+
+    .balance-container > * {
+        margin-top:10px;
+        margin-left:10px;
+        margin-right:10px;
+    }
+
+    .parametrizacion-container > * {
+        margin-top:10px;
+        margin-left:10px;
+        margin-right:10px;
+    }
+
+    .escenario-card{
+        margin-top: 10px;
+        margin-left:10px;
+        margin-right:10px;
+    }
+}
+    
 
 .card {
     box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
@@ -219,14 +269,6 @@
 }
 
 
-.balance-container {
-    grid-area: balance;
-    display: grid;
-    grid-template-columns: 3fr 3fr 2fr ;
-    grid-auto-rows: auto auto auto auto;
-    grid-template-areas: "activo pasivo estado-inicial" "activo pasivo estado-inicial" "activo pasivo estado-inicial" "activo patrimonio-neto estado-inicial"  ;
-    grid-gap: 20px;
-}
 
 .activo {
     grid-area: activo;
@@ -269,17 +311,7 @@
     background-size: cover;
 }
 
-.tab-content{
-    padding:20px;
-}
 
-.parametrizacion-container{
-    display: grid;
-    grid-template-rows:  auto auto;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: "modalidad-cobro forecast" "modalidad-pago creditos";
-    grid-gap: 20px;
-}
 
 .mat-icon-star-size{
     font-size: 15px;

@@ -4,7 +4,7 @@
   </button>
   <h4>Resultados</h4>
 </mat-toolbar>
-<mat-tab-group *ngIf="proyecto">
+<mat-tab-group *ngIf="proyecto" mat-stretch-tabs>
   <mat-tab label="Estado">
     <app-estado [proyecto]="proyecto"></app-estado>
   </mat-tab>

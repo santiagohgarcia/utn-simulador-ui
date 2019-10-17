@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
 
   user: any;
   usuario;
+  opened = true;
 
   constructor(private router: Router,
     private afAuth: AngularFireAuth,
@@ -34,6 +35,10 @@ export class HomeComponent implements OnInit {
         this.router.navigateByUrl("/login");
       }
     });
+
+    if(screen.width < 769){
+      this.opened = false;
+    }
   }
 
   getUsuario(mail){

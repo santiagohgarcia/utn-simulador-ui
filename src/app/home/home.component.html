@@ -24,7 +24,7 @@
       <router-outlet></router-outlet>
     </mat-sidenav-content>
 
-    <mat-sidenav opened mode="side" class="sidenav-container" #sidenav disableClose>
+    <mat-sidenav [opened]="opened" mode="side" class="sidenav-container" #sidenav disableClose>
       <div class="img-container" *ngIf="user">
         <img src="{{user.photoURL}}" style="height: 150px; border-radius: 50%">
         <span>{{user.displayName}}</span>

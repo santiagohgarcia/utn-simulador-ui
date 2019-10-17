@@ -1,34 +1,5 @@
 <div class="card-container">
-  <mat-card class="card producto" *ngIf="estadoActual">
-    <mat-card-header>
-      <div mat-card-avatar class="produccion-avatar"></div>
-      <mat-card-title>Producto</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="list">
-        <div class="list-item">
-          <p>Costo Fijo</p>
-          <h3>$ {{ estadoActual.costoFijo }}</h3>
-        </div>
-        <div class="list-item">
-          <p>Costo Variable</p>
-          <h3>$ {{ estadoActual.costoVariable }}</h3>
-        </div>
-        <div class="list-item">
-          <p>Produccion</p>
-          <h3>{{ estadoActual.produccionMensual }} u/{{escenario.nombrePeriodos}}</h3>
-        </div>
-        <div class="list-item">
-          <p>Precio Producto</p>
-          <h3>$ {{ ultimoPrecioProducto }}</h3>
-        </div>
-        <div class="list-item">
-          <p>Stock Final</p>
-          <h3>{{ estadoActual.stock }}</h3>
-        </div>
-      </div>
-    </mat-card-content>
-  </mat-card>
+
 
   <mat-card class="card caja">
     <mat-card-header>
@@ -43,6 +14,37 @@
       </div>
     </mat-card-content>
   </mat-card>
+
+  <mat-card class="card producto" *ngIf="estadoActual">
+      <mat-card-header>
+        <div mat-card-avatar class="produccion-avatar"></div>
+        <mat-card-title>Producto</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="list">
+          <div class="list-item">
+            <p>Costo Fijo</p>
+            <h3>$ {{ estadoActual.costoFijo }}</h3>
+          </div>
+          <div class="list-item">
+            <p>Costo Variable</p>
+            <h3>$ {{ estadoActual.costoVariable }}</h3>
+          </div>
+          <div class="list-item">
+            <p>Produccion</p>
+            <h3>{{ estadoActual.produccionMensual }} u/{{escenario.nombrePeriodos}}</h3>
+          </div>
+          <div class="list-item">
+            <p>Precio Producto</p>
+            <h3>$ {{ ultimoPrecioProducto }}</h3>
+          </div>
+          <div class="list-item">
+            <p>Stock Final</p>
+            <h3>{{ estadoActual.stock }}</h3>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
 
   <mat-card class="card ventas">
     <mat-card-header>

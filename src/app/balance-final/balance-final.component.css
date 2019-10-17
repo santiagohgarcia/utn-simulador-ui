@@ -1,12 +1,26 @@
+@media screen and (min-width: 769px) {
 
-.balance-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-auto-rows: auto;
-    grid-template-areas: "activo pasivo" "activo patrimonio-neto"  ;
-    grid-gap: 20px;
-    padding: 20px;
+    .balance-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: auto;
+        grid-template-areas: "activo pasivo" "activo patrimonio-neto"  ;
+        grid-gap: 20px;
+        padding: 20px;
+    }
+    
+    
 }
+
+@media screen and (max-width: 768px) {
+
+    .balance-container > * {
+        margin-top: 10px;
+    }
+
+}
+
+
 
 .activo {
     grid-area: activo;
