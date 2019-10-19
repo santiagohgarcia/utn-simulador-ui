@@ -88,14 +88,20 @@ export class TomaDecisionesComponent implements OnInit {
   buildForecast(proyectoId) {
     this.proyectoService.getForecast(proyectoId).subscribe(forecasts => {
       var periodos = this.estado.proyecto.escenario.maximosPeriodos;
-      this.forecasts = forecasts.length > 0 ? forecasts : [...Array(periodos).keys(), periodos].map(periodo => {
-        return {
-          proyectoId: proyectoId,
-          periodo: periodo,
-          cantidadUnidades: 0,
-          precio: 0
-        }
-      });
+      if(forecasts.length > 0 && forecasts.length >= periodos + 1) { 
+        this.forecasts = forecasts.slice(0, periodos + 1)
+      } else {
+        var periodosFaltantes = [...Array(periodos - forecasts.length).keys(), periodos - forecasts.length].map(periodo => {
+          return {
+            proyectoId: proyectoId,
+            periodo: forecasts.length + periodo,
+            cantidadUnidades: 0,
+            precio: 0
+          }
+        });
+        this.forecasts = this.forecasts.concat(forecasts);
+        this.forecasts = this.forecasts.concat(periodosFaltantes);
+      }
     })
 
   }
