@@ -14,12 +14,13 @@
 <mat-tab-group *ngIf="escenario && curso">
   <mat-tab label="Jugadores">
     <div class="jugadores-container">
-      <mat-card>
+      <mat-card class="general">
         <mat-card-header>
+          <!--<div mat-card-avatar class="premios-avatar"></div>-->
           <mat-card-title>Ranking General</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <mat-list class="jugadores-list">
+          <mat-list>
             <mat-list-item>
               <img matListAvatar src="../../assets/img/gold-medal.png">
               <h4 mat-line>Ron Swanson</h4>
@@ -61,9 +62,125 @@
               <p mat-line> 12357 puntos </p>
             </mat-list-item>
           </mat-list>
-
         </mat-card-content>
       </mat-card>
+
+      <!--<div class="legend">
+        <mat-card>
+          <mat-card-header>
+            <div mat-card-avatar class="one-avatar"></div>
+            <mat-card-title>+1000 puntos</mat-card-title>
+          </mat-card-header>
+        </mat-card>
+        <mat-card>
+          <mat-card-header>
+            <div mat-card-avatar class="two-avatar"></div>
+            <mat-card-title>+500 puntos</mat-card-title>
+          </mat-card-header>
+        </mat-card>
+        <mat-card>
+          <mat-card-header>
+            <div mat-card-avatar class="three-avatar"></div>
+            <mat-card-title>+100 puntos</mat-card-title>
+          </mat-card-header>
+        </mat-card>
+      </div>-->
+
+
+      <mat-accordion class="charts-accordion headers-align">
+        <mat-expansion-panel expanded="true" hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <img src="../../assets/img/ventas.png" class="avatar-img">
+              Mejores Ventas
+            </mat-panel-title>
+            <mat-panel-description>
+              <div style="display: flex; margin-right: 20px;">
+                <img src="../../assets/img/one.png" class="number-avatar">
+                <span>+1000</span>
+              </div>
+              <div style="display: flex;  margin-right: 20px;">
+                <img src="../../assets/img/two.png" class="number-avatar">
+                <span>+800</span>
+              </div>
+              <div style="display: flex;  margin-right: 20px;">
+                <img src="../../assets/img/three.png" class="number-avatar">
+                <span>+200</span>
+              </div>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div *ngIf="ventasChartProps" class="canvas-container">
+            <canvas baseChart [datasets]="ventasChartProps.data" [labels]="ventasChartProps.labels"
+              [options]="ventasChartProps.options" [legend]="ventasChartProps.legend"
+              [chartType]="ventasChartProps.type">
+            </canvas>
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <img src="../../assets/img/caja.png" class="avatar-img">
+              Mejor Caja Final
+            </mat-panel-title>
+            <mat-panel-description>
+                <div style="display: flex; margin-right: 20px;">
+                  <img src="../../assets/img/one.png" class="number-avatar">
+                  <span>+1000</span>
+                </div>
+                <div style="display: flex;  margin-right: 20px;">
+                  <img src="../../assets/img/two.png" class="number-avatar">
+                  <span>+800</span>
+                </div>
+                <div style="display: flex;  margin-right: 20px;">
+                  <img src="../../assets/img/three.png" class="number-avatar">
+                  <span>+200</span>
+                </div>
+              </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="canvas-container" *ngIf="ventasChartProps">
+            <canvas baseChart [datasets]="ventasChartProps.data" [labels]="ventasChartProps.labels"
+              [options]="ventasChartProps.options" [legend]="ventasChartProps.legend"
+              [chartType]="ventasChartProps.type">
+            </canvas>
+          </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <img src="../../assets/img/costos.png" class="avatar-img">
+              Mejor Renta
+            </mat-panel-title>
+            <mat-panel-description>
+                <div style="display: flex; margin-right: 20px;">
+                  <img src="../../assets/img/one.png" class="number-avatar">
+                  <span>+1000</span>
+                </div>
+                <div style="display: flex;  margin-right: 20px;">
+                  <img src="../../assets/img/two.png" class="number-avatar">
+                  <span>+800</span>
+                </div>
+                <div style="display: flex;  margin-right: 20px;">
+                  <img src="../../assets/img/three.png" class="number-avatar">
+                  <span>+200</span>
+                </div>
+              </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="canvas-container" *ngIf="ventasChartProps">
+            <canvas baseChart [datasets]="ventasChartProps.data" [labels]="ventasChartProps.labels"
+              [options]="ventasChartProps.options" [legend]="ventasChartProps.legend"
+              [chartType]="ventasChartProps.type">
+            </canvas>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+
+
+
+
+
+
     </div>
   </mat-tab>
   <mat-tab label="Ventas Reales">
@@ -80,7 +197,6 @@
               <th class="mat-header-cell value-column-cantidad">Precio Venta</th>
             </tr>
             <ng-container *ngFor="let forecast of forecasts">
-
               <tr class="mat-row" *ngIf="forecast.periodo > 0">
                 <td class="mat-cell desc-column">{{escenario.nombrePeriodos}} {{forecast.periodo}}</td>
                 <td class="mat-cell value-column-cantidad">
