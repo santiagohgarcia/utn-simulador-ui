@@ -75,4 +75,21 @@
       </div>
     </mat-card-content>
   </mat-card>
+
+  <mat-card class="card politica-pago">
+      <mat-card-header>
+        <div mat-card-avatar class="pago-avatar"></div>
+        <mat-card-title>Modalidad de Pago</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div style="display: block" *ngIf="modPagoChartProps">
+          <canvas baseChart [datasets]="modPagoChartProps.data" [labels]="modPagoChartProps.labels"
+            [options]="modPagoChartProps.options" [legend]="modPagoChartProps.legend"
+            [chartType]="modPagoChartProps.type">
+          </canvas>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  
 </div>

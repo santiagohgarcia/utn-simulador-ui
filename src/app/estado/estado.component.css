@@ -2,9 +2,9 @@
 
     .card-container {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-auto-rows: auto;
-        grid-template-areas: "caja ventas" "politica-cobro producto"  ;
+        grid-template-areas: "caja caja ventas ventas" "politica-cobro politica-pago producto producto";
         grid-gap: 20px;
         padding: 20px;
     }
@@ -44,6 +44,10 @@
 
 .politica-cobro{
     grid-area: politica-cobro
+}
+
+.politica-pago{
+    grid-area: politica-pago
 }
 
 .card {

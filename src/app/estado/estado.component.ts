@@ -18,6 +18,7 @@ export class EstadoComponent implements OnInit {
   cajaChartProps;
   ventasChartProps;
   modCobroChartProps;
+  modPagoChartProps;
   escenario;
 
   constructor(private proyectoService: ProyectoService,
@@ -43,6 +44,7 @@ export class EstadoComponent implements OnInit {
       this.estadoActual = estadoActual;
       this.escenario = estadoActual.proyecto.escenario;
       this.setModCobroChartProps(estadoActual);
+      this.setModPagoChartProps(estadoActual);
     })
   }
 
@@ -81,6 +83,7 @@ export class EstadoComponent implements OnInit {
       data: [
         {
           data: estados.map(estado => estado.ventas),
+          fill: false,
           label: 'Ventas'
         },
         {
@@ -98,14 +101,27 @@ export class EstadoComponent implements OnInit {
   setModCobroChartProps(estadoActual) {
     this.modCobroChartProps = {
       options: {
-        scaleShowVerticalLines: false,
-        responsive: true
+        responsive: true,
+        legend: {position: 'bottom'}
       },
-      labels: estadoActual.proyecto.modalidadCobro.map(modCobro => `${this.escenario.nombrePeriodos} ${modCobro.offsetPeriodo > 0 ? ' + ' + modCobro.offsetPeriodo : ''}`),
-      type: 'bar',
-      legend: false,
+      labels: estadoActual.proyecto.modalidadCobro.filter(mc => mc.porcentaje > 0).map(modCobro => `${this.escenario.nombrePeriodos} ${modCobro.offsetPeriodo > 0 ? ' + ' + modCobro.offsetPeriodo : ''}`),
+      type: 'pie',
       data: [
-        { data: estadoActual.proyecto.modalidadCobro.map(modCobro => modCobro.porcentaje), label: 'Porcentaje' }
+        { data: estadoActual.proyecto.modalidadCobro.filter(mc => mc.porcentaje > 0).map(modCobro => modCobro.porcentaje), label: 'Porcentaje' }
+      ]
+    }
+  }
+
+  setModPagoChartProps(estadoActual) {
+    this.modPagoChartProps = {
+      options: {
+        responsive: true,
+        legend: {position: 'bottom'}
+      },
+      labels: estadoActual.proyecto.proveedorSeleccionado.modalidadPago.filter(mp => mp.porcentaje > 0).map(modPago => `${this.escenario.nombrePeriodos} ${modPago.offsetPeriodo > 0 ? ' + ' + modPago.offsetPeriodo : ''}`),
+      type: 'pie',
+      data: [
+        { data: estadoActual.proyecto.proveedorSeleccionado.modalidadPago.filter(mp => mp.porcentaje > 0).map(modPago => modPago.porcentaje), label: 'Porcentaje' }
       ]
     }
   }
