@@ -45,4 +45,17 @@ export class PresupuestoEconomicoComponent implements OnInit {
     }
   }
 
+  getTotalCuentaPeriodo(cuentasPeriodo, signoInvertido = false) {
+    var acumulador = 0;
+    if (cuentasPeriodo) {
+      cuentasPeriodo.map(cp => acumulador = acumulador + cp.monto);
+      acumulador = signoInvertido ? -acumulador : acumulador;
+      if(acumulador < 0) {
+        return "(" + Math.abs(acumulador) + ")";
+      } else {
+        return acumulador;
+      }
+    }
+  }
+
 }

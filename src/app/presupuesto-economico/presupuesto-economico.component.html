@@ -3,6 +3,7 @@
   <tr class="mat-header-row">
     <th class="mat-header-cell desc-column">Descripcion</th>
     <th *ngFor="let periodo of periodos | slice:1" class="mat-header-cell value-column"> {{escenario.nombrePeriodos}} {{periodo}} </th>
+    <th class="mat-header-cell value-column">Totales</th>
   </tr>
 
 
@@ -16,6 +17,9 @@
     <td *ngFor="let periodo of periodos | slice:1" class="mat-cell value-column">
       {{ getCuentaPeriodo(flujo.montosPeriodo,periodo,false) }}
     </td>
+    <td class="mat-cell value-column">
+      {{ getTotalCuentaPeriodo(flujo.montosPeriodo,false) }}
+    </td>
   </tr>
       
   <!--COMPRA-->
@@ -27,6 +31,9 @@
     </td>
     <td *ngFor="let periodo of periodos | slice:1" class="mat-cell value-column">
       {{ getCuentaPeriodo(flujo.montosPeriodo,periodo,true) }}
+    </td>
+    <td class="mat-cell value-column">
+      {{ getTotalCuentaPeriodo(flujo.montosPeriodo,false) }}
     </td>
   </tr>
 
@@ -44,6 +51,9 @@
         {{ getCuentaPeriodo(flujo.montosPeriodo,periodo,false) }}
       </p>
     </td>
+    <td class="mat-cell value-column">
+      {{ getTotalCuentaPeriodo(flujo.montosPeriodo,false) }}
+    </td>
   </tr>
 
   <!--OTROS-->
@@ -58,6 +68,11 @@
         {{ getCuentaPeriodo(cuenta.cuentasPeriodo,periodo,true, false) }}
       </p>
     </td>
+    <td class="mat-cell value-column">
+      <p *ngFor="let cuenta of flujo.cuentas">
+        {{ getTotalCuentaPeriodo(cuenta.cuentasPeriodo,false) }}
+      </p>
+    </td>
   </tr>
 
   <tr *ngIf="presupuestoEconomico.TOTAL as flujo" class="mat-row">
@@ -68,6 +83,9 @@
     </td>
     <td *ngFor="let periodo of periodos | slice:1" class="mat-cell value-column flujo-column">
       {{ getCuentaPeriodo(flujo.montosPeriodo,periodo,true, false) }}
+    </td>
+    <td class="mat-cell value-column flujo-column">
+      {{ getTotalCuentaPeriodo(flujo.montosPeriodo,false) }}
     </td>
   </tr>
 
