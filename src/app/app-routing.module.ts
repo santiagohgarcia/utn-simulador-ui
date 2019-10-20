@@ -22,6 +22,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', redirectTo: 'simulaciones' },
   {
+    path: 'simulaciones', component: HomeComponent,
+    children: [{ path: '', component: SimulacionesComponent, pathMatch: 'full' }]
+  },
+  {
     path: 'simulaciones/escenario/:escenarioId/resultados', component: HomeComponent,
     children: [{ path: '', component: ResultadosComponent, pathMatch: 'full' }]
   },
@@ -36,10 +40,6 @@ const routes: Routes = [
   {
     path: 'cursos', component: HomeComponent,
     children: [{ path: '', component: CursosComponent, pathMatch: 'full' }]
-  },
-  {
-    path: 'simulaciones', component: HomeComponent,
-    children: [{ path: '', component: SimulacionesComponent, pathMatch: 'full' }]
   },
   {
     path: 'estado-juegos', component: HomeComponent,

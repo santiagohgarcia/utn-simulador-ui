@@ -178,7 +178,7 @@ export class MaterialModule { }
   ],
   entryComponents: [RegisterComponent, OpcionDialogComponent, ConsecuenciaDialogComponent, 
                     FinanciacionDialogComponent, CursoDialogComponent, MatriculacionDialogComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,HomeComponent]
 })
 export class AppModule { }
 
