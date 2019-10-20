@@ -131,6 +131,11 @@
     background-size: cover;
 }
 
+.pago-avatar{
+    background-image: url('../../assets/img/pago.png');
+    background-size: cover;
+}
+
 .mat-card-content {
     padding-top: 12px;
 }
