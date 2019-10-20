@@ -223,6 +223,11 @@
     background-size: cover;
 }
 
+.calidad-avatar{
+    background-image: url('../../assets/img/calidad.png');
+    background-size: cover;
+}
+
 .proveedor-column{
     display: flex;
     flex-direction: row;

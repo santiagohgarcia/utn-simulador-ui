@@ -41,7 +41,8 @@ export class MatriculacionDialogComponent implements OnInit {
       let cursoSend = {nombre: this.curso.nombre, clave: btoa(this.curso.clave)};
       this.usuarioService.matricular(this.usuario, cursoSend).subscribe(_ => {
         
-        this.dialogRef.close()
+        this.dialogRef.close();
+        window.location.reload();
       });
     }
   }
