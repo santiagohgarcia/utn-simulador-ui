@@ -17,14 +17,7 @@ export class AppComponent implements OnInit {
               private usuarioService: UsuarioService){ }
 
   ngOnInit() {
-    this.afAuth.authState.subscribe(user => {
-      if (user){
-        this.usuarioService.getUsuario(user.email).subscribe(usuario => this.usuario = usuario)
-      }else {
-        // User is not logged in
-        this.router.navigateByUrl("/login");
-      }
-    });
+   
   }
 
 }
