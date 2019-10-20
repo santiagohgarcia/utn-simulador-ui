@@ -158,6 +158,30 @@ export class TomaDecisionesComponent implements OnInit {
     return this.decisiones.map(d => d.opciones.find(o => o.id === d.opcionTomada)).filter(d => d);
   }
 
+  getAumentoCostoFijo() {
+    var aumentoCostoFijo = 0;
+    this.getOpcionesTomadas().forEach(o => aumentoCostoFijo = aumentoCostoFijo + o.variacionCostoFijo);
+    return aumentoCostoFijo != 0 ? aumentoCostoFijo : null;
+  }
+
+  getAumentoCostoVariable() {
+    var aumentoCostoVariable = this.getProveedorSeleccionado() ? this.getProveedorSeleccionado().variacionCostoVariable : 0;
+    this.getOpcionesTomadas().forEach(o => aumentoCostoVariable = aumentoCostoVariable + o.variacionCostoVariable);
+    return aumentoCostoVariable != 0 ? aumentoCostoVariable : null;
+  }
+
+  getAumentoProduccionMensual() {
+    var aumentoProduccionMensual = 0;
+    this.getOpcionesTomadas().forEach(o => aumentoProduccionMensual = aumentoProduccionMensual + o.variacionProduccion);
+    return aumentoProduccionMensual != 0 ? aumentoProduccionMensual : null;
+  }
+
+  getAumentoCalidad() {
+    var aumentoCalidad = this.getProveedorSeleccionado() ? this.getProveedorSeleccionado().variacionCalidad : 0;
+    this.getOpcionesTomadas().forEach(o => aumentoCalidad = aumentoCalidad + o.variacionCalidad);
+    return aumentoCalidad != 0 ? aumentoCalidad : null;
+  }
+
   simular() {
     if (this.inputsValidos()) {
       //Grabar FORECAST
@@ -236,6 +260,10 @@ export class TomaDecisionesComponent implements OnInit {
 
   onSeleccionarFinanciacion(financiacion) {
     this.credito.financiacionId = financiacion.id;
+  }
+
+  getProveedorSeleccionado() {
+    return this.proveedores.find(p => p.id == this.proveedorSeleccionado);
   }
 
 

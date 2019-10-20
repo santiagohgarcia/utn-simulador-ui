@@ -321,3 +321,21 @@
 .mat-icon-star-size{
     font-size: 15px;
 }
+
+.good-var{
+    color: #24dd24;
+    font-style: italic;
+}
+
+.bad-var{
+    color: #ff5353;
+    font-style: italic;
+}
+
+.plus-var:before {
+    content: " + ";
+}
+
+.minus-var:before {
+    content: " - ";
+}
