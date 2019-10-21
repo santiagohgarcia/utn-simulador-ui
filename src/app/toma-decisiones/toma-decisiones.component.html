@@ -104,7 +104,7 @@
               <mat-card-content>
                 <h1 class="single-number">
                   $ {{estado.costoFijo}}
-                  <span class="bad-var plus-var" *ngIf="getAumentoCostoFijo()">
+                  <span [ngClass]="getAumentoCostoFijo() < 0 ? 'good-var' : 'bad-var plus-var'" *ngIf="getAumentoCostoFijo()">
                     {{ getAumentoCostoFijo() }}
                   </span>
                 </h1>
@@ -118,7 +118,7 @@
               <mat-card-content>
                 <h1 class="single-number">
                   $ {{estado.costoVariable}}
-                  <span class="bad-var plus-var" *ngIf="getAumentoCostoVariable()">
+                  <span [ngClass]="getAumentoCostoVariable() < 0 ? 'good-var' : 'bad-var plus-var'" *ngIf="getAumentoCostoVariable()">
                     {{ getAumentoCostoVariable() }}
                   </span>
                 </h1>
@@ -132,7 +132,7 @@
               <mat-card-content>
                 <h1 class="single-number">
                   {{estado.produccionMensual}} u./{{escenario.nombrePeriodos}}
-                  <span class="good-var plus-var" *ngIf="getAumentoProduccionMensual()">
+                  <span [ngClass]="getAumentoProduccionMensual() < 0 ? 'bad-var' : 'good-var plus-var'" *ngIf="getAumentoProduccionMensual()">
                     {{ getAumentoProduccionMensual() }}
                   </span>
                 </h1>
@@ -156,7 +156,7 @@
                   <h1 class="single-number">
                     <i class="material-icons" *ngFor="let calidad of getEvenNumber(estado.calidad)">star</i>
                     <i class="material-icons" *ngIf="getOddNumber(estado.calidad)">star_half</i>
-                    <span class="good-var plus-var" *ngIf="getAumentoCalidad()">
+                    <span [ngClass]="getAumentoCalidad() < 0 ? 'bad-var' : 'good-var plus-var'" *ngIf="getAumentoCalidad()">
                       <i class="material-icons" *ngFor="let calidad of getEvenNumber(getAumentoCalidad())">star</i>
                       <i class="material-icons" *ngIf="getOddNumber(getAumentoCalidad())">star_half</i>
                     </span>
