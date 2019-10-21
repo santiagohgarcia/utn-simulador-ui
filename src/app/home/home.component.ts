@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(_ => {
       this.router.navigateByUrl('/simulaciones', { skipLocationChange: true })
-      //this.getUsuario(usuario.mail)
+      this.getUsuario(usuario.mail)
     });
   }
 

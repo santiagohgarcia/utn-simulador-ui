@@ -45,6 +45,13 @@ export class EscenarioDetalleComponent implements OnInit {
         resultadoDelEjercicio: 0
       }
     },
+    estadoInicial: {
+      costoFijo: 0,
+      costoVariable: 0,
+      stock: 0,
+      produccionMensual: 0,
+      calidad: 0
+    },
     cursos: [],
     invalid: null
   };
