@@ -65,6 +65,8 @@ export class DecisionDetalleComponent implements OnInit {
         variacionCostoFijo: 0,
         variacionCostoVariable: 0,
         variacionProduccion: 0, 
+        variacionCalidad: 0,
+        variacionPublicidad: 0,
         consecuencias: []
       }
     });

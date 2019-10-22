@@ -25,6 +25,18 @@
                 [(value)]="opcion.variacionProduccion">
             <mat-error *ngIf="variacionProduccion.invalid">Required field</mat-error>
         </mat-form-field>
+        <mat-form-field class="full-width">
+            <input type="number" matInput placeholder="Variacion de Calidad" type="text"
+                [formControl]="variacionCalidad" [(ngModel)]="opcion.variacionCalidad"
+                [(value)]="opcion.variacionCalidad">
+            <mat-error *ngIf="variacionCalidad.invalid">Required field</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input type="number" matInput placeholder="Variacion de Calidad" type="text"
+                [formControl]="variacionPublicidad" [(ngModel)]="opcion.variacionPublicidad"
+                [(value)]="opcion.variacionPublicidad">
+            <mat-error *ngIf="variacionPublicidad.invalid">Required field</mat-error>
+        </mat-form-field>
     </form>
 </div>
 <div mat-dialog-actions>
