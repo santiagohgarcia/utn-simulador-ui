@@ -22,7 +22,7 @@ import { FlujoFondosComponent } from './flujo-fondos/flujo-fondos.component';
 import { ProyectoService } from './proyecto.service';
 import { UsuarioService } from './usuario.service';
 import { TomaDecisionesComponent } from './toma-decisiones/toma-decisiones.component';
-import { ResultadosComponent } from './resultados/resultados.component';
+import { ResultadosComponent, EntregarConfirmationPopup } from './resultados/resultados.component';
 import { EscenariosComponent } from './escenarios/escenarios.component';
 import { EscenarioDetalleComponent } from './escenario-detalle/escenario-detalle.component';
 import { ChartsModule } from 'ng2-charts';
@@ -81,6 +81,7 @@ import {
 } from '@angular/material';
 import { MatriculacionDialogComponent } from './matriculacion-dialog/matriculacion-dialog.component';
 import { EstadoJuegoDetailComponent } from './estado-juego-detail/estado-juego-detail.component';
+import { SimulacionEntregadaComponent } from './simulacion-entregada/simulacion-entregada.component';
 
 
 @NgModule({
@@ -133,6 +134,7 @@ export class MaterialModule { }
     RegisterComponent,
     DecisionesComponent,
     DecisionDetalleComponent,
+    SimulacionEntregadaComponent,
     FlujoFondosComponent,
     TomaDecisionesComponent,
     ResultadosComponent,
@@ -142,6 +144,7 @@ export class MaterialModule { }
     ConsecuenciaDialogComponent,
     FinanciacionDialogComponent,
     MatriculacionDialogComponent,
+    EntregarConfirmationPopup,
     CursoDialogComponent,
     SimulacionesComponent,
     PresupuestoFinancieroComponent,
@@ -177,7 +180,7 @@ export class MaterialModule { }
     FinanciacionService
   ],
   entryComponents: [RegisterComponent, OpcionDialogComponent, ConsecuenciaDialogComponent, 
-                    FinanciacionDialogComponent, CursoDialogComponent, MatriculacionDialogComponent],
+                    FinanciacionDialogComponent, CursoDialogComponent, MatriculacionDialogComponent,EntregarConfirmationPopup],
   bootstrap: [AppComponent,HomeComponent]
 })
 export class AppModule { }

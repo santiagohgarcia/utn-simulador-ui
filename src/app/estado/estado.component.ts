@@ -102,7 +102,8 @@ export class EstadoComponent implements OnInit {
     this.modCobroChartProps = {
       options: {
         responsive: true,
-        legend: {position: 'bottom'}
+        legend: {position: 'bottom'},
+        aspectRatio: 1
       },
       labels: estadoActual.proyecto.modalidadCobro.filter(mc => mc.porcentaje > 0).map(modCobro => `${this.escenario.nombrePeriodos} ${modCobro.offsetPeriodo > 0 ? ' + ' + modCobro.offsetPeriodo : ''}`),
       type: 'pie',
@@ -116,7 +117,8 @@ export class EstadoComponent implements OnInit {
     this.modPagoChartProps = {
       options: {
         responsive: true,
-        legend: {position: 'bottom'}
+        legend: {position: 'bottom'},
+        aspectRatio: 1
       },
       labels: estadoActual.proyecto.proveedorSeleccionado.modalidadPago.filter(mp => mp.porcentaje > 0).map(modPago => `${this.escenario.nombrePeriodos} ${modPago.offsetPeriodo > 0 ? ' + ' + modPago.offsetPeriodo : ''}`),
       type: 'pie',

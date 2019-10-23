@@ -73,8 +73,8 @@
       <div mat-card-avatar class="cobro-avatar"></div>
       <mat-card-title>Modalidad de Cobro</mat-card-title>
     </mat-card-header>
-    <mat-card-content>
-      <div style="display: block" *ngIf="modCobroChartProps">
+    <mat-card-content class="pie-container">
+      <div *ngIf="modCobroChartProps">
         <canvas baseChart [datasets]="modCobroChartProps.data" [labels]="modCobroChartProps.labels"
           [options]="modCobroChartProps.options" [legend]="modCobroChartProps.legend"
           [chartType]="modCobroChartProps.type">
@@ -88,8 +88,8 @@
         <div mat-card-avatar class="pago-avatar"></div>
         <mat-card-title>Modalidad de Pago</mat-card-title>
       </mat-card-header>
-      <mat-card-content>
-        <div style="display: block" *ngIf="modPagoChartProps">
+      <mat-card-content class="pie-container">
+        <div *ngIf="modPagoChartProps">
           <canvas baseChart [datasets]="modPagoChartProps.data" [labels]="modPagoChartProps.labels"
             [options]="modPagoChartProps.options" [legend]="modPagoChartProps.legend"
             [chartType]="modPagoChartProps.type">
