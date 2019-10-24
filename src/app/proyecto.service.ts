@@ -124,5 +124,10 @@ export class ProyectoService {
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
+  entregarProyecto(idProyecto) {
+    return this.http.post(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/entregar`, null)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+
 }
 

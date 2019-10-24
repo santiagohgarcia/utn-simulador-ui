@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { EscenariosService } from '../escenarios.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from '../usuario.service';
+import { ProyectoService } from '../proyecto.service';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 
 @Component({
@@ -14,7 +15,7 @@ export class ResultadosComponent implements OnInit {
   escenario;
 
   constructor(private escenarioService: EscenariosService, private route: ActivatedRoute,
-    private usuarioService: UsuarioService, public dialog: MatDialog, private router: Router) { }
+    private usuarioService: UsuarioService, private proyectoService: ProyectoService, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
     var escenarioId = Number(this.route.snapshot.paramMap.get('escenarioId'));
@@ -39,7 +40,12 @@ export class ResultadosComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(respuesta => {
       if (respuesta === "ENTREGAR") {
-        this.router.navigate(['/simulacion-entregada']);
+        respuesta = this.proyectoService.entregarProyecto(this.proyecto.id); //TODO_SANTI: Por algun motivo no se me ejecuta la llamada (no la veo en Network)
+        if (respuesta && respuesta.entregado){ 
+          this.router.navigate(['/simulacion-entregada']);
+        } else {
+          //TODO_SANTI: Mostrar mensaje de No se pudo entregar
+        }
       }
     });
   }

@@ -224,4 +224,34 @@
       </mat-card>
     </div>
   </mat-tab>
+
+  <!-- TODO_SANTI: Ponerle formato bonito a esto -->
+  <mat-tab label="Estado Usuarios">
+      <div class="estado-usuarios-content">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Estado Usuarios</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <table class="mat-table table">
+              <tr class="mat-header-row">
+                <th class="mat-header-cell desc-column">Escenario</th>
+                <th class="mat-header-cell desc-column">Curso</th>
+                <th class="mat-header-cell desc-column">Usuario</th>
+                <th class="mat-header-cell desc-column">Entregado</th>
+              </tr>
+              <ng-container *ngFor="let escenarioCurso of escenarioCursos">
+                <tr class="mat-row">
+                  <td class="mat-cell desc-column">{{escenarioCurso.escenario}}</td>
+                  <td class="mat-cell desc-column">{{escenarioCurso.curso}}</td>
+                  <td class="mat-cell desc-column">{{escenarioCurso.usuario}}</td>
+                  <td class="mat-cell desc-column">{{escenarioCurso.entregado}}</td>
+                </tr>
+              </ng-container>
+            </table>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+
 </mat-tab-group>

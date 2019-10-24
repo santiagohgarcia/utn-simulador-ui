@@ -129,7 +129,7 @@ export class EstadoComponent implements OnInit {
   }
 
   getEvenNumber = function(num) {
-    return new Array(Math.floor(Number(num)/2));
+    return Math.floor(Number(num)/2) > 0 ? new Array(Math.floor(Number(num)/2)) : 0;
   }
 
   getOddNumber = function(num) {

@@ -13,6 +13,7 @@ export class EstadoJuegoDetailComponent implements OnInit {
   escenario;
   curso;
   ventasChartProps;
+  escenarioCursos;
 
   forecasts = [{
     proyectoId: 1,
@@ -39,6 +40,7 @@ export class EstadoJuegoDetailComponent implements OnInit {
     this.getCurso(cursoId)
     this.getEscenario(escenarioId);
     this.setVentasChartProps();
+    this.getDetalleEscenarioUsuariosPorCurso(escenarioId, cursoId);
   }
 
   getCurso(cursoId) {
@@ -47,6 +49,10 @@ export class EstadoJuegoDetailComponent implements OnInit {
 
   getEscenario(escenarioId) {
     this.escenariosService.getEscenario(escenarioId).subscribe(escenario => this.escenario = escenario)
+  }
+
+  getDetalleEscenarioUsuariosPorCurso(escenarioId, cursoId) {
+    this.escenariosService.getDetalleEscenarioUsuariosPorCurso(escenarioId, cursoId).subscribe(escenariosCursos => this.escenarioCursos = escenariosCursos)
   }
 
   setVentasChartProps() {
