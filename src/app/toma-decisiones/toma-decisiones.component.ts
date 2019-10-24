@@ -161,13 +161,13 @@ export class TomaDecisionesComponent implements OnInit {
   getAumentoCostoFijo() {
     var aumentoCostoFijo = 0;
     this.getOpcionesTomadas().forEach(o => aumentoCostoFijo = aumentoCostoFijo + o.variacionCostoFijo);
-    return aumentoCostoFijo != 0 ? aumentoCostoFijo : null;
+    return aumentoCostoFijo != 0 ? (aumentoCostoFijo % 1 != 0 ? aumentoCostoFijo.toFixed(2) : aumentoCostoFijo) : null;
   }
 
   getAumentoCostoVariable() {
     var aumentoCostoVariable = this.getProveedorSeleccionado() ? this.getProveedorSeleccionado().variacionCostoVariable : 0;
     this.getOpcionesTomadas().forEach(o => aumentoCostoVariable = aumentoCostoVariable + o.variacionCostoVariable);
-    return aumentoCostoVariable != 0 ? aumentoCostoVariable : null;
+    return aumentoCostoVariable != 0 ? (aumentoCostoVariable % 1 != 0 ? aumentoCostoVariable.toFixed(2) : aumentoCostoVariable) : null;
   }
 
   getAumentoProduccionMensual() {
