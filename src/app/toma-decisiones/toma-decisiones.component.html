@@ -1,4 +1,4 @@
-<mat-toolbar color="secundary" *ngIf="escenario">
+<mat-toolbar color="secundary" *ngIf="escenario && proyecto && !proyecto.entregado">
   <button mat-icon-button routerLink="/simulaciones">
     <mat-icon>arrow_back</mat-icon>
   </button>
@@ -9,7 +9,7 @@
 </mat-toolbar>
 
 
-<mat-tab-group mat-stretch-tabs >
+<mat-tab-group mat-stretch-tabs *ngIf="escenario && proyecto && !proyecto.entregado">
 
   <mat-tab label="Enunciado">
     <div class="tab-content">

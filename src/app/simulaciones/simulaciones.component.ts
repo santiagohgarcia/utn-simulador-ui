@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EscenariosService } from '../escenarios.service';
 import { UsuarioService } from '../usuario.service';
+import { zip, of } from "rxjs";
+import { switchMap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-simulaciones',
@@ -18,8 +20,23 @@ export class SimulacionesComponent implements OnInit {
     this.getEscenarios(this.usuario.id);
   }
 
-  getEscenarios(idUsuario){
-    this.escenariosService.getEscenariosParaUsuario(idUsuario).subscribe(escenarios => this.escenarios = escenarios)
+  getEscenarios(idUsuario) {
+    const $escenarios = this.escenariosService.getEscenariosParaUsuario(idUsuario);
+
+    const $escenariosConProyectos = $escenarios.pipe(
+      switchMap(escenarios => {
+        const $escenarios = escenarios.map(escenario => {
+          return this.usuarioService.getProyecto(escenario.id, idUsuario).pipe(
+            map(proyecto => {
+              escenario.proyecto = proyecto;
+              return escenario;
+            })
+          )
+        })
+        return zip(...$escenarios);
+      }));
+
+    $escenariosConProyectos.subscribe(escenarios => this.escenarios = escenarios);
   }
 
 }

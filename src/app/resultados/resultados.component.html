@@ -1,10 +1,13 @@
-<mat-toolbar color="secundary" *ngIf="escenario">
-  <button mat-icon-button routerLink="/simulaciones/escenario/{{escenario.id}}">
+<mat-toolbar color="secundary" *ngIf="escenario && proyecto">
+  <button *ngIf="proyecto.entregado" mat-icon-button routerLink="/simulaciones">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <button *ngIf="!proyecto.entregado" mat-icon-button routerLink="/simulaciones/escenario/{{escenario.id}}">
     <mat-icon>arrow_back</mat-icon>
   </button>
   <h4>Resultados</h4>
   <div class="spacer"></div>
-  <button mat-raised-button color="accent" (click)="entregarSimulacion()">ENTREGAR SIMULACION</button>
+  <button *ngIf="!proyecto.entregado" mat-raised-button color="accent" (click)="entregarSimulacion()">ENTREGAR SIMULACION</button>
 </mat-toolbar>
 <mat-tab-group *ngIf="proyecto" mat-stretch-tabs>
   <mat-tab label="Estado">

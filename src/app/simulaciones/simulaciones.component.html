@@ -11,8 +11,8 @@
         </mat-card-subtitle>
       </mat-card-header>
       <mat-card-actions>
-        <!-- TODO_SANTI: Cambiar el JUGAR por un VER si proyecto.entregado -->
-        <button mat-button routerLink="/simulaciones/escenario/{{escenario.id}}">JUGAR</button>
+        <button *ngIf="!escenario.proyecto.proyecto.entregado" mat-button routerLink="/simulaciones/escenario/{{escenario.id}}">JUGAR</button>
+        <button *ngIf="escenario.proyecto.proyecto.entregado" mat-button routerLink="/simulaciones/escenario/{{escenario.id}}/resultados">VER RESULTADOS</button>
       </mat-card-actions>
     </mat-card>
   </div>

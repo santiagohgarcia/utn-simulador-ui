@@ -40,12 +40,8 @@ export class ResultadosComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(respuesta => {
       if (respuesta === "ENTREGAR") {
-        respuesta = this.proyectoService.entregarProyecto(this.proyecto.id); //TODO_SANTI: Por algun motivo no se me ejecuta la llamada (no la veo en Network)
-        if (respuesta && respuesta.entregado){ 
-          this.router.navigate(['/simulacion-entregada']);
-        } else {
-          //TODO_SANTI: Mostrar mensaje de No se pudo entregar
-        }
+        this.proyectoService.entregarProyecto(this.proyecto.id)
+          .subscribe( _ =>  this.router.navigate(['/simulacion-entregada']) ); 
       }
     });
   }
