@@ -59,7 +59,8 @@ export class HomeComponent implements OnInit {
   matricularUsuario(usuario){
     const dialogRef = this.dialog.open(MatriculacionDialogComponent, {
       width: '400px',
-      data:  usuario
+      data:  usuario,
+      disableClose: true
     });
     dialogRef.afterClosed().subscribe(_ => {
       this.router.navigateByUrl('/simulaciones', { skipLocationChange: true })
