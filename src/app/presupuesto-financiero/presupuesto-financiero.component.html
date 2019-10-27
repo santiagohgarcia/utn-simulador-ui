@@ -5,8 +5,8 @@
       <th *ngFor="let periodo of periodos" class="mat-header-cell value-column"> {{escenario.nombrePeriodos}} {{periodo}} </th>
     </tr>
   
-    <!--INGRESOS_AFECTOS_A_IMPUESTOS-->
-    <tr *ngIf="presupuestoFinanciero.INGRESOS_AFECTOS_A_IMPUESTOS as flujo" class="mat-row">
+    <!--INGRESOS-->
+    <tr *ngIf="presupuestoFinanciero.INGRESOS as flujo" class="mat-row">
       <td class="mat-cell">
         <p class="flujo-column">
           {{ flujo.descripcion }}
@@ -25,28 +25,8 @@
       </td>
     </tr>
   
-    <!--INGRESOS_NO_AFECTOS_A_IMPUESTOS-->
-    <tr *ngIf="presupuestoFinanciero.INGRESOS_NO_AFECTOS_A_IMPUESTOS as flujo" class="mat-row">
-      <td class="mat-cell ">
-        <p class="flujo-column">
-          {{ flujo.descripcion }}
-        </p>
-        <p *ngFor="let cuenta of flujo.cuentas;" class="desc-cuenta">
-          {{ cuenta.descripcion }}
-        </p>
-      </td>
-      <td *ngFor="let periodo of periodos;" class="mat-cell value-column">
-        <p>
-          &nbsp;
-        </p>
-        <p *ngFor="let cuenta of flujo.cuentas;">
-          {{ getCuentaPeriodo(cuenta.cuentasPeriodo,periodo,true, false) }}
-        </p>
-      </td>
-    </tr>
-  
-    <!--EGRESOS_AFECTOS_A_IMPUESTOS-->
-    <tr *ngIf="presupuestoFinanciero.EGRESOS_AFECTOS_A_IMPUESTOS as flujo" class="mat-row">
+    <!--EGRESOS-->
+    <tr *ngIf="presupuestoFinanciero.EGRESOS as flujo" class="mat-row">
       <td class="mat-cell ">
         <p class="flujo-column">
           {{ flujo.descripcion }}
@@ -65,100 +45,8 @@
       </td>
     </tr>
   
-    <!--EGRESOS_NO_AFECTOS_A_IMPUESTOS-->
-    <tr *ngIf="presupuestoFinanciero.EGRESOS_NO_AFECTOS_A_IMPUESTOS as flujo" class="mat-row">
-      <td class="mat-cell ">
-        <p class="flujo-column">
-          {{ flujo.descripcion }}
-        </p>
-        <p *ngFor="let cuenta of flujo.cuentas;" class="desc-cuenta">
-          {{ cuenta.descripcion }}
-        </p>
-      </td>
-      <td *ngFor="let periodo of periodos;" class="mat-cell value-column">
-        <p>
-          &nbsp;
-        </p>
-        <p *ngFor="let cuenta of flujo.cuentas;">
-          {{ getCuentaPeriodo(cuenta.cuentasPeriodo,periodo,true, true) }}
-        </p>
-      </td>
-    </tr>
-  
-    <!--INVERSIONES-->
-    <tr *ngIf="presupuestoFinanciero.INVERSIONES as flujo" class="mat-row">
-      <td class="mat-cell ">
-        <p class="flujo-column">
-          {{ flujo.descripcion }}
-        </p>
-        <p *ngFor="let cuenta of flujo.cuentas;">
-          {{ cuenta.descripcion }}
-        </p>
-      </td>
-      <td *ngFor="let periodo of periodos;" class="mat-cell value-column">
-        <p>
-          &nbsp;
-        </p>
-        <p *ngFor="let cuenta of flujo.cuentas;">
-          {{ getCuentaPeriodo(cuenta.cuentasPeriodo,periodo,true) }}
-        </p>
-      </td>
-    </tr>
-  
-    <!--UTILIDAD_ANTES_DE_IMPUESTOS-->
-    <tr *ngIf="presupuestoFinanciero.UTILIDAD_ANTES_DE_IMPUESTOS as flujo" class="mat-row">
-      <td class="mat-cell ">
-        <p class="flujo-column">
-          {{ flujo.descripcion }}
-        </p>
-      </td>
-      <td *ngFor="let periodo of periodos;" class="mat-cell value-column">
-        {{ getCuentaPeriodo(flujo.montosPeriodo,periodo,true) }}
-      </td>
-    </tr>
-  
-    <!--IMPUESTOS-->
-    <tr *ngIf="presupuestoFinanciero.IMPUESTOS as flujo" class="mat-row">
-      <td class="mat-cell ">
-        <p class="flujo-column">
-          {{ flujo.descripcion }}
-        </p>
-      </td>
-      <td *ngFor="let periodo of periodos;" class="mat-cell value-column">
-        {{ getCuentaPeriodo(flujo.montosPeriodo,periodo,true) }}
-      </td>
-    </tr>
-  
-    <!--UTILIDAD_DESPUES_DE_IMPUESTOS-->
-    <tr *ngIf="presupuestoFinanciero.UTILIDAD_DESPUES_DE_IMPUESTOS as flujo" class="mat-row">
-      <td class="mat-cell ">
-        <p class="flujo-column">
-          {{ flujo.descripcion }}
-        </p>
-      </td>
-      <td *ngFor="let periodo of periodos;" class="mat-cell value-column">
-        {{ getCuentaPeriodo(flujo.montosPeriodo,periodo,true) }}
-      </td>
-    </tr>
-  
-    <!--AJUSTE_DE_GASTOS_NO_DESEMBOLSABLES-->
-    <tr *ngIf="presupuestoFinanciero.AJUSTE_DE_GASTOS_NO_DESEMBOLSABLES as flujo" class="mat-row">
-      <td class="mat-cell ">
-        <p class="flujo-column">
-          {{ flujo.descripcion }}
-        </p>
-        <p *ngFor="let cuenta of flujo.cuentas;">
-          {{ cuenta.descripcion }}
-        </p>
-      </td>
-      <td *ngFor="let periodo of periodos;" class="mat-cell value-column">
-        <p *ngFor="let cuenta of flujo.cuentas;">
-          {{ getCuentaPeriodo(cuenta.cuentasPeriodo,periodo,true) }}
-        </p>
-      </td>
-    </tr>
-  
-    <!--FLUJO_DE_FONDOS-->
+
+    <!--TOTAL-->
     <tr *ngIf="presupuestoFinanciero.TOTAL as flujo" class="mat-row">
       <td class="mat-cell ">
         <p class="flujo-column">
