@@ -8,6 +8,7 @@ import { DecisionesService } from '../decisiones.service';
 import { ConsecuenciaDialogComponent } from './consecuencias/consecuencia-dialog.component';
 import { MessagesService } from '../messages.service';
 import { EscenariosService } from '../escenarios.service';
+import { ProyectoService } from '../proyecto.service';
 
 @Component({
   selector: 'app-decision-detalle',
@@ -22,7 +23,7 @@ import { EscenariosService } from '../escenarios.service';
   ]
 })
 export class DecisionDetalleComponent implements OnInit {
-
+  tipoCuentas;
   decision: any = {
     escenarioId: null,
     descripcion: "",
@@ -41,7 +42,8 @@ export class DecisionDetalleComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private messageService: MessagesService,
-    private escenariosService: EscenariosService) { }
+    private escenariosService: EscenariosService,
+    private proyectoService: ProyectoService) { }
 
   ngOnInit() {
     var esenarioId = Number(this.route.snapshot.paramMap.get('escenarioId'));
@@ -54,6 +56,16 @@ export class DecisionDetalleComponent implements OnInit {
     } else {
       this.decision.escenarioId = esenarioId;
     }
+    this.getTipoCuentas();
+  }
+
+  getTipoCuentas(){
+      this.proyectoService.getTipoCuentas().subscribe(tipoCuentas => this.tipoCuentas = tipoCuentas)
+  }
+
+  tipoCuentaDescripcion(tipoCuenta){
+    const tipoCuentaObject = this.tipoCuentas.find(tc => tc.key === tipoCuenta)
+    return tipoCuentaObject && tipoCuentaObject.descripcion;
   }
 
   addOpcion() {

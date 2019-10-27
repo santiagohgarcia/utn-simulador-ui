@@ -30,7 +30,11 @@ export class HomeComponent implements OnInit {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.user = user;
-        this.getUsuario(user.email);
+        this.getUsuario({
+          mail: user.email,
+          nombreCompleto: user.displayName || user.email,
+          fotoUrl: user.photoURL
+        });
       } else {
         // User is not logged in
         this.router.navigateByUrl("/login");
@@ -55,11 +59,12 @@ export class HomeComponent implements OnInit {
   matricularUsuario(usuario){
     const dialogRef = this.dialog.open(MatriculacionDialogComponent, {
       width: '400px',
-      data:  usuario
+      data:  usuario,
+      disableClose: true
     });
     dialogRef.afterClosed().subscribe(_ => {
       this.router.navigateByUrl('/simulaciones', { skipLocationChange: true })
-      this.getUsuario(usuario.mail)
+      this.getUsuario(usuario)
     });
   }
 
