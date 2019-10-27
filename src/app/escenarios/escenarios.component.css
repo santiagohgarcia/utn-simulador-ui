@@ -24,3 +24,9 @@
     justify-content: space-between;
     align-items: baseline;
 }
+
+.mat-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
