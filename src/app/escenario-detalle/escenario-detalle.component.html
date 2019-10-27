@@ -162,8 +162,7 @@
       <form [formGroup]="estadoInicialForm" class="estado-form">
         <mat-form-field class="form-field">
           <input autofocus matInput placeholder="Costo Fijo" [formControl]="costoFijo"
-            [(ngModel)]="escenario.estadoInicial.costoFijo" type="number"
-            [(value)]="escenario.estadoInicial.costoFijo">
+            [(ngModel)]="escenario.estadoInicial.costoFijo" type="number" [(value)]="escenario.estadoInicial.costoFijo">
         </mat-form-field>
         <mat-form-field class="form-field">
           <input autofocus matInput placeholder="Costo Variable" [formControl]="costoVariable"
@@ -177,13 +176,18 @@
         </mat-form-field>
         <mat-form-field class="form-field">
           <input autofocus matInput placeholder="Stock" [formControl]="stock"
-            [(ngModel)]="escenario.estadoInicial.stock" type="number"
-            [(value)]="escenario.estadoInicial.stock">
+            [(ngModel)]="escenario.estadoInicial.stock" type="number" [(value)]="escenario.estadoInicial.stock">
         </mat-form-field>
         <mat-form-field class="form-field">
           <input autofocus matInput placeholder="Calidad" [formControl]="calidad"
-            [(ngModel)]="escenario.estadoInicial.calidad" type="number"
-            [(value)]="escenario.estadoInicial.calidad">
+            [(ngModel)]="escenario.estadoInicial.calidad" type="number" [(value)]="escenario.estadoInicial.calidad">
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input autofocus matInput placeholder="Cantidad de Vendedores" [formControl]="cantidadVendedores"
+            type="number">
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input autofocus matInput placeholder="Publicidad" [formControl]="publicidad" type="number">
         </mat-form-field>
       </form>
     </mat-card-content>

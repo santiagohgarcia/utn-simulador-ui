@@ -4,11 +4,8 @@
 <div class="card-container" *ngIf="usuario">
   <mat-card *ngFor="let escenario of escenarios;">
     <mat-card-header>
-      
         <mat-card-title>{{escenario.titulo | titlecase}}</mat-card-title>
         <mat-card-subtitle>{{escenario.descripcion}}</mat-card-subtitle>
-     
-   
     </mat-card-header>
 
     <mat-card-actions>

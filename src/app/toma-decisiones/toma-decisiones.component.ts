@@ -182,6 +182,19 @@ export class TomaDecisionesComponent implements OnInit {
     return aumentoCalidad != 0 ? aumentoCalidad : null;
   }
 
+  getAumentoPublicidad() {
+    var aumentoPublicidad = 0;
+    this.getOpcionesTomadas().forEach(o => aumentoPublicidad = aumentoPublicidad + o.variacionPublicidad);
+    return aumentoPublicidad != 0 ? aumentoPublicidad : null;
+  }
+
+  getAumentoCantidadVendedores() {
+    var aumentoCantidadVendedores = 0;
+    this.getOpcionesTomadas().forEach(o => aumentoCantidadVendedores = aumentoCantidadVendedores + o.variacionCantidadVendedores);
+    return aumentoCantidadVendedores != 0 ? aumentoCantidadVendedores : null;
+  }
+
+
   simular() {
     if (this.inputsValidos()) {
       //Grabar FORECAST

@@ -15,7 +15,7 @@
 .balance-container {
     grid-area: balance;
     display: grid;
-    grid-template-columns: 3fr 3fr 2fr ;
+    grid-template-columns: 2fr 2fr 4fr ;
     grid-auto-rows: auto auto auto auto;
     grid-template-areas: "activo pasivo estado-inicial" "activo pasivo estado-inicial" "activo pasivo estado-inicial" "activo patrimonio-neto estado-inicial"  ;
     grid-gap: 20px;
@@ -83,7 +83,7 @@
     grid-area: estado-inicial;
     display: grid;
     grid-auto-rows: auto;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-gap: 20px;
 }
 
@@ -316,7 +316,15 @@
     background-size: cover;
 }
 
+.publicidad-avatar{
+    background-image: url('../../assets/img/publicity.png');
+    background-size: cover;
+}
 
+.teamwork-avatar{
+    background-image: url('../../assets/img/teamwork.png');
+    background-size: cover;
+}
 
 .mat-icon-star-size{
     font-size: 15px;
