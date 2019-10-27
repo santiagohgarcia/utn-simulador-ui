@@ -168,6 +168,36 @@
               </h1>
             </mat-card-content>
           </mat-card>
+          <mat-card class="single-number-card">
+              <mat-card-header>
+                  <div mat-card-avatar class="publicidad-avatar"></div>
+                <mat-card-title>Publicidad</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <h1 class="single-number">
+                  {{estado.publicidad}}
+                  <span [ngClass]="getAumentoProduccionMensual() < 0 ? 'bad-var' : 'good-var plus-var'"
+                    *ngIf="getAumentoPublicidad()">
+                    {{ getAumentoPublicidad() }}
+                  </span>
+                </h1>
+              </mat-card-content>
+            </mat-card>
+            <mat-card class="single-number-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="teamwork-avatar"></div>
+                  <mat-card-title>Vendedores</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <h1 class="single-number">
+                    {{estado.cantidadVendedores}}
+                    <span [ngClass]="getAumentoCantidadVendedores() < 0 ? 'bad-var' : 'good-var plus-var'"
+                      *ngIf="getAumentoCantidadVendedores()">
+                      {{ getAumentoCantidadVendedores() }}
+                    </span>
+                  </h1>
+                </mat-card-content>
+              </mat-card>
         </div>
       </div>
     </div>

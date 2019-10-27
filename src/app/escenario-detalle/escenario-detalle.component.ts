@@ -50,7 +50,9 @@ export class EscenarioDetalleComponent implements OnInit {
       costoVariable: 0,
       stock: 0,
       produccionMensual: 0,
-      calidad: 0
+      calidad: 0,
+      publicidad: 0,
+      cantidadVendedores: 0
     },
     cursos: [],
     invalid: null
@@ -107,12 +109,16 @@ export class EscenarioDetalleComponent implements OnInit {
   costoVariable = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
   produccionMensual = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
   stock = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
+  publicidad = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
+  cantidadVendedores = new FormControl(new Number(), [Validators.required, Validators.min(0)]);
   estadoInicialForm: FormGroup = new FormGroup({
     calidad: this.calidad,
     costoFijo: this.costoFijo,
     costoVariable: this.costoVariable,
     produccionMensual: this.produccionMensual,
-    stock: this.stock
+    stock: this.stock,
+    publicidad: this.publicidad,
+    cantidadVendedores: this.cantidadVendedores
   });
 
   forecasts = [{

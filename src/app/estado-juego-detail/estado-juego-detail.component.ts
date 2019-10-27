@@ -15,21 +15,125 @@ export class EstadoJuegoDetailComponent implements OnInit {
   ventasChartProps;
   jugadores;
 
+  tablaPonderadora = {
+    precioDesde: [{
+      concepto: 300,
+      bajo: 1,
+      medio: 3,
+      alto: 4
+    }, {
+      concepto: 300,
+      bajo: 1,
+      medio: 3,
+      alto: 4
+    }, {
+      concepto: 300,
+      bajo: 1,
+      medio: 3,
+      alto: 4
+    }],
+    modalidadCobro: [{
+      concepto: "Contado",
+      bajo: 1,
+      medio: 3,
+      alto: 4
+    }, {
+      concepto: "30 dias",
+      bajo: 1,
+      medio: 3,
+      alto: 4
+    },{
+      concepto: "60 dias",
+      bajo: 1,
+      medio: 3,
+      alto: 4
+    }, {
+      concepto: "90 dias",
+      bajo: 1,
+      medio: 3,
+      alto: 4
+    }],
+    calidadDesde: [{
+      concepto: 0,
+      bajo: 1,
+      medio: 3,
+      alto: 4
+    }, {
+      concepto: 5,
+      bajo: 1,
+      medio: 3,
+      alto: 4
+    },{
+      concepto: 8,
+      bajo: 1,
+      medio: 3,
+      alto: 4
+    }],
+    vendedoresDesde: [{
+      concepto: 0,
+      bajo: 1,
+      medio: 3,
+      alto: 4
+    }, {
+      concepto: 5,
+      bajo: 1,
+      medio: 3,
+      alto: 4
+    },{
+      concepto: 8,
+      bajo: 1,
+      medio: 3,
+      alto: 4
+    }],
+    publicidadDesde: [{
+      concepto: 0,
+      bajo: 1,
+      medio: 3,
+      alto: 4
+    }, {
+      concepto: 5,
+      bajo: 1,
+      medio: 3,
+      alto: 4
+    },{
+      concepto: 8,
+      bajo: 1,
+      medio: 3,
+      alto: 4
+    }],
+    empresasCompetidoras: [{
+      concepto: "Empresa A",
+      bajo: 1,
+      medio: 3,
+      alto: 4
+    }, {
+      concepto: "Empresa B",
+      bajo: 1,
+      medio: 3,
+      alto: 4
+    },{
+      concepto: "Empresa C",
+      bajo: 1,
+      medio: 3,
+      alto: 4
+    }]
+  }
+
   forecasts = [{
-    proyectoId: 1,
-    periodo: 0,
-    cantidadUnidades: 0,
-    precio: 0
-  }, {
-    proyectoId: 1,
     periodo: 1,
-    cantidadUnidades: 0,
-    precio: 0
+    bajo: 1,
+    medio: 3,
+    alto: 4
   }, {
-    proyectoId: 1,
-    periodo: 2,
-    cantidadUnidades: 0,
-    precio: 0
+    periodo: 1,
+    bajo: 1,
+    medio: 3,
+    alto: 4
+  }, {
+    periodo: 1,
+    bajo: 1,
+    medio: 3,
+    alto: 4 
   }]
 
   constructor(private route: ActivatedRoute, private cursosService: CursosService, private escenariosService: EscenariosService) { }
