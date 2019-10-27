@@ -77,12 +77,12 @@ export class EstadoComponent implements OnInit {
         scaleShowVerticalLines: false,
         responsive: true
       },
-      labels: estados.map(estado => `${this.escenario.nombrePeriodos} ${estado.periodo}`),
+      labels: estados.filter((_,index) => index !== 0).map(estado => `${this.escenario.nombrePeriodos} ${estado.periodo}`),
       type: 'line',
       legend: true,
       data: [
         {
-          data: estados.map(estado => estado.ventas),
+          data: estados.filter((_,index) => index !== 0).map(estado => estado.ventas),
           fill: false,
           label: 'Ventas'
         },

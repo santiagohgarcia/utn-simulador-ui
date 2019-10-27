@@ -4,7 +4,6 @@
   </button>
   <h4>{{escenario.titulo}}</h4>
   <span class="spacer"></span>
-  <!-- TODO_SANTI: Mostrar un boton distinto cuando proyecto.entregado que sea "VER RESULTADO" y solo redirija a la otra pag -->
   <button mat-raised-button color="primary" (click)="simular()">SIMULAR</button>
 </mat-toolbar>
 
@@ -23,9 +22,9 @@
 
   <mat-tab label="Datos Iniciales">
     <div class="tab-content">
-     
+
       <div *ngIf="escenario && escenario.balanceInicial" class="balance-container">
-         
+
         <mat-card class="activo">
           <mat-card-header>
             <div mat-card-avatar class="activo-avatar"></div>
@@ -97,74 +96,77 @@
         </mat-card>
 
         <div class="estado-inicial">
-            <mat-card class="single-number-card">
-              <mat-card-header>
-                  <div mat-card-avatar class="costos-avatar"></div>
-                <mat-card-title>Costo Fijo</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                <h1 class="single-number">
-                  $ {{estado.costoFijo}}
-                  <span [ngClass]="getAumentoCostoFijo() < 0 ? 'good-var' : 'bad-var plus-var'" *ngIf="getAumentoCostoFijo()">
-                    {{ getAumentoCostoFijo() }}
-                  </span>
-                </h1>
-              </mat-card-content>
-            </mat-card>
-            <mat-card class="single-number-card">
-              <mat-card-header>
-                  <div mat-card-avatar class="costos-avatar"></div>
-                <mat-card-title>Costo Variable</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                <h1 class="single-number">
-                  $ {{estado.costoVariable}}
-                  <span [ngClass]="getAumentoCostoVariable() < 0 ? 'good-var' : 'bad-var plus-var'" *ngIf="getAumentoCostoVariable()">
-                    {{ getAumentoCostoVariable() }}
-                  </span>
-                </h1>
-              </mat-card-content>
-            </mat-card>
-            <mat-card class="single-number-card">
-              <mat-card-header>
-                  <div mat-card-avatar class="produccion-avatar"></div>
-                <mat-card-title>Produccion</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                <h1 class="single-number">
-                  {{estado.produccionMensual}} u./{{escenario.nombrePeriodos}}
-                  <span [ngClass]="getAumentoProduccionMensual() < 0 ? 'bad-var' : 'good-var plus-var'" *ngIf="getAumentoProduccionMensual()">
-                    {{ getAumentoProduccionMensual() }}
-                  </span>
-                </h1>
-              </mat-card-content>
-            </mat-card>
-            <mat-card class="single-number-card">
-              <mat-card-header>
-                <div mat-card-avatar class="stock-avatar"></div>
-                <mat-card-title>Stock</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                <h1 class="single-number">{{estado.stock}} u.</h1>
-              </mat-card-content>
-            </mat-card>
-            <mat-card class="single-number-card">
-                <mat-card-header>
-                    <div mat-card-avatar class="calidad-avatar"></div>
-                  <mat-card-title>Calidad</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                  <h1 class="single-number">
-                    <i class="material-icons" *ngFor="let calidad of getEvenNumber(estado.calidad)">star</i>
-                    <i class="material-icons" *ngIf="getOddNumber(estado.calidad)">star_half</i>
-                    <span [ngClass]="getAumentoCalidad() < 0 ? 'bad-var' : 'good-var plus-var'" *ngIf="getAumentoCalidad()">
-                      <i class="material-icons" *ngFor="let calidad of getEvenNumber(getAumentoCalidad())">star</i>
-                      <i class="material-icons" *ngIf="getOddNumber(getAumentoCalidad())">star_half</i>
-                    </span>
-                  </h1>
-                </mat-card-content>
-              </mat-card>
-          </div>
+          <mat-card class="single-number-card">
+            <mat-card-header>
+              <div mat-card-avatar class="costos-avatar"></div>
+              <mat-card-title>Costo Fijo</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <h1 class="single-number">
+                $ {{estado.costoFijo}}
+                <span [ngClass]="getAumentoCostoFijo() < 0 ? 'good-var' : 'bad-var plus-var'"
+                  *ngIf="getAumentoCostoFijo()">
+                  {{ getAumentoCostoFijo() }}
+                </span>
+              </h1>
+            </mat-card-content>
+          </mat-card>
+          <mat-card class="single-number-card">
+            <mat-card-header>
+              <div mat-card-avatar class="costos-avatar"></div>
+              <mat-card-title>Costo Variable</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <h1 class="single-number">
+                $ {{estado.costoVariable}}
+                <span [ngClass]="getAumentoCostoVariable() < 0 ? 'good-var' : 'bad-var plus-var'"
+                  *ngIf="getAumentoCostoVariable()">
+                  {{ getAumentoCostoVariable() }}
+                </span>
+              </h1>
+            </mat-card-content>
+          </mat-card>
+          <mat-card class="single-number-card">
+            <mat-card-header>
+              <div mat-card-avatar class="produccion-avatar"></div>
+              <mat-card-title>Produccion</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <h1 class="single-number">
+                {{estado.produccionMensual}} u./{{escenario.nombrePeriodos}}
+                <span [ngClass]="getAumentoProduccionMensual() < 0 ? 'bad-var' : 'good-var plus-var'"
+                  *ngIf="getAumentoProduccionMensual()">
+                  {{ getAumentoProduccionMensual() }}
+                </span>
+              </h1>
+            </mat-card-content>
+          </mat-card>
+          <mat-card class="single-number-card">
+            <mat-card-header>
+              <div mat-card-avatar class="stock-avatar"></div>
+              <mat-card-title>Stock</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <h1 class="single-number">{{estado.stock}} u.</h1>
+            </mat-card-content>
+          </mat-card>
+          <mat-card class="single-number-card">
+            <mat-card-header>
+              <div mat-card-avatar class="calidad-avatar"></div>
+              <mat-card-title>Calidad</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <h1 class="single-number">
+                <i class="material-icons" *ngFor="let calidad of getEvenNumber(estado.calidad)">star</i>
+                <i class="material-icons" *ngIf="getOddNumber(estado.calidad)">star_half</i>
+                <span [ngClass]="getAumentoCalidad() < 0 ? 'bad-var' : 'good-var plus-var'" *ngIf="getAumentoCalidad()">
+                  <i class="material-icons" *ngFor="let calidad of getEvenNumber(getAumentoCalidad())">star</i>
+                  <i class="material-icons" *ngIf="getOddNumber(getAumentoCalidad())">star_half</i>
+                </span>
+              </h1>
+            </mat-card-content>
+          </mat-card>
+        </div>
       </div>
     </div>
   </mat-tab>
@@ -268,10 +270,12 @@
                     <span class="proveedor-desc-container">
                       <span style="font-weight: bold; margin-bottom: 5px;">{{proveedor.nombre}}</span>
                       <span style="margin-bottom: 5px;">Costo Variable: +{{proveedor.variacionCostoVariable}}</span>
-                      <span style="margin-bottom: 5px;">Calidad: 
-                          <i class="material-icons mat-icon-star-size" *ngFor="let calidad of getEvenNumber(proveedor.variacionCalidad)">star</i>
-                          <i class="material-icons mat-icon-star-size" *ngIf="getOddNumber(proveedor.variacionCalidad)">star_half</i></span>
-                      
+                      <span style="margin-bottom: 5px;">Calidad:
+                        <i class="material-icons mat-icon-star-size"
+                          *ngFor="let calidad of getEvenNumber(proveedor.variacionCalidad)">star</i>
+                        <i class="material-icons mat-icon-star-size"
+                          *ngIf="getOddNumber(proveedor.variacionCalidad)">star_half</i></span>
+
                     </span>
                   </span>
                 </td>
