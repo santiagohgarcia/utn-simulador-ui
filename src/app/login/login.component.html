@@ -5,7 +5,7 @@
 <div class="back">
     <mat-card class="card">
         <div class="button-row">
-            <h1 class="title">Sign In.</h1>
+            <h1 class="title">Ingresar</h1>
             <button mat-fab class="facebook-button" matTooltip="Login with Facebook" (click)="withFacebook()">
                 <mat-icon svgIcon="facebook_icon"></mat-icon>
             </button>
@@ -29,9 +29,8 @@
 
         <div class="button-row signUpRow">
             <mat-slide-toggle color="primary" (change)="rememberMe()" [(ngModel)]="rememberMeChecked"
-                [(checked)]="rememberMeChecked">Remember me</mat-slide-toggle>
-
-            <button mat-button color="warn" (click)="openRegisterDialog()">Sing Up.</button>
+                [(checked)]="rememberMeChecked">Recordarme</mat-slide-toggle>
+            <button mat-button color="warn" (click)="openRegisterDialog()">Registrarse</button>
         </div>
     </mat-card>
 

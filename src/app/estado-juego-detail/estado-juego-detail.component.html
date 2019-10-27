@@ -12,7 +12,7 @@
 </mat-toolbar>
 
 <mat-tab-group *ngIf="escenario && curso">
-  <mat-tab label="Jugadores">
+  <mat-tab label="Resultados">
     <div class="jugadores-container">
       <mat-card class="general">
         <mat-card-header>
@@ -21,71 +21,19 @@
         </mat-card-header>
         <mat-card-content>
           <mat-list>
-            <mat-list-item>
-              <img matListAvatar src="../../assets/img/gold-medal.png">
-              <h4 mat-line>Ron Swanson</h4>
-              <p mat-line> 12357 puntos </p>
-            </mat-list-item>
-            <mat-list-item>
-              <img matListAvatar src="../../assets/img/silver-medal.png">
-              <h4 mat-line>Leslie Knope</h4>
-              <p mat-line> 12357 puntos </p>
-            </mat-list-item>
-            <mat-list-item>
-              <img matListAvatar src="../../assets/img/bronze-medal.png">
-              <h4 mat-line>Tom Havenford</h4>
-              <p mat-line> 12357 puntos </p>
-            </mat-list-item>
-            <mat-list-item>
-              <img matListAvatar src="../../assets/img/medal.png">
-              <h4 mat-line>Pam Beasley</h4>
-              <p mat-line> 12357 puntos </p>
-            </mat-list-item>
-            <mat-list-item>
-              <img matListAvatar src="../../assets/img/medal.png">
-              <h4 mat-line>Andy Dwiyer</h4>
-              <p mat-line> 12357 puntos </p>
-            </mat-list-item>
-            <mat-list-item>
-              <img matListAvatar src="../../assets/img/medal.png">
-              <h4 mat-line>Ann Perkins</h4>
-              <p mat-line> 12357 puntos </p>
-            </mat-list-item>
-            <mat-list-item>
-              <img matListAvatar src="../../assets/img/medal.png">
-              <h4 mat-line>Ben Wyatt</h4>
-              <p mat-line> 12357 puntos </p>
-            </mat-list-item>
-            <mat-list-item>
-              <img matListAvatar src="../../assets/img/medal.png">
-              <h4 mat-line>Chris Teager</h4>
-              <p mat-line> 12357 puntos </p>
+            <mat-list-item *ngFor="let jugador of jugadores">
+              <div class="ranking-list-item">
+                <div class="ranking-list-item-avatar">
+                  <img matListAvatar src="../../assets/img/gold-medal.png" style="margin-right: 5px;">
+                  <h4 style="font-weight: 400; font-size: inherit;">{{jugador.usuarioNombre}}</h4>
+                </div>
+                <img *ngIf="jugador.usuarioFotoUrl" matListAvatar src="{{jugador.usuarioFotoUrl}}">
+                <img *ngIf="!jugador.usuarioFotoUrl" matListAvatar src="../../assets/img/student.png">
+              </div>
             </mat-list-item>
           </mat-list>
         </mat-card-content>
       </mat-card>
-
-      <!--<div class="legend">
-        <mat-card>
-          <mat-card-header>
-            <div mat-card-avatar class="one-avatar"></div>
-            <mat-card-title>+1000 puntos</mat-card-title>
-          </mat-card-header>
-        </mat-card>
-        <mat-card>
-          <mat-card-header>
-            <div mat-card-avatar class="two-avatar"></div>
-            <mat-card-title>+500 puntos</mat-card-title>
-          </mat-card-header>
-        </mat-card>
-        <mat-card>
-          <mat-card-header>
-            <div mat-card-avatar class="three-avatar"></div>
-            <mat-card-title>+100 puntos</mat-card-title>
-          </mat-card-header>
-        </mat-card>
-      </div>-->
-
 
       <mat-accordion class="charts-accordion headers-align">
         <mat-expansion-panel expanded="true" hideToggle>
@@ -123,19 +71,19 @@
               Mejor Caja Final
             </mat-panel-title>
             <mat-panel-description>
-                <div style="display: flex; margin-right: 20px;">
-                  <img src="../../assets/img/one.png" class="number-avatar">
-                  <span>+1000</span>
-                </div>
-                <div style="display: flex;  margin-right: 20px;">
-                  <img src="../../assets/img/two.png" class="number-avatar">
-                  <span>+800</span>
-                </div>
-                <div style="display: flex;  margin-right: 20px;">
-                  <img src="../../assets/img/three.png" class="number-avatar">
-                  <span>+200</span>
-                </div>
-              </mat-panel-description>
+              <div style="display: flex; margin-right: 20px;">
+                <img src="../../assets/img/one.png" class="number-avatar">
+                <span>+1000</span>
+              </div>
+              <div style="display: flex;  margin-right: 20px;">
+                <img src="../../assets/img/two.png" class="number-avatar">
+                <span>+800</span>
+              </div>
+              <div style="display: flex;  margin-right: 20px;">
+                <img src="../../assets/img/three.png" class="number-avatar">
+                <span>+200</span>
+              </div>
+            </mat-panel-description>
           </mat-expansion-panel-header>
           <div class="canvas-container" *ngIf="ventasChartProps">
             <canvas baseChart [datasets]="ventasChartProps.data" [labels]="ventasChartProps.labels"
@@ -152,19 +100,19 @@
               Mejor Renta
             </mat-panel-title>
             <mat-panel-description>
-                <div style="display: flex; margin-right: 20px;">
-                  <img src="../../assets/img/one.png" class="number-avatar">
-                  <span>+1000</span>
-                </div>
-                <div style="display: flex;  margin-right: 20px;">
-                  <img src="../../assets/img/two.png" class="number-avatar">
-                  <span>+800</span>
-                </div>
-                <div style="display: flex;  margin-right: 20px;">
-                  <img src="../../assets/img/three.png" class="number-avatar">
-                  <span>+200</span>
-                </div>
-              </mat-panel-description>
+              <div style="display: flex; margin-right: 20px;">
+                <img src="../../assets/img/one.png" class="number-avatar">
+                <span>+1000</span>
+              </div>
+              <div style="display: flex;  margin-right: 20px;">
+                <img src="../../assets/img/two.png" class="number-avatar">
+                <span>+800</span>
+              </div>
+              <div style="display: flex;  margin-right: 20px;">
+                <img src="../../assets/img/three.png" class="number-avatar">
+                <span>+200</span>
+              </div>
+            </mat-panel-description>
           </mat-expansion-panel-header>
           <div class="canvas-container" *ngIf="ventasChartProps">
             <canvas baseChart [datasets]="ventasChartProps.data" [labels]="ventasChartProps.labels"
@@ -175,16 +123,28 @@
         </mat-expansion-panel>
       </mat-accordion>
 
-
-
-
-
-
-
     </div>
   </mat-tab>
-  <mat-tab label="Ventas Reales">
+  <mat-tab label="Estado Actual">
     <div class="ventas-reales-content">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Jugadores</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-list class="jugadores-list">
+            <mat-list-item *ngFor="let jugador of jugadores">
+              <img *ngIf="jugador.usuarioFotoUrl" matListAvatar src="{{jugador.usuarioFotoUrl}}"
+                [className]="jugador.entregado ? 'jugador-entregado' : 'jugador-no-entregado'">
+              <img *ngIf="!jugador.usuarioFotoUrl" matListAvatar src="../../assets/img/student.png"
+                [className]="jugador.entregado ? 'jugador-entregado' : 'jugador-no-entregado'">
+              <h4 mat-line>{{jugador.usuarioNombre}}</h4>
+              <p mat-line *ngIf="jugador.entregado" class="jugadores-list-subline">Entregado</p>
+              <p mat-line *ngIf="!jugador.entregado" class="jugadores-list-subline">No Entregado</p>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
       <mat-card>
         <mat-card-header>
           <mat-card-title>Ventas Reales</mat-card-title>
@@ -224,34 +184,5 @@
       </mat-card>
     </div>
   </mat-tab>
-
-  <!-- TODO_SANTI: Ponerle formato bonito a esto -->
-  <mat-tab label="Estado Usuarios">
-      <div class="estado-usuarios-content">
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>Estado Usuarios</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <table class="mat-table table">
-              <tr class="mat-header-row">
-                <th class="mat-header-cell desc-column">Escenario</th>
-                <th class="mat-header-cell desc-column">Curso</th>
-                <th class="mat-header-cell desc-column">Usuario</th>
-                <th class="mat-header-cell desc-column">Entregado</th>
-              </tr>
-              <ng-container *ngFor="let escenarioCurso of escenarioCursos">
-                <tr class="mat-row">
-                  <td class="mat-cell desc-column">{{escenarioCurso.escenario}}</td>
-                  <td class="mat-cell desc-column">{{escenarioCurso.curso}}</td>
-                  <td class="mat-cell desc-column">{{escenarioCurso.usuario}}</td>
-                  <td class="mat-cell desc-column">{{escenarioCurso.entregado}}</td>
-                </tr>
-              </ng-container>
-            </table>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </mat-tab>
 
 </mat-tab-group>

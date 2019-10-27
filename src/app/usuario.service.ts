@@ -17,8 +17,8 @@ export class UsuarioService {
     return this._usuario;
   }
 
-  getUsuario(email): Observable<any> {
-    return this.http.get(`${environment.proyectoServiceHost}/api/usuario/${email}`)
+  getUsuario(usuario): Observable<any> {
+    return this.http.post(`${environment.proyectoServiceHost}/api/usuario`,usuario)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)),
             tap( usuario => this._usuario = usuario ));
   }
