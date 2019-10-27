@@ -301,7 +301,7 @@
 
         <mat-card-header>
           <div mat-card-avatar class="credito-avatar"></div>
-          <mat-card-title>Financiacion</mat-card-title>
+          <mat-card-title>Financiación</mat-card-title>
 
         </mat-card-header>
         <mat-card-content>
@@ -312,7 +312,12 @@
                 [(value)]="credito.monto">
             </mat-form-field>
           </div>
-
+          <div class="monto-cont">
+            <mat-form-field class="monto">
+            <input type="number" matInput style="text-align: right" placeholder="Periodo Inicial" [(ngModel)]="credito.periodoInicial"
+              [(value)]="credito.periodoInicial">
+            </mat-form-field>
+          </div>
           <table class="mat-table table">
 
             <tr class="mat-header-row">
