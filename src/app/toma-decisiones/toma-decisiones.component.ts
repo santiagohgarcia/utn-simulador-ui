@@ -65,6 +65,7 @@ export class TomaDecisionesComponent implements OnInit {
     this.proyectoService.getCredito(proyectoId)
       .subscribe(credito => this.credito = credito || {
         monto: 0,
+        periodoInicial: 0,
         proyectoId: this.proyecto.id
       });
   }
