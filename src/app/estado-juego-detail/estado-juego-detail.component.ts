@@ -217,7 +217,7 @@ export class EstadoJuegoDetailComponent implements OnInit {
 
   _validateSecuencia(array,prop){
     var arrayValor = array.map( elem => elem[prop]),
-        arrayOrdernado = arrayValor.concat([]).sort();
+        arrayOrdernado = arrayValor.concat([]).sort((a,b) => a > b ? 1 : -1);
     if(JSON.stringify(arrayOrdernado) !== JSON.stringify(arrayValor)){
       return "Revise las secuencias de valores en las configuraciones de mercado"
     }
