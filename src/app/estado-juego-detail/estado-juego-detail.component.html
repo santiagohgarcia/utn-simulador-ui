@@ -4,10 +4,11 @@
       <mat-icon>arrow_back</mat-icon>
     </button>
     <h4>{{escenario.titulo | titlecase}}</h4>
-    <span class="spacer"></span>
-    <mat-chip-list>
+    <mat-chip-list style="margin-left:10px;">
       <mat-chip color="primary" selected>ABIERTO</mat-chip>
     </mat-chip-list>
+    <span class="spacer"></span>
+    <button mat-raised-button color="warn" (click)="cerrarEscenario()">CERRAR ESCENARIO</button>
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -149,7 +150,7 @@
 
   <mat-tab label="Tabla Ponderadora">
     <div class="tabla-ponderadora-content">
-      <mat-card class="forecast">
+      <mat-card class="forecast" *ngIf="configuracionMercado.mercadosPeriodo">
         <mat-card-header>
           <div mat-card-avatar class="ventas-avatar"></div>
           <mat-card-title>Demanda de Mercado</mat-card-title>
@@ -162,12 +163,10 @@
               <th class="mat-header-cell value-column-cantidad">Medio</th>
               <th class="mat-header-cell value-column-cantidad">Alto</th>
             </tr>
-            <ng-container *ngFor="let forecast of forecasts">
+            <ng-container *ngFor="let forecast of configuracionMercado.mercadosPeriodo">
               <tr class="mat-row">
                 <td class="mat-cell">
-
-                  <span>Mes {{forecast.periodo}}</span>
-
+                  <span>{{forecast.periodo}}</span>
                 </td>
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
@@ -192,7 +191,7 @@
           </table>
         </mat-card-content>
       </mat-card>
-      <mat-card class="empresas">
+      <mat-card class="empresas" *ngIf="configuracionMercado.empresasCompetidoras">
         <mat-card-header>
           <div mat-card-avatar class="competencia-avatar"></div>
           <mat-card-title>Empresas Competidoras</mat-card-title>
@@ -205,11 +204,11 @@
               <th class="mat-header-cell value-column-cantidad">Medio</th>
               <th class="mat-header-cell value-column-cantidad">Alto</th>
             </tr>
-            <ng-container *ngFor="let ec of tablaPonderadora.empresasCompetidoras">
+            <ng-container *ngFor="let ec of configuracionMercado.empresasCompetidoras">
               <tr class="mat-row">
                 <td class="mat-cell">
                   <mat-form-field>
-                    <input [(ngModel)]="ec.concepto" [(value)]="ec.concepto" matInput>
+                    <input [(ngModel)]="ec.nombre" [(value)]="ec.nombre" matInput>
                   </mat-form-field>
                 </td>
                 <td class="mat-cell value-column-cantidad">
@@ -235,7 +234,7 @@
           </table>
         </mat-card-content>
       </mat-card>
-      <mat-card class="precio-intervalo">
+      <mat-card class="precio-intervalo" *ngIf="configuracionMercado.restriccionPrecio">
         <mat-card-header>
           <div mat-card-avatar class="precio-avatar"></div>
           <mat-card-title>Intervalo de Precios</mat-card-title>
@@ -243,16 +242,20 @@
         <mat-card-content>
           <div class="precio-intervalo-container">
             <mat-form-field>
-              <input placeholder="Precio Min" type="number" matInput>
+              <input placeholder="Precio Min" type="number" matInput
+                [(ngModel)]="configuracionMercado.restriccionPrecio.precioMin"
+                [(value)]="configuracionMercado.restriccionPrecio.precioMin">
             </mat-form-field>
             <span style="margin-right: 20px; margin-left: 20px;">hasta</span>
             <mat-form-field>
-              <input placeholder="Precio Max" type="number" matInput>
+              <input placeholder="Precio Max" type="number" matInput
+                [(ngModel)]="configuracionMercado.restriccionPrecio.precioMax"
+                [(value)]="configuracionMercado.restriccionPrecio.precioMax">
             </mat-form-field>
           </div>
         </mat-card-content>
       </mat-card>
-      <mat-accordion class="accordion-tables headers-align">
+      <mat-accordion class="accordion-tables headers-align" *ngIf="configuracionMercado.ponderacionesMercado">
         <mat-expansion-panel hideToggle expanded="true">
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -269,11 +272,11 @@
               <th class="mat-header-cell value-column-cantidad">Medio</th>
               <th class="mat-header-cell value-column-cantidad">Alto</th>
             </tr>
-            <ng-container *ngFor="let pd of tablaPonderadora.precioDesde">
+            <ng-container *ngFor="let pd of configuracionMercado.ponderacionesMercado.precioDesde">
               <tr class="mat-row">
                 <td class="mat-cell">
                   <mat-form-field>
-                    <input type="number" matInput [(ngModel)]="pd.concepto" [(value)]="pd.concepto">
+                    <input type="number" matInput [(ngModel)]="pd.valor" [(value)]="pd.valor">
                   </mat-form-field>
                 </td>
                 <td class="mat-cell value-column-cantidad">
@@ -302,7 +305,7 @@
           <mat-expansion-panel-header>
             <mat-panel-title>
               <img src="../../assets/img/cobro.png" class="avatar-img">
-              Modalidad Cobro
+              Modalidad de Cobro
             </mat-panel-title>
 
           </mat-expansion-panel-header>
@@ -313,10 +316,10 @@
               <th class="mat-header-cell value-column-cantidad">Medio</th>
               <th class="mat-header-cell value-column-cantidad">Alto</th>
             </tr>
-            <ng-container *ngFor="let mc of tablaPonderadora.modalidadCobro">
+            <ng-container *ngFor="let mc of configuracionMercado.ponderacionesMercado.modalidadCobro">
               <tr class="mat-row">
                 <td class="mat-cell">
-                  <span>{{mc.concepto}}</span>
+                  <span>{{getModalidadCobroDesc(mc.valor)}}</span>
                 </td>
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
@@ -355,11 +358,11 @@
               <th class="mat-header-cell value-column-cantidad">Medio</th>
               <th class="mat-header-cell value-column-cantidad">Alto</th>
             </tr>
-            <ng-container *ngFor="let cd of tablaPonderadora.calidadDesde">
+            <ng-container *ngFor="let cd of configuracionMercado.ponderacionesMercado.calidadDesde">
               <tr class="mat-row">
                 <td class="mat-cell">
                   <mat-form-field>
-                    <input type="number" matInput [(ngModel)]="cd.concepto" [(value)]="cd.concepto">
+                    <input type="number" matInput [(ngModel)]="cd.valor" [(value)]="cd.valor">
                   </mat-form-field>
                 </td>
                 <td class="mat-cell value-column-cantidad">
@@ -399,11 +402,11 @@
               <th class="mat-header-cell value-column-cantidad">Medio</th>
               <th class="mat-header-cell value-column-cantidad">Alto</th>
             </tr>
-            <ng-container *ngFor="let vd of tablaPonderadora.vendedoresDesde">
+            <ng-container *ngFor="let vd of configuracionMercado.ponderacionesMercado.vendedoresDesde">
               <tr class="mat-row">
                 <td class="mat-cell">
                   <mat-form-field>
-                    <input type="number" matInput [(ngModel)]="vd.concepto" [(value)]="vd.concepto">
+                    <input type="number" matInput [(ngModel)]="vd.valor" [(value)]="vd.valor">
                   </mat-form-field>
                 </td>
                 <td class="mat-cell value-column-cantidad">
@@ -443,11 +446,11 @@
               <th class="mat-header-cell value-column-cantidad">Medio</th>
               <th class="mat-header-cell value-column-cantidad">Alto</th>
             </tr>
-            <ng-container *ngFor="let pd of tablaPonderadora.publicidadDesde">
+            <ng-container *ngFor="let pd of configuracionMercado.ponderacionesMercado.publicidadDesde">
               <tr class="mat-row">
                 <td class="mat-cell">
                   <mat-form-field>
-                    <input type="number" matInput [(ngModel)]="pd.concepto" [(value)]="pd.concepto">
+                    <input type="number" matInput [(ngModel)]="pd.valor" [(value)]="pd.valor">
                   </mat-form-field>
                 </td>
                 <td class="mat-cell value-column-cantidad">

@@ -89,5 +89,19 @@ export class EscenariosService {
     return this.http.get(`${environment.proyectoServiceHost}/api/escenarios/${idEscenario}/cursos/${idCurso}`)
     .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
+  
+  postConfiguracionesMercado(configuracionesMercado){
+    const escenarioId = configuracionesMercado.restriccionPrecio.escenarioId,
+    configuracionesMercadoForPost = JSON.parse(JSON.stringify(configuracionesMercado));
+    configuracionesMercadoForPost.ponderacionesMercado = [
+      ...configuracionesMercadoForPost.ponderacionesMercado.precioDesde,
+      ...configuracionesMercadoForPost.ponderacionesMercado.modalidadCobro,
+      ...configuracionesMercadoForPost.ponderacionesMercado.publicidadDesde,
+      ...configuracionesMercadoForPost.ponderacionesMercado.calidadDesde,
+      ...configuracionesMercadoForPost.ponderacionesMercado.vendedoresDesde
+    ]
+    return this.http.post(`${environment.proyectoServiceHost}/api/escenario/${escenarioId}/configuracionMercado`, configuracionesMercadoForPost)
+    .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
 
 }
