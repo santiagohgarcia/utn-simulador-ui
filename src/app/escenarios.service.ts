@@ -15,7 +15,7 @@ export class EscenariosService {
 
   constructor(private http: HttpClient, private messageService: MessagesService) { }
 
-  getEscenariosParaUsuario(idUsuario){
+  getEscenariosParaUsuario(idUsuario) {
     return this.http.get(`${environment.proyectoServiceHost}/api/escenarios/usuario/${idUsuario}`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
@@ -77,22 +77,47 @@ export class EscenariosService {
 
   getCursosEscenario(idEscenario) {
     return this.http.get(`${environment.proyectoServiceHost}/api/escenarios/${idEscenario}/cursos`)
-    .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
   updateCursosEscenario(idEscenario, cursos) {
     return this.http.put(`${environment.proyectoServiceHost}/api/escenarios/${idEscenario}/cursos`, cursos)
-    .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
   getDetalleEscenarioUsuariosPorCurso(idEscenario, idCurso) {
     return this.http.get(`${environment.proyectoServiceHost}/api/escenarios/${idEscenario}/cursos/${idCurso}`)
-    .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
-  
-  postConfiguracionesMercado(configuracionesMercado){
+
+  getConfiguracionMercado(escenarioId) {
+    return this.http.get(`${environment.proyectoServiceHost}/api/escenario/${escenarioId}/configuracionMercado`)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)),
+        map(configuracionesMercado => {
+          var ponderacionesMercado = {
+            precioDesde: [],
+            modalidadCobro: [],
+            publicidadDesde: [],
+            calidadDesde: [],
+            vendedoresDesde: []
+          }
+          configuracionesMercado.ponderacionesMercado.forEach(pm => {
+            ponderacionesMercado[{
+              "PRECIO_DESDE": "precioDesde",
+              "MODALIDAD_DE_COBRO": "modalidadCobro",
+              "PUBLICIDAD_DESDE": "publicidadDesde",
+              "CALIDAD_DESDE": "calidadDesde",
+              "VENDEDORES_DESDE": "vendedoresDesde",
+            }[pm.concepto]].push(pm)
+          })
+          configuracionesMercado.ponderacionesMercado = ponderacionesMercado;
+          return configuracionesMercado;
+        }));
+  }
+
+  postConfiguracionesMercado(configuracionesMercado) {
     const escenarioId = configuracionesMercado.restriccionPrecio.escenarioId,
-    configuracionesMercadoForPost = JSON.parse(JSON.stringify(configuracionesMercado));
+      configuracionesMercadoForPost = JSON.parse(JSON.stringify(configuracionesMercado));
     configuracionesMercadoForPost.ponderacionesMercado = [
       ...configuracionesMercadoForPost.ponderacionesMercado.precioDesde,
       ...configuracionesMercadoForPost.ponderacionesMercado.modalidadCobro,
@@ -101,7 +126,7 @@ export class EscenariosService {
       ...configuracionesMercadoForPost.ponderacionesMercado.vendedoresDesde
     ]
     return this.http.post(`${environment.proyectoServiceHost}/api/escenario/${escenarioId}/configuracionMercado`, configuracionesMercadoForPost)
-    .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
 }

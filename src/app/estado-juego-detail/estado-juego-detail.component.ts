@@ -33,6 +33,16 @@ export class EstadoJuegoDetailComponent implements OnInit {
 
   }
 
+  getConfiguracionMercado(escenario){
+    this.escenariosService.getConfiguracionMercado(escenario.id).subscribe( configuracionMercado => {
+      if(configuracionMercado.restriccionPrecio){
+        this.configuracionMercado = configuracionMercado;
+      }else{
+        this.setConfiguracionMercado(escenario)
+      }
+    })
+  }
+
   setConfiguracionMercado(escenario) {
     const arrayPeriodos = [...Array(escenario.maximosPeriodos).keys()],
       array3 = [...Array(3).keys()],
@@ -127,7 +137,7 @@ export class EstadoJuegoDetailComponent implements OnInit {
   getEscenario(escenarioId) {
     this.escenariosService.getEscenario(escenarioId).subscribe(escenario => {
       this.escenario = escenario
-      this.setConfiguracionMercado(escenario)
+      this.getConfiguracionMercado(escenario)
     })
   }
 
@@ -183,66 +193,14 @@ export class EstadoJuegoDetailComponent implements OnInit {
     }
   }
 
-  cerrarEscenario() {
-    const error = this._getErroresConfiguracionesMercado();
-    if(error){
-      this.messageService.openSnackBar(error)
-    }else{
-      this.saveConfiguracionesMercado().subscribe(_ => {
-        
-      })
-    }
-  }
-
-  saveConfiguracionesMercado(){
-    return this.escenariosService.postConfiguracionesMercado(this.configuracionMercado);
-  }
-
-  _getErroresConfiguracionesMercado() {
-    return [this._validateObligatory(this.configuracionMercado.empresasCompetidoras, "nombre"),
-    this._validateObligatory(this.configuracionMercado.mercadosPeriodo, null),
-    this._validateObligatory(this.configuracionMercado.ponderacionesMercado.precioDesde, "valor"),
-    this._validateSecuencia(this.configuracionMercado.ponderacionesMercado.precioDesde, "valor"),
-    this._validatePrecioContraIntervalo(),
-    this._validateObligatory(this.configuracionMercado.ponderacionesMercado.modalidadCobro, "valor"),
-    this._validateSecuencia(this.configuracionMercado.ponderacionesMercado.modalidadCobro, "valor"),
-    this._validateObligatory(this.configuracionMercado.ponderacionesMercado.publicidadDesde, "valor"),
-    this._validateSecuencia(this.configuracionMercado.ponderacionesMercado.publicidadDesde, "valor"),
-    this._validateObligatory(this.configuracionMercado.ponderacionesMercado.calidadDesde, "valor"),
-    this._validateSecuencia(this.configuracionMercado.ponderacionesMercado.calidadDesde, "valor"),
-    this._validateObligatory(this.configuracionMercado.ponderacionesMercado.vendedoresDesde, "valor"),
-    this._validateSecuencia(this.configuracionMercado.ponderacionesMercado.vendedoresDesde, "valor"),
-    this._validateIntervaloPrecio()].find(elem => elem !== true)
-  }
-
-  _validateSecuencia(array,prop){
-    var arrayValor = array.map( elem => elem[prop]),
-        arrayOrdernado = arrayValor.concat([]).sort((a,b) => a > b ? 1 : -1);
-    if(JSON.stringify(arrayOrdernado) !== JSON.stringify(arrayValor)){
-      return "Revise las secuencias de valores en las configuraciones de mercado"
-    }
-    return true;
-  }
-
-  _validateObligatory(array, additionalProp) {
-    return array.find(elem => {
-      return ( !(elem.bajo >= 0 && elem.medio >= 0 && elem.alto >= 0) ||
-        (additionalProp ? !(elem[additionalProp] || elem[additionalProp] === 0) : false))
-    }) ? "Falta completar datos en la configuracion del mercado" : true;
-  }
-
-  _validatePrecioContraIntervalo() {
-    return this.configuracionMercado.ponderacionesMercado.precioDesde.find(elem => {
-      return (elem.valor > this.configuracionMercado.restriccionPrecio.precioMax ||
-        elem.valor < this.configuracionMercado.restriccionPrecio.precioMin)
-    }) ? "El rango de precios y los precios ingresados no coinciden" : true;
-  }
-
-  _validateIntervaloPrecio() {
-    return (this.configuracionMercado.restriccionPrecio.precioMin > 0 &&
-      this.configuracionMercado.restriccionPrecio.precioMax > 0 && 
-      this.configuracionMercado.restriccionPrecio.precioMin < this.configuracionMercado.restriccionPrecio.precioMax )
-      ? true : "Ingrese un Intervalo de Precio valido"
+  cerrarEscenario(){
+    this.escenariosService.getConfiguracionMercado(this.escenario.id).subscribe( configuracionMercado => {
+      if(configuracionMercado.restriccionPrecio){
+        //Simular 
+      }else{
+        this.messageService.openSnackBar("Antes de cerrar el escenario, debe guardar las configuraciones de mercado")
+      }
+    })
   }
 
 }

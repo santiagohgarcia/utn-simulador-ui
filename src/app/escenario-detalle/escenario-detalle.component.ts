@@ -18,6 +18,7 @@ export class EscenarioDetalleComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   filtredCursos: Observable<string[]>;
   allCursos;
+  configuracionMercado;
   escenario = {
     id: null,
     titulo: '',
@@ -157,7 +158,10 @@ export class EscenarioDetalleComponent implements OnInit {
   ngOnInit() {
     var id = Number(this.route.snapshot.paramMap.get('id'));
     if (id) {
-      this.getEscenario(id).subscribe(escenario => this.escenario = escenario);
+      this.getEscenario(id).subscribe(escenario => {
+        this.escenario = escenario
+        this.getConfiguracionMercado(escenario)
+      });
       this.escenariosService.getCursosEscenario(id).subscribe(cursosEscenario => {
         this.escenario.cursos = cursosEscenario;
       })
@@ -211,19 +215,169 @@ export class EscenarioDetalleComponent implements OnInit {
   save() {
     if (this.escenarioForm.valid && this.activoForm.valid && this.pasivoForm.valid && this.patrimonioNetoForm.valid) {
       this.escenariosService[this.escenario.id ? 'modifyEscenario' : 'createEscenario'](this.escenario)
-        .subscribe(_ => {
-          if (this.escenario.id) {
-            this.escenariosService.updateCursosEscenario(this.escenario.id, this.escenario.cursos).subscribe(_ => {
+        .subscribe(escenario => {
+          this.escenariosService.updateCursosEscenario(escenario.id, this.escenario.cursos).subscribe(_ => {
+            if (this.escenario.id) {
+              const error = this._getErroresConfiguracionesMercado();
+              if (error) {
+                this.messageService.openSnackBar(error)
+              } else {
+                this.escenariosService.postConfiguracionesMercado(this.configuracionMercado).subscribe(_ => {
+                  this.messageService.openSnackBar("Escenario modificado");
+                  this.router.navigate(['/escenarios'])
+                })
+              }
+            } else {
               this.messageService.openSnackBar("Escenario modificado");
               this.router.navigate(['/escenarios'])
-            })
-          } else {
-            this.messageService.openSnackBar("Escenario modificado");
-            this.router.navigate(['/escenarios'])
-          }
+            }
+          })
         });
     }
   }
 
+  getConfiguracionMercado(escenario) {
+    this.escenariosService.getConfiguracionMercado(escenario.id).subscribe(configuracionMercado => {
+      if (configuracionMercado.restriccionPrecio) {
+        this.configuracionMercado = configuracionMercado;
+      } else {
+        this.setConfiguracionMercado(escenario)
+      }
+    })
+  }
+
+  setConfiguracionMercado(escenario) {
+    const arrayPeriodos = [...Array(escenario.maximosPeriodos).keys()],
+      array3 = [...Array(3).keys()],
+      array4 = [...Array(4).keys()];
+    this.configuracionMercado = {
+      empresasCompetidoras: array3.map((_, index) => {
+        return {
+          escenarioId: escenario.id,
+          nombre: null,
+          bajo: 0,
+          medio: 0,
+          alto: 0
+        }
+      }),
+      mercadosPeriodo: arrayPeriodos.map((_, index) => {
+        return {
+          escenarioId: escenario.id,
+          periodo: index + 1,
+          bajo: 0,
+          medio: 0,
+          alto: 0
+        }
+      }),
+      ponderacionesMercado: {
+        precioDesde: array3.map((_, index) => {
+          return {
+            escenarioId: escenario.id,
+            concepto: "PRECIO_DESDE",
+            valor: 0,
+            bajo: 0,
+            medio: 0,
+            alto: 0
+          }
+        }),
+        vendedoresDesde: array3.map((_, index) => {
+          return {
+            escenarioId: escenario.id,
+            concepto: "VENDEDORES_DESDE",
+            valor: 0,
+            bajo: 0,
+            medio: 0,
+            alto: 0
+          }
+        }),
+        publicidadDesde: array3.map((_, index) => {
+          return {
+            escenarioId: escenario.id,
+            concepto: "PUBLICIDAD_DESDE",
+            valor: 0,
+            bajo: 0,
+            medio: 0,
+            alto: 0
+          }
+        }),
+        modalidadCobro: array4.map((_, index) => {
+          return {
+            escenarioId: escenario.id,
+            concepto: "MODALIDAD_DE_COBRO",
+            valor: index,
+            bajo: 0,
+            medio: 0,
+            alto: 0
+          }
+        }),
+        calidadDesde: array3.map((_, index) => {
+          return {
+            escenarioId: escenario.id,
+            concepto: "CALIDAD_DESDE",
+            valor: 0,
+            bajo: 0,
+            medio: 0,
+            alto: 0
+          }
+        })
+      },
+      restriccionPrecio: {
+        escenarioId: escenario.id,
+        precioMin: 0,
+        precioMax: 0
+      }
+    }
+  }
+
+  getModalidadCobroDesc(modCobroIndex) {
+    return ["Contado", "a 30 dias", "a 60 dias", "a 90 dias"][modCobroIndex]
+  }
+
+  _getErroresConfiguracionesMercado() {
+    return [this._validateObligatory(this.configuracionMercado.empresasCompetidoras, "nombre"),
+    this._validateObligatory(this.configuracionMercado.mercadosPeriodo, null),
+    this._validateObligatory(this.configuracionMercado.ponderacionesMercado.precioDesde, "valor"),
+    this._validateSecuencia(this.configuracionMercado.ponderacionesMercado.precioDesde, "valor"),
+    this._validatePrecioContraIntervalo(),
+    this._validateObligatory(this.configuracionMercado.ponderacionesMercado.modalidadCobro, "valor"),
+    this._validateSecuencia(this.configuracionMercado.ponderacionesMercado.modalidadCobro, "valor"),
+    this._validateObligatory(this.configuracionMercado.ponderacionesMercado.publicidadDesde, "valor"),
+    this._validateSecuencia(this.configuracionMercado.ponderacionesMercado.publicidadDesde, "valor"),
+    this._validateObligatory(this.configuracionMercado.ponderacionesMercado.calidadDesde, "valor"),
+    this._validateSecuencia(this.configuracionMercado.ponderacionesMercado.calidadDesde, "valor"),
+    this._validateObligatory(this.configuracionMercado.ponderacionesMercado.vendedoresDesde, "valor"),
+    this._validateSecuencia(this.configuracionMercado.ponderacionesMercado.vendedoresDesde, "valor"),
+    this._validateIntervaloPrecio()].find(elem => elem !== true)
+  }
+
+  _validateSecuencia(array, prop) {
+    var arrayValor = array.map(elem => elem[prop]),
+      arrayOrdernado = arrayValor.concat([]).sort((a, b) => a > b ? 1 : -1);
+    if (JSON.stringify(arrayOrdernado) !== JSON.stringify(arrayValor)) {
+      return "Revise las secuencias de valores en las configuraciones de mercado"
+    }
+    return true;
+  }
+
+  _validateObligatory(array, additionalProp) {
+    return array.find(elem => {
+      return (!(elem.bajo >= 0 && elem.medio >= 0 && elem.alto >= 0) ||
+        (additionalProp ? !(elem[additionalProp] || elem[additionalProp] === 0) : false))
+    }) ? "Falta completar datos en la configuracion del mercado" : true;
+  }
+
+  _validatePrecioContraIntervalo() {
+    return this.configuracionMercado.ponderacionesMercado.precioDesde.find(elem => {
+      return (elem.valor > this.configuracionMercado.restriccionPrecio.precioMax ||
+        elem.valor < this.configuracionMercado.restriccionPrecio.precioMin)
+    }) ? "El rango de precios y los precios ingresados no coinciden" : true;
+  }
+
+  _validateIntervaloPrecio() {
+    return (this.configuracionMercado.restriccionPrecio.precioMin > 0 &&
+      this.configuracionMercado.restriccionPrecio.precioMax > 0 &&
+      this.configuracionMercado.restriccionPrecio.precioMin < this.configuracionMercado.restriccionPrecio.precioMax)
+      ? true : "Ingrese un Intervalo de Precio valido"
+  }
 
 }

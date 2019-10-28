@@ -42,7 +42,8 @@
     position: fixed;
     right: 20px;
     bottom: 15px;
-    margin-left: -28px;
+    margin-left: -28px;    
+    z-index: 1;
 }
 
 .mat-card-actions {
@@ -95,10 +96,6 @@
     padding:20px;
 }
 
-.mat-card-header {
-    align-items: end;
-    justify-content: space-between;
-}
 
 .balance-form{
     display: grid;
@@ -137,4 +134,71 @@
     grid-template-rows: auto;
     grid-gap: 20px;
     padding: 10px 16px;
+}
+
+.precio-intervalo-container{
+    padding:10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.precio-intervalo{
+    grid-area: precio-intervalo;
+}
+
+.mat-expansion-panel-header {   
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.headers-align .mat-expansion-panel-header-description {
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+.mat-expansion-panel-header-title {
+    align-items: center;
+    padding:5px;
+}
+
+.mat-expansion-panel-header {
+    padding: 0 10px;
+}
+
+.competencia-avatar{
+    background-image: url('../../assets/img/competencia.png');
+    background-size: cover;
+}
+
+.precio-avatar{
+    background-image: url('../../assets/img/precio.png');
+    background-size: cover;
+}
+
+
+.tabla-ponderadora-content{
+    padding:20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas: "forecast precio-intervalo" "forecast accordion-tables"  "empresas accordion-tables";
+    grid-gap: 20px;
+}
+
+.forecast{
+    grid-area: forecast;
+}
+
+.accordion-tables{
+    grid-area: accordion-tables;
+}
+
+.empresas{
+    grid-area: empresas;
+}
+
+.avatar-img{
+    height: 30px;
+    margin-right: 10px;
 }

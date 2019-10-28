@@ -198,13 +198,10 @@
     align-items: center;
 }
 
-.precio-intervalo-container{
-    padding:10px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
 
-.precio-intervalo{
-    grid-area: precio-intervalo;
+.fab {
+    position: fixed;
+    right: 20px;
+    bottom: 15px;
+    margin-left: -28px;
 }
