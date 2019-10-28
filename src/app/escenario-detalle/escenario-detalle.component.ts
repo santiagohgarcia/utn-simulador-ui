@@ -229,7 +229,7 @@ export class EscenarioDetalleComponent implements OnInit {
               }
             } else {
               this.messageService.openSnackBar("Escenario modificado");
-              this.router.navigate(['/escenarios'])
+              this.router.navigate(['/escenarios/'+escenario.id])
             }
           })
         });
