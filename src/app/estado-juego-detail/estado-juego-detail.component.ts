@@ -34,7 +34,7 @@ export class EstadoJuegoDetailComponent implements OnInit {
   }
 
   setConfiguracionMercado(escenario) {
-    const arrayPeriodos = [...Array(escenario.maximosPeriodos - 1).keys()],
+    const arrayPeriodos = [...Array(escenario.maximosPeriodos).keys()],
       array3 = [...Array(3).keys()],
       array4 = [...Array(4).keys()];
     this.configuracionMercado = {
@@ -50,7 +50,7 @@ export class EstadoJuegoDetailComponent implements OnInit {
       mercadosPeriodo: arrayPeriodos.map((_, index) => {
         return {
           escenarioId: escenario.id,
-          periodo: escenario.nombrePeriodos + " " + (index+1),
+          periodo: index + 1,
           bajo: 0,
           medio: 0,
           alto: 0
