@@ -129,4 +129,9 @@ export class EscenariosService {
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
+  simularMercado(escenarioId, cursoId) {
+    return this.http.post(`${environment.proyectoServiceHost}/api/escenario/${escenarioId}/curso/${cursoId}/simular-mercado`,{})
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+
 }

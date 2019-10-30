@@ -196,7 +196,9 @@ export class EstadoJuegoDetailComponent implements OnInit {
   cerrarEscenario(){
     this.escenariosService.getConfiguracionMercado(this.escenario.id).subscribe( configuracionMercado => {
       if(configuracionMercado.restriccionPrecio){
-        //Simular 
+        this.escenariosService.simularMercado(this.escenario.id,this.curso.id).subscribe(_ => {
+          this.messageService.openSnackBar("Simulacion de Mercado ejecutada correctamente")
+        })
       }else{
         this.messageService.openSnackBar("Antes de cerrar el escenario, debe guardar las configuraciones de mercado")
       }
