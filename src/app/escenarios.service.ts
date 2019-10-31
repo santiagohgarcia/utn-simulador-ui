@@ -130,7 +130,27 @@ export class EscenariosService {
   }
 
   simularMercado(escenarioId, cursoId) {
-    return this.http.post(`${environment.proyectoServiceHost}/api/escenario/${escenarioId}/curso/${cursoId}/simular-mercado`,{})
+    return this.http.post(`${environment.proyectoServiceHost}/api/escenario/${escenarioId}/curso/${cursoId}/simular-mercado`, {})
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+
+  getPuntajes(escenarioId) {
+    return this.http.get(`${environment.proyectoServiceHost}/api/escenario/${escenarioId}/puntajeEscenario`)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)),
+        map(puntajes => {
+          return {
+            ventas: puntajes.filter(p => p.concepto === "VENTAS")[0],
+            caja: puntajes.filter(p => p.concepto === "CAJA")[0],
+            renta: puntajes.filter(p => p.concepto === "RENTA")[0]
+          }
+        }));
+  }
+
+  postPuntajes(puntajes) {
+    const escenarioId = puntajes.ventas.escenarioId;
+    var puntajesForPost = JSON.parse(JSON.stringify(puntajes));
+    puntajesForPost = [puntajes.ventas, puntajes.caja, puntajes.renta];
+    return this.http.post(`${environment.proyectoServiceHost}/api/escenario/${escenarioId}/puntajeEscenario`, puntajesForPost)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 

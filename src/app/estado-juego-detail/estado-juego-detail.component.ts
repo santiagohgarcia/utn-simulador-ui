@@ -4,6 +4,7 @@ import { CursosService } from '../cursos.service';
 import { EscenariosService } from '../escenarios.service';
 import { Message, MessageSpan } from '@angular/compiler/src/i18n/i18n_ast';
 import { MessagesService } from '../messages.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-estado-juego-detail',
@@ -19,7 +20,64 @@ export class EstadoJuegoDetailComponent implements OnInit {
 
   configuracionMercado;
 
-  constructor(private route: ActivatedRoute, private cursosService: CursosService, 
+  ventasQuintil1 = new FormControl('', [Validators.required]);
+  ventasQuintil2 = new FormControl('', [Validators.required]);
+  ventasQuintil3 = new FormControl('', [Validators.required]);
+  ventasQuintil4 = new FormControl('', [Validators.required]);
+  ventasQuintil5 = new FormControl('', [Validators.required]);
+  ventasForm: FormGroup = new FormGroup({
+    ventasQuintil1: this.ventasQuintil1,
+    ventasQuintil2: this.ventasQuintil2,
+    ventasQuintil3: this.ventasQuintil3,
+    ventasQuintil4: this.ventasQuintil4,
+    ventasQuintil5: this.ventasQuintil5
+  });
+
+  cajaQuintil1 = new FormControl('', [Validators.required]);
+  cajaQuintil2 = new FormControl('', [Validators.required]);
+  cajaQuintil3 = new FormControl('', [Validators.required]);
+  cajaQuintil4 = new FormControl('', [Validators.required]);
+  cajaQuintil5 = new FormControl('', [Validators.required]);
+  cajaForm: FormGroup = new FormGroup({
+    cajaQuintil1: this.cajaQuintil1,
+    cajaQuintil2: this.cajaQuintil2,
+    cajaQuintil3: this.cajaQuintil3,
+    cajaQuintil4: this.cajaQuintil4,
+    cajaQuintil5: this.cajaQuintil5
+  });
+
+  rentaQuintil1 = new FormControl('', [Validators.required]);
+  rentaQuintil2 = new FormControl('', [Validators.required]);
+  rentaQuintil3 = new FormControl('', [Validators.required]);
+  rentaQuintil4 = new FormControl('', [Validators.required]);
+  rentaQuintil5 = new FormControl('', [Validators.required]);
+  rentaForm: FormGroup = new FormGroup({
+    rentaQuintil1: this.rentaQuintil1,
+    rentaQuintil2: this.rentaQuintil2,
+    rentaQuintil3: this.rentaQuintil3,
+    rentaQuintil4: this.rentaQuintil4,
+    rentaQuintil5: this.rentaQuintil5
+  });
+
+  puntajes = {
+    ventas: {
+      escenarioId: null,
+      concepto: "VENTAS",
+      quintil1: 0, quintil2: 0, quintil3: 0, quintil4: 0, quintil5: 0
+    },
+    caja: {
+      escenarioId: null,
+      concepto: "CAJA",
+      quintil1: 0, quintil2: 0, quintil3: 0, quintil4: 0, quintil5: 0
+    },
+    renta: {
+      escenarioId: null,
+      concepto: "RENTA",
+      quintil1: 0, quintil2: 0, quintil3: 0, quintil4: 0, quintil5: 0
+    }
+  }
+
+  constructor(private route: ActivatedRoute, private cursosService: CursosService,
     private escenariosService: EscenariosService,
     private messageService: MessagesService) { }
 
@@ -30,14 +88,35 @@ export class EstadoJuegoDetailComponent implements OnInit {
     this.getEscenario(escenarioId);
     this.setVentasChartProps();
     this.getDetalleEscenarioUsuariosPorCurso(escenarioId, cursoId);
-
+    this.getPuntajes(escenarioId)
   }
 
-  getConfiguracionMercado(escenario){
-    this.escenariosService.getConfiguracionMercado(escenario.id).subscribe( configuracionMercado => {
-      if(configuracionMercado.restriccionPrecio){
+  getPuntajes(escenarioId) {
+    this.escenariosService.getPuntajes(escenarioId).subscribe(puntajes => {
+      if (puntajes.ventas) {
+        this.puntajes = puntajes;
+      } else {
+        this.puntajes.ventas.escenarioId = escenarioId;
+        this.puntajes.caja.escenarioId = escenarioId;
+        this.puntajes.renta.escenarioId = escenarioId;
+      }
+    })
+  }
+
+  savePuntajes() {
+    if (this.ventasForm.valid && this.cajaForm.valid && this.rentaForm.valid) {
+      this.escenariosService.postPuntajes(this.puntajes).subscribe(_ => {
+        this.messageService.openSnackBar("Puntajes grabados correctamente")
+        this.getPuntajes(this.escenario.id)
+      })
+    }
+  }
+
+  getConfiguracionMercado(escenario) {
+    this.escenariosService.getConfiguracionMercado(escenario.id).subscribe(configuracionMercado => {
+      if (configuracionMercado.restriccionPrecio) {
         this.configuracionMercado = configuracionMercado;
-      }else{
+      } else {
         this.setConfiguracionMercado(escenario)
       }
     })
@@ -193,13 +272,17 @@ export class EstadoJuegoDetailComponent implements OnInit {
     }
   }
 
-  cerrarEscenario(){
-    this.escenariosService.getConfiguracionMercado(this.escenario.id).subscribe( configuracionMercado => {
-      if(configuracionMercado.restriccionPrecio){
-        this.escenariosService.simularMercado(this.escenario.id,this.curso.id).subscribe(_ => {
-          this.messageService.openSnackBar("Simulacion de Mercado ejecutada correctamente")
-        })
-      }else{
+  cerrarEscenario() {
+    this.escenariosService.getConfiguracionMercado(this.escenario.id).subscribe(configuracionMercado => {
+      if (configuracionMercado.restriccionPrecio) {
+        if (this.ventasForm.valid && this.cajaForm.valid && this.rentaForm.valid) {
+          this.escenariosService.postPuntajes(this.puntajes).subscribe(_ => {
+            this.escenariosService.simularMercado(this.escenario.id, this.curso.id).subscribe(_ => {
+              this.messageService.openSnackBar("Simulacion de Mercado ejecutada correctamente")
+            })
+          })
+        }
+      } else {
         this.messageService.openSnackBar("Antes de cerrar el escenario, debe guardar las configuraciones de mercado")
       }
     })
