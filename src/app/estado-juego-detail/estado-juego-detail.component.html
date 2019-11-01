@@ -37,76 +37,76 @@
 
       <mat-accordion class="charts-accordion headers-align">
         <mat-expansion-panel expanded="true" hideToggle>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <img src="../../assets/img/ventas.png" class="avatar-img">
-              Mejores Ventas
-            </mat-panel-title>
-            <mat-panel-description>
-              <div style="display: flex; margin-right: 20px;">
-                <img src="../../assets/img/one.png" class="number-avatar">
-                <span>+{{puntajes.ventas.quintil1}}</span>
-              </div>
-              <div style="display: flex;  margin-right: 20px;">
-                <img src="../../assets/img/two.png" class="number-avatar">
-                <span>+{{puntajes.ventas.quintil2}}</span>
-              </div>
-              <div style="display: flex;  margin-right: 20px;">
-                <img src="../../assets/img/three.png" class="number-avatar">
-                <span>+{{puntajes.ventas.quintil3}}</span>
-              </div>
-              <div style="display: flex;  margin-right: 20px;">
-                <img src="../../assets/img/four.png" class="number-avatar">
-                <span>+{{puntajes.ventas.quintil4}}</span>
-              </div>
-              <div style="display: flex;  margin-right: 20px;">
-                <img src="../../assets/img/five.png" class="number-avatar">
-                <span>+{{puntajes.ventas.quintil5}}</span>
-              </div>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div *ngIf="ventasChartProps" class="canvas-container">
-            <canvas baseChart [datasets]="ventasChartProps.data" [labels]="ventasChartProps.labels"
-              [options]="ventasChartProps.options" [legend]="ventasChartProps.legend"
-              [chartType]="ventasChartProps.type">
-            </canvas>
-          </div>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <img src="../../assets/img/caja.png" class="avatar-img">
+                Mejor Caja Final
+              </mat-panel-title>
+              <mat-panel-description>
+                <div style="display: flex; margin-right: 20px;">
+                  <img src="../../assets/img/one.png" class="number-avatar">
+                  <span>+0</span>
+                </div>
+                <div style="display: flex;  margin-right: 20px;">
+                  <img src="../../assets/img/two.png" class="number-avatar">
+                  <span>+0</span>
+                </div>
+                <div style="display: flex;  margin-right: 20px;">
+                  <img src="../../assets/img/three.png" class="number-avatar">
+                  <span>+0</span>
+                </div>
+                <div style="display: flex;  margin-right: 20px;">
+                  <img src="../../assets/img/four.png" class="number-avatar">
+                  <span>+0</span>
+                </div>
+                <div style="display: flex;  margin-right: 20px;">
+                  <img src="../../assets/img/five.png" class="number-avatar">
+                  <span>+0</span>
+                </div>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="canvas-container" *ngIf="ventasChartProps">
+              <canvas baseChart [datasets]="ventasChartProps.data" [labels]="ventasChartProps.labels"
+                [options]="ventasChartProps.options" [legend]="ventasChartProps.legend"
+                [chartType]="ventasChartProps.type">
+              </canvas>
+            </div>
         </mat-expansion-panel>
         <mat-expansion-panel hideToggle>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <img src="../../assets/img/caja.png" class="avatar-img">
-              Mejor Caja Final
-            </mat-panel-title>
-            <mat-panel-description>
-              <div style="display: flex; margin-right: 20px;">
-                <img src="../../assets/img/one.png" class="number-avatar">
-                <span>+{{puntajes.caja.quintil1}}</span>
-              </div>
-              <div style="display: flex;  margin-right: 20px;">
-                <img src="../../assets/img/two.png" class="number-avatar">
-                <span>+{{puntajes.caja.quintil2}}</span>
-              </div>
-              <div style="display: flex;  margin-right: 20px;">
-                <img src="../../assets/img/three.png" class="number-avatar">
-                <span>+{{puntajes.caja.quintil3}}</span>
-              </div>
-              <div style="display: flex;  margin-right: 20px;">
-                <img src="../../assets/img/four.png" class="number-avatar">
-                <span>+{{puntajes.caja.quintil4}}</span>
-              </div>
-              <div style="display: flex;  margin-right: 20px;">
-                <img src="../../assets/img/five.png" class="number-avatar">
-                <span>+{{puntajes.caja.quintil5}}</span>
-              </div>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div class="canvas-container" *ngIf="ventasChartProps">
-            <canvas baseChart [datasets]="ventasChartProps.data" [labels]="ventasChartProps.labels"
-              [options]="ventasChartProps.options" [legend]="ventasChartProps.legend"
-              [chartType]="ventasChartProps.type">
-            </canvas>
-          </div>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <img src="../../assets/img/ventas.png" class="avatar-img">
+                Mejores Ventas
+              </mat-panel-title>
+              <mat-panel-description>
+                <div style="display: flex; margin-right: 20px;">
+                  <img src="../../assets/img/one.png" class="number-avatar">
+                  <span>+0</span>
+                </div>
+                <div style="display: flex;  margin-right: 20px;">
+                  <img src="../../assets/img/two.png" class="number-avatar">
+                  <span>+0</span>
+                </div>
+                <div style="display: flex;  margin-right: 20px;">
+                  <img src="../../assets/img/three.png" class="number-avatar">
+                  <span>+0</span>
+                </div>
+                <div style="display: flex;  margin-right: 20px;">
+                  <img src="../../assets/img/four.png" class="number-avatar">
+                  <span>+0</span>
+                </div>
+                <div style="display: flex;  margin-right: 20px;">
+                  <img src="../../assets/img/five.png" class="number-avatar">
+                  <span>+0</span>
+                </div>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngIf="ventasChartProps" class="canvas-container">
+              <canvas baseChart [datasets]="ventasChartProps.data" [labels]="ventasChartProps.labels"
+                [options]="ventasChartProps.options" [legend]="ventasChartProps.legend"
+                [chartType]="ventasChartProps.type">
+              </canvas>
+            </div>
         </mat-expansion-panel>
 
         <mat-expansion-panel hideToggle>
@@ -115,26 +115,26 @@
               <img src="../../assets/img/costos.png" class="avatar-img">
               Mejor Renta
             </mat-panel-title>
-            <mat-panel-description *ngIf="puntajes.renta">
+            <mat-panel-description>
               <div style="display: flex; margin-right: 20px;">
                 <img src="../../assets/img/one.png" class="number-avatar">
-                <span>+{{puntajes.renta.quintil1}}</span>
+                <span>+0</span>
               </div>
               <div style="display: flex;  margin-right: 20px;">
                 <img src="../../assets/img/two.png" class="number-avatar">
-                <span>+{{puntajes.renta.quintil2}}</span>
+                <span>+0</span>
               </div>
               <div style="display: flex;  margin-right: 20px;">
                 <img src="../../assets/img/three.png" class="number-avatar">
-                <span>+{{puntajes.renta.quintil3}}</span>
+                <span>+0</span>
               </div>
               <div style="display: flex;  margin-right: 20px;">
                 <img src="../../assets/img/four.png" class="number-avatar">
-                <span>+{{puntajes.renta.quintil4}}</span>
+                <span>+0</span>
               </div>
               <div style="display: flex;  margin-right: 20px;">
                 <img src="../../assets/img/five.png" class="number-avatar">
-                <span>+{{puntajes.renta.quintil5}}</span>
+                <span>+0</span>
               </div>
             </mat-panel-description>
           </mat-expansion-panel-header>
@@ -173,141 +173,68 @@
   </mat-tab>
   <mat-tab label="Puntajes">
     <div class="puntajes-content">
-      <mat-card *ngIf="puntajes.ventas">
-        <mat-card-header>
-            <div mat-card-avatar class="ventas-avatar"></div>
-          <mat-card-title>Ventas</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <form [formGroup]="ventasForm" class="quintil-form">
-            <mat-form-field>
-              <img src="../../assets/img/one.png" class="number-avatar" matPrefix>
-              <input autofocus matInput placeholder="Quintil 1" [formControl]="ventasQuintil1" type="number"
-                [(ngModel)]="puntajes.ventas.quintil1" [(value)]="puntajes.ventas.quintil1" class="quintil-input">
-              <mat-error *ngIf="ventasQuintil1.invalid">Required field</mat-error>
-              <span matSuffix class="quintil-suffix">puntos</span>
-            </mat-form-field>
-            <mat-form-field>
-              <img src="../../assets/img/two.png" class="number-avatar" matPrefix>
-              <input autofocus matInput placeholder="Quintil 2" [formControl]="ventasQuintil2" type="number"
-                [(ngModel)]="puntajes.ventas.quintil2" [(value)]="puntajes.ventas.quintil2" class="quintil-input">
-              <mat-error *ngIf="ventasQuintil2.invalid">Required field</mat-error>
-              <span matSuffix class="quintil-suffix">puntos</span>
-            </mat-form-field>
-            <mat-form-field>
-              <img src="../../assets/img/three.png" class="number-avatar" matPrefix>
-              <input autofocus matInput placeholder="Quintil 3" [formControl]="ventasQuintil3" type="number"
-                [(ngModel)]="puntajes.ventas.quintil3" [(value)]="puntajes.ventas.quintil3" class="quintil-input">
-              <mat-error *ngIf="ventasQuintil3.invalid">Required field</mat-error>
-              <span matSuffix class="quintil-suffix">puntos</span>
-            </mat-form-field>
-            <mat-form-field>
-              <img src="../../assets/img/four.png" class="number-avatar" matPrefix>
-              <input autofocus matInput placeholder="Quintil 4" [formControl]="ventasQuintil4" type="number"
-                [(ngModel)]="puntajes.ventas.quintil4" [(value)]="puntajes.ventas.quintil4" class="quintil-input">
-              <mat-error *ngIf="ventasQuintil4.invalid">Required field</mat-error>
-              <span matSuffix class="quintil-suffix">puntos</span>
-            </mat-form-field>
-            <mat-form-field>
-              <img src="../../assets/img/five.png" class="number-avatar" matPrefix>
-              <input autofocus matInput placeholder="Quintil 5" [formControl]="ventasQuintil5" type="number"
-                [(ngModel)]="puntajes.ventas.quintil5" [(value)]="puntajes.ventas.quintil5" class="quintil-input">
-              <mat-error *ngIf="ventasQuintil5.invalid">Required field</mat-error>
-              <span matSuffix class="quintil-suffix">puntos</span>
-            </mat-form-field>
-          </form>
-        </mat-card-content>
-      </mat-card>
-      <mat-card *ngIf="puntajes.caja">
-        <mat-card-header>
-            <div mat-card-avatar class="caja-avatar"></div>
-          <mat-card-title>Caja</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <form [formGroup]="cajaForm" class="quintil-form">
-            <mat-form-field>
-              <img src="../../assets/img/one.png" class="number-avatar" matPrefix>
-              <input autofocus matInput placeholder="Quintil 1" [formControl]="cajaQuintil1" type="number"
-                [(ngModel)]="puntajes.caja.quintil1" [(value)]="puntajes.caja.quintil1" class="quintil-input">
-              <mat-error *ngIf="cajaQuintil1.invalid">Required field</mat-error>
-              <span matSuffix class="quintil-suffix">puntos</span>
-            </mat-form-field>
-            <mat-form-field>
-              <img src="../../assets/img/two.png" class="number-avatar" matPrefix>
-              <input autofocus matInput placeholder="Quintil 2" [formControl]="cajaQuintil2" type="number"
-                [(ngModel)]="puntajes.caja.quintil2" [(value)]="puntajes.caja.quintil2" class="quintil-input">
-              <mat-error *ngIf="cajaQuintil2.invalid">Required field</mat-error>
-              <span matSuffix class="quintil-suffix">puntos</span>
-            </mat-form-field>
-            <mat-form-field>
-              <img src="../../assets/img/three.png" class="number-avatar" matPrefix>
-              <input autofocus matInput placeholder="Quintil 3" [formControl]="cajaQuintil3" type="number"
-                [(ngModel)]="puntajes.caja.quintil3" [(value)]="puntajes.caja.quintil3" class="quintil-input">
-              <mat-error *ngIf="cajaQuintil3.invalid">Required field</mat-error>
-              <span matSuffix class="quintil-suffix">puntos</span>
-            </mat-form-field>
-            <mat-form-field>
-              <img src="../../assets/img/four.png" class="number-avatar" matPrefix>
-              <input autofocus matInput placeholder="Quintil 4" [formControl]="cajaQuintil4" type="number"
-                [(ngModel)]="puntajes.caja.quintil4" [(value)]="puntajes.caja.quintil4" class="quintil-input">
-              <mat-error *ngIf="cajaQuintil4.invalid">Required field</mat-error>
-              <span matSuffix class="quintil-suffix">puntos</span>
-            </mat-form-field>
-            <mat-form-field>
-              <img src="../../assets/img/five.png" class="number-avatar" matPrefix>
-              <input autofocus matInput placeholder="Quintil 5" [formControl]="cajaQuintil5" type="number"
-                [(ngModel)]="puntajes.caja.quintil5" [(value)]="puntajes.caja.quintil5" class="quintil-input">
-              <mat-error *ngIf="cajaQuintil5.invalid">Required field</mat-error>
-              <span matSuffix class="quintil-suffix">puntos</span>
-            </mat-form-field>
-          </form>
-        </mat-card-content>
-      </mat-card>
-      <mat-card *ngIf="puntajes.renta">
-        <mat-card-header>
-            <div mat-card-avatar class="costos-avatar"></div>
-          <mat-card-title>Renta</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <form [formGroup]="rentaForm" class="quintil-form">
-            <mat-form-field>
-              <img src="../../assets/img/one.png" class="number-avatar" matPrefix>
-              <input autofocus matInput placeholder="Quintil 1" [formControl]="rentaQuintil1" type="number"
-                [(ngModel)]="puntajes.renta.quintil1" [(value)]="puntajes.renta.quintil1" class="quintil-input">
-              <mat-error *ngIf="rentaQuintil1.invalid">Required field</mat-error>
-              <span matSuffix class="quintil-suffix">puntos</span>
-            </mat-form-field>
-            <mat-form-field>
-              <img src="../../assets/img/two.png" class="number-avatar" matPrefix>
-              <input autofocus matInput placeholder="Quintil 2" [formControl]="rentaQuintil2" type="number"
-                [(ngModel)]="puntajes.renta.quintil2" [(value)]="puntajes.renta.quintil2" class="quintil-input">
-              <mat-error *ngIf="rentaQuintil2.invalid">Required field</mat-error>
-              <span matSuffix class="quintil-suffix">puntos</span>
-            </mat-form-field>
-            <mat-form-field>
-              <img src="../../assets/img/three.png" class="number-avatar" matPrefix>
-              <input autofocus matInput placeholder="Quintil 3" [formControl]="rentaQuintil3" type="number"
-                [(ngModel)]="puntajes.renta.quintil3" [(value)]="puntajes.renta.quintil3" class="quintil-input">
-              <mat-error *ngIf="rentaQuintil3.invalid">Required field</mat-error>
-              <span matSuffix class="quintil-suffix">puntos</span>
-            </mat-form-field>
-            <mat-form-field>
-              <img src="../../assets/img/four.png" class="number-avatar" matPrefix>
-              <input autofocus matInput placeholder="Quintil 4" [formControl]="rentaQuintil4" type="number"
-                [(ngModel)]="puntajes.renta.quintil4" [(value)]="puntajes.renta.quintil4" class="quintil-input">
-              <mat-error *ngIf="rentaQuintil4.invalid">Required field</mat-error>
-              <span matSuffix class="quintil-suffix">puntos</span>
-            </mat-form-field>
-            <mat-form-field>
-              <img src="../../assets/img/five.png" class="number-avatar" matPrefix>
-              <input autofocus matInput placeholder="Quintil 5" [formControl]="rentaQuintil5" type="number"
-                [(ngModel)]="puntajes.renta.quintil5" [(value)]="puntajes.renta.quintil5" class="quintil-input">
-              <mat-error *ngIf="rentaQuintil5.invalid">Required field</mat-error>
-              <span matSuffix class="quintil-suffix">puntos</span>
-            </mat-form-field>
-          </form>
-        </mat-card-content>
-      </mat-card>
+      <form [formGroup]="puntajeEscenarioForm" class="puntajes-form">
+        <mat-card>
+            <mat-card-header>
+                <div mat-card-avatar class="escenario-avatar"></div>
+              <mat-card-title>Escenario</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-form-field>
+                <input autofocus matInput [formControl]="porcentajeEscenario" type="number"
+                  [(ngModel)]="puntajes.porcentajeEscenario" [(value)]="puntajes.porcentajeEscenario" class="puntajes-input">
+                <mat-error *ngIf="porcentajeEscenario.invalid">Required field</mat-error>
+                <span matSuffix class="puntajes-suffix">%</span>
+              </mat-form-field>
+            </mat-card-content>
+          </mat-card>
+      </form>
+      <form [formGroup]="puntajeForm" class="puntajes-form">
+        <div class="puntajes-form-detail">
+          <mat-card>
+            <mat-card-header>
+                <div mat-card-avatar class="caja-avatar"></div>
+              <mat-card-title>Caja</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-form-field>
+                <input autofocus matInput [formControl]="porcentajeCaja" type="number"
+                  [(ngModel)]="puntajes.porcentajeCaja" [(value)]="puntajes.porcentajeCaja" class="puntajes-input">
+                <mat-error *ngIf="porcentajeCaja.invalid">Required field</mat-error>
+                <span matSuffix class="puntajes-suffix">%</span>
+              </mat-form-field>
+            </mat-card-content>
+          </mat-card>
+          <mat-card>
+            <mat-card-header>
+                <div mat-card-avatar class="ventas-avatar"></div>
+              <mat-card-title>Ventas</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-form-field>
+                <input autofocus matInput [formControl]="porcentajeVentas" type="number"
+                  [(ngModel)]="puntajes.porcentajeVentas" [(value)]="puntajes.porcentajeVentas" class="puntajes-input">
+                <mat-error *ngIf="porcentajeVentas.invalid">Required field</mat-error>
+                <span matSuffix class="puntajes-suffix">%</span>
+              </mat-form-field>
+            </mat-card-content>
+          </mat-card>
+          <mat-card>
+            <mat-card-header>
+                <div mat-card-avatar class="renta-avatar"></div>
+              <mat-card-title>Renta</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-form-field>
+                <input autofocus matInput [formControl]="porcentajeRenta" type="number"
+                  [(ngModel)]="puntajes.porcentajeRenta" [(value)]="puntajes.porcentajeRenta" class="puntajes-input">
+                <mat-error *ngIf="porcentajeRenta.invalid">Required field</mat-error>
+                <span matSuffix class="puntajes-suffix">%</span>
+              </mat-form-field>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </form>
     </div>
     <button mat-fab color="primary" class="fab" (click)="savePuntajes()">
       <mat-icon>save</mat-icon>

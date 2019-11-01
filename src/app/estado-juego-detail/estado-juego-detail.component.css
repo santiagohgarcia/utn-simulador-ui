@@ -94,6 +94,11 @@
     grid-area: renta;
 }
 
+.escenario-avatar{
+    background-image: url('../../assets/img/success.png');
+    background-size: cover;
+}
+
 .caja-avatar{
     background-image: url('../../assets/img/caja.png');
     background-size: cover;
@@ -101,6 +106,11 @@
 
 .ventas-avatar{
     background-image: url('../../assets/img/ventas.png');
+    background-size: cover;
+}
+
+.renta-avatar{
+    background-image: url('../../assets/img/patrimonio-neto.png');
     background-size: cover;
 }
 
@@ -208,22 +218,29 @@
 
 .puntajes-content{
     display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap:40px;
+    padding:40px
+}
+
+.puntajes-form-detail{
+    display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap:40px;
     padding:40px
 }
 
-.quintil-form{
+.puntajes-form{
     display: grid;
     grid-template-columns: 1fr;
     grid-gap:10px;
     padding:10px
 }
 
-.quintil-input {
+.puntajes-input {
     text-align: right;
 }
 
-.quintil-suffix{
+.puntajes-suffix{
     margin-left: 10px;
 }
