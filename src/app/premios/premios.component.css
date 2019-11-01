@@ -1,0 +1,103 @@
+@media screen and (min-width: 769px) {
+
+    .card-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr ;
+        grid-template-rows: auto;
+        grid-gap: 10px;
+        padding: 20px;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .card-container > * {
+        margin-top: 10px;
+    }
+
+}
+
+.mat-card-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.mat-card-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.mat-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+    
+
+.podium-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+.podium-item-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.first-place-image{
+    height: 120px; 
+    border-radius: 50%
+}
+
+.second-place-image{
+    height: 85px; 
+    border-radius: 50%
+}
+
+.third-place-image{
+    height: 85px; 
+    border-radius: 50%
+}
+
+.gold-medal-image{
+    height: 60px;
+    margin-top: -15px;
+}
+
+.silver-medal-image{
+    height: 45px;
+    margin-top: -13px;
+}
+
+.bronze-medal-image{
+    height: 45px;
+    margin-top: -13px;
+}
+
+.winner-name-text{
+    margin-top:8px;
+    font-size: larger;
+    font-weight: 500;
+}
+
+.result-overview-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top:5px;
+    margin-bottom: 5px;
+}
+
+.overview-image{
+    height: 20px;
+    margin-right: 8px;
+}

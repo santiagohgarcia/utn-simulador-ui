@@ -1,3 +1,70 @@
-<p>
-  awards works!
-</p>
+<mat-toolbar color="secundary">
+  <h4>Escenarios</h4>
+  <span class="spacer"></span>
+  <h4 *ngIf="usuario.curso">{{usuario.curso.nombre}}</h4>
+</mat-toolbar>
+<div class="card-container">
+  <mat-card *ngFor="let escenario of escenarios;">
+    <mat-card-header>
+      <mat-card-title>{{escenario.titulo | titlecase}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="podium-container">
+        <div class="podium-item-container" style="align-self: flex-end;">
+          <img src="{{usuario.fotoUrl}}" class="second-place-image" >
+          <img src="../../assets/img/silver-medal.png" class="silver-medal-image">
+          <span class="winner-name-text">Ron Swanson</span>
+          <div class="result-overview-container">
+            <img src="../../assets/img/ventas.png" class="overview-image">
+            <span>$34566</span>
+          </div>
+          <div class="result-overview-container">
+            <img src="../../assets/img/caja.png" class="overview-image">
+            <span>$65456</span>
+          </div>
+          <div class="result-overview-container">
+            <img src="../../assets/img/costos.png" class="overview-image">
+            <span>$3453</span>
+          </div>
+        </div>
+        <div class="podium-item-container" style="align-self: flex-start;">
+          <img src="{{usuario.fotoUrl}}" class="first-place-image">
+          <img src="../../assets/img/gold-medal.png" class="gold-medal-image">
+          <span class="winner-name-text" style="font-size: large;">Pam Beasly</span>
+          <div class="result-overview-container">
+            <img src="../../assets/img/ventas.png" class="overview-image">
+            <span>$12314</span>
+          </div>
+          <div class="result-overview-container">
+            <img src="../../assets/img/caja.png" class="overview-image">
+            <span>$67576</span>
+          </div>
+          <div class="result-overview-container">
+            <img src="../../assets/img/costos.png" class="overview-image">
+            <span>$87567</span>
+          </div>
+        </div>
+        <div class="podium-item-container" style="align-self: flex-end;">
+          <img src="{{usuario.fotoUrl}}" class="third-place-image">
+          <img src="../../assets/img/bronze-medal.png" class="bronze-medal-image">
+          <span class="winner-name-text">Jim Harpert</span>
+          <div class="result-overview-container">
+            <img src="../../assets/img/ventas.png" class="overview-image">
+            <span>$65789</span>
+          </div>
+          <div class="result-overview-container">
+            <img src="../../assets/img/caja.png" class="overview-image">
+            <span>$57687</span>
+          </div>
+          <div class="result-overview-container">
+            <img src="../../assets/img/costos.png" class="overview-image">
+            <span>$23450</span>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>VER DETALLES</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

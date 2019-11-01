@@ -1,19 +1,20 @@
-<mat-toolbar color="secundary" >
-    <h4>Escenarios</h4>
-    <span class="spacer"></span>
-    <h4 *ngIf="usuario.curso">{{usuario.curso.nombre}}</h4>
-  </mat-toolbar>
+<mat-toolbar color="secundary">
+  <h4>Escenarios</h4>
+  <span class="spacer"></span>
+  <h4 *ngIf="usuario.curso">{{usuario.curso.nombre}}</h4>
+</mat-toolbar>
 <div class="card-container">
-    <mat-card *ngFor="let escenario of escenarios;">
-      <mat-card-header>
-        <mat-card-title>{{escenario.titulo | titlecase}}</mat-card-title>
-        <mat-card-subtitle>{{escenario.descripcion}}
-        </mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-actions>
-        <button *ngIf="!escenario.proyecto.proyecto.entregado" mat-button routerLink="/simulaciones/escenario/{{escenario.id}}">JUGAR</button>
-        <button *ngIf="escenario.proyecto.proyecto.entregado" mat-button routerLink="/simulaciones/escenario/{{escenario.id}}/resultados">VER RESULTADOS</button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
-  
+  <mat-card *ngFor="let escenario of escenarios;">
+    <mat-card-header>
+      <mat-card-title>{{escenario.titulo | titlecase}}</mat-card-title>
+      <mat-card-subtitle>{{escenario.descripcion}}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions>
+      <button *ngIf="!escenario.proyecto.proyecto.entregado" mat-button
+        routerLink="/simulaciones/escenario/{{escenario.id}}">JUGAR</button>
+      <button *ngIf="escenario.proyecto.proyecto.entregado" mat-button
+        routerLink="/simulaciones/escenario/{{escenario.id}}/resultados">VER RESULTADOS</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
