@@ -183,7 +183,7 @@
               <mat-form-field>
                 <input autofocus matInput [formControl]="porcentajeEscenario" type="number"
                   [(ngModel)]="puntajes.porcentajeEscenario" [(value)]="puntajes.porcentajeEscenario" class="puntajes-input">
-                <mat-error *ngIf="porcentajeEscenario.invalid">Required field</mat-error>
+                <mat-error *ngIf="porcentajeEscenario.invalid">Valor incorrecto</mat-error>
                 <span matSuffix class="puntajes-suffix">%</span>
               </mat-form-field>
             </mat-card-content>
