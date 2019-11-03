@@ -5,12 +5,21 @@
 </mat-toolbar>
 <div class="card-container">
   <mat-card *ngFor="let escenario of escenarios;">
-    <mat-card-header>
-      <mat-card-title>{{escenario.titulo | titlecase}}</mat-card-title>
-      <mat-card-subtitle>{{escenario.descripcion}}
-      </mat-card-subtitle>
-    </mat-card-header>
+    <div class="escenario-header">
+      <div class="escenario-header-cont">
+        <span class="escenario-title">{{escenario.titulo | titlecase}}</span>
+        <mat-chip-list>
+          <mat-chip color="accent" selected *ngIf="escenario.proyecto.proyecto.entregado">ENTREGADO</mat-chip>
+        </mat-chip-list>
+        <mat-chip-list>
+          <mat-chip color="primary" selected>ABIERTO</mat-chip>
+        </mat-chip-list>
+
+      </div>
+      <span class="escenario-subtitle">{{escenario.descripcion}}</span>
+    </div>
     <mat-card-actions>
+
       <button *ngIf="!escenario.proyecto.proyecto.entregado" mat-button
         routerLink="/simulaciones/escenario/{{escenario.id}}">JUGAR</button>
       <button *ngIf="escenario.proyecto.proyecto.entregado" mat-button

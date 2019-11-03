@@ -17,10 +17,6 @@
     }
 
 }
-    
-
-    
-
 
 
 .mat-card-actions {
@@ -46,4 +42,28 @@
 
 .spacer {
     flex: 1 1 auto;
+}
+
+.escenario-header{
+    display: flex;
+    flex-direction: column;
+}
+
+.escenario-header-cont{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+}
+
+.escenario-title{
+    font-size: large;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.escenario-subtitle{
+    font-size: small;
+    font-weight: 200;
 }
