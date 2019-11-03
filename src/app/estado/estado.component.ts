@@ -50,7 +50,7 @@ export class EstadoComponent implements OnInit {
 
   getEstados(proyectoId) {
     this.proyectoService.getEstados(proyectoId).subscribe(estados => {
-      this.estados = estados.filter(e => e.esForecast);
+      this.estados = estados;
       this.setCajaChartProps(this.estados);
       this.setVentasChartProps(this.estados);
     })
