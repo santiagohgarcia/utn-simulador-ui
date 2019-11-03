@@ -13,6 +13,8 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 export class ResultadosComponent implements OnInit {
   proyecto;
   escenario;
+  decisiones;
+  seccion = "RESULTADOS_FORECAST";
 
   constructor(private escenarioService: EscenariosService, private route: ActivatedRoute,
     private usuarioService: UsuarioService, private proyectoService: ProyectoService, public dialog: MatDialog, private router: Router) { }
@@ -26,7 +28,13 @@ export class ResultadosComponent implements OnInit {
   getProyecto(escenarioId, usuarioId) {
     this.usuarioService.getProyecto(escenarioId, usuarioId).subscribe(estado => {
       this.proyecto = estado.proyecto;
+      this.getDecisiones(this.proyecto.id)
     })
+  }
+
+  getDecisiones(proyectoId) {
+    this.proyectoService.getDecisiones(proyectoId)
+      .subscribe(decisiones => this.decisiones = decisiones);
   }
 
   getEscenario(escenarioId) {

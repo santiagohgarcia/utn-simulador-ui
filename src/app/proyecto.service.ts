@@ -23,7 +23,7 @@ export class ProyectoService {
   }
 
   getEstados(proyectoId): Observable<any> {
-    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${proyectoId}/estado`)
+    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${proyectoId}/estado-forecast`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
@@ -47,18 +47,18 @@ export class ProyectoService {
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
-  getFlujoFondos(idProyecto): Observable<any> {
-    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/flujo-fondo-forecast`)
+  getFlujoFondos(idProyecto, forecast): Observable<any> {
+    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/flujo-fondo${forecast ? '-forecast' : ''}`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
-  getPresupuestoFinanciero(idProyecto): Observable<any> {
-    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/presupuesto-financiero-forecast`)
+  getPresupuestoFinanciero(idProyecto,forecast): Observable<any> {
+    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/presupuesto-financiero${forecast ? '-forecast' : ''}`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
-  getPresupuestoEconomico(idProyecto): Observable<any> {
-    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/presupuesto-economico-forecast`)
+  getPresupuestoEconomico(idProyecto,forecast): Observable<any> {
+    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/presupuesto-economico${forecast ? '-forecast' : ''}`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
@@ -81,7 +81,7 @@ export class ProyectoService {
     return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/modalidadCobro`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
-  
+
   getProveedores(idProyecto): Observable<any> {
     return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/proveedor`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
@@ -109,8 +109,8 @@ export class ProyectoService {
         })));
   }
 
-  getBalanceFinal(idProyecto) {
-    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/balance-final`)
+  getBalanceFinal(idProyecto,forecast) {
+    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/balance-final${forecast ? '-forecast' : ''}`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
@@ -119,7 +119,7 @@ export class ProyectoService {
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
-  tomarCredito(credito){
+  tomarCredito(credito) {
     return this.http.post(`${environment.proyectoServiceHost}/api/proyecto/${credito.proyectoId}/credito`, credito)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }

@@ -26,7 +26,7 @@
             <img src="../../assets/img/caja.png" class="avatar-img">
             Mejor Caja Final
           </mat-panel-title>
-          <mat-panel-description>
+          <!--mat-panel-description>
             <div style="display: flex; margin-right: 20px;">
               <img src="../../assets/img/one.png" class="number-avatar">
               <span>+0</span>
@@ -47,7 +47,7 @@
               <img src="../../assets/img/five.png" class="number-avatar">
               <span>+0</span>
             </div>
-          </mat-panel-description>
+          </mat-panel-description-->
         </mat-expansion-panel-header>
         <div class="canvas-container" *ngIf="ventasChartProps">
           <canvas baseChart [datasets]="ventasChartProps.data" [labels]="ventasChartProps.labels"
@@ -62,28 +62,6 @@
             <img src="../../assets/img/ventas.png" class="avatar-img">
             Mejores Ventas
           </mat-panel-title>
-          <mat-panel-description>
-            <div style="display: flex; margin-right: 20px;">
-              <img src="../../assets/img/one.png" class="number-avatar">
-              <span>+0</span>
-            </div>
-            <div style="display: flex;  margin-right: 20px;">
-              <img src="../../assets/img/two.png" class="number-avatar">
-              <span>+0</span>
-            </div>
-            <div style="display: flex;  margin-right: 20px;">
-              <img src="../../assets/img/three.png" class="number-avatar">
-              <span>+0</span>
-            </div>
-            <div style="display: flex;  margin-right: 20px;">
-              <img src="../../assets/img/four.png" class="number-avatar">
-              <span>+0</span>
-            </div>
-            <div style="display: flex;  margin-right: 20px;">
-              <img src="../../assets/img/five.png" class="number-avatar">
-              <span>+0</span>
-            </div>
-          </mat-panel-description>
         </mat-expansion-panel-header>
         <div *ngIf="ventasChartProps" class="canvas-container">
           <canvas baseChart [datasets]="ventasChartProps.data" [labels]="ventasChartProps.labels"
@@ -99,28 +77,6 @@
           <img src="../../assets/img/costos.png" class="avatar-img">
           Mejor Renta
         </mat-panel-title>
-        <mat-panel-description>
-          <div style="display: flex; margin-right: 20px;">
-            <img src="../../assets/img/one.png" class="number-avatar">
-            <span>+0</span>
-          </div>
-          <div style="display: flex;  margin-right: 20px;">
-            <img src="../../assets/img/two.png" class="number-avatar">
-            <span>+0</span>
-          </div>
-          <div style="display: flex;  margin-right: 20px;">
-            <img src="../../assets/img/three.png" class="number-avatar">
-            <span>+0</span>
-          </div>
-          <div style="display: flex;  margin-right: 20px;">
-            <img src="../../assets/img/four.png" class="number-avatar">
-            <span>+0</span>
-          </div>
-          <div style="display: flex;  margin-right: 20px;">
-            <img src="../../assets/img/five.png" class="number-avatar">
-            <span>+0</span>
-          </div>
-        </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="canvas-container" *ngIf="ventasChartProps">
         <canvas baseChart [datasets]="ventasChartProps.data" [labels]="ventasChartProps.labels"

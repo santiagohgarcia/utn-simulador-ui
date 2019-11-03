@@ -20,6 +20,7 @@ import { UsuarioService } from '../usuario.service';
 })
 export class FlujoFondosComponent implements OnInit {
   @Input() proyecto: any;
+  @Input() forecast: boolean;
   flujoFondos;
   periodos;
   escenario;
@@ -33,22 +34,22 @@ export class FlujoFondosComponent implements OnInit {
   }
 
   getFlujoFondos(proyectoId) {
-    this.proyectoService.getFlujoFondos(proyectoId).subscribe( ff => {
+    this.proyectoService.getFlujoFondos(proyectoId, this.forecast).subscribe(ff => {
       this.flujoFondos = ff;
     })
   }
 
-  getPeriodos(proyectoId){
+  getPeriodos(proyectoId) {
     this.proyectoService.getPeriodoActual(proyectoId).subscribe(periodoActual => {
-          this.periodos = [...Array(periodoActual).keys(),periodoActual];
+      this.periodos = [...Array(periodoActual).keys(), periodoActual];
     })
   }
 
-  getCuentaPeriodo(cuentasPeriodo,periodo,defaultCero = true, signoInvertido = false){
-    var periodo = cuentasPeriodo && cuentasPeriodo.find(cuentaPeriodo => cuentaPeriodo.periodo === periodo )
-    var montoCrudo = periodo ? periodo.monto : ( defaultCero ? 0 : ""  );
+  getCuentaPeriodo(cuentasPeriodo, periodo, defaultCero = true, signoInvertido = false) {
+    var periodo = cuentasPeriodo && cuentasPeriodo.find(cuentaPeriodo => cuentaPeriodo.periodo === periodo)
+    var montoCrudo = periodo ? periodo.monto : (defaultCero ? 0 : "");
     montoCrudo = signoInvertido ? -montoCrudo : montoCrudo;
-    if(montoCrudo < 0 ){
+    if (montoCrudo < 0) {
       return "(" + Math.abs(montoCrudo) + ")";
     } else {
       return montoCrudo;

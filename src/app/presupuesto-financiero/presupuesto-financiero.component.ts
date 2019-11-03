@@ -10,6 +10,7 @@ import { UsuarioService } from '../usuario.service';
 })
 export class PresupuestoFinancieroComponent implements OnInit {
   @Input() proyecto: any;
+  @Input() forecast: boolean;
   presupuestoFinanciero;
   periodos;
   escenario;
@@ -23,7 +24,7 @@ export class PresupuestoFinancieroComponent implements OnInit {
   }
 
   getPresupuestoFinanciero(proyectoId) {
-    this.proyectoService.getPresupuestoFinanciero(proyectoId).subscribe(pf => {
+    this.proyectoService.getPresupuestoFinanciero(proyectoId,this.forecast).subscribe(pf => {
       this.presupuestoFinanciero = pf;
     })
   }

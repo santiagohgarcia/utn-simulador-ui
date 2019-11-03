@@ -8,6 +8,7 @@ import { ProyectoService } from '../proyecto.service';
 })
 export class BalanceFinalComponent implements OnInit {
   @Input() proyecto: any;
+  @Input() forecast: boolean;
   balanceFinal;
 
   constructor(private proyectoService: ProyectoService) { }
@@ -17,7 +18,7 @@ export class BalanceFinalComponent implements OnInit {
   }
 
   getBalanceFinal(idProyecto){
-    this.proyectoService.getBalanceFinal(idProyecto).subscribe(balanceFinal => this.balanceFinal = balanceFinal);
+    this.proyectoService.getBalanceFinal(idProyecto,this.forecast).subscribe(balanceFinal => this.balanceFinal = balanceFinal);
   }
 
 }

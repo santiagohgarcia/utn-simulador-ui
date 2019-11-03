@@ -5,24 +5,102 @@
   <button *ngIf="!proyecto.entregado" mat-icon-button routerLink="/simulaciones/escenario/{{escenario.id}}">
     <mat-icon>arrow_back</mat-icon>
   </button>
-  <h4>Resultados</h4>
   <div class="spacer"></div>
-  <button *ngIf="!proyecto.entregado" mat-raised-button color="accent" (click)="entregarSimulacion()">ENTREGAR SIMULACION</button>
+  <button *ngIf="!proyecto.entregado" mat-raised-button color="accent" (click)="entregarSimulacion()">ENTREGAR
+    SIMULACION</button>
+  <mat-button-toggle-group name="fontStyle" *ngIf="proyecto.entregado" [(value)]="seccion">
+    <mat-button-toggle value="RESULTADOS_FORECAST">Resultados Forecast</mat-button-toggle>
+    <mat-button-toggle value="RESULTADOS_REALES">Resultados Reales</mat-button-toggle>
+  </mat-button-toggle-group>
 </mat-toolbar>
-<mat-tab-group *ngIf="proyecto" mat-stretch-tabs>
+
+<mat-tab-group *ngIf="proyecto && seccion === 'RESULTADOS_FORECAST' " mat-stretch-tabs>
+  <mat-tab label="Enunciado">
+    <div class="tab-content">
+      <mat-card *ngIf="escenario" class="escenario-card">
+        <mat-card-content>
+          {{escenario.descripcion}}
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-tab>
+  <mat-tab label="Decisiones">
+    <div class="decisiones-container">
+      <mat-card *ngFor="let decision of decisiones">
+        <mat-card-header>
+          <mat-card-title>{{ decision.id }}. {{ decision.descripcion }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-radio-group class="respuestas-container" [(ngModel)]="decision.opcionTomada" disabled="true">
+            <mat-radio-button class="respuesta" *ngFor="let opcion of decision.opciones" [value]="opcion.id">
+              {{opcion.descripcion}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-tab>
   <mat-tab label="Estado">
     <app-estado [proyecto]="proyecto"></app-estado>
   </mat-tab>
   <mat-tab label="Flujo de Fondos">
-    <app-flujo-fondos [proyecto]="proyecto"></app-flujo-fondos>
+    <app-flujo-fondos [proyecto]="proyecto" [forecast]="true"></app-flujo-fondos>
   </mat-tab>
   <mat-tab label="Presupuesto Financiero">
-    <app-presupuesto-financiero [proyecto]="proyecto"></app-presupuesto-financiero>
+    <app-presupuesto-financiero [proyecto]="proyecto" [forecast]="true">
+    </app-presupuesto-financiero>
   </mat-tab>
   <mat-tab label="Presupuesto Economico">
-    <app-presupuesto-economico [proyecto]="proyecto"></app-presupuesto-economico>
+    <app-presupuesto-economico [proyecto]="proyecto" [forecast]="true">
+    </app-presupuesto-economico>
   </mat-tab>
   <mat-tab label="Balance Final">
-    <app-balance-final [proyecto]="proyecto"></app-balance-final>
+    <app-balance-final [proyecto]="proyecto" [forecast]="true"></app-balance-final>
+  </mat-tab>
+</mat-tab-group>
+
+<mat-tab-group *ngIf="proyecto && seccion === 'RESULTADOS_REALES'" mat-stretch-tabs>
+  <mat-tab label="Enunciado">
+    <div class="tab-content">
+      <mat-card *ngIf="escenario" class="escenario-card">
+        <mat-card-content>
+          {{escenario.descripcion}}
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Decisiones">
+    <div class="decisiones-container">
+      <mat-card *ngFor="let decision of decisiones">
+        <mat-card-header>
+          <mat-card-title>{{ decision.id }}. {{ decision.descripcion }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-radio-group class="respuestas-container" [(ngModel)]="decision.opcionTomada" disabled="true">
+            <mat-radio-button class="respuesta" *ngFor="let opcion of decision.opciones" [value]="opcion.id">
+              {{opcion.descripcion}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-tab>
+  <mat-tab label="Estado">
+    <app-estado [proyecto]="proyecto"></app-estado>
+  </mat-tab>
+  <mat-tab label="Flujo de Fondos">
+    <app-flujo-fondos [proyecto]="proyecto" [forecast]="false"></app-flujo-fondos>
+  </mat-tab>
+  <mat-tab label="Presupuesto Financiero">
+    <app-presupuesto-financiero [proyecto]="proyecto" [forecast]="false">
+    </app-presupuesto-financiero>
+  </mat-tab>
+  <mat-tab label="Presupuesto Economico">
+    <app-presupuesto-economico [proyecto]="proyecto" [forecast]="false">
+    </app-presupuesto-economico>
+  </mat-tab>
+  <mat-tab label="Balance Final">
+    <app-balance-final [proyecto]="proyecto" [forecast]="false"></app-balance-final>
   </mat-tab>
 </mat-tab-group>
