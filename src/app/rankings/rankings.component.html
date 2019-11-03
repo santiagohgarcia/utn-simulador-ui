@@ -5,11 +5,14 @@
     </mat-card-header>
     <mat-card-content>
       <mat-list>
-        <mat-list-item *ngFor="let jugador of jugadores">
+        <mat-list-item *ngFor="let jugador of jugadores; let i = index">
           <div class="ranking-list-item">
             <div class="ranking-list-item-avatar">
-              <img matListAvatar src="../../assets/img/gold-medal.png" style="margin-right: 5px;">
-              <h4 style="font-weight: 400; font-size: inherit;">{{jugador.usuarioNombre}}</h4>
+              <img matListAvatar src="{{getMedalUrlByIndex(i)}}" style="margin-right: 5px;">
+              <div class="jugador-header-cont">
+                  <span style="font-weight: 400; font-size: inherit;">{{jugador.usuarioNombre}}</span>
+                  <span style="font-weight: 300; font-size: inherit;">{{jugador.puntaje}} puntos</span>
+              </div>
             </div>
             <img *ngIf="jugador.usuarioFotoUrl" matListAvatar src="{{jugador.usuarioFotoUrl}}">
             <img *ngIf="!jugador.usuarioFotoUrl" matListAvatar src="../../assets/img/student.png">
@@ -49,10 +52,10 @@
             </div>
           </mat-panel-description-->
         </mat-expansion-panel-header>
-        <div class="canvas-container" *ngIf="ventasChartProps">
-          <canvas baseChart [datasets]="ventasChartProps.data" [labels]="ventasChartProps.labels"
-            [options]="ventasChartProps.options" [legend]="ventasChartProps.legend"
-            [chartType]="ventasChartProps.type">
+        <div class="canvas-container" *ngIf="cajaChartProps">
+          <canvas baseChart [datasets]="cajaChartProps.data" [labels]="cajaChartProps.labels"
+            [options]="cajaChartProps.options" [legend]="cajaChartProps.legend"
+            [chartType]="cajaChartProps.type">
           </canvas>
         </div>
     </mat-expansion-panel>
@@ -78,10 +81,10 @@
           Mejor Renta
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <div class="canvas-container" *ngIf="ventasChartProps">
-        <canvas baseChart [datasets]="ventasChartProps.data" [labels]="ventasChartProps.labels"
-          [options]="ventasChartProps.options" [legend]="ventasChartProps.legend"
-          [chartType]="ventasChartProps.type">
+      <div class="canvas-container" *ngIf="rentaChartProps">
+        <canvas baseChart [datasets]="rentaChartProps.data" [labels]="rentaChartProps.labels"
+          [options]="rentaChartProps.options" [legend]="rentaChartProps.legend"
+          [chartType]="rentaChartProps.type">
         </canvas>
       </div>
     </mat-expansion-panel>

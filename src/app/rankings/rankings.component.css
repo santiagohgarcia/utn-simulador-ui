@@ -83,3 +83,9 @@
     flex-direction: row;
     align-items: center;
 }
+
+.jugador-header-cont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

@@ -87,7 +87,10 @@ export class EscenariosService {
 
   getDetalleEscenarioUsuariosPorCurso(idEscenario, idCurso) {
     return this.http.get(`${environment.proyectoServiceHost}/api/escenarios/${idEscenario}/cursos/${idCurso}`)
-      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+      .pipe(map( (jugadores: Array<any>) => {
+        jugadores.sort((a,b) => a.puntaje > b.puntaje ? 1 : -1 )
+        return jugadores;
+      }),catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
   getConfiguracionMercado(escenarioId) {

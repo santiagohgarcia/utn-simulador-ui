@@ -15,6 +15,8 @@ export class RankingsComponent implements OnInit {
   @Input() curso: any;
 
   ventasChartProps;
+  cajaChartProps;
+  rentaChartProps;
   jugadores;
   puntajes;
 
@@ -26,7 +28,6 @@ export class RankingsComponent implements OnInit {
     this.getCurso(this.usuarioService.usuario.cursoId);
     this.getDetalleEscenarioUsuariosPorCurso(this.escenario.id, this.curso.id);
     this.getPuntajes(this.escenario.id)
-    this.setVentasChartProps();
   }
 
   getCurso(cursoId) {
@@ -34,7 +35,12 @@ export class RankingsComponent implements OnInit {
   }
 
   getDetalleEscenarioUsuariosPorCurso(escenarioId, cursoId) {
-    this.escenariosService.getDetalleEscenarioUsuariosPorCurso(escenarioId, cursoId).subscribe(jugadores => this.jugadores = jugadores)
+    this.escenariosService.getDetalleEscenarioUsuariosPorCurso(escenarioId, cursoId).subscribe(jugadores => {
+      this.jugadores = jugadores;
+      this.setVentasChartProps(jugadores);
+      this.setCajaChartProps(jugadores);
+      this.setRentaChartProps(jugadores);
+    })
   }
 
   getPuntajes(escenarioId) {
@@ -45,51 +51,74 @@ export class RankingsComponent implements OnInit {
     })
   }
 
-  setVentasChartProps() {
+  setVentasChartProps(jugadores) {
+    var jugadoresPorVentas = jugadores.concat([]).sort((j1, j2) => j1.ventas > j2.ventas);
     this.ventasChartProps = {
       options: {
         scaleShowVerticalLines: false,
         responsive: true,
         aspectRatio: 3
       },
-      labels: [
-        "Ron Swanson",
-        "Leslie Knope",
-        "Perd Hapley",
-        "Tom Haveford",
-        "Pam Beasly",
-        "Donna",
-        "Garry Gergich",
-        "Ben Wyatt"
-      ],
+      labels: jugadoresPorVentas.map(j => j.usuarioNombre),
       type: 'horizontalBar',
       legend: false,
       data: [
         {
-          data: [2000, 1800, 1600, 1400, 1300, 1200, 1000, 800],
-          label: 'Ventas',
-          backgroundColor: [
-            "rgba(75, 192, 192, 0.5)",
-            "rgba(75, 192, 192, 0.5)",
-            "rgba(75, 192, 192, 0.5)",
-            "rgba(255, 205, 86, 0.5)",
-            "rgba(255, 205, 86, 0.5)",
-            "rgba(255, 205, 86, 0.5)",
-            "rgba(255, 99, 132, 0.5)",
-            "rgba(255, 99, 132, 0.5)"
-          ],
-          borderColor: [
-            "rgb(75, 192, 192)",
-            "rgb(75, 192, 192)",
-            "rgb(75, 192, 192)",
-            "rgb(255, 205, 86)",
-            "rgb(255, 205, 86)",
-            "rgb(255, 205, 86)",
-            "rgb(255, 99, 132)",
-            "rgb(255, 99, 132)"
-          ]
+          data: jugadoresPorVentas.map(j => j.ventasTotales),
+          label: 'Ventas'
         }
       ]
+    }
+  }
+
+
+  setCajaChartProps(jugadores) {
+    var jugadoresPorCaja = jugadores.concat([]).sort((j1, j2) => j1.cajaFinal > j2.cajaFinal);
+    this.cajaChartProps = {
+      options: {
+        scaleShowVerticalLines: false,
+        responsive: true,
+        aspectRatio: 3
+      },
+      labels: jugadoresPorCaja.map(j => j.usuarioNombre),
+      type: 'horizontalBar',
+      legend: false,
+      data: [
+        {
+          data: jugadoresPorCaja.map(j => j.cajaFinal),
+          label: 'Ventas'
+        }
+      ]
+    }
+  }
+
+
+  setRentaChartProps(jugadores) {
+    var jugadoresPorRenta = jugadores.concat([]).sort((j1, j2) => j1.renta > j2.renta);
+    this.rentaChartProps = {
+      options: {
+        scaleShowVerticalLines: false,
+        responsive: true,
+        aspectRatio: 3
+      },
+      labels: jugadoresPorRenta.map(j => j.usuarioNombre),
+      type: 'horizontalBar',
+      legend: false,
+      data: [
+        {
+          data: jugadoresPorRenta.map(j => j.renta),
+          label: 'Ventas'
+        }
+      ]
+    }
+  }
+
+  getMedalUrlByIndex(index) {
+    switch (index) {
+      case 0: return "../../assets/img/gold-medal.png";
+      case 1: return "../../assets/img/silver-medal.png";
+      case 2: return "../../assets/img/bronze-medal.png";
+      default: return "../../assets/img/medal.png";
     }
   }
 
