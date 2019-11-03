@@ -23,7 +23,7 @@ export class ProyectoService {
   }
 
   getEstados(proyectoId): Observable<any> {
-    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${proyectoId}/estado`)
+    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${proyectoId}/estado-forecast`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
