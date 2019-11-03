@@ -110,7 +110,7 @@ export class ProyectoService {
   }
 
   getBalanceFinal(idProyecto) {
-    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/balance-final`)
+    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/balance-final-forecast`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
