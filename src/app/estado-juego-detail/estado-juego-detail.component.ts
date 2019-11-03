@@ -17,31 +17,9 @@ export class EstadoJuegoDetailComponent implements OnInit {
   curso;
   ventasChartProps;
   jugadores;
+  puntajes
 
   configuracionMercado;
-
-  puntajes = {
-    escenarioId: null,
-    porcentajeCaja: 0,
-    porcentajeVentas: 0,
-    porcentajeRenta: 0,
-    porcentajeEscenario: 0
-  }
-
-  porcentajeCaja = new FormControl('', [Validators.required]);
-  porcentajeVentas = new FormControl('', [Validators.required]);
-  porcentajeRenta = new FormControl('', [Validators.required]);
-  porcentajeEscenario = new FormControl('', [Validators.required, Validators.min(1), Validators.max(100)]);
-
-  puntajeEscenarioForm: FormGroup = new FormGroup({
-    porcentajeEscenario: this.porcentajeEscenario
-  });
-
-  puntajeForm: FormGroup = new FormGroup({
-    porcentajeCaja: this.porcentajeCaja,
-    porcentajeVentas: this.porcentajeVentas,
-    porcentajeRenta: this.porcentajeRenta
-  });
 
   constructor(private route: ActivatedRoute, private cursosService: CursosService,
     private escenariosService: EscenariosService,
@@ -60,20 +38,11 @@ export class EstadoJuegoDetailComponent implements OnInit {
     this.escenariosService.getPuntajes(escenarioId).subscribe(puntajes => {
       if (puntajes) {
         this.puntajes = puntajes;
-      } else {
-        this.puntajes.escenarioId = escenarioId;
       }
     })
   }
 
-  savePuntajes() {
-    if (this.puntajeForm.valid && this.puntajeEscenarioForm.valid && this._porcentajesValidos()) {
-      this.escenariosService.postPuntajes(this.escenario.id, this.puntajes).subscribe(_ => {
-        this.messageService.openSnackBar("Puntajes grabados correctamente")
-        this.getPuntajes(this.escenario.id)
-      })
-    }
-  }
+
 
   getConfiguracionMercado(escenario) {
     this.escenariosService.getConfiguracionMercado(escenario.id).subscribe(configuracionMercado => {
@@ -187,29 +156,18 @@ export class EstadoJuegoDetailComponent implements OnInit {
     this.escenariosService.getDetalleEscenarioUsuariosPorCurso(escenarioId, cursoId).subscribe(jugadores => this.jugadores = jugadores)
   }
 
-
   cerrarEscenario() {
     this.escenariosService.getConfiguracionMercado(this.escenario.id).subscribe(configuracionMercado => {
       if (configuracionMercado.restriccionPrecio) {
-        if (this.puntajeForm.valid && this.puntajeEscenarioForm.valid && this._porcentajesValidos()) {
-          this.escenariosService.postPuntajes(this.escenario.id, this.puntajes).subscribe(_ => {
             this.escenariosService.simularMercado(this.escenario.id, this.curso.id).subscribe(_ => {
               this.messageService.openSnackBar("Simulacion de Mercado ejecutada correctamente")
             })
-          })
-        }
       } else {
         this.messageService.openSnackBar("Antes de cerrar el escenario, debe guardar las configuraciones de mercado")
       }
     })
   }
 
-  _porcentajesValidos() {
-    if (this.puntajes.porcentajeCaja + this.puntajes.porcentajeVentas + this.puntajes.porcentajeRenta !== 100) {
-      this.messageService.openSnackBar("Los porcentajes ingresados para caja, renta y ventas deben sumar 100%")
-      return false;
-    }
-    return true;
-  }
+
 
 }

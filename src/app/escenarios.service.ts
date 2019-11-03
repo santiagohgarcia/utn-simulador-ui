@@ -140,6 +140,7 @@ export class EscenariosService {
   }
 
   postPuntajes(escenarioId, puntajes) {
+    puntajes.escenarioId = escenarioId;
     return this.http.post(`${environment.proyectoServiceHost}/api/escenario/${escenarioId}/puntajeEscenario`, puntajes)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }

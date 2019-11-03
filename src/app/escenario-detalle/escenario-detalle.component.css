@@ -91,7 +91,7 @@
     display: grid;
     grid-template-rows: auto auto;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-areas: "form balance balance balance" "form estado estado estado";
+    grid-template-areas: "form balance balance balance" "form estado estado puntajes";
     grid-gap: 20px;
     padding:20px;
 }
@@ -122,11 +122,20 @@
 
 .estado-form{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto;
     grid-gap: 20px;
     padding: 10px 16px;
 }
+
+.puntaje-form{
+    display: grid; 
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    padding: 10px 16px;
+}
+
 
 .patrimonio-form{
     display: grid;
@@ -201,4 +210,8 @@
 .avatar-img{
     height: 30px;
     margin-right: 10px;
+}
+
+.puntajes-card{
+    grid-area: puntajes;
 }

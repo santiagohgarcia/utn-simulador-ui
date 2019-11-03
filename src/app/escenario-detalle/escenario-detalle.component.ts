@@ -144,12 +144,33 @@ export class EscenarioDetalleComponent implements OnInit {
     precio: 0
   }]
 
+  porcentajeCaja = new FormControl('', [Validators.required]);
+  porcentajeVentas = new FormControl('', [Validators.required]);
+  porcentajeRenta = new FormControl('', [Validators.required]);
+  porcentajeEscenario = new FormControl('', [Validators.required, Validators.min(0), Validators.max(100)]);
+
+  puntajeForm: FormGroup = new FormGroup({
+    porcentajeCaja: this.porcentajeCaja,
+    porcentajeVentas: this.porcentajeVentas,
+    porcentajeRenta: this.porcentajeRenta,
+    porcentajeEscenario: this.porcentajeEscenario
+  });
+
   constructor(private escenariosService: EscenariosService,
     private route: ActivatedRoute,
     private router: Router,
     private cursosService: CursosService,
     private messageService: MessagesService) {
 
+  }
+
+
+  puntajes = {
+    escenarioId: null,
+    porcentajeCaja: 0,
+    porcentajeVentas: 0,
+    porcentajeRenta: 0,
+    porcentajeEscenario: 0
   }
 
   @ViewChild('cursosInput', { static: false }) cursosInput: ElementRef<HTMLInputElement>;
@@ -165,8 +186,19 @@ export class EscenarioDetalleComponent implements OnInit {
       this.escenariosService.getCursosEscenario(id).subscribe(cursosEscenario => {
         this.escenario.cursos = cursosEscenario;
       })
+      this.getPuntajes(id);
     }
     this.getCursos();
+  }
+
+  getPuntajes(escenarioId) {
+    this.escenariosService.getPuntajes(escenarioId).subscribe(puntajes => {
+      if (puntajes) {
+        this.puntajes = puntajes;
+      } else {
+        this.puntajes.escenarioId = escenarioId;
+      }
+    })
   }
 
   getCursos() {
@@ -213,24 +245,26 @@ export class EscenarioDetalleComponent implements OnInit {
   }
 
   save() {
-    if (this.escenarioForm.valid && this.activoForm.valid && this.pasivoForm.valid && this.patrimonioNetoForm.valid) {
+    if (this.escenarioForm.valid && this.activoForm.valid && this.pasivoForm.valid && this.patrimonioNetoForm.valid && this.puntajeForm.valid && this._porcentajesValidos()) {
       this.escenariosService[this.escenario.id ? 'modifyEscenario' : 'createEscenario'](this.escenario)
         .subscribe(escenario => {
           this.escenariosService.updateCursosEscenario(escenario.id, this.escenario.cursos).subscribe(_ => {
-            if (this.escenario.id) {
-              const error = this._getErroresConfiguracionesMercado();
-              if (error) {
-                this.messageService.openSnackBar(error)
+            this.escenariosService.postPuntajes(escenario.id, this.puntajes).subscribe(_ => {
+              if (this.escenario.id) {
+                const error = this._getErroresConfiguracionesMercado();
+                if (error) {
+                  this.messageService.openSnackBar(error)
+                } else {
+                  this.escenariosService.postConfiguracionesMercado(this.configuracionMercado).subscribe(_ => {
+                    this.messageService.openSnackBar("Escenario modificado");
+                    this.router.navigate(['/escenarios'])
+                  })
+                }
               } else {
-                this.escenariosService.postConfiguracionesMercado(this.configuracionMercado).subscribe(_ => {
-                  this.messageService.openSnackBar("Escenario modificado");
-                  this.router.navigate(['/escenarios'])
-                })
+                this.messageService.openSnackBar("Escenario modificado");
+                this.router.navigate(['/escenarios/' + escenario.id])
               }
-            } else {
-              this.messageService.openSnackBar("Escenario modificado");
-              this.router.navigate(['/escenarios/'+escenario.id])
-            }
+            })
           })
         });
     }
@@ -378,6 +412,14 @@ export class EscenarioDetalleComponent implements OnInit {
       this.configuracionMercado.restriccionPrecio.precioMax > 0 &&
       this.configuracionMercado.restriccionPrecio.precioMin < this.configuracionMercado.restriccionPrecio.precioMax)
       ? true : "Ingrese un Intervalo de Precio valido"
+  }
+
+  _porcentajesValidos() {
+    if (this.puntajes.porcentajeCaja + this.puntajes.porcentajeVentas + this.puntajes.porcentajeRenta !== 100) {
+      this.messageService.openSnackBar("Los porcentajes ingresados para caja, renta y ventas deben sumar 100%")
+      return false;
+    }
+    return true;
   }
 
 }
