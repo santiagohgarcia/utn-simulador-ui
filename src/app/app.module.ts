@@ -82,6 +82,8 @@ import {
 import { MatriculacionDialogComponent } from './matriculacion-dialog/matriculacion-dialog.component';
 import { EstadoJuegoDetailComponent } from './estado-juego-detail/estado-juego-detail.component';
 import { SimulacionEntregadaComponent } from './simulacion-entregada/simulacion-entregada.component';
+import { PremiosDetailComponent } from './premios-detail/premios-detail.component';
+import { RankingsComponent } from './rankings/rankings.component';
 
 
 @NgModule({
@@ -155,7 +157,9 @@ export class MaterialModule { }
     EstadoJuegosComponent,
     FinanciacionesComponent,
     CursosComponent,
-    EstadoJuegoDetailComponent
+    EstadoJuegoDetailComponent,
+    PremiosDetailComponent,
+    RankingsComponent
   ],
   imports: [
     BrowserModule,

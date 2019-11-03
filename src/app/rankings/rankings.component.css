@@ -1,0 +1,85 @@
+.jugadores-list{
+    display:grid; 
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; 
+    grid-template-rows: auto;
+}
+
+.jugadores-container{
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    grid-template-rows: 1fr ;
+    grid-template-areas: "general charts";
+    grid-gap: 20px;
+    padding: 20px;
+}
+
+.general{
+    grid-area: general;
+}
+
+.charts-accordion{
+    grid-area: charts;
+}
+
+.legend{
+    grid-area: legend;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap:20px;
+}
+
+.ventas{ 
+    grid-area: ventas;
+}
+
+.caja{
+    grid-area: caja;
+}
+
+.renta{
+    grid-area: renta;
+}
+
+.avatar-img{
+    height: 30px;
+    margin-right: 10px;
+}
+
+.number-avatar{
+    height: 20px;
+    margin-right: 5px;
+}
+
+
+.headers-align .mat-expansion-panel-header-description {
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+.mat-expansion-panel-header-title {
+    align-items: center;
+    padding:5px;
+}
+
+.mat-expansion-panel-header {
+    padding: 0 10px;
+}
+
+.jugadores-list-subline{
+    font-weight: 200 !important;
+}
+
+.ranking-list-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    width: 100%;
+    align-items: center;
+}
+
+.ranking-list-item-avatar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

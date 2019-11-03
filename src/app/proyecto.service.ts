@@ -43,7 +43,7 @@ export class ProyectoService {
   }
 
   simular(idProyecto, opciones) {
-    return this.http.post(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/simularOpciones`, opciones)
+    return this.http.post(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/simular-forecast`, opciones)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
@@ -110,7 +110,7 @@ export class ProyectoService {
   }
 
   getBalanceFinal(idProyecto) {
-    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/balance_final`)
+    return this.http.get(`${environment.proyectoServiceHost}/api/proyecto/${idProyecto}/balance-final-forecast`)
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
