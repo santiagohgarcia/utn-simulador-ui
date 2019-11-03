@@ -52,7 +52,6 @@ export class EstadoJuegoDetailComponent implements OnInit {
     const cursoId = Number(this.route.snapshot.paramMap.get('cursoId'));
     this.getCurso(cursoId)
     this.getEscenario(escenarioId);
-    this.setVentasChartProps();
     this.getDetalleEscenarioUsuariosPorCurso(escenarioId, cursoId);
     this.getPuntajes(escenarioId)
   }
@@ -188,53 +187,6 @@ export class EstadoJuegoDetailComponent implements OnInit {
     this.escenariosService.getDetalleEscenarioUsuariosPorCurso(escenarioId, cursoId).subscribe(jugadores => this.jugadores = jugadores)
   }
 
-  setVentasChartProps() {
-    this.ventasChartProps = {
-      options: {
-        scaleShowVerticalLines: false,
-        responsive: true,
-        aspectRatio: 3
-      },
-      labels: [
-        "Ron Swanson",
-        "Leslie Knope",
-        "Perd Hapley",
-        "Tom Haveford",
-        "Pam Beasly",
-        "Donna",
-        "Garry Gergich",
-        "Ben Wyatt"
-      ],
-      type: 'horizontalBar',
-      legend: false,
-      data: [
-        {
-          data: [2000, 1800, 1600, 1400, 1300, 1200, 1000, 800],
-          label: 'Ventas',
-          backgroundColor: [
-            "rgba(75, 192, 192, 0.5)",
-            "rgba(75, 192, 192, 0.5)",
-            "rgba(75, 192, 192, 0.5)",
-            "rgba(255, 205, 86, 0.5)",
-            "rgba(255, 205, 86, 0.5)",
-            "rgba(255, 205, 86, 0.5)",
-            "rgba(255, 99, 132, 0.5)",
-            "rgba(255, 99, 132, 0.5)"
-          ],
-          borderColor: [
-            "rgb(75, 192, 192)",
-            "rgb(75, 192, 192)",
-            "rgb(75, 192, 192)",
-            "rgb(255, 205, 86)",
-            "rgb(255, 205, 86)",
-            "rgb(255, 205, 86)",
-            "rgb(255, 99, 132)",
-            "rgb(255, 99, 132)"
-          ]
-        }
-      ]
-    }
-  }
 
   cerrarEscenario() {
     this.escenariosService.getConfiguracionMercado(this.escenario.id).subscribe(configuracionMercado => {

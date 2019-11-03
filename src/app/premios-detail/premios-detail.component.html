@@ -1,0 +1,11 @@
+<div *ngIf="escenario && curso">
+    <mat-toolbar color="secundary">
+        <button mat-icon-button routerLink="/premios">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+        <h4>{{escenario.titulo}}</h4>
+        <span class="spacer"></span>
+        <h4 *ngIf="curso">{{curso.nombre}}</h4>
+    </mat-toolbar>
+    <app-rankings [escenario]="escenario" [curso]="curso"></app-rankings>
+</div>

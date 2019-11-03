@@ -16,6 +16,7 @@ import { EstadoJuegosComponent } from './estado-juegos/estado-juegos.component';
 import { CursosComponent } from './cursos/cursos.component';
 import { EstadoJuegoDetailComponent } from './estado-juego-detail/estado-juego-detail.component';
 import { SimulacionEntregadaComponent } from './simulacion-entregada/simulacion-entregada.component';
+import { PremiosDetailComponent } from './premios-detail/premios-detail.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'premios', component: HomeComponent,
     children: [{ path: '', component: PremiosComponent, pathMatch: 'full' }]
+  },
+  {
+    path: 'premios/escenario/:escenarioId', component: HomeComponent,
+    children: [{ path: '', component: PremiosDetailComponent, pathMatch: 'full' }]
   },
   {
     path: 'escenarios', component: HomeComponent,

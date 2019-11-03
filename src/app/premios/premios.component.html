@@ -11,7 +11,7 @@
     <mat-card-content>
       <div class="podium-container">
         <div class="podium-item-container" style="align-self: flex-end;">
-          <img src="{{usuario.fotoUrl}}" class="second-place-image" >
+          <img src="../../assets/img/ron.jpg" class="second-place-image" >
           <img src="../../assets/img/silver-medal.png" class="silver-medal-image">
           <span class="winner-name-text">Ron Swanson</span>
           <div class="result-overview-container">
@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="podium-item-container" style="align-self: flex-start;">
-          <img src="{{usuario.fotoUrl}}" class="first-place-image">
+          <img src="../../assets/img/pam.jpg" class="first-place-image">
           <img src="../../assets/img/gold-medal.png" class="gold-medal-image">
           <span class="winner-name-text" style="font-size: large;">Pam Beasly</span>
           <div class="result-overview-container">
@@ -45,7 +45,7 @@
           </div>
         </div>
         <div class="podium-item-container" style="align-self: flex-end;">
-          <img src="{{usuario.fotoUrl}}" class="third-place-image">
+          <img src="../../assets/img/jim.jpg" class="third-place-image">
           <img src="../../assets/img/bronze-medal.png" class="bronze-medal-image">
           <span class="winner-name-text">Jim Harpert</span>
           <div class="result-overview-container">
@@ -64,7 +64,7 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>VER DETALLES</button>
+      <button mat-button routerLink="/premios/escenario/{{escenario.id}}">VER DETALLES</button>
     </mat-card-actions>
   </mat-card>
 </div>
