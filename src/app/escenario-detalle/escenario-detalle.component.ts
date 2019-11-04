@@ -288,7 +288,7 @@ export class EscenarioDetalleComponent implements OnInit {
       empresasCompetidoras: array3.map((_, index) => {
         return {
           escenarioId: escenario.id,
-          nombre: null,
+          nombre: 'Empresa ' + index,
           bajo: 0,
           medio: 0,
           alto: 0

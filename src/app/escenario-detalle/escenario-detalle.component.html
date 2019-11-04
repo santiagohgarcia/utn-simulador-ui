@@ -174,10 +174,11 @@
             </mat-form-field>
             <mat-form-field class="form-field">
               <input autofocus matInput placeholder="Cantidad de Vendedores" [formControl]="cantidadVendedores"
-                type="number">
+              [(ngModel)]="escenario.estadoInicial.cantidadVendedores" type="number" [(value)]="escenario.estadoInicial.cantidadVendedores">
             </mat-form-field>
             <mat-form-field class="form-field">
-              <input autofocus matInput placeholder="Publicidad" [formControl]="publicidad" type="number">
+              <input autofocus matInput placeholder="Publicidad" [formControl]="publicidad" 
+              [(ngModel)]="escenario.estadoInicial.publicidad" type="number" [(value)]="escenario.estadoInicial.publicidad">
             </mat-form-field>
           </form>
         </mat-card-content>
