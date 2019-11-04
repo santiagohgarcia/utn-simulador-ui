@@ -26,6 +26,10 @@ export class EstadoJuegoDetailComponent implements OnInit {
     private messageService: MessagesService) { }
 
   ngOnInit() {
+    this._loadData()
+  }
+
+  _loadData(){
     const escenarioId = Number(this.route.snapshot.paramMap.get('escenarioId'));
     const cursoId = Number(this.route.snapshot.paramMap.get('cursoId'));
     this.getCurso(cursoId)
@@ -41,8 +45,6 @@ export class EstadoJuegoDetailComponent implements OnInit {
       }
     })
   }
-
-
 
   getConfiguracionMercado(escenario) {
     this.escenariosService.getConfiguracionMercado(escenario.id).subscribe(configuracionMercado => {
@@ -161,6 +163,7 @@ export class EstadoJuegoDetailComponent implements OnInit {
       if (configuracionMercado.restriccionPrecio) {
             this.escenariosService.simularMercado(this.escenario.id, this.curso.id).subscribe(_ => {
               this.messageService.openSnackBar("Simulacion de Mercado ejecutada correctamente")
+              this._loadData()
             })
       } else {
         this.messageService.openSnackBar("Antes de cerrar el escenario, debe guardar las configuraciones de mercado")
