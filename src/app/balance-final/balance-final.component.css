@@ -4,7 +4,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-auto-rows: auto;
-        grid-template-areas: "activo pasivo" "activo patrimonio-neto"  ;
+        grid-template-areas: "activo pasivo" "activo patrimonio-neto" "total-activo total-pasivo-patrimonio-neto"  ;
         grid-gap: 20px;
         padding: 20px;
     }
@@ -34,6 +34,14 @@
 
 .patrimonio-neto {
     grid-area: patrimonio-neto;
+}
+
+.total-activo {
+    grid-area: total-activo;
+}
+
+.total-pasivo-patrimonio-neto {
+    grid-area: total-pasivo-patrimonio-neto;
 }
 
 .list-item {

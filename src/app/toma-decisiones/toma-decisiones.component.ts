@@ -25,6 +25,8 @@ export class TomaDecisionesComponent implements OnInit {
   usuario;
   financiaciones;
   credito;
+  totalActivo = 0;
+  totalPasivoPatrimonioNeto = 0;
 
   constructor(
     private proyectoService: ProyectoService,
@@ -53,6 +55,8 @@ export class TomaDecisionesComponent implements OnInit {
       this.estado = estado;
       this.proyecto = estado.proyecto;
       this.escenario = estado.proyecto.escenario;
+      this.getTotalActivo();
+      this.getTotalPasivoPatrimonioNeto();
       this.getProveedores(this.proyecto.id)
       this.getCredito(this.proyecto.id)
       this.getDecisiones(this.proyecto.id)
@@ -227,6 +231,14 @@ export class TomaDecisionesComponent implements OnInit {
 
   getOddNumber = function(num) {
     return Number(num) % 2 != 0;
+  }
+
+  getTotalActivo() {
+    this.totalActivo = this.escenario.balanceInicial.activo.caja + this.escenario.balanceInicial.activo.cuentasPorCobrar + this.escenario.balanceInicial.activo.inventario + this.escenario.balanceInicial.activo.maquinaria + this.escenario.balanceInicial.activo.amortizacionAcumulada;
+  }
+
+  getTotalPasivoPatrimonioNeto() {
+    this.totalPasivoPatrimonioNeto = this.escenario.balanceInicial.pasivo.proveedores + this.escenario.balanceInicial.pasivo.deudasBancarias + this.escenario.balanceInicial.patrimonioNeto.capitalSocial + this.escenario.balanceInicial.patrimonioNeto.resultadoDelEjercicio;
   }
 
   inputsValidos() {

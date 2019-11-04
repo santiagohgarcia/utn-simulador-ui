@@ -17,7 +17,7 @@
     display: grid;
     grid-template-columns: 2fr 2fr 4fr ;
     grid-auto-rows: auto auto auto auto;
-    grid-template-areas: "activo pasivo estado-inicial" "activo pasivo estado-inicial" "activo pasivo estado-inicial" "activo patrimonio-neto estado-inicial"  ;
+    grid-template-areas: "activo pasivo estado-inicial" "activo pasivo estado-inicial" "activo pasivo estado-inicial" "activo patrimonio-neto estado-inicial" "total-activo total-pasivo-patrimonio-neto estado-inicial" ;
     grid-gap: 20px;
 }
 
@@ -285,6 +285,14 @@
 
 .patrimonio-neto {
     grid-area: patrimonio-neto;
+}
+
+.total-activo {
+    grid-area: total-activo;
+}
+
+.total-pasivo-patrimonio-neto {
+    grid-area: total-pasivo-patrimonio-neto;
 }
 
 .list-item {
