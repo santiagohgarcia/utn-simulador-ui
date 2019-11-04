@@ -8,9 +8,9 @@
   <div class="spacer"></div>
   <button *ngIf="!proyecto.entregado" mat-raised-button color="accent" (click)="entregarSimulacion()">ENTREGAR
     SIMULACION</button>
-  <mat-button-toggle-group name="fontStyle" *ngIf="proyecto.entregado" [(value)]="seccion">
+  <mat-button-toggle-group name="fontStyle" *ngIf="proyecto.entregado && escenarioCurso" [(value)]="seccion" >
     <mat-button-toggle value="RESULTADOS_FORECAST">Resultados Forecast</mat-button-toggle>
-    <mat-button-toggle value="RESULTADOS_REALES">Resultados Reales</mat-button-toggle>
+    <mat-button-toggle value="RESULTADOS_REALES" [disabled]="escenarioCurso.abierto">Resultados Reales</mat-button-toggle>
   </mat-button-toggle-group>
 </mat-toolbar>
 

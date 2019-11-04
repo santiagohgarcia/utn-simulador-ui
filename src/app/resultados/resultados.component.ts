@@ -14,6 +14,7 @@ export class ResultadosComponent implements OnInit {
   proyecto;
   escenario;
   decisiones;
+  escenarioCurso;
   seccion = "RESULTADOS_FORECAST";
 
   constructor(private escenarioService: EscenariosService, private route: ActivatedRoute,
@@ -23,6 +24,13 @@ export class ResultadosComponent implements OnInit {
     var escenarioId = Number(this.route.snapshot.paramMap.get('escenarioId'));
     this.getEscenario(escenarioId);
     this.getProyecto(escenarioId, this.usuarioService.usuario.id);
+    this.getDetalleEscenarioUsuariosPorCurso(escenarioId, this.usuarioService.usuario.curso.id);
+  }
+
+  getDetalleEscenarioUsuariosPorCurso(escenarioId, cursoId) {
+    this.escenarioService.getDetalleEscenarioUsuariosPorCurso(escenarioId, cursoId).subscribe(escenarioCurso => {
+      this.escenarioCurso = escenarioCurso;
+    })
   }
 
   getProyecto(escenarioId, usuarioId) {
