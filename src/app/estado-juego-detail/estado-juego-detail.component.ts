@@ -16,7 +16,7 @@ export class EstadoJuegoDetailComponent implements OnInit {
   escenario;
   curso;
   ventasChartProps;
-  jugadores;
+  escenarioCurso;
   puntajes
 
   configuracionMercado;
@@ -153,7 +153,7 @@ export class EstadoJuegoDetailComponent implements OnInit {
   }
 
   getDetalleEscenarioUsuariosPorCurso(escenarioId, cursoId) {
-    this.escenariosService.getDetalleEscenarioUsuariosPorCurso(escenarioId, cursoId).subscribe(jugadores => this.jugadores = jugadores)
+    this.escenariosService.getDetalleEscenarioUsuariosPorCurso(escenarioId, cursoId).subscribe(escenarioCurso => this.escenarioCurso = escenarioCurso)
   }
 
   cerrarEscenario() {

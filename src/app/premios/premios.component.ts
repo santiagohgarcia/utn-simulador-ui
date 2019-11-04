@@ -18,25 +18,38 @@ export class PremiosComponent implements OnInit {
 
   ngOnInit() {
     this.usuario = this.usuarioService.usuario;
-    this.getEscenarios(this.usuario.id);
+    this.getEscenarios(this.usuario.id, this.usuario.curso.id);
   }
 
-  getEscenarios(idUsuario) {
+  getEscenarios(idUsuario, cursoId) {
     const $escenarios = this.escenariosService.getEscenariosParaUsuario(idUsuario);
 
     const $escenariosConProyectos = $escenarios.pipe(
       switchMap(escenarios => {
         const $escenarios = escenarios.map(escenario => {
-          return this.usuarioService.getProyecto(escenario.id, idUsuario).pipe(
-            map(proyecto => {
+          var $proyecto = this.usuarioService.getProyecto(escenario.id, idUsuario);
+          var $escenarioCurso = this.escenariosService.getDetalleEscenarioUsuariosPorCurso(escenario.id, cursoId);
+          return zip($proyecto, $escenarioCurso).pipe(
+            map(([proyecto, escenarioCurso]) => {
               escenario.proyecto = proyecto;
+              escenario.escenarioCurso = escenarioCurso;
+              escenario.podio = this._jugadoresToPodio(escenarioCurso.jugadores);
               return escenario;
             })
-          )
+          );
         })
         return zip(...$escenarios);
       }));
 
     $escenariosConProyectos.subscribe(escenarios => this.escenarios = escenarios);
   }
+
+  _jugadoresToPodio(jugadores) {
+    return {
+      primerPuesto: jugadores[0],
+      segundoPuesto: jugadores[1],
+      tercerPuesto: jugadores[2]
+    }
+  }
+
 }

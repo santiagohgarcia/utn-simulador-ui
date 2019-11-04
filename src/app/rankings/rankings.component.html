@@ -4,8 +4,8 @@
       <mat-card-title>Ranking General</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <mat-list>
-        <mat-list-item *ngFor="let jugador of jugadores; let i = index">
+      <mat-list *ngIf="escenarioCurso">
+        <mat-list-item *ngFor="let jugador of escenarioCurso.jugadores; let i = index">
           <div class="ranking-list-item">
             <div class="ranking-list-item-avatar">
               <img matListAvatar src="{{getMedalUrlByIndex(i)}}" style="margin-right: 5px;">

@@ -7,58 +7,64 @@
   <mat-card *ngFor="let escenario of escenarios;">
     <mat-card-header>
       <mat-card-title>{{escenario.titulo | titlecase}}</mat-card-title>
+      <mat-chip-list>
+        <mat-chip color="primary" selected>ABIERTO</mat-chip>
+      </mat-chip-list>
     </mat-card-header>
     <mat-card-content>
       <div class="podium-container">
-        <div class="podium-item-container" style="align-self: flex-end;">
-          <img src="../../assets/img/ron.jpg" class="second-place-image" >
+        <div class="podium-item-container" style="align-self: flex-end;" *ngIf="escenario.podio.segundoPuesto"> 
+          <img src="{{escenario.podio.segundoPuesto.usuarioFotoUrl}}" class="second-place-image">
           <img src="../../assets/img/silver-medal.png" class="silver-medal-image">
-          <span class="winner-name-text">Ron Swanson</span>
+          <span class="winner-name-text">{{escenario.podio.segundoPuesto.usuarioNombre}}</span>
+          <span class="winner-name-text" style="margin-bottom:8px;">{{escenario.podio.segundoPuesto.puntaje}} puntos</span>
           <div class="result-overview-container">
             <img src="../../assets/img/ventas.png" class="overview-image">
-            <span>$34566</span>
+            <span>${{escenario.podio.segundoPuesto.ventasTotales}}</span>
           </div>
           <div class="result-overview-container">
             <img src="../../assets/img/caja.png" class="overview-image">
-            <span>$65456</span>
+            <span>${{escenario.podio.segundoPuesto.cajaFinal}}</span>
           </div>
           <div class="result-overview-container">
             <img src="../../assets/img/costos.png" class="overview-image">
-            <span>$3453</span>
+            <span>${{escenario.podio.segundoPuesto.renta}}</span>
           </div>
         </div>
-        <div class="podium-item-container" style="align-self: flex-start;">
-          <img src="../../assets/img/pam.jpg" class="first-place-image">
+        <div class="podium-item-container" style="align-self: flex-start;" *ngIf="escenario.podio.primerPuesto">
+          <img src="{{escenario.podio.primerPuesto.usuarioFotoUrl}}" class="first-place-image">
           <img src="../../assets/img/gold-medal.png" class="gold-medal-image">
-          <span class="winner-name-text" style="font-size: large;">Pam Beasly</span>
+          <span class="winner-name-text" style="font-size: large;">{{escenario.podio.primerPuesto.usuarioNombre}}</span>
+          <span class="winner-name-text" style="font-size: medium; margin-bottom:10px;">{{escenario.podio.primerPuesto.puntaje}} puntos</span>
           <div class="result-overview-container">
             <img src="../../assets/img/ventas.png" class="overview-image">
-            <span>$12314</span>
+            <span>${{escenario.podio.primerPuesto.ventasTotales}}</span>
           </div>
           <div class="result-overview-container">
             <img src="../../assets/img/caja.png" class="overview-image">
-            <span>$67576</span>
+            <span>${{escenario.podio.primerPuesto.cajaFinal}}</span>
           </div>
           <div class="result-overview-container">
             <img src="../../assets/img/costos.png" class="overview-image">
-            <span>$87567</span>
+            <span>${{escenario.podio.primerPuesto.renta}}</span>
           </div>
         </div>
-        <div class="podium-item-container" style="align-self: flex-end;">
-          <img src="../../assets/img/jim.jpg" class="third-place-image">
+        <div class="podium-item-container" style="align-self: flex-end;" *ngIf="escenario.podio.tercerPuesto">
+          <img src="{{escenario.podio.tercerPuesto.usuarioFotoUrl}}" class="third-place-image">
           <img src="../../assets/img/bronze-medal.png" class="bronze-medal-image">
-          <span class="winner-name-text">Jim Harpert</span>
+          <span class="winner-name-text">{{escenario.podio.tercerPuesto.usuarioNombre}}</span>
+          <span class="winner-name-text" style="margin-bottom:8px;">{{escenario.podio.tercerPuesto.puntaje}} puntos</span>
           <div class="result-overview-container">
             <img src="../../assets/img/ventas.png" class="overview-image">
-            <span>$65789</span>
+            <span>${{escenario.podio.tercerPuesto.ventasTotales}}</span>
           </div>
           <div class="result-overview-container">
             <img src="../../assets/img/caja.png" class="overview-image">
-            <span>$57687</span>
+            <span>${{escenario.podio.tercerPuesto.cajaFinal}}</span>
           </div>
           <div class="result-overview-container">
             <img src="../../assets/img/costos.png" class="overview-image">
-            <span>$23450</span>
+            <span>${{escenario.podio.tercerPuesto.renta}}</span>
           </div>
         </div>
       </div>

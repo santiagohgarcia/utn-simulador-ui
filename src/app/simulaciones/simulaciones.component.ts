@@ -26,12 +26,15 @@ export class SimulacionesComponent implements OnInit {
     const $escenariosConProyectos = $escenarios.pipe(
       switchMap(escenarios => {
         const $escenarios = escenarios.map(escenario => {
-          return this.usuarioService.getProyecto(escenario.id, idUsuario).pipe(
-            map(proyecto => {
+          var $proyecto = this.usuarioService.getProyecto(escenario.id, idUsuario);
+          var $escenarioCurso = this.escenariosService.getDetalleEscenarioUsuariosPorCurso(escenario.id, this.usuario.curso.id);
+          return zip($proyecto, $escenarioCurso).pipe(
+            map(([proyecto, escenarioCurso]) => {
               escenario.proyecto = proyecto;
+              escenario.escenarioCurso = escenarioCurso;
               return escenario;
             })
-          )
+          );
         })
         return zip(...$escenarios);
       }));

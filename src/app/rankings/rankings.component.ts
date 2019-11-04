@@ -17,7 +17,7 @@ export class RankingsComponent implements OnInit {
   ventasChartProps;
   cajaChartProps;
   rentaChartProps;
-  jugadores;
+  escenarioCurso;
   puntajes;
 
   constructor(private route: ActivatedRoute, private cursosService: CursosService,
@@ -35,11 +35,11 @@ export class RankingsComponent implements OnInit {
   }
 
   getDetalleEscenarioUsuariosPorCurso(escenarioId, cursoId) {
-    this.escenariosService.getDetalleEscenarioUsuariosPorCurso(escenarioId, cursoId).subscribe(jugadores => {
-      this.jugadores = jugadores;
-      this.setVentasChartProps(jugadores);
-      this.setCajaChartProps(jugadores);
-      this.setRentaChartProps(jugadores);
+    this.escenariosService.getDetalleEscenarioUsuariosPorCurso(escenarioId, cursoId).subscribe(escenarioCurso => {
+      this.escenarioCurso = escenarioCurso;
+      this.setVentasChartProps(escenarioCurso.jugadores);
+      this.setCajaChartProps(escenarioCurso.jugadores);
+      this.setRentaChartProps(escenarioCurso.jugadores);
     })
   }
 

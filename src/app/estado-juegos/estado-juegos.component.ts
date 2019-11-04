@@ -39,11 +39,17 @@ export class EstadoJuegosComponent implements OnInit {
     );
 
     zip($cursos, $escenariosConCursos).subscribe(([cursos, escenariosConCursos]) => {
-      this.cursosTree = cursos.map(curso => {
+      var cursosTree = cursos.map(curso => {
         curso.escenarios = escenariosConCursos.filter((escenario: any) => escenario.cursos.find(c => c.nombre === curso.nombre))
         return curso;
       });
-
+      cursosTree.forEach(curso => {
+        curso.escenarios.forEach(escenario => {
+          this.escenariosService.getDetalleEscenarioUsuariosPorCurso(escenario.id, curso.id)
+            .subscribe(escenarioCurso => escenario.escenarioCurso = escenarioCurso)
+        })
+      })
+      this.cursosTree = cursosTree;
     })
 
   }

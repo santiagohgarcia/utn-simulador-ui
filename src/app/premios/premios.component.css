@@ -101,3 +101,9 @@
     height: 20px;
     margin-right: 8px;
 }
+
+.escenario-header-cont{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
