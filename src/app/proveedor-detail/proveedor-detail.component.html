@@ -12,17 +12,17 @@
 <form [formGroup]="proveedorForm" class="form">
   <mat-form-field class="full-width">
     <input autofocus matInput placeholder="Nombre" [formControl]="nombre" [(ngModel)]="proveedor.nombre"
-      [(value)]="proveedor.nombre">
+      [(value)]="proveedor.nombre" required>
     <mat-error *ngIf="nombre.invalid">Required field</mat-error>
   </mat-form-field>
   <mat-form-field class="full-width">
     <input type="number" matInput placeholder="Variacion Costo Variable" [formControl]="variacionCostoVariable"
-      [(ngModel)]="proveedor.variacionCostoVariable" [(value)]="proveedor.variacionCostoVariable">
+      [(ngModel)]="proveedor.variacionCostoVariable" [(value)]="proveedor.variacionCostoVariable" required>
     <mat-error *ngIf="variacionCostoVariable.invalid">Required field</mat-error>
   </mat-form-field>
   <mat-form-field class="full-width">
     <input type="number" matInput placeholder="Variacion Calidad" [formControl]="variacionCalidad"
-      [(ngModel)]="proveedor.variacionCalidad" [(value)]="proveedor.variacionCalidad">
+      [(ngModel)]="proveedor.variacionCalidad" [(value)]="proveedor.variacionCalidad" required>
     <mat-error *ngIf="variacionCalidad.invalid">Required field</mat-error>
   </mat-form-field>
 </form>
@@ -40,7 +40,7 @@
       <mat-card-title *ngIf="modalidadPago.offsetPeriodo === 3">90 dias</mat-card-title>
       <mat-form-field class="full-width" style="text-align: right; width:100px;">
         <input type="number" matInput placeholder="Porcentaje" style="text-align: right; width:100px;"
-          [(ngModel)]="modalidadPago.porcentaje" [(value)]="modalidadPago.porcentaje">
+          [(ngModel)]="modalidadPago.porcentaje" [(value)]="modalidadPago.porcentaje" required>
           <span matSuffix>%</span>
       </mat-form-field>
     </mat-card-header>

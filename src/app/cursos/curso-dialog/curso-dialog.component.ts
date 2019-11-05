@@ -40,6 +40,8 @@ export class CursoDialogComponent implements OnInit {
           this.messageService.openSnackBar("Curso modificado");
           this.dialogRef.close();
         })
+    }else {
+      this.messageService.openSnackBarDatosIngresados()
     }
   }
 

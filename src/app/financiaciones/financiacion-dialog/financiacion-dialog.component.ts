@@ -14,12 +14,12 @@ import { FinanciacionService } from '../../financiacion.service';
 export class FinanciacionDialogComponent implements OnInit {
   financiacion;
   descripcion = new FormControl('', [Validators.required])
-  tna = new FormControl('', [Validators.required])
+  tea = new FormControl('', [Validators.required, Validators.min(1), Validators.max(100)])
   cantidadCuotas = new FormControl('', [Validators.required])
   financiacionForm: FormGroup = new FormGroup({
     descripcion: this.descripcion,
     cantidadCuotas: this.cantidadCuotas,
-    tna: this.tna
+    tea: this.tea
   });
 
   constructor( public dialogRef: MatDialogRef<FinanciacionDialogComponent>,

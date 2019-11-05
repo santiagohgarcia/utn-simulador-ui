@@ -22,6 +22,12 @@ export class MessagesService {
     return throwError(err);
   }
 
+  openSnackBarDatosIngresados(){
+    this._snackBar.open("Revise los datos ingresados", "OK", {
+      duration: 2000, 
+    });
+  }
+
 
 
 

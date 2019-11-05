@@ -61,7 +61,7 @@ export class EscenarioDetalleComponent implements OnInit {
 
   descripcion = new FormControl('', [Validators.required]);
   titulo = new FormControl('', [Validators.required]);
-  maximosPeriodos = new FormControl(new Number(), [Validators.required]);
+  maximosPeriodos = new FormControl(new Number(), [Validators.required, Validators.min(1)]);
   nombrePeriodos = new FormControl('', [Validators.required]);
   impuestoPorcentaje = new FormControl(new Number(), [Validators.required, Validators.min(0), Validators.max(99.9)]);
   cursos = new FormControl();
@@ -245,28 +245,33 @@ export class EscenarioDetalleComponent implements OnInit {
   }
 
   save() {
-    if (this.escenarioForm.valid && this.activoForm.valid && this.pasivoForm.valid && this.patrimonioNetoForm.valid && this.puntajeForm.valid && this._porcentajesValidos()) {
-      this.escenariosService[this.escenario.id ? 'modifyEscenario' : 'createEscenario'](this.escenario)
-        .subscribe(escenario => {
-          this.escenariosService.updateCursosEscenario(escenario.id, this.escenario.cursos).subscribe(_ => {
-            this.escenariosService.postPuntajes(escenario.id, this.puntajes).subscribe(_ => {
-              if (this.escenario.id) {
-                const error = this._getErroresConfiguracionesMercado();
-                if (error) {
-                  this.messageService.openSnackBar(error)
+    if (this.escenarioForm.valid && this.activoForm.valid && this.pasivoForm.valid && this.patrimonioNetoForm.valid
+      && this.puntajeForm.valid) {
+      if (this._porcentajesValidos()) {
+        this.escenariosService[this.escenario.id ? 'modifyEscenario' : 'createEscenario'](this.escenario)
+          .subscribe(escenario => {
+            this.escenariosService.updateCursosEscenario(escenario.id, this.escenario.cursos).subscribe(_ => {
+              this.escenariosService.postPuntajes(escenario.id, this.puntajes).subscribe(_ => {
+                if (this.escenario.id) {
+                  const error = this._getErroresConfiguracionesMercado();
+                  if (error) {
+                    this.messageService.openSnackBar(error)
+                  } else {
+                    this.escenariosService.postConfiguracionesMercado(this.configuracionMercado).subscribe(_ => {
+                      this.messageService.openSnackBar("Escenario modificado");
+                      this.router.navigate(['/escenarios'])
+                    })
+                  }
                 } else {
-                  this.escenariosService.postConfiguracionesMercado(this.configuracionMercado).subscribe(_ => {
-                    this.messageService.openSnackBar("Escenario modificado");
-                    this.router.navigate(['/escenarios'])
-                  })
+                  this.messageService.openSnackBar("Escenario modificado");
+                  this.router.navigate(['/escenarios/' + escenario.id])
                 }
-              } else {
-                this.messageService.openSnackBar("Escenario modificado");
-                this.router.navigate(['/escenarios/' + escenario.id])
-              }
+              })
             })
-          })
-        });
+          });
+      }
+    } else {
+      this.messageService.openSnackBar("ERROR: Revise los datos ingresados.");
     }
   }
 
@@ -416,7 +421,7 @@ export class EscenarioDetalleComponent implements OnInit {
 
   _porcentajesValidos() {
     if (this.puntajes.porcentajeCaja + this.puntajes.porcentajeVentas + this.puntajes.porcentajeRenta !== 100) {
-      this.messageService.openSnackBar("Los porcentajes ingresados para caja, renta y ventas deben sumar 100%")
+      this.messageService.openSnackBar("Puntajes: Los porcentajes ingresados para caja, renta y ventas deben sumar 100%")
       return false;
     }
     return true;

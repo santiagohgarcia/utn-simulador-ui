@@ -4,19 +4,19 @@
     <form [formGroup]="financiacionForm" class="form">
         <mat-form-field class="full-width">
             <input matInput placeholder="Descripcion" type="text" [formControl]="descripcion"
-                [(ngModel)]="financiacion.descripcion" [(value)]="financiacion.descripcion">
+                [(ngModel)]="financiacion.descripcion" [(value)]="financiacion.descripcion" required>
             <mat-error *ngIf="descripcion.invalid">Required field</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
-            <input type="number" matInput placeholder="TNA" type="number"
-                [formControl]="tna" [(ngModel)]="financiacion.tna"
-                [(value)]="financiacion.tna">
-            <mat-error *ngIf="tna.invalid">Required field</mat-error>
+            <input type="number" matInput placeholder="TEA" type="number"
+                [formControl]="tea" [(ngModel)]="financiacion.tea"
+                [(value)]="financiacion.tea" required>
+            <mat-error *ngIf="tea.invalid">Required field</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
             <input type="number" matInput placeholder="Cantidad Cuotas" type="number"
                 [formControl]="cantidadCuotas" [(ngModel)]="financiacion.cantidadCuotas"
-                [(value)]="financiacion.cantidadCuotas">
+                [(value)]="financiacion.cantidadCuotas" required>
             <mat-error *ngIf="cantidadCuotas.invalid">Required field</mat-error>
         </mat-form-field>
     </form>

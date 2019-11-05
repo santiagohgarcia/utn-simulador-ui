@@ -41,8 +41,8 @@ export class ProveedorDetailComponent implements OnInit {
     variacionCalidad: this.variacionCalidad
   });
 
-  constructor(private proveedoresService: ProveedoresService, 
-    private route: ActivatedRoute, 
+  constructor(private proveedoresService: ProveedoresService,
+    private route: ActivatedRoute,
     private router: Router,
     private messageService: MessagesService,
     private escenariosService: EscenariosService) { }
@@ -64,16 +64,20 @@ export class ProveedorDetailComponent implements OnInit {
   }
 
   save() {
-    if (this.proveedorForm.valid && this.inputsValidos()) {
-      this.proveedoresService[this.proveedor.id ? 'modifyProveedor' : 'createProveedor'](this.proveedor)
-      .subscribe(_ => {
-        this.messageService.openSnackBar("Proveedor modificado");
-        this.router.navigate([`/escenarios/${this.proveedor.escenarioId}`])
-      })
+    if (this.proveedorForm.valid) {
+      if (this.inputsValidos()) {
+        this.proveedoresService[this.proveedor.id ? 'modifyProveedor' : 'createProveedor'](this.proveedor)
+          .subscribe(_ => {
+            this.messageService.openSnackBar("Proveedor modificado");
+            this.router.navigate([`/escenarios/${this.proveedor.escenarioId}`])
+          })
+      }
+    } else {
+      this.messageService.openSnackBarDatosIngresados()
     }
   }
 
-  inputsValidos(){
+  inputsValidos() {
     //Validar totales de modalidad de pago
     var modalidadPagoPorcentajeTotal = this.proveedor.modalidadPago.filter(elem => elem.porcentaje > 0)
       .reduce((acum, elem) => acum + elem.porcentaje, 0)
