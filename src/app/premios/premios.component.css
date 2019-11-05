@@ -26,15 +26,15 @@
     }
     
     
-.first-place-image{
-    height: 120px; 
-    border-radius: 50%
-}
+    .first-place-image{
+        height: 120px; 
+        border-radius: 50%
+    }
 
-.gold-medal-image{
-    height: 60px;
-    margin-top: -15px;
-}
+    .gold-medal-image{
+        height: 60px;
+        margin-top: -15px;
+    }
 
 }
 
@@ -143,6 +143,7 @@
     margin-top:8px;
     font-size: larger;
     font-weight: 500;
+    
 }
 
 .result-overview-container{

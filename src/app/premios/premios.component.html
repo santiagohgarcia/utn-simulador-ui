@@ -45,9 +45,9 @@
         <div class="podium-item-container primero" *ngIf="escenario.podio.primerPuesto">
           <div class="image-container">
             <img *ngIf="escenario.podio.primerPuesto.usuarioFotoUrl"
-              src="{{escenario.podio.primerPuesto.usuarioFotoUrl}}" class="second-place-image">
+              src="{{escenario.podio.primerPuesto.usuarioFotoUrl}}" class="first-place-image">
             <img *ngIf="!escenario.podio.primerPuesto.usuarioFotoUrl" src="../../assets/img/student.png"
-              class="second-place-image">
+              class="first-place-image">
             <img src="../../assets/img/gold-medal.png" class="gold-medal-image">
             <span class="winner-name-text"
               style="font-size: large;">{{escenario.podio.primerPuesto.usuarioNombre}}</span>
