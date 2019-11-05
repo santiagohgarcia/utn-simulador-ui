@@ -52,7 +52,8 @@ export class RankingsComponent implements OnInit {
   }
 
   setVentasChartProps(jugadores) {
-    var jugadoresPorVentas = jugadores.concat([]).sort((j1, j2) => j1.ventas > j2.ventas);
+    var jugadoresPorVentas = jugadores.concat([]);
+    jugadoresPorVentas.sort((j1, j2) => j1.ventas < j2.ventas);
     this.ventasChartProps = {
       options: {
         scaleShowVerticalLines: false,
@@ -73,7 +74,8 @@ export class RankingsComponent implements OnInit {
 
 
   setCajaChartProps(jugadores) {
-    var jugadoresPorCaja = jugadores.concat([]).sort((j1, j2) => j1.cajaFinal > j2.cajaFinal);
+    var jugadoresPorCaja = jugadores.concat([]);
+    jugadoresPorCaja.sort((j1, j2) => j1.cajaFinal < j2.cajaFinal);
     this.cajaChartProps = {
       options: {
         scaleShowVerticalLines: false,
@@ -94,7 +96,8 @@ export class RankingsComponent implements OnInit {
 
 
   setRentaChartProps(jugadores) {
-    var jugadoresPorRenta = jugadores.concat([]).sort((j1, j2) => j1.renta > j2.renta);
+    var jugadoresPorRenta = jugadores.concat([]);
+    jugadoresPorRenta.sort((j1, j2) => j1.renta < j2.renta);
     this.rentaChartProps = {
       options: {
         scaleShowVerticalLines: false,

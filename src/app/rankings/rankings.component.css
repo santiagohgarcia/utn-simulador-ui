@@ -1,17 +1,37 @@
+@media screen and (min-width: 769px) {
+
+    .jugadores-container{
+        display: grid;
+        grid-template-columns: 5fr 7fr;
+        grid-template-rows: 1fr ;
+        grid-template-areas: "general charts";
+        grid-gap: 20px;
+        padding: 20px;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .jugadores-container{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto ;
+        grid-template-areas: "general" "charts";
+        grid-gap: 20px;
+    }
+
+    
+}
+
+
+
 .jugadores-list{
     display:grid; 
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; 
     grid-template-rows: auto;
 }
 
-.jugadores-container{
-    display: grid;
-    grid-template-columns: 5fr 7fr;
-    grid-template-rows: 1fr ;
-    grid-template-areas: "general charts";
-    grid-gap: 20px;
-    padding: 20px;
-}
 
 .general{
     grid-area: general;

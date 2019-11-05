@@ -16,58 +16,83 @@
     </mat-card-header>
     <mat-card-content>
       <div class="podium-container" *ngIf="!escenario.escenarioCurso.abierto">
-        <div class="podium-item-container" style="align-self: flex-end;" *ngIf="escenario.podio.segundoPuesto"> 
-          <img src="{{escenario.podio.segundoPuesto.usuarioFotoUrl}}" class="second-place-image">
-          <img src="../../assets/img/silver-medal.png" class="silver-medal-image">
-          <span class="winner-name-text">{{escenario.podio.segundoPuesto.usuarioNombre}}</span>
-          <span class="winner-name-text" style="margin-bottom:8px;">{{escenario.podio.segundoPuesto.puntaje}} puntos</span>
-          <div class="result-overview-container">
-            <img src="../../assets/img/ventas.png" class="overview-image">
-            <span>${{escenario.podio.segundoPuesto.ventasTotales}}</span>
+        <div class="podium-item-container segundo" *ngIf="escenario.podio.segundoPuesto">
+          <div class="image-container">
+            <img *ngIf="escenario.podio.segundoPuesto.usuarioFotoUrl"
+              src="{{escenario.podio.segundoPuesto.usuarioFotoUrl}}" class="second-place-image">
+            <img *ngIf="!escenario.podio.segundoPuesto.usuarioFotoUrl" src="../../assets/img/student.png"
+              class="second-place-image">
+            <img src="../../assets/img/silver-medal.png" class="silver-medal-image">
+            <span class="winner-name-text">{{escenario.podio.segundoPuesto.usuarioNombre}}</span>
           </div>
-          <div class="result-overview-container">
-            <img src="../../assets/img/caja.png" class="overview-image">
-            <span>${{escenario.podio.segundoPuesto.cajaFinal}}</span>
-          </div>
-          <div class="result-overview-container">
-            <img src="../../assets/img/costos.png" class="overview-image">
-            <span>${{escenario.podio.segundoPuesto.renta}}</span>
-          </div>
-        </div>
-        <div class="podium-item-container" style="align-self: flex-start;" *ngIf="escenario.podio.primerPuesto">
-          <img src="{{escenario.podio.primerPuesto.usuarioFotoUrl}}" class="first-place-image">
-          <img src="../../assets/img/gold-medal.png" class="gold-medal-image">
-          <span class="winner-name-text" style="font-size: large;">{{escenario.podio.primerPuesto.usuarioNombre}}</span>
-          <span class="winner-name-text" style="font-size: medium; margin-bottom:10px;">{{escenario.podio.primerPuesto.puntaje}} puntos</span>
-          <div class="result-overview-container">
-            <img src="../../assets/img/ventas.png" class="overview-image">
-            <span>${{escenario.podio.primerPuesto.ventasTotales}}</span>
-          </div>
-          <div class="result-overview-container">
-            <img src="../../assets/img/caja.png" class="overview-image">
-            <span>${{escenario.podio.primerPuesto.cajaFinal}}</span>
-          </div>
-          <div class="result-overview-container">
-            <img src="../../assets/img/costos.png" class="overview-image">
-            <span>${{escenario.podio.primerPuesto.renta}}</span>
+          <div class="description-container">
+            <span class="winner-name-text" style="margin-bottom:8px;">{{escenario.podio.segundoPuesto.puntaje}}
+              puntos</span>
+            <div class="result-overview-container">
+              <img src="../../assets/img/ventas.png" class="overview-image">
+              <span>${{escenario.podio.segundoPuesto.ventasTotales}}</span>
+            </div>
+            <div class="result-overview-container">
+              <img src="../../assets/img/caja.png" class="overview-image">
+              <span>${{escenario.podio.segundoPuesto.cajaFinal}}</span>
+            </div>
+            <div class="result-overview-container">
+              <img src="../../assets/img/costos.png" class="overview-image">
+              <span>${{escenario.podio.segundoPuesto.renta}}</span>
+            </div>
           </div>
         </div>
-        <div class="podium-item-container" style="align-self: flex-end;" *ngIf="escenario.podio.tercerPuesto">
-          <img src="{{escenario.podio.tercerPuesto.usuarioFotoUrl}}" class="third-place-image">
-          <img src="../../assets/img/bronze-medal.png" class="bronze-medal-image">
-          <span class="winner-name-text">{{escenario.podio.tercerPuesto.usuarioNombre}}</span>
-          <span class="winner-name-text" style="margin-bottom:8px;">{{escenario.podio.tercerPuesto.puntaje}} puntos</span>
-          <div class="result-overview-container">
-            <img src="../../assets/img/ventas.png" class="overview-image">
-            <span>${{escenario.podio.tercerPuesto.ventasTotales}}</span>
+        <div class="podium-item-container primero" *ngIf="escenario.podio.primerPuesto">
+          <div class="image-container">
+            <img *ngIf="escenario.podio.primerPuesto.usuarioFotoUrl"
+              src="{{escenario.podio.primerPuesto.usuarioFotoUrl}}" class="second-place-image">
+            <img *ngIf="!escenario.podio.primerPuesto.usuarioFotoUrl" src="../../assets/img/student.png"
+              class="second-place-image">
+            <img src="../../assets/img/gold-medal.png" class="gold-medal-image">
+            <span class="winner-name-text"
+              style="font-size: large;">{{escenario.podio.primerPuesto.usuarioNombre}}</span>
           </div>
-          <div class="result-overview-container">
-            <img src="../../assets/img/caja.png" class="overview-image">
-            <span>${{escenario.podio.tercerPuesto.cajaFinal}}</span>
+          <div class="description-container">
+            <span class="winner-name-text"
+              style="font-size: medium; margin-bottom:10px;">{{escenario.podio.primerPuesto.puntaje}} puntos</span>
+            <div class="result-overview-container">
+              <img src="../../assets/img/ventas.png" class="overview-image">
+              <span>${{escenario.podio.primerPuesto.ventasTotales}}</span>
+            </div>
+            <div class="result-overview-container">
+              <img src="../../assets/img/caja.png" class="overview-image">
+              <span>${{escenario.podio.primerPuesto.cajaFinal}}</span>
+            </div>
+            <div class="result-overview-container">
+              <img src="../../assets/img/costos.png" class="overview-image">
+              <span>${{escenario.podio.primerPuesto.renta}}</span>
+            </div>
           </div>
-          <div class="result-overview-container">
-            <img src="../../assets/img/costos.png" class="overview-image">
-            <span>${{escenario.podio.tercerPuesto.renta}}</span>
+        </div>
+        <div class="podium-item-container tercero" *ngIf="escenario.podio.tercerPuesto">
+          <div class="image-container">
+            <img *ngIf="escenario.podio.tercerPuesto.usuarioFotoUrl"
+              src="{{escenario.podio.tercerPuesto.usuarioFotoUrl}}" class="second-place-image">
+            <img *ngIf="!escenario.podio.tercerPuesto.usuarioFotoUrl" src="../../assets/img/student.png"
+              class="second-place-image">
+            <img src="../../assets/img/bronze-medal.png" class="bronze-medal-image">
+            <span class="winner-name-text">{{escenario.podio.tercerPuesto.usuarioNombre}}</span>
+          </div>
+          <div class="description-container">
+            <span class="winner-name-text" style="margin-bottom:8px;">{{escenario.podio.tercerPuesto.puntaje}}
+              puntos</span>
+            <div class="result-overview-container">
+              <img src="../../assets/img/ventas.png" class="overview-image">
+              <span>${{escenario.podio.tercerPuesto.ventasTotales}}</span>
+            </div>
+            <div class="result-overview-container">
+              <img src="../../assets/img/caja.png" class="overview-image">
+              <span>${{escenario.podio.tercerPuesto.cajaFinal}}</span>
+            </div>
+            <div class="result-overview-container">
+              <img src="../../assets/img/costos.png" class="overview-image">
+              <span>${{escenario.podio.tercerPuesto.renta}}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -76,7 +101,8 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button *ngIf="!escenario.escenarioCurso.abierto" mat-button routerLink="/premios/escenario/{{escenario.id}}">VER DETALLES</button>
+      <button *ngIf="!escenario.escenarioCurso.abierto" mat-button routerLink="/premios/escenario/{{escenario.id}}">VER
+        DETALLES</button>
     </mat-card-actions>
   </mat-card>
 </div>

@@ -8,6 +8,34 @@
         padding: 20px;
     }
 
+    .podium-item-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    
+    .podium-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-template-areas: "segundo primero tercero";
+        padding:10px;
+        grid-gap: 10px;
+    }
+    
+    
+.first-place-image{
+    height: 120px; 
+    border-radius: 50%
+}
+
+.gold-medal-image{
+    height: 60px;
+    margin-top: -15px;
+}
+
 }
 
 @media screen and (max-width: 768px) {
@@ -16,6 +44,57 @@
         margin-top: 10px;
     }
 
+    .podium-item-container{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    
+    .podium-container{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        grid-template-areas: "primero" "segundo" "tercero";
+        padding:10px;
+        grid-gap: 20px;
+    }
+
+    .first-place-image{
+        height: 85px; 
+        border-radius: 50%
+    }
+
+    .gold-medal-image{
+        height: 45px;
+        margin-top: -13px;
+    }
+
+}
+
+.primero {
+    grid-area: primero;
+}
+
+.segundo {
+    grid-area: segundo;
+}
+
+.tercero {
+    grid-area: tercero;
+}
+
+.image-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.description-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .mat-card-actions {
@@ -38,25 +117,7 @@
 .spacer {
     flex: 1 1 auto;
 }
-    
 
-.podium-container{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: flex-end;
-}
-
-.podium-item-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.first-place-image{
-    height: 120px; 
-    border-radius: 50%
-}
 
 .second-place-image{
     height: 85px; 
@@ -66,11 +127,6 @@
 .third-place-image{
     height: 85px; 
     border-radius: 50%
-}
-
-.gold-medal-image{
-    height: 60px;
-    margin-top: -15px;
 }
 
 .silver-medal-image{
