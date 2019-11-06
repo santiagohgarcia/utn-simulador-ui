@@ -42,7 +42,7 @@ export class FinanciacionesComponent implements OnInit {
       data: {
         escenarioId: this.escenario.id,
         descripcion:"",
-        tna: 0,
+        tea: 0,
         cantidadCuotas: 0
       }
     });

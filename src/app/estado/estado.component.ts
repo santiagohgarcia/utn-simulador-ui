@@ -71,7 +71,7 @@ export class EstadoComponent implements OnInit {
       type: 'line',
       legend: false,
       data: [
-        { data: estados.map(estado => estado.caja), label: 'Caja' }
+        { data: estados.map(estado => estado.caja), label: 'Caja',fill: false }
       ]
     }
   }

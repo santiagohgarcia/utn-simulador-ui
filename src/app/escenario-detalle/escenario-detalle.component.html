@@ -18,27 +18,27 @@
         <mat-card-content>
           <form [formGroup]="escenarioForm" class="form">
             <mat-form-field class="form-field">
-              <input autofocus matInput placeholder="Titulo" [formControl]="titulo" [(ngModel)]="escenario.titulo"
+              <input autofocus required matInput placeholder="Titulo" [formControl]="titulo" [(ngModel)]="escenario.titulo"
                 [(value)]="escenario.titulo">
               <mat-error *ngIf="escenario.invalid">Required field</mat-error>
             </mat-form-field>
-            <mat-form-field class="form-field">
-              <input type="number" matInput placeholder="Cantidad de Periodos" [formControl]="maximosPeriodos"
+            <mat-form-field class="form-field" >
+              <input type="number" required matInput placeholder="Cantidad de Periodos" [formControl]="maximosPeriodos"
                 [(ngModel)]="escenario.maximosPeriodos" [(value)]="escenario.maximosPeriodos">
               <mat-error *ngIf="escenario.invalid">Required field</mat-error>
             </mat-form-field>
             <mat-form-field class="form-field">
-              <input matInput placeholder="Nombre Periodos" [formControl]="nombrePeriodos"
+              <input matInput required placeholder="Nombre Periodos" [formControl]="nombrePeriodos"
                 [(ngModel)]="escenario.nombrePeriodos" [(value)]="escenario.nombrePeriodos">
               <mat-error *ngIf="escenario.invalid">Required field</mat-error>
             </mat-form-field>
             <mat-form-field class="form-field">
-              <textarea cdkTextareaAutosize matInput placeholder="Descripcion" [formControl]="descripcion"
+              <textarea cdkTextareaAutosize required matInput placeholder="Descripcion" [formControl]="descripcion"
                 [(ngModel)]="escenario.descripcion" [(value)]="escenario.descripcion"></textarea>
               <mat-error *ngIf="escenario.invalid">Required field</mat-error>
             </mat-form-field>
             <mat-form-field class="form-field">
-              <input type="number" matInput placeholder="Porcentaje de Impuestos" [formControl]="impuestoPorcentaje"
+              <input type="number" required matInput placeholder="Porcentaje de Impuestos" [formControl]="impuestoPorcentaje"
                 [(ngModel)]="escenario.impuestoPorcentaje" [(value)]="escenario.impuestoPorcentaje">
               <mat-error *ngIf="escenario.invalid">Required field</mat-error>
             </mat-form-field>
@@ -73,23 +73,23 @@
               <div style="margin-left:16px;">Activo</div>
               <form [formGroup]="activoForm" class="balance-form" *ngIf="escenario.balanceInicial.activo">
                 <mat-form-field class="form-field">
-                  <input autofocus matInput placeholder="Caja" [formControl]="caja" type="number"
+                  <input autofocus required matInput placeholder="Caja" [formControl]="caja" type="number"
                     [(ngModel)]="escenario.balanceInicial.activo.caja" [(value)]="escenario.balanceInicial.activo.caja">
                 </mat-form-field>
                 <mat-form-field class="form-field">
-                  <input autofocus matInput placeholder="Inventario" [formControl]="inventario" type="number"
+                  <input autofocus matInput required placeholder="Inventario" [formControl]="inventario" type="number"
                     [(ngModel)]="escenario.balanceInicial.activo.inventario"
                     [(value)]="escenario.balanceInicial.activo.inventario">
                   <mat-error *ngIf="inventario.invalid">Required field</mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-field">
                   <input autofocus matInput placeholder="Cuentas a Cobrar" [formControl]="cuentasPorCobrar"
-                    type="number" [(ngModel)]="escenario.balanceInicial.activo.cuentasPorCobrar"
+                    type="number" required [(ngModel)]="escenario.balanceInicial.activo.cuentasPorCobrar"
                     [(value)]="escenario.balanceInicial.activo.cuentasPorCobrar">
                   <mat-error *ngIf="cuentasPorCobrar.invalid">Required field</mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-field">
-                  <input autofocus matInput placeholder="Periodos Cuentas a Cobrar"
+                  <input autofocus required matInput placeholder="Periodos Cuentas a Cobrar"
                     [formControl]="cuentasPorCobrarPeriodos" type="number"
                     [(ngModel)]="escenario.balanceInicial.activo.cuentasPorCobrarPeriodos"
                     [(value)]="escenario.balanceInicial.activo.cuentasPorCobrarPeriodos">
@@ -101,22 +101,22 @@
               <div style="margin-left:16px;">Pasivo</div>
               <form [formGroup]="pasivoForm" class="balance-form" *ngIf="escenario.balanceInicial.pasivo">
                 <mat-form-field class="form-field">
-                  <input autofocus matInput placeholder="Proveedores" [formControl]="proveedores" type="number"
+                  <input autofocus required matInput placeholder="Proveedores" [formControl]="proveedores" type="number"
                     [(ngModel)]="escenario.balanceInicial.pasivo.proveedores"
                     [(value)]="escenario.balanceInicial.pasivo.proveedores">
                 </mat-form-field>
                 <mat-form-field class="form-field">
-                  <input autofocus matInput placeholder="Periodos Proveedores" [formControl]="proveedoresPeriodos"
+                  <input autofocus required matInput placeholder="Periodos Proveedores" [formControl]="proveedoresPeriodos"
                     type="number" [(ngModel)]="escenario.balanceInicial.pasivo.proveedoresPeriodos"
                     [(value)]="escenario.balanceInicial.pasivo.proveedoresPeriodos">
                 </mat-form-field>
                 <mat-form-field class="form-field">
-                  <input autofocus matInput placeholder="Deudas Bancarias" [formControl]="deudasBancarias" type="number"
+                  <input autofocus required matInput placeholder="Deudas Bancarias" [formControl]="deudasBancarias" type="number"
                     [(ngModel)]="escenario.balanceInicial.pasivo.deudasBancarias"
                     [(value)]="escenario.balanceInicial.pasivo.deudasBancarias">
                 </mat-form-field>
                 <mat-form-field class="form-field">
-                  <input autofocus matInput placeholder="Periodos Deudas Bancarias"
+                  <input autofocus required matInput placeholder="Periodos Deudas Bancarias"
                     [formControl]="deudasBancariasPeriodos" type="number"
                     [(ngModel)]="escenario.balanceInicial.pasivo.deudasBancariasPeriodos"
                     [(value)]="escenario.balanceInicial.pasivo.deudasBancariasPeriodos">
@@ -128,12 +128,12 @@
               <form [formGroup]="patrimonioNetoForm" class="patrimonio-form"
                 *ngIf="escenario.balanceInicial.patrimonioNeto">
                 <mat-form-field class="form-field">
-                  <input autofocus matInput placeholder="Capital Social" [formControl]="capitalSocial" type="number"
+                  <input autofocus required matInput placeholder="Capital Social" [formControl]="capitalSocial" type="number"
                     [(ngModel)]="escenario.balanceInicial.patrimonioNeto.capitalSocial"
                     [(value)]="escenario.balanceInicial.patrimonioNeto.capitalSocial">
                 </mat-form-field>
                 <mat-form-field class="form-field">
-                  <input autofocus matInput placeholder="Resultado del ejercicio" [formControl]="resultadoDelEjercicio"
+                  <input autofocus required matInput placeholder="Resultado del ejercicio" [formControl]="resultadoDelEjercicio"
                     [(ngModel)]="escenario.balanceInicial.patrimonioNeto.resultadoDelEjercicio" type="number"
                     [(value)]="escenario.balanceInicial.patrimonioNeto.resultadoDelEjercicio">
                 </mat-form-field>
@@ -150,22 +150,22 @@
         <mat-card-content>
           <form [formGroup]="estadoInicialForm" class="estado-form">
             <mat-form-field class="form-field">
-              <input autofocus matInput placeholder="Costo Fijo" [formControl]="costoFijo"
+              <input autofocus required matInput placeholder="Costo Fijo" [formControl]="costoFijo"
                 [(ngModel)]="escenario.estadoInicial.costoFijo" type="number"
                 [(value)]="escenario.estadoInicial.costoFijo">
             </mat-form-field>
             <mat-form-field class="form-field">
-              <input autofocus matInput placeholder="Costo Variable" [formControl]="costoVariable"
+              <input autofocus required matInput placeholder="Costo Variable" [formControl]="costoVariable"
                 [(ngModel)]="escenario.estadoInicial.costoVariable" type="number"
                 [(value)]="escenario.estadoInicial.costoVariable">
             </mat-form-field>
             <mat-form-field class="form-field">
-              <input autofocus matInput placeholder="Produccion Mensual" [formControl]="produccionMensual"
+              <input autofocus required matInput placeholder="Produccion Mensual" [formControl]="produccionMensual"
                 [(ngModel)]="escenario.estadoInicial.produccionMensual" type="number"
                 [(value)]="escenario.estadoInicial.produccionMensual">
             </mat-form-field>
             <mat-form-field class="form-field">
-              <input autofocus matInput placeholder="Stock" [formControl]="stock"
+              <input autofocus required matInput placeholder="Stock" [formControl]="stock"
                 [(ngModel)]="escenario.estadoInicial.stock" type="number" [(value)]="escenario.estadoInicial.stock">
             </mat-form-field>
             <mat-form-field class="form-field">
@@ -173,11 +173,11 @@
                 [(ngModel)]="escenario.estadoInicial.calidad" type="number" [(value)]="escenario.estadoInicial.calidad">
             </mat-form-field>
             <mat-form-field class="form-field">
-              <input autofocus matInput placeholder="Cantidad de Vendedores" [formControl]="cantidadVendedores"
+              <input autofocus required matInput placeholder="Cantidad de Vendedores" [formControl]="cantidadVendedores"
               [(ngModel)]="escenario.estadoInicial.cantidadVendedores" type="number" [(value)]="escenario.estadoInicial.cantidadVendedores">
             </mat-form-field>
             <mat-form-field class="form-field">
-              <input autofocus matInput placeholder="Publicidad" [formControl]="publicidad" 
+              <input autofocus required matInput placeholder="Publicidad" [formControl]="publicidad" 
               [(ngModel)]="escenario.estadoInicial.publicidad" type="number" [(value)]="escenario.estadoInicial.publicidad">
             </mat-form-field>
           </form>
@@ -190,22 +190,22 @@
         <mat-card-content>
           <form [formGroup]="puntajeForm" class="puntaje-form">
             <mat-form-field class="form-field">
-              <input autofocus matInput placeholder="Porcentaje Escenario" [formControl]="porcentajeEscenario"
+              <input autofocus required matInput placeholder="Porcentaje Escenario" [formControl]="porcentajeEscenario"
                 [(ngModel)]="puntajes.porcentajeEscenario" type="number" [(value)]="puntajes.porcentajeEscenario">
               <span matSuffix>%</span>
             </mat-form-field>
             <mat-form-field class="form-field">
-              <input autofocus matInput placeholder="Ponderacion de Caja" [formControl]="porcentajeCaja"
+              <input autofocus required matInput placeholder="Ponderacion de Caja" [formControl]="porcentajeCaja"
                 [(ngModel)]="puntajes.porcentajeCaja" type="number" [(value)]="puntajes.porcentajeCaja">
               <span matSuffix>%</span>
             </mat-form-field>
             <mat-form-field class="form-field">
-              <input autofocus matInput placeholder="Ponderacion de Ventas" [formControl]="porcentajeVentas"
+              <input autofocus required matInput placeholder="Ponderacion de Ventas" [formControl]="porcentajeVentas"
                 [(ngModel)]="puntajes.porcentajeVentas" type="number" [(value)]="puntajes.porcentajeVentas">
               <span matSuffix>%</span>
             </mat-form-field>
             <mat-form-field class="form-field">
-              <input autofocus matInput placeholder="Ponderacion de Renta" [formControl]="porcentajeRenta"
+              <input autofocus required matInput placeholder="Ponderacion de Renta" [formControl]="porcentajeRenta"
                 [(ngModel)]="puntajes.porcentajeRenta" type="number" [(value)]="puntajes.porcentajeRenta">
               <span matSuffix>%</span>
             </mat-form-field>
@@ -245,19 +245,19 @@
                 </td>
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" [(ngModel)]="forecast.bajo" [(value)]="forecast.bajo" matInput
+                    <input type="number" required [(ngModel)]="forecast.bajo" [(value)]="forecast.bajo" matInput
                       style="text-align: right;width: 80px;">
                   </mat-form-field>
                 </td>
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" [(ngModel)]="forecast.medio" [(value)]="forecast.medio" matInput
+                    <input type="number" required [(ngModel)]="forecast.medio" [(value)]="forecast.medio" matInput
                       style="text-align: right;width: 80px;">
                   </mat-form-field>
                 </td>
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" [(ngModel)]="forecast.alto" [(value)]="forecast.alto" matInput
+                    <input type="number" required [(ngModel)]="forecast.alto" [(value)]="forecast.alto" matInput
                       style="text-align: right;width: 80px;">
                   </mat-form-field>
                 </td>
@@ -283,24 +283,24 @@
               <tr class="mat-row">
                 <td class="mat-cell">
                   <mat-form-field>
-                    <input [(ngModel)]="ec.nombre" [(value)]="ec.nombre" matInput>
+                    <input [(ngModel)]="ec.nombre" required [(value)]="ec.nombre" matInput>
                   </mat-form-field>
                 </td>
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" [(ngModel)]="ec.bajo" [(value)]="ec.bajo" matInput
+                    <input type="number" required [(ngModel)]="ec.bajo" [(value)]="ec.bajo" matInput
                       style="text-align: right;width: 80px;">
                   </mat-form-field>
                 </td>
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" [(ngModel)]="ec.medio" [(value)]="ec.medio" matInput
+                    <input type="number" required [(ngModel)]="ec.medio" [(value)]="ec.medio" matInput
                       style="text-align: right;width: 80px;">
                   </mat-form-field>
                 </td>
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" [(ngModel)]="ec.alto" [(value)]="ec.alto" matInput
+                    <input type="number" required [(ngModel)]="ec.alto" [(value)]="ec.alto" matInput
                       style="text-align: right;width: 80px;">
                   </mat-form-field>
                 </td>
@@ -317,13 +317,13 @@
         <mat-card-content>
           <div class="precio-intervalo-container">
             <mat-form-field>
-              <input placeholder="Precio Min" type="number" matInput
+              <input placeholder="Precio Min" type="number" matInput required
                 [(ngModel)]="configuracionMercado.restriccionPrecio.precioMin"
                 [(value)]="configuracionMercado.restriccionPrecio.precioMin">
             </mat-form-field>
             <span style="margin-right: 20px; margin-left: 20px;">hasta</span>
             <mat-form-field>
-              <input placeholder="Precio Max" type="number" matInput
+              <input placeholder="Precio Max" type="number" matInput required
                 [(ngModel)]="configuracionMercado.restriccionPrecio.precioMax"
                 [(value)]="configuracionMercado.restriccionPrecio.precioMax">
             </mat-form-field>
@@ -351,25 +351,25 @@
               <tr class="mat-row">
                 <td class="mat-cell">
                   <mat-form-field>
-                    <input type="number" matInput [(ngModel)]="pd.valor" [(value)]="pd.valor">
+                    <input type="number" matInput [(ngModel)]="pd.valor" [(value)]="pd.valor" required>
                   </mat-form-field>
                 </td>
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
                     <input type="number" [(ngModel)]="pd.bajo" [(value)]="pd.bajo" matInput
-                      style="text-align: right;width: 80px;">
+                      style="text-align: right;width: 80px;" required>
                   </mat-form-field>
                 </td>
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
                     <input type="number" [(ngModel)]="pd.medio" [(value)]="pd.medio" matInput
-                      style="text-align: right;width: 80px;">
+                      style="text-align: right;width: 80px;" required>
                   </mat-form-field>
                 </td>
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
                     <input type="number" [(ngModel)]="pd.alto" [(value)]="pd.alto" matInput
-                      style="text-align: right;width: 80px;">
+                      style="text-align: right;width: 80px;" required>
                   </mat-form-field>
                 </td>
               </tr>
@@ -399,19 +399,19 @@
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
                     <input type="number" [(ngModel)]="mc.bajo" [(value)]="mc.bajo" matInput
-                      style="text-align: right;width: 80px;">
+                      style="text-align: right;width: 80px;" required>
                   </mat-form-field>
                 </td>
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
                     <input type="number" [(ngModel)]="mc.medio" [(value)]="mc.medio" matInput
-                      style="text-align: right;width: 80px;">
+                      style="text-align: right;width: 80px;" required>
                   </mat-form-field>
                 </td>
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
                     <input type="number" [(ngModel)]="mc.alto" [(value)]="mc.alto" matInput
-                      style="text-align: right;width: 80px;">
+                      style="text-align: right;width: 80px;" required>
                   </mat-form-field>
                 </td>
               </tr>
@@ -443,19 +443,19 @@
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
                     <input type="number" [(ngModel)]="cd.bajo" [(value)]="cd.bajo" matInput
-                      style="text-align: right;width: 80px;">
+                      style="text-align: right;width: 80px;" required>
                   </mat-form-field>
                 </td>
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
                     <input type="number" [(ngModel)]="cd.medio" [(value)]="cd.medio" matInput
-                      style="text-align: right;width: 80px;">
+                      style="text-align: right;width: 80px;" required>
                   </mat-form-field>
                 </td>
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
                     <input type="number" [(ngModel)]="cd.alto" [(value)]="cd.alto" matInput
-                      style="text-align: right;width: 80px;">
+                      style="text-align: right;width: 80px;" required>
                   </mat-form-field>
                 </td>
               </tr>
@@ -487,19 +487,19 @@
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
                     <input type="number" [(ngModel)]="vd.bajo" [(value)]="vd.bajo" matInput
-                      style="text-align: right;width: 80px;">
+                      style="text-align: right;width: 80px;" required>
                   </mat-form-field>
                 </td>
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
                     <input type="number" [(ngModel)]="vd.medio" [(value)]="vd.medio" matInput
-                      style="text-align: right;width: 80px;">
+                      style="text-align: right;width: 80px;" required>
                   </mat-form-field>
                 </td>
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
                     <input type="number" [(ngModel)]="vd.alto" [(value)]="vd.alto" matInput
-                      style="text-align: right;width: 80px;">
+                      style="text-align: right;width: 80px;" required>
                   </mat-form-field>
                 </td>
               </tr>
@@ -531,19 +531,19 @@
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
                     <input type="number" [(ngModel)]="pd.bajo" [(value)]="pd.bajo" matInput
-                      style="text-align: right;width: 80px;">
+                      style="text-align: right;width: 80px;" required>
                   </mat-form-field>
                 </td>
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
                     <input type="number" [(ngModel)]="pd.medio" [(value)]="pd.medio" matInput
-                      style="text-align: right;width: 80px;">
+                      style="text-align: right;width: 80px;" required>
                   </mat-form-field>
                 </td>
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
                     <input type="number" [(ngModel)]="pd.alto" [(value)]="pd.alto" matInput
-                      style="text-align: right;width: 80px;">
+                      style="text-align: right;width: 80px;" required>
                   </mat-form-field>
                 </td>
               </tr>
@@ -554,10 +554,6 @@
     </div>
   </mat-tab>
 </mat-tab-group>
-
-
-
-
 
 <button mat-fab color="primary" class="fab" (click)="save()">
   <mat-icon>save</mat-icon>

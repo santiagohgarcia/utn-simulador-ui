@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { ProyectoService } from '../../proyecto.service';
+import { MessagesService } from '../../messages.service';
 
 
 @Component({
@@ -30,6 +31,7 @@ export class ConsecuenciaDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<ConsecuenciaDialogComponent>,
     private proyectoService: ProyectoService,
+    private messageService: MessagesService,
     @Inject(MAT_DIALOG_DATA) public data) { }
 
   ngOnInit() {
@@ -53,6 +55,8 @@ export class ConsecuenciaDialogComponent implements OnInit {
   save(){
     if(this.consecuenciaForm.valid){
       this.dialogRef.close(this.consecuencia);
+    }else {
+      this.messageService.openSnackBarDatosIngresados()
     }
   }
 

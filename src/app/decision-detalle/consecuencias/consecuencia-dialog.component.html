@@ -4,28 +4,28 @@
     <form [formGroup]="consecuenciaForm" class="form">
         <mat-form-field class="full-width">
             <input matInput placeholder="Descripcion" type="text" [formControl]="descripcion"
-                [(ngModel)]="consecuencia.descripcion" [(value)]="consecuencia.descripcion">
+                [(ngModel)]="consecuencia.descripcion" [(value)]="consecuencia.descripcion" required>
             <mat-error *ngIf="descripcion.invalid">Required field</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
             <input type="number" matInput placeholder="Monto" [formControl]="monto" [(ngModel)]="consecuencia.monto"
-                [(value)]="consecuencia.monto">
+                [(value)]="consecuencia.monto" required>
             <mat-error *ngIf="monto.invalid">Required field</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
             <input type="number" matInput placeholder="Periodo Inicio" [formControl]="periodoInicio"
-                [(ngModel)]="consecuencia.periodoInicio" [(value)]="consecuencia.periodoInicio">
+                [(ngModel)]="consecuencia.periodoInicio" [(value)]="consecuencia.periodoInicio" required>
             <mat-error *ngIf="periodoInicio.invalid">Required field</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
             <input type="number" matInput placeholder="Cantidad Periodos" [formControl]="cantidadPeriodos"
-                [(ngModel)]="consecuencia.cantidadPeriodos" [(value)]="consecuencia.cantidadPeriodos">
+                [(ngModel)]="consecuencia.cantidadPeriodos" [(value)]="consecuencia.cantidadPeriodos" required>
             <mat-error *ngIf="cantidadPeriodos.invalid">Required field</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
             <mat-label>Tipo Cuenta</mat-label>
             <mat-select [formControl]="tipoCuenta" [(ngModel)]="consecuencia.tipoCuenta"
-                [(value)]="consecuencia.tipoCuenta">
+                [(value)]="consecuencia.tipoCuenta" required>
                 <mat-option *ngFor="let tipoCuenta of tipoCuentas" [value]="tipoCuenta.key">
                     {{tipoCuenta.descripcion}}
                 </mat-option>
@@ -36,11 +36,10 @@
         <mat-form-field class="full-width">
             <mat-label>Tipo Flujo de Fondos</mat-label>
             <mat-select [formControl]="tipoFlujoFondo" [(ngModel)]="consecuencia.tipoFlujoFondo"
-                [(value)]="consecuencia.tipoFlujoFondo">
+                [(value)]="consecuencia.tipoFlujoFondo" required>
                 <mat-option *ngFor="let tipoFlujoFondo of tipoFlujoFondos" [value]="tipoFlujoFondo.key">
                     {{tipoFlujoFondo.descripcion}}
                 </mat-option>
-              
             </mat-select>
             <mat-error *ngIf="tipoFlujoFondo.invalid">Required field</mat-error>
         </mat-form-field>

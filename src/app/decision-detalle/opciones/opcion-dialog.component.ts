@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { MessagesService } from '../../messages.service';
 
 @Component({
   selector: 'opcion-dialog',
@@ -25,6 +26,7 @@ export class OpcionDialogComponent implements OnInit {
   });
 
   constructor( public dialogRef: MatDialogRef<OpcionDialogComponent>,
+    private messageService: MessagesService,
     @Inject(MAT_DIALOG_DATA) public data) { }
 
   ngOnInit() {
@@ -38,6 +40,8 @@ export class OpcionDialogComponent implements OnInit {
   save(){
     if(this.opcionForm.valid){
       this.dialogRef.close(this.opcion);
+    }else {
+      this.messageService.openSnackBarDatosIngresados()
     }
   }
 

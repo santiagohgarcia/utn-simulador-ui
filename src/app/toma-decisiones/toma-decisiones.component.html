@@ -234,7 +234,7 @@
               <td class="mat-cell value-column">
                 <mat-form-field class="value-column">
                   <input type="number" matInput [(ngModel)]="modalidadCobroItem.porcentaje"
-                    [(value)]="modalidadCobroItem.porcentaje" class="value-column">
+                    [(value)]="modalidadCobroItem.porcentaje" class="value-column" required>
                   <span matSuffix>%</span>
                 </mat-form-field>
               </td>
@@ -266,7 +266,7 @@
                 <td class="mat-cell value-column-cantidad">
                   <mat-form-field style="text-align: right;width: 80px;">
                     <input type="number" matInput [(ngModel)]="forecast.cantidadUnidades"
-                      [(value)]="forecast.cantidadUnidades" style="text-align: right;width: 80px;">
+                      [(value)]="forecast.cantidadUnidades" style="text-align: right;width: 80px;" required> 
                     <span matSuffix>u.</span>
                   </mat-form-field>
                 </td>
@@ -274,7 +274,7 @@
                   <mat-form-field style="text-align: right;width: 80px;">
                     <span matPrefix>$ &nbsp;</span>
                     <input type="number" matInput [(ngModel)]="forecast.precio" [(value)]="forecast.precio"
-                      style="text-align: right;width: 80px;">
+                      style="text-align: right;width: 80px;" required>
                   </mat-form-field>
                 </td>
               </tr>
@@ -357,20 +357,20 @@
             <mat-form-field class="monto">
               <span matPrefix>$ &nbsp;</span>
               <input type="number" matInput style="text-align: right" placeholder="Monto" [(ngModel)]="credito.monto"
-                [(value)]="credito.monto">
+                [(value)]="credito.monto" required>
             </mat-form-field>
           </div>
           <div class="monto-cont">
             <mat-form-field class="monto">
             <input type="number" matInput style="text-align: right" placeholder="Periodo Inicial" [(ngModel)]="credito.periodoInicial"
-              [(value)]="credito.periodoInicial">
+              [(value)]="credito.periodoInicial" required>
             </mat-form-field>
           </div>
           <table class="mat-table table">
 
             <tr class="mat-header-row">
               <th class="mat-header-cell desc-column">Credito</th>
-              <th class="mat-header-cell value-column">TNA</th>
+              <th class="mat-header-cell value-column">TEA</th>
               <th class="mat-header-cell value-column">Cuotas</th>
             </tr>
 
@@ -383,7 +383,7 @@
                 </mat-radio-button>
               </td>
               <td class="mat-cell value-column">
-                {{financiacion.tna}}%
+                {{financiacion.tea}}%
               </td>
               <td class="mat-cell value-column">
                 {{financiacion.cantidadCuotas}}

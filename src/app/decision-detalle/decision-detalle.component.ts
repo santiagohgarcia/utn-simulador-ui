@@ -37,8 +37,8 @@ export class DecisionDetalleComponent implements OnInit {
 
   displayedColumns: string[] = ['descripcion', 'edit'];
 
-  constructor(private decisionesService: DecisionesService, 
-    private route: ActivatedRoute, 
+  constructor(private decisionesService: DecisionesService,
+    private route: ActivatedRoute,
     private dialog: MatDialog,
     private router: Router,
     private messageService: MessagesService,
@@ -59,11 +59,11 @@ export class DecisionDetalleComponent implements OnInit {
     this.getTipoCuentas();
   }
 
-  getTipoCuentas(){
-      this.proyectoService.getTipoCuentas().subscribe(tipoCuentas => this.tipoCuentas = tipoCuentas)
+  getTipoCuentas() {
+    this.proyectoService.getTipoCuentas().subscribe(tipoCuentas => this.tipoCuentas = tipoCuentas)
   }
 
-  tipoCuentaDescripcion(tipoCuenta){
+  tipoCuentaDescripcion(tipoCuenta) {
     const tipoCuentaObject = this.tipoCuentas.find(tc => tc.key === tipoCuenta)
     return tipoCuentaObject && tipoCuentaObject.descripcion;
   }
@@ -76,7 +76,7 @@ export class DecisionDetalleComponent implements OnInit {
         descripcion: "",
         variacionCostoFijo: 0,
         variacionCostoVariable: 0,
-        variacionProduccion: 0, 
+        variacionProduccion: 0,
         variacionCalidad: 0,
         variacionPublicidad: 0,
         consecuencias: []
@@ -172,6 +172,8 @@ export class DecisionDetalleComponent implements OnInit {
           this.messageService.openSnackBar("Decision modificada");
           this.router.navigate([`/escenarios/${this.decision.escenarioId}`])
         })
+    } else {
+      this.messageService.openSnackBarDatosIngresados()
     }
   }
 
