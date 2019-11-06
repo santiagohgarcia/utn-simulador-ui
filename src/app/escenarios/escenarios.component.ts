@@ -27,4 +27,8 @@ export class EscenariosComponent implements OnInit {
     this.escenariosService.deleteEscenario(id).subscribe(_ => this.getEscenarios())
   }
 
+  duplicateEscenario(escenario){
+    this.escenariosService.duplicateEscenario(escenario).subscribe(_ => this.getEscenarios())
+  }
+
 }

@@ -16,13 +16,15 @@ export class OpcionDialogComponent implements OnInit {
   variacionProduccion = new FormControl('', [Validators.required])
   variacionCalidad = new FormControl('', [Validators.required])
   variacionPublicidad = new FormControl('', [Validators.required])
+  variacionCantidadVendedores = new FormControl('', [Validators.required])
   opcionForm: FormGroup = new FormGroup({
     descripcion: this.descripcion,
     variacionCostoFijo: this.variacionCostoFijo,
     variacionCostoVariable: this.variacionCostoVariable,
     variacionProduccion: this.variacionProduccion,
     variacionCalidad: this.variacionCalidad,
-    variacionPublicidad: this.variacionPublicidad
+    variacionPublicidad: this.variacionPublicidad,
+    variacionCantidadVendedores: this.variacionCantidadVendedores
   });
 
   constructor( public dialogRef: MatDialogRef<OpcionDialogComponent>,

@@ -35,6 +35,11 @@ export class EscenariosService {
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
+  duplicateEscenario(escenario) {
+    return this.http.post(`${environment.proyectoServiceHost}/api/escenarios/${escenario.id}`, escenario)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+
   createEscenario(escenario) {
     delete escenario.id;
     return this.http.post(`${environment.proyectoServiceHost}/api/escenarios`, escenario)

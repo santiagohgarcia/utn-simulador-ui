@@ -79,6 +79,7 @@ export class DecisionDetalleComponent implements OnInit {
         variacionProduccion: 0,
         variacionCalidad: 0,
         variacionPublicidad: 0,
+        variacionCantidadVendedores: 0,
         consecuencias: []
       }
     });

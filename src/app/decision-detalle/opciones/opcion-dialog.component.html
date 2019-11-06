@@ -37,6 +37,12 @@
                 [(value)]="opcion.variacionPublicidad" required>
             <mat-error *ngIf="variacionPublicidad.invalid">Required field</mat-error>
         </mat-form-field>
+        <mat-form-field class="full-width">
+            <input type="number" matInput placeholder="Variacion de Cantidad de Vendedores" type="text"
+                [formControl]="variacionCantidadVendedores" [(ngModel)]="opcion.variacionCantidadVendedores"
+                [(value)]="opcion.variacionCantidadVendedores" required>
+            <mat-error *ngIf="variacionCantidadVendedores.invalid">Required field</mat-error>
+        </mat-form-field>
     </form>
 </div>
 <div mat-dialog-actions>
