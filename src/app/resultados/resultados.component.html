@@ -8,13 +8,13 @@
   <div class="spacer"></div>
   <button *ngIf="!proyecto.entregado" mat-raised-button color="accent" (click)="entregarSimulacion()">ENTREGAR
     SIMULACION</button>
-  <mat-button-toggle-group name="fontStyle" *ngIf="proyecto.entregado && escenarioCurso" [(value)]="seccion" >
-    <mat-button-toggle value="RESULTADOS_FORECAST">Resultados Forecast</mat-button-toggle>
+  <mat-button-toggle-group name="fontStyle" *ngIf="proyecto.entregado && forecast && escenarioCurso" [(value)]="seccion" >
+    <mat-button-toggle value="RESULTADOS_FORECAST" [disabled]="forecast.length <= 0">Resultados Forecast</mat-button-toggle>
     <mat-button-toggle value="RESULTADOS_REALES" [disabled]="escenarioCurso.abierto">Resultados Reales</mat-button-toggle>
   </mat-button-toggle-group>
 </mat-toolbar>
 
-<mat-tab-group *ngIf="proyecto && seccion === 'RESULTADOS_FORECAST' " mat-stretch-tabs>
+<mat-tab-group *ngIf="proyecto && forecast && seccion === 'RESULTADOS_FORECAST' " mat-stretch-tabs>
   <mat-tab label="Enunciado">
     <div class="tab-content">
       <mat-card *ngIf="escenario" class="escenario-card">
@@ -41,7 +41,7 @@
     </div>
   </mat-tab>
   <mat-tab label="Estado">
-    <app-estado [proyecto]="proyecto"></app-estado>
+    <app-estado [proyecto]="proyecto" [forecast]="true"></app-estado>
   </mat-tab>
   <mat-tab label="Flujo de Fondos">
     <app-flujo-fondos [proyecto]="proyecto" [forecast]="true"></app-flujo-fondos>
@@ -59,7 +59,7 @@
   </mat-tab>
 </mat-tab-group>
 
-<mat-tab-group *ngIf="proyecto && seccion === 'RESULTADOS_REALES'" mat-stretch-tabs>
+<mat-tab-group *ngIf="proyecto && forecast && seccion === 'RESULTADOS_REALES'" mat-stretch-tabs>
   <mat-tab label="Enunciado">
     <div class="tab-content">
       <mat-card *ngIf="escenario" class="escenario-card">
@@ -87,7 +87,7 @@
     </div>
   </mat-tab>
   <mat-tab label="Estado">
-    <app-estado [proyecto]="proyecto"></app-estado>
+    <app-estado [proyecto]="proyecto" [forecast]="false"></app-estado>
   </mat-tab>
   <mat-tab label="Flujo de Fondos">
     <app-flujo-fondos [proyecto]="proyecto" [forecast]="false"></app-flujo-fondos>

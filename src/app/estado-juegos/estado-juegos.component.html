@@ -13,10 +13,10 @@
         routerLink="/estado-juego/curso/{{curso.id}}/escenario/{{escenario.id}}" > 
           <div class="list-item-cont">
             <span>{{escenario.titulo | titlecase}}</span>
-            <mat-chip-list *ngIf="escenario.escenarioCurso.abierto">
+            <mat-chip-list *ngIf="escenario.escenarioCurso && escenario.escenarioCurso.abierto">
               <mat-chip color="primary" selected>ABIERTO</mat-chip>
             </mat-chip-list>
-            <mat-chip-list *ngIf="!escenario.escenarioCurso.abierto">
+            <mat-chip-list *ngIf="escenario.escenarioCurso && !escenario.escenarioCurso.abierto">
                 <mat-chip color="warn" selected>CERRADO</mat-chip>
               </mat-chip-list>
           </div>

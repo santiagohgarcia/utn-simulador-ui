@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EstadoComponent implements OnInit {
   @Input() proyecto: any;
+  @Input() forecast: boolean;
   estadoActual: any;
   ultimoPrecioProducto;
   estados: any;
@@ -33,14 +34,18 @@ export class EstadoComponent implements OnInit {
   }
 
   getUltimoPrecioProducto(proyectoId){
-    this.proyectoService.getForecast(proyectoId).subscribe(forecasts => {
-      this.ultimoPrecioProducto = forecasts.pop().precio;
-    })
+    if(this.forecast) {
+      this.proyectoService.getForecast(proyectoId).subscribe(forecasts => {
+        this.ultimoPrecioProducto = forecasts.pop().precio;
+      })
+    } else {
+      this.ultimoPrecioProducto = 0;
+    }
 
   }
 
   getEstadoActual(proyectoId) {
-    this.estadoActual = this.proyectoService.getEstado(proyectoId).subscribe(estadoActual => {
+    this.estadoActual = this.proyectoService.getEstado(proyectoId, this.forecast).subscribe(estadoActual => {
       this.estadoActual = estadoActual;
       this.escenario = estadoActual.proyecto.escenario;
       this.setModCobroChartProps(estadoActual);
@@ -49,7 +54,7 @@ export class EstadoComponent implements OnInit {
   }
 
   getEstados(proyectoId) {
-    this.proyectoService.getEstados(proyectoId).subscribe(estados => {
+    this.proyectoService.getEstados(proyectoId, this.forecast).subscribe(estados => {
       this.estados = estados;
       this.setCajaChartProps(this.estados);
       this.setVentasChartProps(this.estados);
