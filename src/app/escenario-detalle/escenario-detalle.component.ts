@@ -156,6 +156,8 @@ export class EscenarioDetalleComponent implements OnInit {
     porcentajeEscenario: this.porcentajeEscenario
   });
 
+  hasProyectos = false;
+
   constructor(private escenariosService: EscenariosService,
     private route: ActivatedRoute,
     private router: Router,
@@ -182,6 +184,7 @@ export class EscenarioDetalleComponent implements OnInit {
       this.getEscenario(id).subscribe(escenario => {
         this.escenario = escenario
         this.getConfiguracionMercado(escenario)
+        this.getHasProyectos(escenario.id);
       });
       this.escenariosService.getCursosEscenario(id).subscribe(cursosEscenario => {
         this.escenario.cursos = cursosEscenario;
@@ -189,6 +192,12 @@ export class EscenarioDetalleComponent implements OnInit {
       this.getPuntajes(id);
     }
     this.getCursos();
+  }
+
+  getHasProyectos(escenarioId){
+    return this.escenariosService.getProyectosByEscenario(escenarioId).subscribe(proyectos => {
+      this.hasProyectos = (proyectos.length > 0)
+    })
   }
 
   getPuntajes(escenarioId) {

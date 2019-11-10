@@ -1,7 +1,7 @@
 <mat-toolbar color="secundary">
   <h1>Financiaciones</h1>
   <span class="spacer"></span>
-  <button mat-icon-button (click)="createFinanciacion()">
+  <button mat-icon-button (click)="createFinanciacion()" *ngIf="!hasProyectos">
     <mat-icon>add</mat-icon>
   </button>
 </mat-toolbar>
@@ -28,7 +28,7 @@
         </mat-list-item>
       </mat-list>
     </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions *ngIf="!hasProyectos">
       <button mat-button (click)="editFinanciacion(financiacion)">EDITAR</button>
       <button mat-button color="warn" (click)="removeFinanciacion(financiacion)">ELIMINAR</button>
     </mat-card-actions>

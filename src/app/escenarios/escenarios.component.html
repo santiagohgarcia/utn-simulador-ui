@@ -9,7 +9,7 @@
     </mat-card-header>
     <mat-card-actions>
       <button mat-button color="primary" (click)="duplicateEscenario(escenario)">CLONAR</button>
-      <button mat-button routerLink="/escenarios/{{escenario.id}}" *ngIf="!escenario.hasProyectos">EDITAR</button>
+      <button mat-button routerLink="/escenarios/{{escenario.id}}">EDITAR</button>
       <button mat-button color="warn" (click)="deleteEscenario(escenario.id)"
         *ngIf="!escenario.hasProyectos">ELIMINAR</button>
     </mat-card-actions>

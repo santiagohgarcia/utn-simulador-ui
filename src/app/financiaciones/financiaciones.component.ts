@@ -11,6 +11,7 @@ import { FinanciacionDialogComponent } from './financiacion-dialog/financiacion-
 })
 export class FinanciacionesComponent implements OnInit {
   @Input() escenario: any;
+  @Input() hasProyectos: boolean;
   financiaciones;
   constructor(private dialog: MatDialog,
     private escenarioService: EscenariosService,

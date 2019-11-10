@@ -9,6 +9,7 @@ import { ProveedoresService } from '../proveedores.service';
 })
 export class ProveedoresComponent implements OnInit {
   @Input() escenario: any;
+  @Input() hasProyectos: boolean;
   proveedores;
 
   constructor(private escenariosService: EscenariosService, 

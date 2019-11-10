@@ -1,7 +1,7 @@
 <mat-toolbar color="secundary">
   <h1>Proveedores</h1>
   <span class="spacer"></span>
-  <button mat-icon-button routerLink="/escenarios/{{escenario.id}}/proveedores/new">
+  <button mat-icon-button routerLink="/escenarios/{{escenario.id}}/proveedores/new" *ngIf="!hasProyectos">
     <mat-icon>add</mat-icon>
   </button>
 </mat-toolbar>
@@ -11,7 +11,7 @@
     <mat-card-header>
       <mat-card-title>{{ proveedor.nombre }}</mat-card-title>
     </mat-card-header>
-    <mat-card-actions>
+    <mat-card-actions *ngIf="!hasProyectos">
       <button mat-button routerLink="/escenarios/{{escenario.id}}/proveedores/{{ proveedor.id }}">EDITAR</button>
       <button mat-button color="warn" (click)="removeProveedor(proveedor)">ELIMINAR</button>
     </mat-card-actions>

@@ -10,6 +10,7 @@ import { EscenariosService } from '../escenarios.service';
 })
 export class DecisionesComponent implements OnInit {
   @Input() escenario: any;
+  @Input() hasProyectos: boolean;
   decisiones: Array<any>;
 
   constructor(private decisionesService: DecisionesService, private escenariosService: EscenariosService) { }
