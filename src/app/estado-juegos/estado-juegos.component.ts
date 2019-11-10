@@ -3,6 +3,7 @@ import { EscenariosService } from '../escenarios.service';
 import { CursosService } from '../cursos.service';
 import { zip, of } from "rxjs";
 import { switchMap, map, flatMap, combineAll } from 'rxjs/operators';
+import { UsuarioService } from '../usuario.service';
 
 @Component({
   selector: 'app-estado-juegos',
@@ -12,12 +13,15 @@ import { switchMap, map, flatMap, combineAll } from 'rxjs/operators';
 export class EstadoJuegosComponent implements OnInit {
   cursosTree;
   escenarios: Array<any>;
+  usuario;
 
   constructor(private escenariosService: EscenariosService,
-    private cursosService: CursosService) { }
+    private cursosService: CursosService,
+    private usuarioService: UsuarioService) { }
 
   ngOnInit() {
     this.getCursosPorEscenario();
+    this.usuario = this.usuarioService.usuario;
   }
 
   getCursosPorEscenario() {

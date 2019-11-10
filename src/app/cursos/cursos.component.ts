@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CursosService } from '../cursos.service';
 import { CursoDialogComponent } from './curso-dialog/curso-dialog.component';
 import { MatDialog } from '@angular/material';
+import { UsuarioService } from '../usuario.service';
 
 @Component({
   selector: 'app-cursos',
@@ -11,11 +12,13 @@ import { MatDialog } from '@angular/material';
 export class CursosComponent implements OnInit {
 
   cursos;
+  usuario;
 
-  constructor(private cursosService: CursosService, private dialog: MatDialog) { }
+  constructor(private cursosService: CursosService, private dialog: MatDialog, private usuarioService: UsuarioService) { }
 
   ngOnInit() {
     this.getCursos();
+    this.usuario = this.usuarioService.usuario;
   }
 
   getCursos() {

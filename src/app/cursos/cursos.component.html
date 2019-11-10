@@ -1,7 +1,7 @@
-<mat-toolbar color="secundary">
+<mat-toolbar color="secundary" *ngIf="usuario && usuario.rol === 'ADMIN'">
     <h4>Cursos</h4>
   </mat-toolbar>
-  <div class="card-container">
+  <div class="card-container" *ngIf="usuario && usuario.rol === 'ADMIN'">
     <mat-card *ngFor="let curso of cursos;">
       <mat-card-header>
           <mat-card-title>Curso {{curso.nombre}}</mat-card-title>
@@ -15,6 +15,6 @@
     </mat-card>
   </div>
   
-  <a mat-fab color="primary" (click)="createCurso()"class="fab">
+  <a mat-fab color="primary" (click)="createCurso()"class="fab" *ngIf="usuario && usuario.rol === 'ADMIN'">
     <mat-icon>add</mat-icon>
   </a>

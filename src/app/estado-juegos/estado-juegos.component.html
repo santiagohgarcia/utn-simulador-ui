@@ -1,8 +1,8 @@
-<mat-toolbar color="secundary">
+<mat-toolbar color="secundary" *ngIf="usuario && usuario.rol === 'ADMIN'">
   <h4>Estado de Juegos</h4>
 </mat-toolbar>
 
-<div class="card-container">
+<div class="card-container" *ngIf="usuario && usuario.rol === 'ADMIN'">
   <mat-card  *ngFor="let curso of cursosTree;">
     <mat-card-header>
       <mat-card-title>{{curso.nombre.toUpperCase()}}</mat-card-title>

@@ -1,9 +1,9 @@
-<mat-toolbar color="secundary">
+<mat-toolbar color="secundary" *ngIf="usuario && usuario.rol === 'JUGADOR'">
   <h4>Escenarios</h4>
   <span class="spacer"></span>
   <h4 *ngIf="usuario.curso">{{usuario.curso.nombre}}</h4>
 </mat-toolbar>
-<div class="card-container">
+<div class="card-container" *ngIf="usuario && usuario.rol === 'JUGADOR'">
   <mat-card *ngFor="let escenario of escenarios;">
     <div class="escenario-header">
       <div class="escenario-header-cont">

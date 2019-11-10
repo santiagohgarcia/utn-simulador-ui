@@ -3,6 +3,7 @@ import { EscenariosService } from '../escenarios.service';
 import { UsuarioService } from '../usuario.service';
 import { zip, of } from "rxjs";
 import { switchMap, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-simulaciones',
@@ -13,11 +14,14 @@ export class SimulacionesComponent implements OnInit {
   usuario;
   escenarios;
 
-  constructor(private escenariosService: EscenariosService, private usuarioService: UsuarioService) { }
+  constructor(private escenariosService: EscenariosService, private usuarioService: UsuarioService,private router: Router) { }
 
   ngOnInit() {
     this.usuario = this.usuarioService.usuario;
     this.getEscenarios(this.usuario.id);
+    if(this.usuario.rol === "ADMIN"){
+      this.router.navigateByUrl("/estado-juegos");
+    }
   }
 
   getEscenarios(idUsuario) {

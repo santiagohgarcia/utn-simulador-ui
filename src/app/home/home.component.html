@@ -32,7 +32,7 @@
         <img *ngIf="!user.photoURL" src="../../assets/img/student.png"
           [style.height.px]="mobileQuery.matches ? 100 : 150" style="border-radius: 50%">
         <span>{{usuario.nombreCompleto}}</span>
-        <div>
+        <div *ngIf="usuario.rol === 'JUGADOR'">
           <span style="font-weight:100;" *ngIf="usuario.curso">{{usuario.curso.nombre}}</span>
           <button style="margin-left: 10px;" class="edit-icon-small" mat-icon-button
             (click)="matricularUsuario(usuario)">
@@ -41,28 +41,28 @@
         </div>
       </div>
       <mat-nav-list>
-        <mat-divider></mat-divider>
-        <mat-list-item>
+        <mat-divider *ngIf="usuario.rol === 'JUGADOR'"></mat-divider>
+        <mat-list-item *ngIf="usuario.rol === 'JUGADOR'">
           <mat-icon mat-list-icon>play_circle_outline</mat-icon>
           <a mat-list-item class="button" routerLink="/simulaciones">Simulaciones</a>
         </mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>
+        <mat-divider *ngIf="usuario.rol === 'JUGADOR'"></mat-divider>
+        <mat-list-item *ngIf="usuario.rol === 'JUGADOR'">
           <mat-icon mat-list-icon>grade</mat-icon>
           <a mat-list-item class="button" routerLink="/premios">Premios</a>
         </mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>
+        <mat-divider *ngIf="usuario.rol === 'ADMIN'"></mat-divider>
+        <mat-list-item *ngIf="usuario.rol === 'ADMIN'">
           <mat-icon mat-list-icon>build</mat-icon>
           <a mat-list-item class="button" routerLink="/escenarios">Escenarios</a>
         </mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>
+        <mat-divider *ngIf="usuario.rol === 'ADMIN'"></mat-divider>
+        <mat-list-item *ngIf="usuario.rol === 'ADMIN'">
           <mat-icon mat-list-icon>games</mat-icon>
           <a mat-list-item class="button" routerLink="/estado-juegos">Estado de Juegos</a>
         </mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>
+        <mat-divider *ngIf="usuario.rol === 'ADMIN'"></mat-divider>
+        <mat-list-item *ngIf="usuario.rol === 'ADMIN'">
           <mat-icon mat-list-icon>group</mat-icon>
           <a mat-list-item class="button" routerLink="/cursos">Cursos</a>
         </mat-list-item>
