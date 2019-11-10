@@ -16,42 +16,42 @@
   </mat-card>
 
   <mat-card class="card producto" *ngIf="estadoActual && escenario">
-      <mat-card-header>
-        <div mat-card-avatar class="produccion-avatar"></div>
-        <mat-card-title>Producto</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="list">
-          <div class="list-item">
-            <p>Costo Fijo</p>
-            <h3>$ {{ estadoActual.costoFijo }}</h3>
-          </div>
-          <div class="list-item">
-            <p>Costo Variable</p>
-            <h3>$ {{ estadoActual.costoVariable }}</h3>
-          </div>
-          <div class="list-item">
-            <p>Produccion</p>
-            <h3>{{ estadoActual.produccionMensual }} u./{{escenario.nombrePeriodos}}</h3>
-          </div>
-          <div class="list-item">
-            <p>Precio Final Producto</p>
-            <h3>$ {{ ultimoPrecioProducto }}</h3>
-          </div>
-          <div class="list-item">
-            <p>Stock Final</p>
-            <h3>{{ estadoActual.stock }} u.</h3>
-          </div>
-          <div class="list-item">
-            <p>Calidad Final</p>
-            <h3>
-              <i class="material-icons" *ngFor="let calidad of getEvenNumber(estadoActual.calidad)">star</i>
-              <i class="material-icons" *ngIf="getOddNumber(estadoActual.calidad)">star_half</i>
-            </h3>
-          </div>
+    <mat-card-header>
+      <div mat-card-avatar class="produccion-avatar"></div>
+      <mat-card-title>Producto</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="list">
+        <div class="list-item">
+          <p>Costo Fijo</p>
+          <h3>$ {{ estadoActual.costoFijo }}</h3>
         </div>
-      </mat-card-content>
-    </mat-card>
+        <div class="list-item">
+          <p>Costo Variable</p>
+          <h3>$ {{ estadoActual.costoVariable }}</h3>
+        </div>
+        <div class="list-item">
+          <p>Produccion</p>
+          <h3>{{ estadoActual.produccionMensual }} u./{{escenario.nombrePeriodos}}</h3>
+        </div>
+        <div class="list-item">
+          <p>Precio Final Producto</p>
+          <h3>$ {{ ultimoPrecioProducto }}</h3>
+        </div>
+        <div class="list-item">
+          <p>Stock Final</p>
+          <h3>{{ estadoActual.stock }} u.</h3>
+        </div>
+        <div class="list-item">
+          <p>Calidad Final</p>
+          <h3>
+            <i class="material-icons" *ngFor="let calidad of getEvenNumber(estadoActual.calidad)">star</i>
+            <i class="material-icons" *ngIf="getOddNumber(estadoActual.calidad)">star_half</i>
+          </h3>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
 
   <mat-card class="card ventas">
     <mat-card-header>
@@ -66,37 +66,19 @@
       </div>
     </mat-card-content>
   </mat-card>
-
-
-  <mat-card class="card politica-cobro">
+  <mat-card class="card ventas-stock">
     <mat-card-header>
-      <div mat-card-avatar class="cobro-avatar"></div>
-      <mat-card-title>Modalidad de Cobro</mat-card-title>
+      <div mat-card-avatar class="costos-avatar"></div>
+      <mat-card-title>Ventas vs Stock</mat-card-title>
     </mat-card-header>
-    <mat-card-content class="pie-container">
-      <div *ngIf="modCobroChartProps">
-        <canvas baseChart [datasets]="modCobroChartProps.data" [labels]="modCobroChartProps.labels"
-          [options]="modCobroChartProps.options" [legend]="modCobroChartProps.legend"
-          [chartType]="modCobroChartProps.type">
+    <mat-card-content>
+      <div style="display: block" *ngIf="ventasVsStockChartProps">
+        <canvas baseChart [datasets]="ventasVsStockChartProps.data" [labels]="ventasChartProps.labels"
+          [options]="ventasVsStockChartProps.options" [legend]="ventasVsStockChartProps.legend"
+          [chartType]="ventasVsStockChartProps.type">
         </canvas>
       </div>
     </mat-card-content>
   </mat-card>
 
-  <mat-card class="card politica-pago">
-      <mat-card-header>
-        <div mat-card-avatar class="pago-avatar"></div>
-        <mat-card-title>Modalidad de Pago</mat-card-title>
-      </mat-card-header>
-      <mat-card-content class="pie-container">
-        <div *ngIf="modPagoChartProps">
-          <canvas baseChart [datasets]="modPagoChartProps.data" [labels]="modPagoChartProps.labels"
-            [options]="modPagoChartProps.options" [legend]="modPagoChartProps.legend"
-            [chartType]="modPagoChartProps.type">
-          </canvas>
-        </div>
-      </mat-card-content>
-    </mat-card>
-
-  
 </div>

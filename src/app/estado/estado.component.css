@@ -2,10 +2,10 @@
 
     .card-container {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
         grid-template-rows: auto auto;
-        grid-template-areas: "caja caja caja caja caja caja ventas ventas ventas ventas ventas ventas" 
-        "politica-cobro politica-cobro politica-cobro politica-cobro politica-pago politica-pago politica-pago politica-pago producto producto producto producto";
+        grid-template-areas: "caja ventas" 
+        "ventas-stock producto";
         grid-gap: 20px;
         padding: 20px;
     }
@@ -43,12 +43,8 @@
     grid-area: ventas
 }
 
-.politica-cobro{
-    grid-area: politica-cobro
-}
-
-.politica-pago{
-    grid-area: politica-pago
+.ventas-stock{
+    grid-area:  ventas-stock
 }
 
 .list-item {
