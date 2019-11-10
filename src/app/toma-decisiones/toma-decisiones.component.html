@@ -34,15 +34,15 @@
             <div class="list">
               <div class="list-item">
                 <p>Caja</p>
-                <h3>$ {{ escenario.balanceInicial.activo.caja }}</h3>
+                <h3>$ {{ escenario.balanceInicial.activo.caja.toLocaleString() }}</h3>
               </div>
               <div class="list-item">
                 <p>Cuentas por Cobrar</p>
-                <h3>$ {{ escenario.balanceInicial.activo.cuentasPorCobrar }}</h3>
+                <h3>$ {{ escenario.balanceInicial.activo.cuentasPorCobrar.toLocaleString() }}</h3>
               </div>
               <div class="list-item">
                 <p>Inventario</p>
-                <h3>$ {{ escenario.balanceInicial.activo.inventario }}</h3>
+                <h3>$ {{ escenario.balanceInicial.activo.inventario.toLocaleString() }}</h3>
               </div>
             </div>
           </mat-card-content>
@@ -53,7 +53,7 @@
                 <div class="list">
                     <div class="list-item">
                         <p>Total</p>
-                        <h3>$ {{ totalActivo }}</h3>
+                        <h3>$ {{ totalActivo.toLocaleString() }}</h3>
                     </div>
                 </div>
             </mat-card-content>
@@ -68,11 +68,11 @@
             <div class="list">
               <div class="list-item">
                 <p>Proveedores</p>
-                <h3>$ {{ escenario.balanceInicial.pasivo.proveedores }}</h3>
+                <h3>$ {{ escenario.balanceInicial.pasivo.proveedores.toLocaleString() }}</h3>
               </div>
               <div class="list-item">
                 <p>Deudas Bancarias</p>
-                <h3>$ {{ escenario.balanceInicial.pasivo.deudasBancarias }}</h3>
+                <h3>$ {{ escenario.balanceInicial.pasivo.deudasBancarias.toLocaleString() }}</h3>
               </div>
             </div>
           </mat-card-content>
@@ -88,11 +88,11 @@
             <div class="list">
               <div class="list-item">
                 <p>Capital Social</p>
-                <h3>$ {{ escenario.balanceInicial.patrimonioNeto.capitalSocial }}</h3>
+                <h3>$ {{ escenario.balanceInicial.patrimonioNeto.capitalSocial.toLocaleString() }}</h3>
               </div>
               <div class="list-item">
                 <p>Resultado del Ejercicio</p>
-                <h3>$ {{ escenario.balanceInicial.patrimonioNeto.resultadoDelEjercicio }}</h3>
+                <h3>$ {{ escenario.balanceInicial.patrimonioNeto.resultadoDelEjercicio.toLocaleString() }}</h3>
               </div>
             </div>
           </mat-card-content>
@@ -103,7 +103,7 @@
                 <div class="list">
                     <div class="list-item">
                         <p>Total</p>
-                        <h3>$ {{ totalPasivoPatrimonioNeto }}</h3>
+                        <h3>$ {{ totalPasivoPatrimonioNeto.toLocaleString() }}</h3>
                     </div>
                 </div>
             </mat-card-content>
@@ -117,10 +117,10 @@
             </mat-card-header>
             <mat-card-content>
               <h1 class="single-number">
-                $ {{estado.costoFijo}}
+                $ {{estado.costoFijo.toLocaleString()}}
                 <span [ngClass]="getAumentoCostoFijo() < 0 ? 'good-var' : 'bad-var plus-var'"
                   *ngIf="getAumentoCostoFijo()">
-                  {{ getAumentoCostoFijo() }}
+                  {{ getAumentoCostoFijo().toLocaleString() }}
                 </span>
               </h1>
             </mat-card-content>
@@ -132,10 +132,10 @@
             </mat-card-header>
             <mat-card-content>
               <h1 class="single-number">
-                $ {{estado.costoVariable}}
+                $ {{estado.costoVariable.toLocaleString()}}
                 <span [ngClass]="getAumentoCostoVariable() < 0 ? 'good-var' : 'bad-var plus-var'"
                   *ngIf="getAumentoCostoVariable()">
-                  {{ getAumentoCostoVariable() }}
+                  {{ getAumentoCostoVariable().toLocaleString() }}
                 </span>
               </h1>
             </mat-card-content>
@@ -147,10 +147,10 @@
             </mat-card-header>
             <mat-card-content>
               <h1 class="single-number">
-                {{estado.produccionMensual}} u./{{escenario.nombrePeriodos}}
+                {{estado.produccionMensual.toLocaleString()}} u./{{escenario.nombrePeriodos}}
                 <span [ngClass]="getAumentoProduccionMensual() < 0 ? 'bad-var' : 'good-var plus-var'"
                   *ngIf="getAumentoProduccionMensual()">
-                  {{ getAumentoProduccionMensual() }}
+                  {{ getAumentoProduccionMensual().toLocaleString() }}
                 </span>
               </h1>
             </mat-card-content>
@@ -161,7 +161,7 @@
               <mat-card-title>Stock</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <h1 class="single-number">{{estado.stock}} u.</h1>
+              <h1 class="single-number">{{estado.stock.toLocaleString()}} u.</h1>
             </mat-card-content>
           </mat-card>
           <mat-card class="single-number-card">
@@ -187,10 +187,10 @@
               </mat-card-header>
               <mat-card-content>
                 <h1 class="single-number">
-                  {{estado.publicidad}}
+                  {{estado.publicidad.toLocaleString()}}
                   <span [ngClass]="getAumentoProduccionMensual() < 0 ? 'bad-var' : 'good-var plus-var'"
                     *ngIf="getAumentoPublicidad()">
-                    {{ getAumentoPublicidad() }}
+                    {{ getAumentoPublicidad().toLocaleString() }}
                   </span>
                 </h1>
               </mat-card-content>
@@ -202,10 +202,10 @@
                 </mat-card-header>
                 <mat-card-content>
                   <h1 class="single-number">
-                    {{estado.cantidadVendedores}}
+                    {{estado.cantidadVendedores.toLocaleString()}}
                     <span [ngClass]="getAumentoCantidadVendedores() < 0 ? 'bad-var' : 'good-var plus-var'"
                       *ngIf="getAumentoCantidadVendedores()">
-                      {{ getAumentoCantidadVendedores() }}
+                      {{ getAumentoCantidadVendedores().toLocaleString() }}
                     </span>
                   </h1>
                 </mat-card-content>

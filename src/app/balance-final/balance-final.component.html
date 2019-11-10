@@ -8,23 +8,23 @@
             <div class="list">
                 <div class="list-item">
                     <p>Caja</p>
-                    <h3>$ {{ balanceFinal.activo.caja }}</h3>
+                    <h3>$ {{ balanceFinal.activo.caja.toLocaleString() }}</h3>
                 </div>
                 <div class="list-item">
                     <p>Cuentas a Cobrar</p>
-                    <h3>$ {{ balanceFinal.activo.cuentasPorCobrar }}</h3>
+                    <h3>$ {{ balanceFinal.activo.cuentasPorCobrar.toLocaleString() }}</h3>
                 </div>
                 <div class="list-item">
                     <p>Inventario</p>
-                    <h3>$ {{ balanceFinal.activo.inventario }}</h3>
+                    <h3>$ {{ balanceFinal.activo.inventario.toLocaleString() }}</h3>
                 </div>
                 <div class="list-item">
                     <p>Maquinaria</p>
-                    <h3>$ {{ balanceFinal.activo.maquinaria }}</h3>
+                    <h3>$ {{ balanceFinal.activo.maquinaria.toLocaleString() }}</h3>
                 </div>
                 <div class="list-item">
                     <p>Amortizacion Acumulada</p>
-                    <h3>$ {{ balanceFinal.activo.amortizacionAcumulada }}</h3>
+                    <h3>$ {{ balanceFinal.activo.amortizacionAcumulada.toLocaleString() }}</h3>
                 </div>
             </div>
         </mat-card-content>
@@ -35,7 +35,7 @@
             <div class="list">
                 <div class="list-item">
                     <p>Total</p>
-                    <h3>$ {{ totalActivo }}</h3>
+                    <h3>$ {{ totalActivo.toLocaleString() }}</h3>
                 </div>
             </div>
         </mat-card-content>
@@ -50,11 +50,11 @@
             <div class="list">
                 <div class="list-item">
                     <p>Proveedores</p>
-                    <h3>$ {{ balanceFinal.pasivo.proveedores }}</h3>
+                    <h3>$ {{ balanceFinal.pasivo.proveedores.toLocaleString() }}</h3>
                 </div>
                 <div class="list-item">
                     <p>Deudas Bancarias</p>
-                    <h3>$ {{ balanceFinal.pasivo.deudasBancarias }}</h3>
+                    <h3>$ {{ balanceFinal.pasivo.deudasBancarias.toLocaleString() }}</h3>
                 </div>
             </div>
         </mat-card-content>
@@ -70,11 +70,11 @@
             <div class="list">
                 <div class="list-item">
                     <p>Capital Social</p>
-                    <h3>$ {{ balanceFinal.patrimonioNeto.capitalSocial }}</h3>
+                    <h3>$ {{ balanceFinal.patrimonioNeto.capitalSocial.toLocaleString() }}</h3>
                 </div>
                 <div class="list-item">
                     <p>Resultado del Ejercicio</p>
-                    <h3>$ {{ balanceFinal.patrimonioNeto.resultadoDelEjercicio }}</h3>
+                    <h3>$ {{ balanceFinal.patrimonioNeto.resultadoDelEjercicio.toLocaleString() }}</h3>
                 </div>
             </div>
         </mat-card-content>
@@ -85,7 +85,7 @@
             <div class="list">
                 <div class="list-item">
                     <p>Total</p>
-                    <h3>$ {{ totalPasivoPatrimonioNeto }}</h3>
+                    <h3>$ {{ totalPasivoPatrimonioNeto.toLocaleString() }}</h3>
                 </div>
             </div>
         </mat-card-content>

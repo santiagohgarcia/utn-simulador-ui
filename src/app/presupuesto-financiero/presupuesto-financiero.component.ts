@@ -40,9 +40,11 @@ export class PresupuestoFinancieroComponent implements OnInit {
     var montoCrudo = periodo ? periodo.monto : (defaultCero ? 0 : "");
     montoCrudo = signoInvertido ? -montoCrudo : montoCrudo;
     if (montoCrudo < 0) {
-      return "(" + Math.abs(montoCrudo) + ")";
-    } else {
+      return "(" + Math.abs(montoCrudo).toLocaleString() + ")";
+    } else if (montoCrudo === 0) {
       return montoCrudo;
+    } else {
+      return montoCrudo.toLocaleString();
     }
   }
 

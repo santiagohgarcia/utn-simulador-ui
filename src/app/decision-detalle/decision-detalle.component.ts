@@ -64,8 +64,10 @@ export class DecisionDetalleComponent implements OnInit {
   }
 
   tipoCuentaDescripcion(tipoCuenta) {
-    const tipoCuentaObject = this.tipoCuentas.find(tc => tc.key === tipoCuenta)
-    return tipoCuentaObject && tipoCuentaObject.descripcion;
+    if (this.tipoCuentas) {
+      const tipoCuentaObject = this.tipoCuentas.find(tc => tc.key === tipoCuenta)
+      return tipoCuentaObject && tipoCuentaObject.descripcion;
+    }
   }
 
   addOpcion() {

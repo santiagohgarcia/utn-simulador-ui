@@ -40,9 +40,11 @@ export class PresupuestoEconomicoComponent implements OnInit {
     var montoCrudo = periodo ? periodo.monto : (defaultCero ? 0 : "");
     montoCrudo = signoInvertido ? -montoCrudo : montoCrudo;
     if (montoCrudo < 0) {
-      return "(" + Math.abs(montoCrudo) + ")";
-    } else {
+      return "(" + Math.abs(montoCrudo).toLocaleString() + ")";
+    } else if (montoCrudo === 0) {
       return montoCrudo;
+    } else {
+      return montoCrudo.toLocaleString();
     }
   }
 
@@ -51,10 +53,12 @@ export class PresupuestoEconomicoComponent implements OnInit {
     if (cuentasPeriodo) {
       cuentasPeriodo.map(cp => acumulador = acumulador + cp.monto);
       acumulador = signoInvertido ? -acumulador : acumulador;
-      if(acumulador < 0) {
-        return "(" + Math.abs(acumulador) + ")";
-      } else {
+      if (acumulador < 0) {
+        return "(" + Math.abs(acumulador).toLocaleString() + ")";
+      } else if (acumulador === 0) {
         return acumulador;
+      } else {
+        return acumulador.toLocaleString();
       }
     }
   }
