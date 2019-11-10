@@ -18,8 +18,7 @@ export class EstadoComponent implements OnInit {
   estados: any;
   cajaChartProps;
   ventasChartProps;
-  modCobroChartProps;
-  modPagoChartProps;
+  ventasVsStockChartProps;
   escenario;
 
   constructor(private proyectoService: ProyectoService,
@@ -33,8 +32,8 @@ export class EstadoComponent implements OnInit {
     this.getUltimoPrecioProducto(this.proyecto.id);
   }
 
-  getUltimoPrecioProducto(proyectoId){
-    if(this.forecast) {
+  getUltimoPrecioProducto(proyectoId) {
+    if (this.forecast) {
       this.proyectoService.getForecast(proyectoId).subscribe(forecasts => {
         this.ultimoPrecioProducto = forecasts.pop().precio;
       })
@@ -48,8 +47,6 @@ export class EstadoComponent implements OnInit {
     this.estadoActual = this.proyectoService.getEstado(proyectoId, this.forecast).subscribe(estadoActual => {
       this.estadoActual = estadoActual;
       this.escenario = estadoActual.proyecto.escenario;
-      this.setModCobroChartProps(estadoActual);
-      this.setModPagoChartProps(estadoActual);
     })
   }
 
@@ -58,6 +55,7 @@ export class EstadoComponent implements OnInit {
       this.estados = estados;
       this.setCajaChartProps(this.estados);
       this.setVentasChartProps(this.estados);
+      this.setStockVsVentasChartProps(this.estados);
     })
   }
 
@@ -71,7 +69,7 @@ export class EstadoComponent implements OnInit {
       type: 'line',
       legend: false,
       data: [
-        { data: estados.map(estado => estado.caja), label: 'Caja',fill: false }
+        { data: estados.map(estado => estado.caja), label: 'Caja', fill: false }
       ]
     }
   }
@@ -82,17 +80,17 @@ export class EstadoComponent implements OnInit {
         scaleShowVerticalLines: false,
         responsive: true
       },
-      labels: estados.filter((_,index) => index !== 0).map(estado => `${this.escenario.nombrePeriodos} ${estado.periodo}`),
+      labels: estados.filter((_, index) => index !== 0).map(estado => `${this.escenario.nombrePeriodos} ${estado.periodo}`),
       type: 'line',
       legend: true,
       data: [
         {
-          data: estados.filter((_,index) => index !== 0).map(estado => estado.ventas),
+          data: estados.filter((_, index) => index !== 0).map(estado => estado.ventas),
           fill: false,
           label: 'Ventas'
         },
         {
-          data: estados.filter((_,index) => index !== 0).map(estado => estado.demandaPotencial),
+          data: estados.filter((_, index) => index !== 0).map(estado => estado.demandaPotencial),
           label: 'Demanda Potencial',
           fill: false,
           backgroundColor: 'rgb(75, 192, 192)',
@@ -103,41 +101,39 @@ export class EstadoComponent implements OnInit {
     }
   }
 
-  setModCobroChartProps(estadoActual) {
-    this.modCobroChartProps = {
+  setStockVsVentasChartProps(estados) {
+    this.ventasVsStockChartProps = {
       options: {
+        scaleShowVerticalLines: false,
         responsive: true,
-        legend: {position: 'bottom'},
-        aspectRatio: 1
+        aspectRatio: 1.5
       },
-      labels: estadoActual.proyecto.modalidadCobro.filter(mc => mc.porcentaje > 0).map(modCobro => `${this.escenario.nombrePeriodos} ${modCobro.offsetPeriodo > 0 ? ' + ' + modCobro.offsetPeriodo : ''}`),
-      type: 'pie',
+      labels: estados.filter((_, index) => index !== 0).map(e => e.proyecto.escenario.nombrePeriodos + " " + e.periodo),
+      type: 'bar',
+      legend: true,
       data: [
-        { data: estadoActual.proyecto.modalidadCobro.filter(mc => mc.porcentaje > 0).map(modCobro => modCobro.porcentaje), label: 'Porcentaje' }
+        {
+          data: estados.filter((_, index) => index !== 0).map(e => e.ventas),
+          type: 'line',
+          fill: false,
+          label: 'Ventas'
+        },
+        {
+          data: estados.filter((_, index) => index !== 0).map(e => e.stock),
+          type: 'bar',
+          label: 'Stock',
+          fill: false
+        }
       ]
     }
+
   }
 
-  setModPagoChartProps(estadoActual) {
-    this.modPagoChartProps = {
-      options: {
-        responsive: true,
-        legend: {position: 'bottom'},
-        aspectRatio: 1
-      },
-      labels: estadoActual.proyecto.proveedorSeleccionado.modalidadPago.filter(mp => mp.porcentaje > 0).map(modPago => `${this.escenario.nombrePeriodos} ${modPago.offsetPeriodo > 0 ? ' + ' + modPago.offsetPeriodo : ''}`),
-      type: 'pie',
-      data: [
-        { data: estadoActual.proyecto.proveedorSeleccionado.modalidadPago.filter(mp => mp.porcentaje > 0).map(modPago => modPago.porcentaje), label: 'Porcentaje' }
-      ]
-    }
+  getEvenNumber = function (num) {
+    return Math.floor(Number(num) / 2) > 0 ? new Array(Math.floor(Number(num) / 2)) : 0;
   }
 
-  getEvenNumber = function(num) {
-    return Math.floor(Number(num)/2) > 0 ? new Array(Math.floor(Number(num)/2)) : 0;
-  }
-
-  getOddNumber = function(num) {
+  getOddNumber = function (num) {
     return Number(num) % 2 != 0;
   }
 
