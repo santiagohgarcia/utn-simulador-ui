@@ -14,16 +14,17 @@
       <mat-card class="form-card">
         <mat-card-header>
           <mat-card-title>Datos Basicos</mat-card-title>
-          <mat-card-subtitle *ngIf="hasProyectos">Algunos jugadores ya han empezado. No puede modificar estos datos</mat-card-subtitle>
+          <mat-card-subtitle *ngIf="hasProyectos">Algunos jugadores ya han empezado. No puede modificar estos datos
+          </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
           <form [formGroup]="escenarioForm" class="form">
             <mat-form-field class="form-field">
-              <input autofocus required matInput placeholder="Titulo" [formControl]="titulo" [(ngModel)]="escenario.titulo"
-                [(value)]="escenario.titulo" [readonly]="hasProyectos">
+              <input autofocus required matInput placeholder="Titulo" [formControl]="titulo"
+                [(ngModel)]="escenario.titulo" [(value)]="escenario.titulo" [readonly]="hasProyectos">
               <mat-error *ngIf="escenario.invalid">Required field</mat-error>
             </mat-form-field>
-            <mat-form-field class="form-field" >
+            <mat-form-field class="form-field">
               <input type="number" required matInput placeholder="Cantidad de Periodos" [formControl]="maximosPeriodos"
                 [(ngModel)]="escenario.maximosPeriodos" [(value)]="escenario.maximosPeriodos" [readonly]="hasProyectos">
               <mat-error *ngIf="escenario.invalid">Required field</mat-error>
@@ -35,12 +36,14 @@
             </mat-form-field>
             <mat-form-field class="form-field">
               <textarea cdkTextareaAutosize required matInput placeholder="Descripcion" [formControl]="descripcion"
-                [(ngModel)]="escenario.descripcion" [(value)]="escenario.descripcion" [readonly]="hasProyectos"></textarea>
+                [(ngModel)]="escenario.descripcion" [(value)]="escenario.descripcion"
+                [readonly]="hasProyectos"></textarea>
               <mat-error *ngIf="escenario.invalid">Required field</mat-error>
             </mat-form-field>
             <mat-form-field class="form-field">
-              <input type="number" required matInput placeholder="Porcentaje de Impuestos" [formControl]="impuestoPorcentaje"
-                [(ngModel)]="escenario.impuestoPorcentaje" [(value)]="escenario.impuestoPorcentaje" [readonly]="hasProyectos">
+              <input type="number" required matInput placeholder="Porcentaje de Impuestos"
+                [formControl]="impuestoPorcentaje" [(ngModel)]="escenario.impuestoPorcentaje"
+                [(value)]="escenario.impuestoPorcentaje" [readonly]="hasProyectos">
               <mat-error *ngIf="escenario.invalid">Required field</mat-error>
             </mat-form-field>
 
@@ -67,16 +70,18 @@
       <mat-card class="balance-inicial-card" *ngIf="escenario.balanceInicial">
         <mat-card-header>
           <mat-card-title>Balance Inicial</mat-card-title>
-          <mat-card-subtitle *ngIf="hasProyectos">Algunos jugadores ya han empezado. No puede modificar estos datos</mat-card-subtitle>
-           </mat-card-header>
+          <mat-card-subtitle *ngIf="hasProyectos">Algunos jugadores ya han empezado. No puede modificar estos datos
+          </mat-card-subtitle>
+        </mat-card-header>
         <mat-card-content>
           <div class="balance-inicial-content">
             <div>
               <div style="margin-left:16px;">Activo</div>
               <form [formGroup]="activoForm" class="balance-form" *ngIf="escenario.balanceInicial.activo">
-                <mat-form-field class="form-field" >
-                  <input autofocus required matInput placeholder="Caja" [formControl]="caja" type="number" 
-                    [(ngModel)]="escenario.balanceInicial.activo.caja" [(value)]="escenario.balanceInicial.activo.caja" [readonly]="hasProyectos">
+                <mat-form-field class="form-field">
+                  <input autofocus required matInput placeholder="Caja" [formControl]="caja" type="number"
+                    [(ngModel)]="escenario.balanceInicial.activo.caja" [(value)]="escenario.balanceInicial.activo.caja"
+                    [readonly]="hasProyectos">
                 </mat-form-field>
                 <mat-form-field class="form-field">
                   <input autofocus matInput required placeholder="Inventario" [formControl]="inventario" type="number"
@@ -108,13 +113,14 @@
                     [(value)]="escenario.balanceInicial.pasivo.proveedores" [readonly]="hasProyectos">
                 </mat-form-field>
                 <mat-form-field class="form-field">
-                  <input autofocus required matInput placeholder="Periodos Proveedores" [formControl]="proveedoresPeriodos"
-                    type="number" [(ngModel)]="escenario.balanceInicial.pasivo.proveedoresPeriodos"
+                  <input autofocus required matInput placeholder="Periodos Proveedores"
+                    [formControl]="proveedoresPeriodos" type="number"
+                    [(ngModel)]="escenario.balanceInicial.pasivo.proveedoresPeriodos"
                     [(value)]="escenario.balanceInicial.pasivo.proveedoresPeriodos" [readonly]="hasProyectos">
                 </mat-form-field>
                 <mat-form-field class="form-field">
-                  <input autofocus required matInput placeholder="Deudas Bancarias" [formControl]="deudasBancarias" type="number"
-                    [(ngModel)]="escenario.balanceInicial.pasivo.deudasBancarias"
+                  <input autofocus required matInput placeholder="Deudas Bancarias" [formControl]="deudasBancarias"
+                    type="number" [(ngModel)]="escenario.balanceInicial.pasivo.deudasBancarias"
                     [(value)]="escenario.balanceInicial.pasivo.deudasBancarias" [readonly]="hasProyectos">
                 </mat-form-field>
                 <mat-form-field class="form-field">
@@ -130,12 +136,13 @@
               <form [formGroup]="patrimonioNetoForm" class="patrimonio-form"
                 *ngIf="escenario.balanceInicial.patrimonioNeto">
                 <mat-form-field class="form-field">
-                  <input autofocus required matInput placeholder="Capital Social" [formControl]="capitalSocial" type="number"
-                    [(ngModel)]="escenario.balanceInicial.patrimonioNeto.capitalSocial"
+                  <input autofocus required matInput placeholder="Capital Social" [formControl]="capitalSocial"
+                    type="number" [(ngModel)]="escenario.balanceInicial.patrimonioNeto.capitalSocial"
                     [(value)]="escenario.balanceInicial.patrimonioNeto.capitalSocial" [readonly]="hasProyectos">
                 </mat-form-field>
                 <mat-form-field class="form-field">
-                  <input autofocus required matInput placeholder="Resultado del ejercicio" [formControl]="resultadoDelEjercicio"
+                  <input autofocus required matInput placeholder="Resultado del ejercicio"
+                    [formControl]="resultadoDelEjercicio"
                     [(ngModel)]="escenario.balanceInicial.patrimonioNeto.resultadoDelEjercicio" type="number"
                     [(value)]="escenario.balanceInicial.patrimonioNeto.resultadoDelEjercicio" [readonly]="hasProyectos">
                 </mat-form-field>
@@ -148,7 +155,9 @@
       <mat-card class="estado-inicial-card" *ngIf="escenario.estadoInicial">
         <mat-card-header>
           <mat-card-title>Estado Inicial</mat-card-title>
-          <mat-card-subtitle *ngIf="hasProyectos">Algunos jugadores ya han empezado. No puede modificar estos datos</mat-card-subtitle>  </mat-card-header>
+          <mat-card-subtitle *ngIf="hasProyectos">Algunos jugadores ya han empezado. No puede modificar estos datos
+          </mat-card-subtitle>
+        </mat-card-header>
         <mat-card-content>
           <form [formGroup]="estadoInicialForm" class="estado-form">
             <mat-form-field class="form-field">
@@ -157,8 +166,8 @@
                 [(value)]="escenario.estadoInicial.costoFijo" [readonly]="hasProyectos">
             </mat-form-field>
             <mat-form-field class="form-field">
-              <input autofocus required matInput placeholder="Costo Variable x Unidad Producida" [formControl]="costoVariable"
-                [(ngModel)]="escenario.estadoInicial.costoVariable" type="number"
+              <input autofocus required matInput placeholder="Costo Variable x Unidad Producida"
+                [formControl]="costoVariable" [(ngModel)]="escenario.estadoInicial.costoVariable" type="number"
                 [(value)]="escenario.estadoInicial.costoVariable" [readonly]="hasProyectos">
             </mat-form-field>
             <mat-form-field class="form-field">
@@ -168,19 +177,23 @@
             </mat-form-field>
             <mat-form-field class="form-field">
               <input autofocus required matInput placeholder="Stock" [formControl]="stock"
-                [(ngModel)]="escenario.estadoInicial.stock" type="number" [(value)]="escenario.estadoInicial.stock" [readonly]="hasProyectos">
+                [(ngModel)]="escenario.estadoInicial.stock" type="number" [(value)]="escenario.estadoInicial.stock"
+                [readonly]="hasProyectos">
             </mat-form-field>
             <mat-form-field class="form-field">
               <input autofocus matInput placeholder="Calidad" [formControl]="calidad"
-                [(ngModel)]="escenario.estadoInicial.calidad" type="number" [(value)]="escenario.estadoInicial.calidad" [readonly]="hasProyectos">
+                [(ngModel)]="escenario.estadoInicial.calidad" type="number" [(value)]="escenario.estadoInicial.calidad"
+                [readonly]="hasProyectos">
             </mat-form-field>
             <mat-form-field class="form-field">
               <input autofocus required matInput placeholder="Cantidad de Vendedores" [formControl]="cantidadVendedores"
-              [(ngModel)]="escenario.estadoInicial.cantidadVendedores" type="number" [(value)]="escenario.estadoInicial.cantidadVendedores" [readonly]="hasProyectos">
+                [(ngModel)]="escenario.estadoInicial.cantidadVendedores" type="number"
+                [(value)]="escenario.estadoInicial.cantidadVendedores" [readonly]="hasProyectos">
             </mat-form-field>
             <mat-form-field class="form-field">
-              <input autofocus required matInput placeholder="Publicidad" [formControl]="publicidad" 
-              [(ngModel)]="escenario.estadoInicial.publicidad" type="number" [(value)]="escenario.estadoInicial.publicidad" [readonly]="hasProyectos">
+              <input autofocus required matInput placeholder="Publicidad" [formControl]="publicidad"
+                [(ngModel)]="escenario.estadoInicial.publicidad" type="number"
+                [(value)]="escenario.estadoInicial.publicidad" [readonly]="hasProyectos">
             </mat-form-field>
           </form>
         </mat-card-content>
@@ -190,12 +203,17 @@
           <mat-card-title>Puntajes</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <form [formGroup]="puntajeForm" class="puntaje-form">
-            <mat-form-field class="form-field">
-              <input autofocus required matInput placeholder="Porcentaje Escenario" [formControl]="porcentajeEscenario"
-                [(ngModel)]="puntajes.porcentajeEscenario" type="number" [(value)]="puntajes.porcentajeEscenario" >
-              <span matSuffix>%</span>
-            </mat-form-field>
+          <form [formGroup]="puntajeForm">
+            <div class="puntaje-form">
+              <mat-form-field class="form-field">
+                <input autofocus required matInput placeholder="Porcentaje Escenario"
+                  [formControl]="porcentajeEscenario" [(ngModel)]="puntajes.porcentajeEscenario" type="number"
+                  [(value)]="puntajes.porcentajeEscenario">
+                <span matSuffix>%</span>
+              </mat-form-field>
+            </div>
+            <span style="margin-left:16px;">Porcentajes de Ponderacion</span>
+            <div class="puntaje-form">
             <mat-form-field class="form-field">
               <input autofocus required matInput placeholder="Ponderacion de Caja" [formControl]="porcentajeCaja"
                 [(ngModel)]="puntajes.porcentajeCaja" type="number" [(value)]="puntajes.porcentajeCaja">
@@ -211,6 +229,7 @@
                 [(ngModel)]="puntajes.porcentajeRenta" type="number" [(value)]="puntajes.porcentajeRenta">
               <span matSuffix>%</span>
             </mat-form-field>
+          </div>
           </form>
         </mat-card-content>
       </mat-card>
