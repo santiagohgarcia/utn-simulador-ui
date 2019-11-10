@@ -48,4 +48,15 @@ export class PresupuestoFinancieroComponent implements OnInit {
     }
   }
 
+  getTotalAcumulado(cuentasPeriodo){
+    var totalAcumulado = cuentasPeriodo.reduce((total,cp) => total + cp.monto,0 );
+    if (totalAcumulado < 0) {
+      return "(" + Math.abs(totalAcumulado).toLocaleString() + ")";
+    } else if (totalAcumulado === 0) {
+      return totalAcumulado;
+    } else {
+      return totalAcumulado.toLocaleString();
+    }
+  }
+
 }

@@ -1,60 +1,75 @@
 <table class="mat-table table" *ngIf="presupuestoFinanciero">
 
-    <tr class="mat-header-row">
-      <th class="mat-header-cell desc-column">Descripcion</th>
-      <th *ngFor="let periodo of periodos" class="mat-header-cell value-column"> {{escenario.nombrePeriodos}} {{periodo}} </th>
-    </tr>
-  
-    <!--INGRESOS-->
-    <tr *ngIf="presupuestoFinanciero.INGRESOS as flujo" class="mat-row">
-      <td class="mat-cell">
-        <p class="flujo-column">
-          {{ flujo.descripcion }}
-        </p>
-        <p *ngFor="let cuenta of flujo.cuentas;" class="desc-cuenta">
-          {{ cuenta.descripcion }}
-        </p>
-      </td>
-      <td *ngFor="let periodo of periodos;" class="mat-cell value-column">
-        <p>
-          &nbsp;
-        </p>
-        <p *ngFor="let cuenta of flujo.cuentas;">
-          {{ getCuentaPeriodo(cuenta.cuentasPeriodo,periodo,true, false) }}
-        </p>
-      </td>
-    </tr>
-  
-    <!--EGRESOS-->
-    <tr *ngIf="presupuestoFinanciero.EGRESOS as flujo" class="mat-row">
-      <td class="mat-cell ">
-        <p class="flujo-column">
-          {{ flujo.descripcion }}
-        </p>
-        <p *ngFor="let cuenta of flujo.cuentas;" class="desc-cuenta">
-          {{ cuenta.descripcion }}
-        </p>
-      </td>
-      <td *ngFor="let periodo of periodos;" class="mat-cell value-column">
-        <p>
-          &nbsp;
-        </p>
-        <p *ngFor="let cuenta of flujo.cuentas;">
-          {{ getCuentaPeriodo(cuenta.cuentasPeriodo,periodo,true, true) }}
-        </p>
-      </td>
-    </tr>
-  
+  <tr class="mat-header-row">
+    <th class="mat-header-cell desc-column">Descripcion</th>
+    <th *ngFor="let periodo of periodos" class="mat-header-cell value-column"> {{escenario.nombrePeriodos}} {{periodo}}
+    </th>
+  </tr>
 
-    <!--TOTAL-->
-    <tr *ngIf="presupuestoFinanciero.TOTAL as flujo" class="mat-row">
-      <td class="mat-cell ">
-        <p class="flujo-column">
-          {{ flujo.descripcion }}
-        </p>
-      </td>
-      <td *ngFor="let periodo of periodos;" class="mat-cell value-column flujo-column">
-        {{ getCuentaPeriodo(flujo.montosPeriodo,periodo,true, false) }}
-      </td>
-    </tr>
-  </table>
+  <!--INGRESOS-->
+  <tr *ngIf="presupuestoFinanciero.INGRESOS as flujo" class="mat-row">
+    <td class="mat-cell">
+      <p class="flujo-column">
+        {{ flujo.descripcion }}
+      </p>
+      <p *ngFor="let cuenta of flujo.cuentas;" class="desc-cuenta">
+        {{ cuenta.descripcion }}
+      </p>
+    </td>
+    <td *ngFor="let periodo of periodos;" class="mat-cell value-column">
+      <p>
+        &nbsp;
+      </p>
+      <p *ngFor="let cuenta of flujo.cuentas;">
+        {{ getCuentaPeriodo(cuenta.cuentasPeriodo,periodo,true, false) }}
+      </p>
+    </td>
+  </tr>
+
+  <!--EGRESOS-->
+  <tr *ngIf="presupuestoFinanciero.EGRESOS as flujo" class="mat-row">
+    <td class="mat-cell ">
+      <p class="flujo-column">
+        {{ flujo.descripcion }}
+      </p>
+      <p *ngFor="let cuenta of flujo.cuentas;" class="desc-cuenta">
+        {{ cuenta.descripcion }}
+      </p>
+    </td>
+    <td *ngFor="let periodo of periodos;" class="mat-cell value-column">
+      <p>
+        &nbsp;
+      </p>
+      <p *ngFor="let cuenta of flujo.cuentas;">
+        {{ getCuentaPeriodo(cuenta.cuentasPeriodo,periodo,true, true) }}
+      </p>
+    </td>
+  </tr>
+
+  <!--TOTAL-->
+  <tr *ngIf="presupuestoFinanciero.TOTAL as flujo" class="mat-row">
+    <td class="mat-cell ">
+      <p class="flujo-column">
+        {{ flujo.descripcion }}
+      </p>
+    </td>
+    <td *ngFor="let periodo of periodos;" class="mat-cell value-column flujo-column">
+      {{ getCuentaPeriodo(flujo.montosPeriodo,periodo,true, false) }}
+    </td>
+  </tr>
+
+  <!--TOTAL ACUMULADO-->
+  <tr *ngIf="presupuestoFinanciero.TOTAL as flujo" class="mat-row">
+    <td class="mat-cell ">
+      <p class="flujo-column">
+        Total Acumulado
+      </p>
+    </td>
+    <td *ngFor="let periodo of periodos;let i = index;" class="mat-cell value-column flujo-column">
+      <div *ngIf="(periodos.length - 1) === i">
+          {{ getTotalAcumulado(flujo.montosPeriodo) }}
+      </div>
+    
+    </td>
+  </tr>
+</table>
