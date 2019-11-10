@@ -5,6 +5,8 @@ import { EscenariosService } from '../escenarios.service';
 import { Message, MessageSpan } from '@angular/compiler/src/i18n/i18n_ast';
 import { MessagesService } from '../messages.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-estado-juego-detail',
@@ -23,13 +25,14 @@ export class EstadoJuegoDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private cursosService: CursosService,
     private escenariosService: EscenariosService,
+    private dialog: MatDialog,
     private messageService: MessagesService) { }
 
   ngOnInit() {
     this._loadData()
   }
 
-  _loadData(){
+  _loadData() {
     const escenarioId = Number(this.route.snapshot.paramMap.get('escenarioId'));
     const cursoId = Number(this.route.snapshot.paramMap.get('cursoId'));
     this.getCurso(cursoId)
@@ -159,16 +162,28 @@ export class EstadoJuegoDetailComponent implements OnInit {
   }
 
   cerrarEscenario() {
-    this.escenariosService.getConfiguracionMercado(this.escenario.id).subscribe(configuracionMercado => {
-      if (configuracionMercado.restriccionPrecio) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '500px',
+      data: {
+        message: "Seguro que desea cerrar el escenario?"
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(response => {
+      if (response === "OK") {
+        this.escenariosService.getConfiguracionMercado(this.escenario.id).subscribe(configuracionMercado => {
+          if (configuracionMercado.restriccionPrecio) {
             this.escenariosService.simularMercado(this.escenario.id, this.curso.id).subscribe(_ => {
               this.messageService.openSnackBar("Simulacion de Mercado ejecutada correctamente")
               this._loadData()
             })
-      } else {
-        this.messageService.openSnackBar("Antes de cerrar el escenario, debe guardar las configuraciones de mercado")
+          } else {
+            this.messageService.openSnackBar("Antes de cerrar el escenario, debe guardar las configuraciones de mercado")
+          }
+        })
       }
-    })
+    });
+
   }
 
 

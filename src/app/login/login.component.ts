@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   hide = true;
   rememberMeChecked = true;
   persistance = firebase.auth.Auth.Persistence.LOCAL;
+  loading = false;
 
   email = new FormControl('', [Validators.required, Validators.email])
   password = new FormControl('', [Validators.required])
@@ -33,7 +34,9 @@ export class LoginComponent implements OnInit {
     sanitizer: DomSanitizer,
     private dialog: MatDialog,
     public snackBar: MatSnackBar) {
+    this.loading = true;
     this.afAuth.authState.subscribe(user => {
+      this.loading = false;
       if (user) {
         this.router.navigateByUrl("/home");
       }
@@ -69,9 +72,9 @@ export class LoginComponent implements OnInit {
   }
 
   rememberMe() {
-    if(this.rememberMeChecked){
+    if (this.rememberMeChecked) {
       this.persistance = firebase.auth.Auth.Persistence.LOCAL;
-    }else{
+    } else {
       this.persistance = firebase.auth.Auth.Persistence.SESSION;
     }
   }

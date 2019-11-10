@@ -84,6 +84,7 @@ import { EstadoJuegoDetailComponent } from './estado-juego-detail/estado-juego-d
 import { SimulacionEntregadaComponent } from './simulacion-entregada/simulacion-entregada.component';
 import { PremiosDetailComponent } from './premios-detail/premios-detail.component';
 import { RankingsComponent } from './rankings/rankings.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 
 @NgModule({
@@ -147,7 +148,8 @@ export class MaterialModule { }
     FinanciacionDialogComponent,
     MatriculacionDialogComponent,
     EntregarConfirmationPopup,
-    CursoDialogComponent,
+    CursoDialogComponent, 
+    ConfirmationDialogComponent,
     SimulacionesComponent,
     PresupuestoFinancieroComponent,
     PresupuestoEconomicoComponent,
@@ -183,9 +185,9 @@ export class MaterialModule { }
     ProveedoresService,
     FinanciacionService
   ],
-  entryComponents: [RegisterComponent, OpcionDialogComponent, ConsecuenciaDialogComponent, 
-                    FinanciacionDialogComponent, CursoDialogComponent, MatriculacionDialogComponent,EntregarConfirmationPopup],
-  bootstrap: [AppComponent,HomeComponent]
+  entryComponents: [RegisterComponent, OpcionDialogComponent, ConsecuenciaDialogComponent,
+    FinanciacionDialogComponent, CursoDialogComponent, MatriculacionDialogComponent, EntregarConfirmationPopup, ConfirmationDialogComponent],
+  bootstrap: [AppComponent, HomeComponent]
 })
 export class AppModule { }
 
