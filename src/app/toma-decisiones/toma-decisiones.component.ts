@@ -271,11 +271,24 @@ export class TomaDecisionesComponent implements OnInit {
       return false;
     }
 
+    //Validar Credito: Valores negaticos
+    if (this.credito.monto < 0 || this.credito.periodoInicial < 0) {
+      this.messageService.openSnackBar("El monto de financiacion y el periodo inicial deben ser numeros positivos");
+      return false;
+    }
+
     //Validar Credito seleccionado
     if (this.credito.monto > 0 && !this.credito.financiacionId) {
       this.messageService.openSnackBar("Usted ha dispuesto un monto de financiacion. Por favor seleccione un tipo de credito");
       return false;
     }
+
+     //Validar Credito periodo valido
+     if (this.credito.monto > 0 && this.credito.periodoInicial > this.escenario.maximosPeriodos) {
+      this.messageService.openSnackBar("El Periodo Inicial del credito no puede ser mayor a los periodos del ejercicio");
+      return false;
+    }
+
 
     return true;
   }
