@@ -23,6 +23,7 @@ import { ProyectoService } from './proyecto.service';
 import { UsuarioService } from './usuario.service';
 import { TomaDecisionesComponent } from './toma-decisiones/toma-decisiones.component';
 import { ResultadosComponent, EntregarConfirmationPopup } from './resultados/resultados.component';
+import { ResultadosAdminComponent } from './resultados-admin/resultados-admin.component';
 import { EscenariosComponent } from './escenarios/escenarios.component';
 import { EscenarioDetalleComponent } from './escenario-detalle/escenario-detalle.component';
 import { ChartsModule } from 'ng2-charts';
@@ -141,6 +142,7 @@ export class MaterialModule { }
     FlujoFondosComponent,
     TomaDecisionesComponent,
     ResultadosComponent,
+    ResultadosAdminComponent,
     EscenariosComponent,
     EscenarioDetalleComponent,
     OpcionDialogComponent,

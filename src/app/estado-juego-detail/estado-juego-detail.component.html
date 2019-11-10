@@ -4,20 +4,20 @@
       <mat-icon>arrow_back</mat-icon>
     </button>
     <h4>{{escenario.titulo | titlecase}}</h4>
-    <mat-chip-list style="margin-left:10px;" *ngIf="escenarioCurso.abierto">
+    <mat-chip-list style="margin-left:10px;" *ngIf="escenarioCurso && escenarioCurso.abierto">
       <mat-chip color="primary" selected>ABIERTO</mat-chip>
     </mat-chip-list>
    
     <span class="spacer"></span>
-    <mat-chip-list style="margin-left:10px;" *ngIf="!escenarioCurso.abierto">
+    <mat-chip-list style="margin-left:10px;" *ngIf="escenarioCurso && !escenarioCurso.abierto">
         <mat-chip color="warn" selected>CERRADO</mat-chip>
       </mat-chip-list>
-    <button mat-raised-button color="warn"  *ngIf="escenarioCurso.abierto" (click)="cerrarEscenario()">CERRAR ESCENARIO</button>
+    <button mat-raised-button color="warn"  *ngIf="escenarioCurso && escenarioCurso.abierto" (click)="cerrarEscenario()">CERRAR ESCENARIO</button>
   </mat-toolbar-row>
 </mat-toolbar>
 
 <mat-tab-group *ngIf="escenario && curso">
-  <mat-tab label="Resultados" *ngIf="!escenarioCurso.abierto">
+  <mat-tab label="Resultados" *ngIf="escenarioCurso && !escenarioCurso.abierto">
     <app-rankings [escenario]="escenario" [curso]="curso"></app-rankings>
   </mat-tab>
   <mat-tab label="Jugadores">
@@ -27,15 +27,15 @@
           <mat-card-title>Jugadores</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <mat-list class="jugadores-list" *ngIf="escenarioCurso">
-            <mat-list-item *ngFor="let jugador of escenarioCurso.jugadores">
-              <img *ngIf="jugador.usuarioFotoUrl" matListAvatar src="{{jugador.usuarioFotoUrl}}"
-                [className]="jugador.entregado ? 'jugador-entregado' : 'jugador-no-entregado'">
-              <img *ngIf="!jugador.usuarioFotoUrl" matListAvatar src="../../assets/img/student.png"
-                [className]="jugador.entregado ? 'jugador-entregado' : 'jugador-no-entregado'">
-              <h4 mat-line>{{jugador.usuarioNombre}}</h4>
-              <p mat-line *ngIf="jugador.entregado" class="jugadores-list-subline">Entregado</p>
-              <p mat-line *ngIf="!jugador.entregado" class="jugadores-list-subline">No Entregado</p>
+          <mat-list class="jugadores-list" *ngIf="escenarioCurso" >
+            <mat-list-item *ngFor="let jugador of escenarioCurso.jugadores" class="jugador-item" [class.disabled]="jugador.entregado ? null : true" routerLink="/simulaciones/escenario/{{escenario.id}}/resultados/curso/{{curso.id}}/usuario/{{jugador.usuarioId}}">
+                <img *ngIf="jugador.usuarioFotoUrl" matListAvatar src="{{jugador.usuarioFotoUrl}}"
+                  [className]="jugador.entregado ? 'jugador-entregado' : 'jugador-no-entregado'">
+                <img *ngIf="!jugador.usuarioFotoUrl" matListAvatar src="../../assets/img/student.png"
+                  [className]="jugador.entregado ? 'jugador-entregado' : 'jugador-no-entregado'">
+                <h4 mat-line>{{jugador.usuarioNombre}}</h4>
+                <p mat-line *ngIf="jugador.entregado" class="jugadores-list-subline">Entregado</p>
+                <p mat-line *ngIf="!jugador.entregado" class="jugadores-list-subline">No Entregado</p>
             </mat-list-item>
           </mat-list>
         </mat-card-content>

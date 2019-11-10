@@ -244,3 +244,12 @@
 .puntajes-suffix{
     margin-left: 10px;
 }
+
+.jugador-item {
+    cursor: pointer;
+}
+
+.disabled {
+    pointer-events: none;
+    cursor: default;
+}
