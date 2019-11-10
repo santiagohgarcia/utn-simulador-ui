@@ -8,6 +8,7 @@ import { DecisionDetalleComponent } from './decision-detalle/decision-detalle.co
 import { FlujoFondosComponent } from './flujo-fondos/flujo-fondos.component';
 import { TomaDecisionesComponent } from './toma-decisiones/toma-decisiones.component';
 import { ResultadosComponent } from './resultados/resultados.component';
+import { ResultadosAdminComponent } from './resultados-admin/resultados-admin.component';
 import { EscenariosComponent } from './escenarios/escenarios.component';
 import { EscenarioDetalleComponent } from './escenario-detalle/escenario-detalle.component';
 import { SimulacionesComponent } from './simulaciones/simulaciones.component';
@@ -34,6 +35,10 @@ const routes: Routes = [
   {
     path: 'simulaciones/escenario/:escenarioId/resultados', component: HomeComponent,
     children: [{ path: '', component: ResultadosComponent, pathMatch: 'full' }]
+  },
+  {
+    path: 'simulaciones/escenario/:escenarioId/resultados/curso/:cursoId/usuario/:usuarioId', component: HomeComponent,
+    children: [{ path: '', component: ResultadosAdminComponent, pathMatch: 'full' }]
   },
   {
     path: 'premios', component: HomeComponent,
