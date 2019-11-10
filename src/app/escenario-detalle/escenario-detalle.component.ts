@@ -185,10 +185,10 @@ export class EscenarioDetalleComponent implements OnInit {
         this.escenario = escenario
         this.getConfiguracionMercado(escenario)
         this.getHasProyectos(escenario.id);
+        this.escenariosService.getCursosEscenario(id).subscribe(cursosEscenario => {
+          this.escenario.cursos = cursosEscenario;
+        })
       });
-      this.escenariosService.getCursosEscenario(id).subscribe(cursosEscenario => {
-        this.escenario.cursos = cursosEscenario;
-      })
       this.getPuntajes(id);
     }
     this.getCursos();
@@ -240,8 +240,13 @@ export class EscenarioDetalleComponent implements OnInit {
   }
 
   private _filterCurso(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.allCursos.filter(curso => curso.nombre.toLowerCase().indexOf(filterValue) === 0);
+    if(value.toLowerCase){
+      const filterValue = value.toLowerCase();
+      return this.allCursos.filter(curso => curso.nombre.toLowerCase().indexOf(filterValue) === 0);
+    }else{
+      return this.allCursos;
+    }
+    
   }
 
   getEscenario(id) {
