@@ -91,7 +91,7 @@ export class EstadoComponent implements OnInit {
         },
         {
           data: estados.filter((_, index) => index !== 0).map(estado => estado.demandaPotencial),
-          label: 'Demanda Potencial',
+          label: 'Demanda obtenida',
           fill: false,
           backgroundColor: 'rgb(75, 192, 192)',
           borderColor: 'rgb(75, 192, 192)',
