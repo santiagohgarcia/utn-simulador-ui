@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { UsuarioService } from '../usuario.service';
 import { MatriculacionDialogComponent } from '../matriculacion-dialog/matriculacion-dialog.component';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-home',
@@ -20,11 +21,15 @@ export class HomeComponent implements OnInit {
   usuario;
   opened = true;
   pendingRequests;
+  mobileQuery: MediaQueryList;
 
   constructor(private router: Router,
     private afAuth: AngularFireAuth,
     private usuarioService: UsuarioService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private media: MediaMatcher) {
+    this.mobileQuery = this.media.matchMedia('(max-width: 600px)');
+  }
 
   ngOnInit() {
     this.afAuth.authState.subscribe(user => {
@@ -41,25 +46,23 @@ export class HomeComponent implements OnInit {
       }
     });
 
-    if(screen.width < 769){
-      this.opened = false;
-    }
+
   }
 
-  getUsuario(mail){
+  getUsuario(mail) {
     this.usuarioService.getUsuario(mail).subscribe(usuario => {
       this.usuario = usuario
-      if(!usuario.curso && usuario.rol === "JUGADOR"){
+      if (!usuario.curso && usuario.rol === "JUGADOR") {
         this.matricularUsuario(usuario);
       }
     }
     )
   }
 
-  matricularUsuario(usuario){
+  matricularUsuario(usuario) {
     const dialogRef = this.dialog.open(MatriculacionDialogComponent, {
       width: '400px',
-      data:  usuario,
+      data: usuario,
       disableClose: true
     });
     dialogRef.afterClosed().subscribe(_ => {

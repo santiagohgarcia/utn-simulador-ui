@@ -1,4 +1,4 @@
-<div *ngIf="usuario" class="container">
+<div *ngIf="usuario" class="container" [class.is-mobile]="mobileQuery.matches">
   <mat-toolbar color="primary" class="toolbar">
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
@@ -18,16 +18,19 @@
     </mat-menu>
   </mat-toolbar>
   <!--<mat-progress-bar mode="query" *ngIf="pendingRequests > 0"></mat-progress-bar>-->
-  <mat-sidenav-container class="sidenav-container">
+  <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
 
     <mat-sidenav-content>
       <router-outlet></router-outlet>
     </mat-sidenav-content>
 
-    <mat-sidenav [opened]="opened" mode="side" class="sidenav-container" #sidenav disableClose>
+    <mat-sidenav [opened]="!mobileQuery.matches" [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" #sidenav class="sidenav-menu">
       <div class="img-container" *ngIf="user">
-        <img *ngIf="user.photoURL" src="{{user.photoURL}}" style="height: 150px; border-radius: 50%">
-        <img *ngIf="!user.photoURL" src="../../assets/img/student.png" style="height: 150px; border-radius: 50%">
+        <img *ngIf="user.photoURL" src="{{user.photoURL}}" [style.height.px]="mobileQuery.matches ? 100 : 150"
+          style="border-radius: 50%">
+        <img *ngIf="!user.photoURL" src="../../assets/img/student.png"
+          [style.height.px]="mobileQuery.matches ? 100 : 150" style="border-radius: 50%">
         <span>{{usuario.nombreCompleto}}</span>
         <div>
           <span style="font-weight:100;" *ngIf="usuario.curso">{{usuario.curso.nombre}}</span>
