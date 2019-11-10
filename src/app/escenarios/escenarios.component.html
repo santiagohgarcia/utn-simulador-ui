@@ -4,13 +4,14 @@
 <div class="card-container" *ngIf="usuario">
   <mat-card *ngFor="let escenario of escenarios;">
     <mat-card-header>
-        <mat-card-title>{{escenario.titulo | titlecase}}</mat-card-title>
-        <mat-card-subtitle>{{escenario.descripcion}}</mat-card-subtitle>
+      <mat-card-title>{{escenario.titulo | titlecase}}</mat-card-title>
+      <mat-card-subtitle>{{escenario.descripcion}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-actions>
       <button mat-button color="primary" (click)="duplicateEscenario(escenario)">CLONAR</button>
-      <button mat-button routerLink="/escenarios/{{escenario.id}}">EDITAR</button>
-      <button mat-button color="warn" (click)="deleteEscenario(escenario.id)">ELIMINAR</button>
+      <button mat-button routerLink="/escenarios/{{escenario.id}}" *ngIf="!escenario.hasProyectos">EDITAR</button>
+      <button mat-button color="warn" (click)="deleteEscenario(escenario.id)"
+        *ngIf="!escenario.hasProyectos">ELIMINAR</button>
     </mat-card-actions>
   </mat-card>
 </div>

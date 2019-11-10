@@ -153,4 +153,9 @@ export class EscenariosService {
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
+  getProyectosByEscenario(escenarioId) {
+    return this.http.get(`${environment.proyectoServiceHost}/api/proyectosPorEscenario/${escenarioId}`)
+      .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
+  }
+
 }

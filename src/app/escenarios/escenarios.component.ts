@@ -4,6 +4,8 @@ import { EscenariosService } from '../escenarios.service';
 import { UsuarioService } from '../usuario.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material';
+import { switchMap, map } from 'rxjs/operators';
+import { zip } from 'rxjs';
 
 @Component({
   selector: 'app-escenarios',
@@ -23,8 +25,21 @@ export class EscenariosComponent implements OnInit {
   }
 
   getEscenarios() {
-    this.escenariosService.getEscenarios().subscribe(escenarios => this.escenarios = escenarios)
+    this.escenariosService.getEscenarios().pipe(
+      switchMap(escenarios => {
+        const $escenarios = escenarios.map(e => {
+          return this.escenariosService.getProyectosByEscenario(e.id).pipe(
+            map(proyectos => {
+              e.hasProyectos = (proyectos.length > 0)
+              return e;
+            })
+          )
+        })
+        return zip(...$escenarios)
+      })
+    ).subscribe(escenarios => this.escenarios = escenarios)
   }
+
 
   deleteEscenario(id) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
