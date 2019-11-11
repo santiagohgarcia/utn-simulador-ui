@@ -33,7 +33,7 @@
         <mat-card-content>
           <mat-radio-group class="respuestas-container" [(ngModel)]="decision.opcionTomada" disabled="true">
             <mat-radio-button class="respuesta" *ngFor="let opcion of decision.opciones" [value]="opcion.id">
-              {{opcion.descripcion}}
+              <span style="white-space: pre-wrap;">{{opcion.descripcion}}</span>
             </mat-radio-button>
           </mat-radio-group>
         </mat-card-content>
