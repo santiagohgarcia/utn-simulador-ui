@@ -24,23 +24,23 @@
       <div class="list">
         <div class="list-item">
           <p>Costo Fijo</p>
-          <h3>$ {{ estadoActual.costoFijo.toLocaleString() }}</h3>
+          <h3 *ngIf="estadoActual.costoFijo">$ {{ estadoActual.costoFijo.toLocaleString() }}</h3>
         </div>
         <div class="list-item">
           <p>Costo Variable x Unidad Producida</p>
-          <h3>$ {{ estadoActual.costoVariable.toLocaleString() }}</h3>
+          <h3 *ngIf="estadoActual.costoVariable">$ {{ estadoActual.costoVariable.toLocaleString() }}</h3>
         </div>
         <div class="list-item">
           <p>Produccion</p>
-          <h3>{{ estadoActual.produccionMensual.toLocaleString() }} u./{{escenario.nombrePeriodos}}</h3>
+          <h3 *ngIf="estadoActual.produccionMensual">{{ estadoActual.produccionMensual.toLocaleString() }} u./{{escenario.nombrePeriodos}}</h3>
         </div>
         <div class="list-item">
           <p>Precio Final Producto</p>
-          <h3>$ {{ ultimoPrecioProducto.toLocaleString() }}</h3>
+          <h3 *ngIf="ultimoPrecioProducto">$ {{ ultimoPrecioProducto.toLocaleString() }}</h3>
         </div>
         <div class="list-item">
           <p>Stock Final</p>
-          <h3>{{ estadoActual.stock.toLocaleString() }} u.</h3>
+          <h3 *ngIf="estadoActual.stock">{{ estadoActual.stock.toLocaleString() }} u.</h3>
         </div>
         <div class="list-item">
           <p>Calidad Final</p>
