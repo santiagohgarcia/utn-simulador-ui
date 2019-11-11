@@ -24,11 +24,11 @@ export class BalanceFinalComponent implements OnInit {
   }
 
   getTotalActivo() {
-    this.totalActivo = this.balanceFinal.activo.caja + this.balanceFinal.activo.cuentasPorCobrar + this.balanceFinal.activo.inventario + this.balanceFinal.activo.maquinaria + this.balanceFinal.activo.amortizacionAcumulada;
+    this.totalActivo = this.balanceFinal.activo.caja + this.balanceFinal.activo.cuentasPorCobrar + this.balanceFinal.activo.inventario + this.balanceFinal.activo.maquinaria + this.balanceFinal.activo.amortizacionAcumulada + this.balanceFinal.activo.otros;
   }
 
   getTotalPasivoPatrimonioNeto() {
-    this.totalPasivoPatrimonioNeto = this.balanceFinal.pasivo.proveedores + this.balanceFinal.pasivo.deudasBancarias + this.balanceFinal.patrimonioNeto.capitalSocial + this.balanceFinal.patrimonioNeto.resultadoDelEjercicio;
+    this.totalPasivoPatrimonioNeto = this.balanceFinal.pasivo.proveedores + this.balanceFinal.pasivo.deudasBancarias + this.balanceFinal.pasivo.otros + this.balanceFinal.patrimonioNeto.capitalSocial + this.balanceFinal.patrimonioNeto.resultadoDelEjercicio;
   }
 
 }
