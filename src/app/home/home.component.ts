@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.afAuth.authState.subscribe(user => {
-      if (user) {
+      if (user && !this.user) {
         this.user = user;
         this.getUsuario({
           mail: user.email,
