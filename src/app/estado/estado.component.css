@@ -132,3 +132,12 @@
 .mat-card-content {
     padding-top: 12px;
 }
+.danger-alert {
+    margin: 15px 15px 0 15px;
+    background: #f8d7da;
+    border: solid 1px #bd0516;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+    color: #bd0516;
+}
