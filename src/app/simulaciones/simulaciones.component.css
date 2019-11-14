@@ -34,6 +34,7 @@
     color: gold;
     margin-right: 5px;
 }
+
 .mat-card {
     display: flex;
     flex-direction: column;
@@ -64,6 +65,7 @@
 }
 
 .escenario-subtitle{
+    margin-top: 10px;
     font-size: small;
     font-weight: 200;
 }
