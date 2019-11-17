@@ -1,581 +1,587 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <button mat-icon-button routerLink="/escenarios">
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-    <h1 *ngIf="!escenario.id">Nuevo Escenario</h1>
-    <h1 *ngIf="escenario.id">Editar Escenario</h1>
-  </mat-toolbar-row>
-</mat-toolbar>
+<div class="admin-theme">
 
-<mat-tab-group mat-stretch-tabs>
-  <mat-tab label="Datos Basicos">
-    <div class="form-container">
-      <mat-card class="form-card">
-        <mat-card-header>
-          <mat-card-title>Datos Basicos</mat-card-title>
-          <mat-card-subtitle *ngIf="hasProyectos">Algunos jugadores ya han empezado. No puede modificar estos datos
-          </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <form [formGroup]="escenarioForm" class="form">
-            <mat-form-field class="form-field">
-              <input autofocus required matInput placeholder="Titulo" [formControl]="titulo"
-                [(ngModel)]="escenario.titulo" [(value)]="escenario.titulo" [readonly]="hasProyectos">
-              <mat-error *ngIf="escenario.invalid">Required field</mat-error>
-            </mat-form-field>
-            <mat-form-field class="form-field">
-              <input type="number" required matInput placeholder="Cantidad de Periodos" [formControl]="maximosPeriodos"
-                [(ngModel)]="escenario.maximosPeriodos" [(value)]="escenario.maximosPeriodos" [readonly]="hasProyectos">
-              <mat-error *ngIf="escenario.invalid">Required field</mat-error>
-            </mat-form-field>
-            <mat-form-field class="form-field">
-              <input matInput required placeholder="Nombre Periodos" [formControl]="nombrePeriodos"
-                [(ngModel)]="escenario.nombrePeriodos" [(value)]="escenario.nombrePeriodos" [readonly]="hasProyectos">
-              <mat-error *ngIf="escenario.invalid">Required field</mat-error>
-            </mat-form-field>
-            <mat-form-field class="form-field">
-              <textarea cdkTextareaAutosize required matInput placeholder="Descripcion" [formControl]="descripcion"
-                [(ngModel)]="escenario.descripcion" [(value)]="escenario.descripcion"
-                [readonly]="hasProyectos"></textarea>
-              <mat-error *ngIf="escenario.invalid">Required field</mat-error>
-            </mat-form-field>
-            <mat-form-field class="form-field">
-              <input type="number" required matInput placeholder="Porcentaje de Impuestos"
-                [formControl]="impuestoPorcentaje" [(ngModel)]="escenario.impuestoPorcentaje"
-                [(value)]="escenario.impuestoPorcentaje" [readonly]="hasProyectos">
-              <mat-error *ngIf="escenario.invalid">Required field</mat-error>
-            </mat-form-field>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button routerLink="/escenarios">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h1 *ngIf="!escenario.id">Nuevo Escenario</h1>
+      <h1 *ngIf="escenario.id">Editar Escenario</h1>
+    </mat-toolbar-row>
+  </mat-toolbar>
 
-            <mat-form-field class="example-chip-list">
-              <mat-chip-list #chipList>
-                <mat-chip *ngFor="let curso of escenario.cursos;" removable="true" (removed)="removeCurso(curso)">
-                  {{curso.nombre}}
-                  <mat-icon matChipRemove>cancel</mat-icon>
-                </mat-chip>
-                <input placeholder="Curso..." #cursosInput [formControl]="cursos" [matAutocomplete]="auto"
-                  [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                  matChipInputAddOnBlur="true">
-              </mat-chip-list>
-              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedCurso($event)">
-                <mat-option *ngFor="let curso of filtredCursos | async;" [value]="curso">
-                  {{curso.nombre}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-          </form>
-        </mat-card-content>
-      </mat-card>
-
-      <mat-card class="balance-inicial-card" *ngIf="escenario.balanceInicial">
-        <mat-card-header>
-          <mat-card-title>Balance Inicial</mat-card-title>
-          <mat-card-subtitle *ngIf="hasProyectos">Algunos jugadores ya han empezado. No puede modificar estos datos
-          </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <div class="balance-inicial-content">
-            <div>
-              <div style="margin-left:16px;">Activo</div>
-              <form [formGroup]="activoForm" class="balance-form" *ngIf="escenario.balanceInicial.activo">
-                <mat-form-field class="form-field">
-                  <input autofocus required matInput placeholder="Caja" [formControl]="caja" type="number"
-                    [(ngModel)]="escenario.balanceInicial.activo.caja" [(value)]="escenario.balanceInicial.activo.caja"
-                    [readonly]="hasProyectos">
-                </mat-form-field>
-                <mat-form-field class="form-field">
-                  <input autofocus matInput required placeholder="Inventario" [formControl]="inventario" type="number"
-                    [(ngModel)]="escenario.balanceInicial.activo.inventario"
-                    [(value)]="escenario.balanceInicial.activo.inventario" [readonly]="hasProyectos">
-                  <mat-error *ngIf="inventario.invalid">Required field</mat-error>
-                </mat-form-field>
-                <mat-form-field class="form-field">
-                  <input autofocus matInput placeholder="Cuentas a Cobrar" [formControl]="cuentasPorCobrar"
-                    type="number" required [(ngModel)]="escenario.balanceInicial.activo.cuentasPorCobrar"
-                    [(value)]="escenario.balanceInicial.activo.cuentasPorCobrar" [readonly]="hasProyectos">
-                  <mat-error *ngIf="cuentasPorCobrar.invalid">Required field</mat-error>
-                </mat-form-field>
-                <mat-form-field class="form-field">
-                  <input autofocus required matInput placeholder="Periodos Cuentas a Cobrar"
-                    [formControl]="cuentasPorCobrarPeriodos" type="number"
-                    [(ngModel)]="escenario.balanceInicial.activo.cuentasPorCobrarPeriodos"
-                    [(value)]="escenario.balanceInicial.activo.cuentasPorCobrarPeriodos" [readonly]="hasProyectos">
-                  <mat-error *ngIf="cuentasPorCobrarPeriodos.invalid">Required field</mat-error>
-                </mat-form-field>
-              </form>
-            </div>
-            <div>
-              <div style="margin-left:16px;">Pasivo</div>
-              <form [formGroup]="pasivoForm" class="balance-form" *ngIf="escenario.balanceInicial.pasivo">
-                <mat-form-field class="form-field">
-                  <input autofocus required matInput placeholder="Proveedores" [formControl]="proveedores" type="number"
-                    [(ngModel)]="escenario.balanceInicial.pasivo.proveedores"
-                    [(value)]="escenario.balanceInicial.pasivo.proveedores" [readonly]="hasProyectos">
-                </mat-form-field>
-                <mat-form-field class="form-field">
-                  <input autofocus required matInput placeholder="Periodos Proveedores"
-                    [formControl]="proveedoresPeriodos" type="number"
-                    [(ngModel)]="escenario.balanceInicial.pasivo.proveedoresPeriodos"
-                    [(value)]="escenario.balanceInicial.pasivo.proveedoresPeriodos" [readonly]="hasProyectos">
-                </mat-form-field>
-                <mat-form-field class="form-field">
-                  <input autofocus required matInput placeholder="Deudas Bancarias" [formControl]="deudasBancarias"
-                    type="number" [(ngModel)]="escenario.balanceInicial.pasivo.deudasBancarias"
-                    [(value)]="escenario.balanceInicial.pasivo.deudasBancarias" [readonly]="hasProyectos">
-                </mat-form-field>
-                <mat-form-field class="form-field">
-                  <input autofocus required matInput placeholder="Periodos Deudas Bancarias"
-                    [formControl]="deudasBancariasPeriodos" type="number"
-                    [(ngModel)]="escenario.balanceInicial.pasivo.deudasBancariasPeriodos"
-                    [(value)]="escenario.balanceInicial.pasivo.deudasBancariasPeriodos" [readonly]="hasProyectos">
-                </mat-form-field>
-              </form>
-            </div>
-            <div>
-              <div style="margin-left:16px;">Patrimonio Neto</div>
-              <form [formGroup]="patrimonioNetoForm" class="patrimonio-form"
-                *ngIf="escenario.balanceInicial.patrimonioNeto">
-                <mat-form-field class="form-field">
-                  <input autofocus required matInput placeholder="Capital Social" [formControl]="capitalSocial"
-                    type="number" [(ngModel)]="escenario.balanceInicial.patrimonioNeto.capitalSocial"
-                    [(value)]="escenario.balanceInicial.patrimonioNeto.capitalSocial" [readonly]="hasProyectos">
-                </mat-form-field>
-                <mat-form-field class="form-field">
-                  <input autofocus required matInput placeholder="Resultado del ejercicio"
-                    [formControl]="resultadoDelEjercicio"
-                    [(ngModel)]="escenario.balanceInicial.patrimonioNeto.resultadoDelEjercicio" type="number"
-                    [(value)]="escenario.balanceInicial.patrimonioNeto.resultadoDelEjercicio" [readonly]="hasProyectos">
-                </mat-form-field>
-              </form>
-            </div>
-          </div>
-        </mat-card-content>
-      </mat-card>
-
-      <mat-card class="estado-inicial-card" *ngIf="escenario.estadoInicial">
-        <mat-card-header>
-          <mat-card-title>Estado Inicial</mat-card-title>
-          <mat-card-subtitle *ngIf="hasProyectos">Algunos jugadores ya han empezado. No puede modificar estos datos
-          </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <form [formGroup]="estadoInicialForm" class="estado-form">
-            <mat-form-field class="form-field">
-              <input autofocus required matInput placeholder="Costo Fijo" [formControl]="costoFijo"
-                [(ngModel)]="escenario.estadoInicial.costoFijo" type="number"
-                [(value)]="escenario.estadoInicial.costoFijo" [readonly]="hasProyectos">
-            </mat-form-field>
-            <mat-form-field class="form-field">
-              <input autofocus required matInput placeholder="Costo Variable x Unidad Producida"
-                [formControl]="costoVariable" [(ngModel)]="escenario.estadoInicial.costoVariable" type="number"
-                [(value)]="escenario.estadoInicial.costoVariable" [readonly]="hasProyectos">
-            </mat-form-field>
-            <mat-form-field class="form-field">
-              <input autofocus required matInput placeholder="Produccion Mensual" [formControl]="produccionMensual"
-                [(ngModel)]="escenario.estadoInicial.produccionMensual" type="number"
-                [(value)]="escenario.estadoInicial.produccionMensual" [readonly]="hasProyectos">
-            </mat-form-field>
-            <mat-form-field class="form-field">
-              <input autofocus required matInput placeholder="Stock" [formControl]="stock"
-                [(ngModel)]="escenario.estadoInicial.stock" type="number" [(value)]="escenario.estadoInicial.stock"
-                [readonly]="hasProyectos">
-            </mat-form-field>
-            <mat-form-field class="form-field">
-              <input autofocus matInput placeholder="Calidad" [formControl]="calidad"
-                [(ngModel)]="escenario.estadoInicial.calidad" type="number" [(value)]="escenario.estadoInicial.calidad"
-                [readonly]="hasProyectos">
-            </mat-form-field>
-            <mat-form-field class="form-field">
-              <input autofocus required matInput placeholder="Cantidad de Vendedores" [formControl]="cantidadVendedores"
-                [(ngModel)]="escenario.estadoInicial.cantidadVendedores" type="number"
-                [(value)]="escenario.estadoInicial.cantidadVendedores" [readonly]="hasProyectos">
-            </mat-form-field>
-            <mat-form-field class="form-field">
-              <input autofocus required matInput placeholder="Publicidad" [formControl]="publicidad"
-                [(ngModel)]="escenario.estadoInicial.publicidad" type="number"
-                [(value)]="escenario.estadoInicial.publicidad" [readonly]="hasProyectos">
-            </mat-form-field>
-          </form>
-        </mat-card-content>
-      </mat-card>
-      <mat-card class="puntajes-card" *ngIf="puntajes">
-        <mat-card-header>
-          <mat-card-title>Puntajes</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <form [formGroup]="puntajeForm">
-            <div class="puntaje-form">
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab label="Datos Basicos">
+      <div class="form-container">
+        <mat-card class="form-card">
+          <mat-card-header>
+            <mat-card-title>Datos Basicos</mat-card-title>
+            <mat-card-subtitle *ngIf="hasProyectos">Algunos jugadores ya han empezado. No puede modificar estos datos
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <form [formGroup]="escenarioForm" class="form">
               <mat-form-field class="form-field">
-                <input autofocus required matInput placeholder="Porcentaje Escenario"
-                  [formControl]="porcentajeEscenario" [(ngModel)]="puntajes.porcentajeEscenario" type="number"
-                  [(value)]="puntajes.porcentajeEscenario">
-                <span matSuffix>%</span>
+                <input autofocus required matInput placeholder="Titulo" [formControl]="titulo"
+                  [(ngModel)]="escenario.titulo" [(value)]="escenario.titulo" [readonly]="hasProyectos">
+                <mat-error *ngIf="escenario.invalid">Required field</mat-error>
+              </mat-form-field>
+              <mat-form-field class="form-field">
+                <input type="number" required matInput placeholder="Cantidad de Periodos"
+                  [formControl]="maximosPeriodos" [(ngModel)]="escenario.maximosPeriodos"
+                  [(value)]="escenario.maximosPeriodos" [readonly]="hasProyectos">
+                <mat-error *ngIf="escenario.invalid">Required field</mat-error>
+              </mat-form-field>
+              <mat-form-field class="form-field">
+                <input matInput required placeholder="Nombre Periodos" [formControl]="nombrePeriodos"
+                  [(ngModel)]="escenario.nombrePeriodos" [(value)]="escenario.nombrePeriodos" [readonly]="hasProyectos">
+                <mat-error *ngIf="escenario.invalid">Required field</mat-error>
+              </mat-form-field>
+              <mat-form-field class="form-field">
+                <textarea cdkTextareaAutosize required matInput placeholder="Descripcion" [formControl]="descripcion"
+                  [(ngModel)]="escenario.descripcion" [(value)]="escenario.descripcion"
+                  [readonly]="hasProyectos"></textarea>
+                <mat-error *ngIf="escenario.invalid">Required field</mat-error>
+              </mat-form-field>
+              <mat-form-field class="form-field">
+                <input type="number" required matInput placeholder="Porcentaje de Impuestos"
+                  [formControl]="impuestoPorcentaje" [(ngModel)]="escenario.impuestoPorcentaje"
+                  [(value)]="escenario.impuestoPorcentaje" [readonly]="hasProyectos">
+                <mat-error *ngIf="escenario.invalid">Required field</mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="example-chip-list">
+                <mat-chip-list #chipList>
+                  <mat-chip *ngFor="let curso of escenario.cursos;" removable="true" (removed)="removeCurso(curso)">
+                    {{curso.nombre}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                  </mat-chip>
+                  <input placeholder="Curso..." #cursosInput [formControl]="cursos" [matAutocomplete]="auto"
+                    [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    matChipInputAddOnBlur="true">
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedCurso($event)">
+                  <mat-option *ngFor="let curso of filtredCursos | async;" [value]="curso">
+                    {{curso.nombre}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </form>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="balance-inicial-card" *ngIf="escenario.balanceInicial">
+          <mat-card-header>
+            <mat-card-title>Balance Inicial</mat-card-title>
+            <mat-card-subtitle *ngIf="hasProyectos">Algunos jugadores ya han empezado. No puede modificar estos datos
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="balance-inicial-content">
+              <div>
+                <div style="margin-left:16px;">Activo</div>
+                <form [formGroup]="activoForm" class="balance-form" *ngIf="escenario.balanceInicial.activo">
+                  <mat-form-field class="form-field">
+                    <input autofocus required matInput placeholder="Caja" [formControl]="caja" type="number"
+                      [(ngModel)]="escenario.balanceInicial.activo.caja"
+                      [(value)]="escenario.balanceInicial.activo.caja" [readonly]="hasProyectos">
+                  </mat-form-field>
+                  <mat-form-field class="form-field">
+                    <input autofocus matInput required placeholder="Inventario" [formControl]="inventario" type="number"
+                      [(ngModel)]="escenario.balanceInicial.activo.inventario"
+                      [(value)]="escenario.balanceInicial.activo.inventario" [readonly]="hasProyectos">
+                    <mat-error *ngIf="inventario.invalid">Required field</mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="form-field">
+                    <input autofocus matInput placeholder="Cuentas a Cobrar" [formControl]="cuentasPorCobrar"
+                      type="number" required [(ngModel)]="escenario.balanceInicial.activo.cuentasPorCobrar"
+                      [(value)]="escenario.balanceInicial.activo.cuentasPorCobrar" [readonly]="hasProyectos">
+                    <mat-error *ngIf="cuentasPorCobrar.invalid">Required field</mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="form-field">
+                    <input autofocus required matInput placeholder="Periodos Cuentas a Cobrar"
+                      [formControl]="cuentasPorCobrarPeriodos" type="number"
+                      [(ngModel)]="escenario.balanceInicial.activo.cuentasPorCobrarPeriodos"
+                      [(value)]="escenario.balanceInicial.activo.cuentasPorCobrarPeriodos" [readonly]="hasProyectos">
+                    <mat-error *ngIf="cuentasPorCobrarPeriodos.invalid">Required field</mat-error>
+                  </mat-form-field>
+                </form>
+              </div>
+              <div>
+                <div style="margin-left:16px;">Pasivo</div>
+                <form [formGroup]="pasivoForm" class="balance-form" *ngIf="escenario.balanceInicial.pasivo">
+                  <mat-form-field class="form-field">
+                    <input autofocus required matInput placeholder="Proveedores" [formControl]="proveedores"
+                      type="number" [(ngModel)]="escenario.balanceInicial.pasivo.proveedores"
+                      [(value)]="escenario.balanceInicial.pasivo.proveedores" [readonly]="hasProyectos">
+                  </mat-form-field>
+                  <mat-form-field class="form-field">
+                    <input autofocus required matInput placeholder="Periodos Proveedores"
+                      [formControl]="proveedoresPeriodos" type="number"
+                      [(ngModel)]="escenario.balanceInicial.pasivo.proveedoresPeriodos"
+                      [(value)]="escenario.balanceInicial.pasivo.proveedoresPeriodos" [readonly]="hasProyectos">
+                  </mat-form-field>
+                  <mat-form-field class="form-field">
+                    <input autofocus required matInput placeholder="Deudas Bancarias" [formControl]="deudasBancarias"
+                      type="number" [(ngModel)]="escenario.balanceInicial.pasivo.deudasBancarias"
+                      [(value)]="escenario.balanceInicial.pasivo.deudasBancarias" [readonly]="hasProyectos">
+                  </mat-form-field>
+                  <mat-form-field class="form-field">
+                    <input autofocus required matInput placeholder="Periodos Deudas Bancarias"
+                      [formControl]="deudasBancariasPeriodos" type="number"
+                      [(ngModel)]="escenario.balanceInicial.pasivo.deudasBancariasPeriodos"
+                      [(value)]="escenario.balanceInicial.pasivo.deudasBancariasPeriodos" [readonly]="hasProyectos">
+                  </mat-form-field>
+                </form>
+              </div>
+              <div>
+                <div style="margin-left:16px;">Patrimonio Neto</div>
+                <form [formGroup]="patrimonioNetoForm" class="patrimonio-form"
+                  *ngIf="escenario.balanceInicial.patrimonioNeto">
+                  <mat-form-field class="form-field">
+                    <input autofocus required matInput placeholder="Capital Social" [formControl]="capitalSocial"
+                      type="number" [(ngModel)]="escenario.balanceInicial.patrimonioNeto.capitalSocial"
+                      [(value)]="escenario.balanceInicial.patrimonioNeto.capitalSocial" [readonly]="hasProyectos">
+                  </mat-form-field>
+                  <mat-form-field class="form-field">
+                    <input autofocus required matInput placeholder="Resultado del ejercicio"
+                      [formControl]="resultadoDelEjercicio"
+                      [(ngModel)]="escenario.balanceInicial.patrimonioNeto.resultadoDelEjercicio" type="number"
+                      [(value)]="escenario.balanceInicial.patrimonioNeto.resultadoDelEjercicio"
+                      [readonly]="hasProyectos">
+                  </mat-form-field>
+                </form>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="estado-inicial-card" *ngIf="escenario.estadoInicial">
+          <mat-card-header>
+            <mat-card-title>Estado Inicial</mat-card-title>
+            <mat-card-subtitle *ngIf="hasProyectos">Algunos jugadores ya han empezado. No puede modificar estos datos
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <form [formGroup]="estadoInicialForm" class="estado-form">
+              <mat-form-field class="form-field">
+                <input autofocus required matInput placeholder="Costo Fijo" [formControl]="costoFijo"
+                  [(ngModel)]="escenario.estadoInicial.costoFijo" type="number"
+                  [(value)]="escenario.estadoInicial.costoFijo" [readonly]="hasProyectos">
+              </mat-form-field>
+              <mat-form-field class="form-field">
+                <input autofocus required matInput placeholder="Costo Variable x Unidad Producida"
+                  [formControl]="costoVariable" [(ngModel)]="escenario.estadoInicial.costoVariable" type="number"
+                  [(value)]="escenario.estadoInicial.costoVariable" [readonly]="hasProyectos">
+              </mat-form-field>
+              <mat-form-field class="form-field">
+                <input autofocus required matInput placeholder="Produccion Mensual" [formControl]="produccionMensual"
+                  [(ngModel)]="escenario.estadoInicial.produccionMensual" type="number"
+                  [(value)]="escenario.estadoInicial.produccionMensual" [readonly]="hasProyectos">
+              </mat-form-field>
+              <mat-form-field class="form-field">
+                <input autofocus required matInput placeholder="Stock" [formControl]="stock"
+                  [(ngModel)]="escenario.estadoInicial.stock" type="number" [(value)]="escenario.estadoInicial.stock"
+                  [readonly]="hasProyectos">
+              </mat-form-field>
+              <mat-form-field class="form-field">
+                <input autofocus matInput placeholder="Calidad" [formControl]="calidad"
+                  [(ngModel)]="escenario.estadoInicial.calidad" type="number"
+                  [(value)]="escenario.estadoInicial.calidad" [readonly]="hasProyectos">
+              </mat-form-field>
+              <mat-form-field class="form-field">
+                <input autofocus required matInput placeholder="Cantidad de Vendedores"
+                  [formControl]="cantidadVendedores" [(ngModel)]="escenario.estadoInicial.cantidadVendedores"
+                  type="number" [(value)]="escenario.estadoInicial.cantidadVendedores" [readonly]="hasProyectos">
+              </mat-form-field>
+              <mat-form-field class="form-field">
+                <input autofocus required matInput placeholder="Publicidad" [formControl]="publicidad"
+                  [(ngModel)]="escenario.estadoInicial.publicidad" type="number"
+                  [(value)]="escenario.estadoInicial.publicidad" [readonly]="hasProyectos">
+              </mat-form-field>
+            </form>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="puntajes-card" *ngIf="puntajes">
+          <mat-card-header>
+            <mat-card-title>Puntajes</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <form [formGroup]="puntajeForm">
+              <div class="puntaje-form">
+                <mat-form-field class="form-field">
+                  <input autofocus required matInput placeholder="Porcentaje Escenario"
+                    [formControl]="porcentajeEscenario" [(ngModel)]="puntajes.porcentajeEscenario" type="number"
+                    [(value)]="puntajes.porcentajeEscenario">
+                  <span matSuffix>%</span>
+                </mat-form-field>
+              </div>
+              <span style="margin-left:16px;">Porcentajes de Ponderacion</span>
+              <div class="puntaje-form">
+                <mat-form-field class="form-field">
+                  <input autofocus required matInput placeholder="Ponderacion de Caja" [formControl]="porcentajeCaja"
+                    [(ngModel)]="puntajes.porcentajeCaja" type="number" [(value)]="puntajes.porcentajeCaja">
+                  <span matSuffix>%</span>
+                </mat-form-field>
+                <mat-form-field class="form-field">
+                  <input autofocus required matInput placeholder="Ponderacion de Ventas"
+                    [formControl]="porcentajeVentas" [(ngModel)]="puntajes.porcentajeVentas" type="number"
+                    [(value)]="puntajes.porcentajeVentas">
+                  <span matSuffix>%</span>
+                </mat-form-field>
+                <mat-form-field class="form-field">
+                  <input autofocus required matInput placeholder="Ponderacion de Renta" [formControl]="porcentajeRenta"
+                    [(ngModel)]="puntajes.porcentajeRenta" type="number" [(value)]="puntajes.porcentajeRenta">
+                  <span matSuffix>%</span>
+                </mat-form-field>
+              </div>
+            </form>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+    <mat-tab label="Financiaciones" *ngIf="escenario.id">
+      <app-financiaciones [escenario]="escenario" [hasProyectos]="hasProyectos"></app-financiaciones>
+    </mat-tab>
+    <mat-tab label="Proveedores" *ngIf="escenario.id">
+      <app-proveedores [escenario]="escenario" [hasProyectos]="hasProyectos"></app-proveedores>
+    </mat-tab>
+    <mat-tab label="Decisiones" *ngIf="escenario.id">
+      <app-decisiones [escenario]="escenario" [hasProyectos]="hasProyectos"></app-decisiones>
+    </mat-tab>
+    <mat-tab label="Configuraciones de Mercado" *ngIf="escenario.id">
+      <div class="tabla-ponderadora-content" *ngIf="configuracionMercado">
+        <mat-card class="forecast">
+          <mat-card-header>
+            <div mat-card-avatar class="ventas-avatar"></div>
+            <mat-card-title>Demanda de Mercado</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <table class="mat-table table">
+              <tr class="mat-header-row">
+                <th class="mat-header-cell desc-column">Valor</th>
+                <th class="mat-header-cell value-column-cantidad">Bajo</th>
+                <th class="mat-header-cell value-column-cantidad">Medio</th>
+                <th class="mat-header-cell value-column-cantidad">Alto</th>
+              </tr>
+              <ng-container *ngFor="let forecast of configuracionMercado.mercadosPeriodo">
+                <tr class="mat-row">
+                  <td class="mat-cell">
+                    <span>{{escenario.nombrePeriodos}} {{forecast.periodo}}</span>
+                  </td>
+                  <td class="mat-cell value-column-cantidad">
+                    <mat-form-field style="text-align: right;width: 80px;">
+                      <input type="number" required [(ngModel)]="forecast.bajo" [(value)]="forecast.bajo" matInput
+                        style="text-align: right;width: 80px;">
+                    </mat-form-field>
+                  </td>
+                  <td class="mat-cell value-column-cantidad">
+                    <mat-form-field style="text-align: right;width: 80px;">
+                      <input type="number" required [(ngModel)]="forecast.medio" [(value)]="forecast.medio" matInput
+                        style="text-align: right;width: 80px;">
+                    </mat-form-field>
+                  </td>
+                  <td class="mat-cell value-column-cantidad">
+                    <mat-form-field style="text-align: right;width: 80px;">
+                      <input type="number" required [(ngModel)]="forecast.alto" [(value)]="forecast.alto" matInput
+                        style="text-align: right;width: 80px;">
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </ng-container>
+            </table>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="empresas" *ngIf="configuracionMercado.empresasCompetidoras">
+          <mat-card-header>
+            <div mat-card-avatar class="competencia-avatar"></div>
+            <mat-card-title>Empresas Competidoras</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <table class="mat-table table">
+              <tr class="mat-header-row">
+                <th class="mat-header-cell desc-column">Empresa</th>
+                <th class="mat-header-cell value-column-cantidad">Bajo</th>
+                <th class="mat-header-cell value-column-cantidad">Medio</th>
+                <th class="mat-header-cell value-column-cantidad">Alto</th>
+              </tr>
+              <ng-container *ngFor="let ec of configuracionMercado.empresasCompetidoras">
+                <tr class="mat-row">
+                  <td class="mat-cell">
+                    <mat-form-field>
+                      <input [(ngModel)]="ec.nombre" required [(value)]="ec.nombre" matInput>
+                    </mat-form-field>
+                  </td>
+                  <td class="mat-cell value-column-cantidad">
+                    <mat-form-field style="text-align: right;width: 80px;">
+                      <input type="number" required [(ngModel)]="ec.bajo" [(value)]="ec.bajo" matInput
+                        style="text-align: right;width: 80px;">
+                    </mat-form-field>
+                  </td>
+                  <td class="mat-cell value-column-cantidad">
+                    <mat-form-field style="text-align: right;width: 80px;">
+                      <input type="number" required [(ngModel)]="ec.medio" [(value)]="ec.medio" matInput
+                        style="text-align: right;width: 80px;">
+                    </mat-form-field>
+                  </td>
+                  <td class="mat-cell value-column-cantidad">
+                    <mat-form-field style="text-align: right;width: 80px;">
+                      <input type="number" required [(ngModel)]="ec.alto" [(value)]="ec.alto" matInput
+                        style="text-align: right;width: 80px;">
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </ng-container>
+            </table>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="precio-intervalo" *ngIf="configuracionMercado.restriccionPrecio">
+          <mat-card-header>
+            <div mat-card-avatar class="precio-avatar"></div>
+            <mat-card-title>Intervalo de Precios</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="precio-intervalo-container">
+              <mat-form-field>
+                <input placeholder="Precio Min" type="number" matInput required
+                  [(ngModel)]="configuracionMercado.restriccionPrecio.precioMin"
+                  [(value)]="configuracionMercado.restriccionPrecio.precioMin">
+              </mat-form-field>
+              <span style="margin-right: 20px; margin-left: 20px;">hasta</span>
+              <mat-form-field>
+                <input placeholder="Precio Max" type="number" matInput required
+                  [(ngModel)]="configuracionMercado.restriccionPrecio.precioMax"
+                  [(value)]="configuracionMercado.restriccionPrecio.precioMax">
               </mat-form-field>
             </div>
-            <span style="margin-left:16px;">Porcentajes de Ponderacion</span>
-            <div class="puntaje-form">
-            <mat-form-field class="form-field">
-              <input autofocus required matInput placeholder="Ponderacion de Caja" [formControl]="porcentajeCaja"
-                [(ngModel)]="puntajes.porcentajeCaja" type="number" [(value)]="puntajes.porcentajeCaja">
-              <span matSuffix>%</span>
-            </mat-form-field>
-            <mat-form-field class="form-field">
-              <input autofocus required matInput placeholder="Ponderacion de Ventas" [formControl]="porcentajeVentas"
-                [(ngModel)]="puntajes.porcentajeVentas" type="number" [(value)]="puntajes.porcentajeVentas">
-              <span matSuffix>%</span>
-            </mat-form-field>
-            <mat-form-field class="form-field">
-              <input autofocus required matInput placeholder="Ponderacion de Renta" [formControl]="porcentajeRenta"
-                [(ngModel)]="puntajes.porcentajeRenta" type="number" [(value)]="puntajes.porcentajeRenta">
-              <span matSuffix>%</span>
-            </mat-form-field>
-          </div>
-          </form>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </mat-tab>
-  <mat-tab label="Financiaciones" *ngIf="escenario.id">
-    <app-financiaciones [escenario]="escenario" [hasProyectos]="hasProyectos"></app-financiaciones>
-  </mat-tab>
-  <mat-tab label="Proveedores" *ngIf="escenario.id">
-    <app-proveedores [escenario]="escenario" [hasProyectos]="hasProyectos"></app-proveedores>
-  </mat-tab>
-  <mat-tab label="Decisiones" *ngIf="escenario.id">
-    <app-decisiones [escenario]="escenario" [hasProyectos]="hasProyectos"></app-decisiones>
-  </mat-tab>
-  <mat-tab label="Configuraciones de Mercado" *ngIf="escenario.id">
-    <div class="tabla-ponderadora-content" *ngIf="configuracionMercado">
-      <mat-card class="forecast">
-        <mat-card-header>
-          <div mat-card-avatar class="ventas-avatar"></div>
-          <mat-card-title>Demanda de Mercado</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <table class="mat-table table">
-            <tr class="mat-header-row">
-              <th class="mat-header-cell desc-column">Valor</th>
-              <th class="mat-header-cell value-column-cantidad">Bajo</th>
-              <th class="mat-header-cell value-column-cantidad">Medio</th>
-              <th class="mat-header-cell value-column-cantidad">Alto</th>
-            </tr>
-            <ng-container *ngFor="let forecast of configuracionMercado.mercadosPeriodo">
-              <tr class="mat-row">
-                <td class="mat-cell">
-                  <span>{{escenario.nombrePeriodos}} {{forecast.periodo}}</span>
-                </td>
-                <td class="mat-cell value-column-cantidad">
-                  <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" required [(ngModel)]="forecast.bajo" [(value)]="forecast.bajo" matInput
-                      style="text-align: right;width: 80px;">
-                  </mat-form-field>
-                </td>
-                <td class="mat-cell value-column-cantidad">
-                  <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" required [(ngModel)]="forecast.medio" [(value)]="forecast.medio" matInput
-                      style="text-align: right;width: 80px;">
-                  </mat-form-field>
-                </td>
-                <td class="mat-cell value-column-cantidad">
-                  <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" required [(ngModel)]="forecast.alto" [(value)]="forecast.alto" matInput
-                      style="text-align: right;width: 80px;">
-                  </mat-form-field>
-                </td>
-              </tr>
-            </ng-container>
-          </table>
-        </mat-card-content>
-      </mat-card>
-      <mat-card class="empresas" *ngIf="configuracionMercado.empresasCompetidoras">
-        <mat-card-header>
-          <div mat-card-avatar class="competencia-avatar"></div>
-          <mat-card-title>Empresas Competidoras</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <table class="mat-table table">
-            <tr class="mat-header-row">
-              <th class="mat-header-cell desc-column">Empresa</th>
-              <th class="mat-header-cell value-column-cantidad">Bajo</th>
-              <th class="mat-header-cell value-column-cantidad">Medio</th>
-              <th class="mat-header-cell value-column-cantidad">Alto</th>
-            </tr>
-            <ng-container *ngFor="let ec of configuracionMercado.empresasCompetidoras">
-              <tr class="mat-row">
-                <td class="mat-cell">
-                  <mat-form-field>
-                    <input [(ngModel)]="ec.nombre" required [(value)]="ec.nombre" matInput>
-                  </mat-form-field>
-                </td>
-                <td class="mat-cell value-column-cantidad">
-                  <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" required [(ngModel)]="ec.bajo" [(value)]="ec.bajo" matInput
-                      style="text-align: right;width: 80px;">
-                  </mat-form-field>
-                </td>
-                <td class="mat-cell value-column-cantidad">
-                  <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" required [(ngModel)]="ec.medio" [(value)]="ec.medio" matInput
-                      style="text-align: right;width: 80px;">
-                  </mat-form-field>
-                </td>
-                <td class="mat-cell value-column-cantidad">
-                  <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" required [(ngModel)]="ec.alto" [(value)]="ec.alto" matInput
-                      style="text-align: right;width: 80px;">
-                  </mat-form-field>
-                </td>
-              </tr>
-            </ng-container>
-          </table>
-        </mat-card-content>
-      </mat-card>
-      <mat-card class="precio-intervalo" *ngIf="configuracionMercado.restriccionPrecio">
-        <mat-card-header>
-          <div mat-card-avatar class="precio-avatar"></div>
-          <mat-card-title>Intervalo de Precios</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <div class="precio-intervalo-container">
-            <mat-form-field>
-              <input placeholder="Precio Min" type="number" matInput required
-                [(ngModel)]="configuracionMercado.restriccionPrecio.precioMin"
-                [(value)]="configuracionMercado.restriccionPrecio.precioMin">
-            </mat-form-field>
-            <span style="margin-right: 20px; margin-left: 20px;">hasta</span>
-            <mat-form-field>
-              <input placeholder="Precio Max" type="number" matInput required
-                [(ngModel)]="configuracionMercado.restriccionPrecio.precioMax"
-                [(value)]="configuracionMercado.restriccionPrecio.precioMax">
-            </mat-form-field>
-          </div>
-        </mat-card-content>
-      </mat-card>
-      <mat-accordion class="accordion-tables headers-align" *ngIf="configuracionMercado.ponderacionesMercado">
-        <mat-expansion-panel hideToggle expanded="true">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <img src="../../assets/img/precio.png" class="avatar-img">
-              Precio Desde
-            </mat-panel-title>
+          </mat-card-content>
+        </mat-card>
+        <mat-accordion class="accordion-tables headers-align" *ngIf="configuracionMercado.ponderacionesMercado">
+          <mat-expansion-panel hideToggle expanded="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <img src="../../assets/img/precio.png" class="avatar-img">
+                Precio Desde
+              </mat-panel-title>
 
-          </mat-expansion-panel-header>
+            </mat-expansion-panel-header>
 
-          <table class="mat-table table">
-            <tr class="mat-header-row">
-              <th class="mat-header-cell desc-column">Valor</th>
-              <th class="mat-header-cell value-column-cantidad">Bajo</th>
-              <th class="mat-header-cell value-column-cantidad">Medio</th>
-              <th class="mat-header-cell value-column-cantidad">Alto</th>
-            </tr>
-            <ng-container *ngFor="let pd of configuracionMercado.ponderacionesMercado.precioDesde">
-              <tr class="mat-row">
-                <td class="mat-cell">
-                  <mat-form-field>
-                    <input type="number" matInput [(ngModel)]="pd.valor" [(value)]="pd.valor" required>
-                  </mat-form-field>
-                </td>
-                <td class="mat-cell value-column-cantidad">
-                  <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" [(ngModel)]="pd.bajo" [(value)]="pd.bajo" matInput
-                      style="text-align: right;width: 80px;" required>
-                  </mat-form-field>
-                </td>
-                <td class="mat-cell value-column-cantidad">
-                  <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" [(ngModel)]="pd.medio" [(value)]="pd.medio" matInput
-                      style="text-align: right;width: 80px;" required>
-                  </mat-form-field>
-                </td>
-                <td class="mat-cell value-column-cantidad">
-                  <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" [(ngModel)]="pd.alto" [(value)]="pd.alto" matInput
-                      style="text-align: right;width: 80px;" required>
-                  </mat-form-field>
-                </td>
+            <table class="mat-table table">
+              <tr class="mat-header-row">
+                <th class="mat-header-cell desc-column">Valor</th>
+                <th class="mat-header-cell value-column-cantidad">Bajo</th>
+                <th class="mat-header-cell value-column-cantidad">Medio</th>
+                <th class="mat-header-cell value-column-cantidad">Alto</th>
               </tr>
-            </ng-container>
-          </table>
-        </mat-expansion-panel>
-        <mat-expansion-panel hideToggle>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <img src="../../assets/img/cobro.png" class="avatar-img">
-              Modalidad de Cobro
-            </mat-panel-title>
+              <ng-container *ngFor="let pd of configuracionMercado.ponderacionesMercado.precioDesde">
+                <tr class="mat-row">
+                  <td class="mat-cell">
+                    <mat-form-field>
+                      <input type="number" matInput [(ngModel)]="pd.valor" [(value)]="pd.valor" required>
+                    </mat-form-field>
+                  </td>
+                  <td class="mat-cell value-column-cantidad">
+                    <mat-form-field style="text-align: right;width: 80px;">
+                      <input type="number" [(ngModel)]="pd.bajo" [(value)]="pd.bajo" matInput
+                        style="text-align: right;width: 80px;" required>
+                    </mat-form-field>
+                  </td>
+                  <td class="mat-cell value-column-cantidad">
+                    <mat-form-field style="text-align: right;width: 80px;">
+                      <input type="number" [(ngModel)]="pd.medio" [(value)]="pd.medio" matInput
+                        style="text-align: right;width: 80px;" required>
+                    </mat-form-field>
+                  </td>
+                  <td class="mat-cell value-column-cantidad">
+                    <mat-form-field style="text-align: right;width: 80px;">
+                      <input type="number" [(ngModel)]="pd.alto" [(value)]="pd.alto" matInput
+                        style="text-align: right;width: 80px;" required>
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </ng-container>
+            </table>
+          </mat-expansion-panel>
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <img src="../../assets/img/cobro.png" class="avatar-img">
+                Modalidad de Cobro
+              </mat-panel-title>
 
-          </mat-expansion-panel-header>
-          <table class="mat-table table">
-            <tr class="mat-header-row">
-              <th class="mat-header-cell desc-column">Valor</th>
-              <th class="mat-header-cell value-column-cantidad">Bajo</th>
-              <th class="mat-header-cell value-column-cantidad">Medio</th>
-              <th class="mat-header-cell value-column-cantidad">Alto</th>
-            </tr>
-            <ng-container *ngFor="let mc of configuracionMercado.ponderacionesMercado.modalidadCobro">
-              <tr class="mat-row">
-                <td class="mat-cell">
-                  <span>{{getModalidadCobroDesc(mc.valor)}}</span>
-                </td>
-                <td class="mat-cell value-column-cantidad">
-                  <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" [(ngModel)]="mc.bajo" [(value)]="mc.bajo" matInput
-                      style="text-align: right;width: 80px;" required>
-                  </mat-form-field>
-                </td>
-                <td class="mat-cell value-column-cantidad">
-                  <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" [(ngModel)]="mc.medio" [(value)]="mc.medio" matInput
-                      style="text-align: right;width: 80px;" required>
-                  </mat-form-field>
-                </td>
-                <td class="mat-cell value-column-cantidad">
-                  <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" [(ngModel)]="mc.alto" [(value)]="mc.alto" matInput
-                      style="text-align: right;width: 80px;" required>
-                  </mat-form-field>
-                </td>
+            </mat-expansion-panel-header>
+            <table class="mat-table table">
+              <tr class="mat-header-row">
+                <th class="mat-header-cell desc-column">Valor</th>
+                <th class="mat-header-cell value-column-cantidad">Bajo</th>
+                <th class="mat-header-cell value-column-cantidad">Medio</th>
+                <th class="mat-header-cell value-column-cantidad">Alto</th>
               </tr>
-            </ng-container>
-          </table>
-        </mat-expansion-panel>
-        <mat-expansion-panel hideToggle>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <img src="../../assets/img/calidad.png" class="avatar-img">
-              Calidad Desde
-            </mat-panel-title>
+              <ng-container *ngFor="let mc of configuracionMercado.ponderacionesMercado.modalidadCobro">
+                <tr class="mat-row">
+                  <td class="mat-cell">
+                    <span>{{getModalidadCobroDesc(mc.valor)}}</span>
+                  </td>
+                  <td class="mat-cell value-column-cantidad">
+                    <mat-form-field style="text-align: right;width: 80px;">
+                      <input type="number" [(ngModel)]="mc.bajo" [(value)]="mc.bajo" matInput
+                        style="text-align: right;width: 80px;" required>
+                    </mat-form-field>
+                  </td>
+                  <td class="mat-cell value-column-cantidad">
+                    <mat-form-field style="text-align: right;width: 80px;">
+                      <input type="number" [(ngModel)]="mc.medio" [(value)]="mc.medio" matInput
+                        style="text-align: right;width: 80px;" required>
+                    </mat-form-field>
+                  </td>
+                  <td class="mat-cell value-column-cantidad">
+                    <mat-form-field style="text-align: right;width: 80px;">
+                      <input type="number" [(ngModel)]="mc.alto" [(value)]="mc.alto" matInput
+                        style="text-align: right;width: 80px;" required>
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </ng-container>
+            </table>
+          </mat-expansion-panel>
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <img src="../../assets/img/calidad.png" class="avatar-img">
+                Calidad Desde
+              </mat-panel-title>
 
-          </mat-expansion-panel-header>
-          <table class="mat-table table">
-            <tr class="mat-header-row">
-              <th class="mat-header-cell desc-column">Valor</th>
-              <th class="mat-header-cell value-column-cantidad">Bajo</th>
-              <th class="mat-header-cell value-column-cantidad">Medio</th>
-              <th class="mat-header-cell value-column-cantidad">Alto</th>
-            </tr>
-            <ng-container *ngFor="let cd of configuracionMercado.ponderacionesMercado.calidadDesde">
-              <tr class="mat-row">
-                <td class="mat-cell">
-                  <mat-form-field>
-                    <input type="number" matInput [(ngModel)]="cd.valor" [(value)]="cd.valor">
-                  </mat-form-field>
-                </td>
-                <td class="mat-cell value-column-cantidad">
-                  <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" [(ngModel)]="cd.bajo" [(value)]="cd.bajo" matInput
-                      style="text-align: right;width: 80px;" required>
-                  </mat-form-field>
-                </td>
-                <td class="mat-cell value-column-cantidad">
-                  <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" [(ngModel)]="cd.medio" [(value)]="cd.medio" matInput
-                      style="text-align: right;width: 80px;" required>
-                  </mat-form-field>
-                </td>
-                <td class="mat-cell value-column-cantidad">
-                  <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" [(ngModel)]="cd.alto" [(value)]="cd.alto" matInput
-                      style="text-align: right;width: 80px;" required>
-                  </mat-form-field>
-                </td>
+            </mat-expansion-panel-header>
+            <table class="mat-table table">
+              <tr class="mat-header-row">
+                <th class="mat-header-cell desc-column">Valor</th>
+                <th class="mat-header-cell value-column-cantidad">Bajo</th>
+                <th class="mat-header-cell value-column-cantidad">Medio</th>
+                <th class="mat-header-cell value-column-cantidad">Alto</th>
               </tr>
-            </ng-container>
-          </table>
-        </mat-expansion-panel>
-        <mat-expansion-panel hideToggle>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <img src="../../assets/img/teamwork.png" class="avatar-img">
-              Vendedores Desde
-            </mat-panel-title>
+              <ng-container *ngFor="let cd of configuracionMercado.ponderacionesMercado.calidadDesde">
+                <tr class="mat-row">
+                  <td class="mat-cell">
+                    <mat-form-field>
+                      <input type="number" matInput [(ngModel)]="cd.valor" [(value)]="cd.valor">
+                    </mat-form-field>
+                  </td>
+                  <td class="mat-cell value-column-cantidad">
+                    <mat-form-field style="text-align: right;width: 80px;">
+                      <input type="number" [(ngModel)]="cd.bajo" [(value)]="cd.bajo" matInput
+                        style="text-align: right;width: 80px;" required>
+                    </mat-form-field>
+                  </td>
+                  <td class="mat-cell value-column-cantidad">
+                    <mat-form-field style="text-align: right;width: 80px;">
+                      <input type="number" [(ngModel)]="cd.medio" [(value)]="cd.medio" matInput
+                        style="text-align: right;width: 80px;" required>
+                    </mat-form-field>
+                  </td>
+                  <td class="mat-cell value-column-cantidad">
+                    <mat-form-field style="text-align: right;width: 80px;">
+                      <input type="number" [(ngModel)]="cd.alto" [(value)]="cd.alto" matInput
+                        style="text-align: right;width: 80px;" required>
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </ng-container>
+            </table>
+          </mat-expansion-panel>
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <img src="../../assets/img/teamwork.png" class="avatar-img">
+                Vendedores Desde
+              </mat-panel-title>
 
-          </mat-expansion-panel-header>
-          <table class="mat-table table">
-            <tr class="mat-header-row">
-              <th class="mat-header-cell desc-column">Valor</th>
-              <th class="mat-header-cell value-column-cantidad">Bajo</th>
-              <th class="mat-header-cell value-column-cantidad">Medio</th>
-              <th class="mat-header-cell value-column-cantidad">Alto</th>
-            </tr>
-            <ng-container *ngFor="let vd of configuracionMercado.ponderacionesMercado.vendedoresDesde">
-              <tr class="mat-row">
-                <td class="mat-cell">
-                  <mat-form-field>
-                    <input type="number" matInput [(ngModel)]="vd.valor" [(value)]="vd.valor">
-                  </mat-form-field>
-                </td>
-                <td class="mat-cell value-column-cantidad">
-                  <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" [(ngModel)]="vd.bajo" [(value)]="vd.bajo" matInput
-                      style="text-align: right;width: 80px;" required>
-                  </mat-form-field>
-                </td>
-                <td class="mat-cell value-column-cantidad">
-                  <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" [(ngModel)]="vd.medio" [(value)]="vd.medio" matInput
-                      style="text-align: right;width: 80px;" required>
-                  </mat-form-field>
-                </td>
-                <td class="mat-cell value-column-cantidad">
-                  <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" [(ngModel)]="vd.alto" [(value)]="vd.alto" matInput
-                      style="text-align: right;width: 80px;" required>
-                  </mat-form-field>
-                </td>
+            </mat-expansion-panel-header>
+            <table class="mat-table table">
+              <tr class="mat-header-row">
+                <th class="mat-header-cell desc-column">Valor</th>
+                <th class="mat-header-cell value-column-cantidad">Bajo</th>
+                <th class="mat-header-cell value-column-cantidad">Medio</th>
+                <th class="mat-header-cell value-column-cantidad">Alto</th>
               </tr>
-            </ng-container>
-          </table>
-        </mat-expansion-panel>
-        <mat-expansion-panel hideToggle>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <img src="../../assets/img/publicity.png" class="avatar-img">
-              Publicidad Desde
-            </mat-panel-title>
+              <ng-container *ngFor="let vd of configuracionMercado.ponderacionesMercado.vendedoresDesde">
+                <tr class="mat-row">
+                  <td class="mat-cell">
+                    <mat-form-field>
+                      <input type="number" matInput [(ngModel)]="vd.valor" [(value)]="vd.valor">
+                    </mat-form-field>
+                  </td>
+                  <td class="mat-cell value-column-cantidad">
+                    <mat-form-field style="text-align: right;width: 80px;">
+                      <input type="number" [(ngModel)]="vd.bajo" [(value)]="vd.bajo" matInput
+                        style="text-align: right;width: 80px;" required>
+                    </mat-form-field>
+                  </td>
+                  <td class="mat-cell value-column-cantidad">
+                    <mat-form-field style="text-align: right;width: 80px;">
+                      <input type="number" [(ngModel)]="vd.medio" [(value)]="vd.medio" matInput
+                        style="text-align: right;width: 80px;" required>
+                    </mat-form-field>
+                  </td>
+                  <td class="mat-cell value-column-cantidad">
+                    <mat-form-field style="text-align: right;width: 80px;">
+                      <input type="number" [(ngModel)]="vd.alto" [(value)]="vd.alto" matInput
+                        style="text-align: right;width: 80px;" required>
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </ng-container>
+            </table>
+          </mat-expansion-panel>
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <img src="../../assets/img/publicity.png" class="avatar-img">
+                Publicidad Desde
+              </mat-panel-title>
 
-          </mat-expansion-panel-header>
-          <table class="mat-table table">
-            <tr class="mat-header-row">
-              <th class="mat-header-cell desc-column">Valor</th>
-              <th class="mat-header-cell value-column-cantidad">Bajo</th>
-              <th class="mat-header-cell value-column-cantidad">Medio</th>
-              <th class="mat-header-cell value-column-cantidad">Alto</th>
-            </tr>
-            <ng-container *ngFor="let pd of configuracionMercado.ponderacionesMercado.publicidadDesde">
-              <tr class="mat-row">
-                <td class="mat-cell">
-                  <mat-form-field>
-                    <input type="number" matInput [(ngModel)]="pd.valor" [(value)]="pd.valor">
-                  </mat-form-field>
-                </td>
-                <td class="mat-cell value-column-cantidad">
-                  <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" [(ngModel)]="pd.bajo" [(value)]="pd.bajo" matInput
-                      style="text-align: right;width: 80px;" required>
-                  </mat-form-field>
-                </td>
-                <td class="mat-cell value-column-cantidad">
-                  <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" [(ngModel)]="pd.medio" [(value)]="pd.medio" matInput
-                      style="text-align: right;width: 80px;" required>
-                  </mat-form-field>
-                </td>
-                <td class="mat-cell value-column-cantidad">
-                  <mat-form-field style="text-align: right;width: 80px;">
-                    <input type="number" [(ngModel)]="pd.alto" [(value)]="pd.alto" matInput
-                      style="text-align: right;width: 80px;" required>
-                  </mat-form-field>
-                </td>
+            </mat-expansion-panel-header>
+            <table class="mat-table table">
+              <tr class="mat-header-row">
+                <th class="mat-header-cell desc-column">Valor</th>
+                <th class="mat-header-cell value-column-cantidad">Bajo</th>
+                <th class="mat-header-cell value-column-cantidad">Medio</th>
+                <th class="mat-header-cell value-column-cantidad">Alto</th>
               </tr>
-            </ng-container>
-          </table>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </div>
-  </mat-tab>
-</mat-tab-group>
+              <ng-container *ngFor="let pd of configuracionMercado.ponderacionesMercado.publicidadDesde">
+                <tr class="mat-row">
+                  <td class="mat-cell">
+                    <mat-form-field>
+                      <input type="number" matInput [(ngModel)]="pd.valor" [(value)]="pd.valor">
+                    </mat-form-field>
+                  </td>
+                  <td class="mat-cell value-column-cantidad">
+                    <mat-form-field style="text-align: right;width: 80px;">
+                      <input type="number" [(ngModel)]="pd.bajo" [(value)]="pd.bajo" matInput
+                        style="text-align: right;width: 80px;" required>
+                    </mat-form-field>
+                  </td>
+                  <td class="mat-cell value-column-cantidad">
+                    <mat-form-field style="text-align: right;width: 80px;">
+                      <input type="number" [(ngModel)]="pd.medio" [(value)]="pd.medio" matInput
+                        style="text-align: right;width: 80px;" required>
+                    </mat-form-field>
+                  </td>
+                  <td class="mat-cell value-column-cantidad">
+                    <mat-form-field style="text-align: right;width: 80px;">
+                      <input type="number" [(ngModel)]="pd.alto" [(value)]="pd.alto" matInput
+                        style="text-align: right;width: 80px;" required>
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </ng-container>
+            </table>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 
-<button mat-fab color="primary" class="fab" (click)="save()">
-  <mat-icon>save</mat-icon>
-</button>
+  <button mat-fab color="primary" class="fab" (click)="save()">
+    <mat-icon>save</mat-icon>
+  </button>
+</div>

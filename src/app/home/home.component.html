@@ -1,4 +1,4 @@
-<div *ngIf="usuario" class="container" [class.is-mobile]="mobileQuery.matches">
+<div *ngIf="usuario" class="container" [class.is-mobile]="mobileQuery.matches" [class.admin-theme]="usuario.rol === 'ADMIN'">
   <mat-toolbar color="primary" class="toolbar">
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>

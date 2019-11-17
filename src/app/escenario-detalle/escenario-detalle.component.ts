@@ -8,6 +8,7 @@ import { CursosService } from '../cursos.service';
 import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material';
 import { startWith, map } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
+import { UsuarioService } from '../usuario.service';
 
 @Component({
   selector: 'app-escenario-detalle',
@@ -17,6 +18,7 @@ import { of, Observable } from 'rxjs';
 export class EscenarioDetalleComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   filtredCursos: Observable<string[]>;
+  usuario;
   allCursos;
   configuracionMercado;
   escenario = {
@@ -159,6 +161,7 @@ export class EscenarioDetalleComponent implements OnInit {
   hasProyectos = false;
 
   constructor(private escenariosService: EscenariosService,
+    private usuariosService: UsuarioService,
     private route: ActivatedRoute,
     private router: Router,
     private cursosService: CursosService,
