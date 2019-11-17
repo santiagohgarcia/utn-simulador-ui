@@ -30,7 +30,7 @@ export class PresupuestoFinancieroComponent implements OnInit {
   }
 
   getPeriodos(proyectoId) {
-    this.proyectoService.getPeriodoActual(proyectoId).subscribe(periodoActual => {
+    this.proyectoService.getPeriodoActual(proyectoId, this.forecast).subscribe(periodoActual => {
       this.periodos = [...Array(periodoActual).keys(), periodoActual];
     })
   }

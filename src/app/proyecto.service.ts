@@ -57,8 +57,8 @@ export class ProyectoService {
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
-  getPeriodoActual(idProyecto) {
-    return this.getEstado(idProyecto, false).pipe(map(estado => estado.proyecto.escenario.maximosPeriodos))
+  getPeriodoActual(idProyecto, forecast) {
+    return this.getEstado(idProyecto, forecast).pipe(map(estado => estado.proyecto.escenario.maximosPeriodos))
       .pipe(catchError(this.messageService.catchError.bind(this.messageService)));
   }
 
