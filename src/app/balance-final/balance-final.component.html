@@ -60,7 +60,7 @@
                     <p>Deudas Bancarias</p>
                     <h3>$ {{ balanceFinal.pasivo.deudasBancarias.toLocaleString() }}</h3>
                 </div>
-                <div class="list-item">
+                <div *ngIf="balanceFinal.pasivo.otros.toLocaleString() != 0" class="list-item">
                     <p>Otros</p>
                     <h3>$ {{ balanceFinal.pasivo.otros.toLocaleString() }}</h3>
                 </div>
