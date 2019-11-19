@@ -5,13 +5,13 @@
         <mat-form-field class="full-width">
             <input matInput placeholder="Nombre" type="text" [formControl]="nombre"
                 [(ngModel)]="curso.nombre" [(value)]="curso.nombre" required>
-            <mat-error *ngIf="clave.invalid">Required field</mat-error>
+            <mat-error *ngIf="clave.invalid">Campo requerido</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
-            <input matInput placeholder="Clave de Matriculacion" type="text"
+            <input matInput placeholder="Clave de Matriculación" type="text"
                 [formControl]="clave" [(ngModel)]="curso.clave"
                 [(value)]="curso.clave" required>
-            <mat-error *ngIf="clave.invalid">Required field</mat-error>
+            <mat-error *ngIf="clave.invalid">Campo requerido</mat-error>
         </mat-form-field>
     </form>
 </div>

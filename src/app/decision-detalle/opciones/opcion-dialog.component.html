@@ -3,45 +3,45 @@
 <div mat-dialog-content>
     <form [formGroup]="opcionForm" class="form">
         <mat-form-field class="full-width">
-            <input matInput placeholder="Descripcion" type="text" [formControl]="descripcion"
+            <input matInput placeholder="Descripción" type="text" [formControl]="descripcion"
                 [(ngModel)]="opcion.descripcion" [(value)]="opcion.descripcion" required>
-            <mat-error *ngIf="descripcion.invalid">Required field</mat-error>
+            <mat-error *ngIf="descripcion.invalid">Campo requerido</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
-            <input type="number" matInput placeholder="Variacion de Costo Fijo" type="text"
+            <input type="number" matInput placeholder="Variación de Costo Fijo" type="text"
                 [formControl]="variacionCostoFijo" [(ngModel)]="opcion.variacionCostoFijo"
                 [(value)]="opcion.variacionCostoFijo" required>
-            <mat-error *ngIf="variacionCostoFijo.invalid">Required field</mat-error>
+            <mat-error *ngIf="variacionCostoFijo.invalid">Campo requerido</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
-            <input type="number" matInput placeholder="Variacion de Costo Variable" type="text"
+            <input type="number" matInput placeholder="Variación de Costo Variable" type="text"
                 [formControl]="variacionCostoVariable" [(ngModel)]="opcion.variacionCostoVariable"
                 [(value)]="opcion.variacionCostoVariable" required>
-            <mat-error *ngIf="variacionCostoVariable.invalid">Required field</mat-error>
+            <mat-error *ngIf="variacionCostoVariable.invalid">Campo requerido</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
-            <input type="number" matInput placeholder="Variacion de Produccion" type="text"
+            <input type="number" matInput placeholder="Variación de Producción" type="text"
                 [formControl]="variacionProduccion" [(ngModel)]="opcion.variacionProduccion"
                 [(value)]="opcion.variacionProduccion" required>
-            <mat-error *ngIf="variacionProduccion.invalid">Required field</mat-error>
+            <mat-error *ngIf="variacionProduccion.invalid">Campo requerido</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
-            <input type="number" matInput placeholder="Variacion de Calidad" type="text"
+            <input type="number" matInput placeholder="Variación de Calidad" type="text"
                 [formControl]="variacionCalidad" [(ngModel)]="opcion.variacionCalidad"
                 [(value)]="opcion.variacionCalidad" required>
-            <mat-error *ngIf="variacionCalidad.invalid">Required field</mat-error>
+            <mat-error *ngIf="variacionCalidad.invalid">Campo requerido</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
-            <input type="number" matInput placeholder="Variacion de Publicidad" type="text"
+            <input type="number" matInput placeholder="Variación de Publicidad" type="text"
                 [formControl]="variacionPublicidad" [(ngModel)]="opcion.variacionPublicidad"
                 [(value)]="opcion.variacionPublicidad" required>
-            <mat-error *ngIf="variacionPublicidad.invalid">Required field</mat-error>
+            <mat-error *ngIf="variacionPublicidad.invalid">Campo requerido</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
-            <input type="number" matInput placeholder="Variacion de Cantidad de Vendedores" type="text"
+            <input type="number" matInput placeholder="Variación de Cantidad de Vendedores" type="text"
                 [formControl]="variacionCantidadVendedores" [(ngModel)]="opcion.variacionCantidadVendedores"
                 [(value)]="opcion.variacionCantidadVendedores" required>
-            <mat-error *ngIf="variacionCantidadVendedores.invalid">Required field</mat-error>
+            <mat-error *ngIf="variacionCantidadVendedores.invalid">Campo requerido</mat-error>
         </mat-form-field>
     </form>
 </div>

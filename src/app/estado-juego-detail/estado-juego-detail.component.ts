@@ -165,7 +165,7 @@ export class EstadoJuegoDetailComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '500px',
       data: {
-        message: "Seguro que desea cerrar el escenario?"
+        message: "¿Seguro que desea cerrar el escenario?"
       }
     });
 
@@ -174,7 +174,7 @@ export class EstadoJuegoDetailComponent implements OnInit {
         this.escenariosService.getConfiguracionMercado(this.escenario.id).subscribe(configuracionMercado => {
           if (configuracionMercado.restriccionPrecio) {
             this.escenariosService.simularMercado(this.escenario.id, this.curso.id).subscribe(_ => {
-              this.messageService.openSnackBar("Simulacion de Mercado ejecutada correctamente")
+              this.messageService.openSnackBar("Simulación de Mercado ejecutada correctamente")
               this._loadData()
             })
           } else {

@@ -45,7 +45,7 @@ export class EscenariosComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '500px',
       data: {
-        message: "Seguro que desea eliminar el escenario?"
+        message: "¿Seguro que desea eliminar el escenario?"
       }
     });
     dialogRef.afterClosed().subscribe(response => {
@@ -59,7 +59,7 @@ export class EscenariosComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '500px',
       data: {
-        message: "Seguro que desea clonar el escenario?"
+        message: "¿Seguro que desea clonar el escenario?"
       }
     });
     dialogRef.afterClosed().subscribe(response => {

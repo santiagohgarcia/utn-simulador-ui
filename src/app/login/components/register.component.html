@@ -8,7 +8,7 @@
         </mat-form-field>
         <mat-form-field class="full-width">
             <input matInput placeholder="Ingrese su contraseña" type="password" [formControl]="password">
-            <mat-error *ngIf="password.invalid">Required field</mat-error>
+            <mat-error *ngIf="password.invalid">Campo requerido</mat-error>
 
         </mat-form-field>
       <mat-form-field class="full-width">
@@ -19,7 +19,7 @@
 </div>
 <div mat-dialog-actions>
     <div class="button-row">
-        <button mat-raised-button color="warn" (click)="onClose()">Cancel</button>
-        <button mat-raised-button color="primary" (click)="onRegister()">Register</button>
+        <button mat-raised-button color="warn" (click)="onClose()">Cancelar</button>
+        <button mat-raised-button color="primary" (click)="onRegister()">Registrarme</button>
     </div>
 </div>

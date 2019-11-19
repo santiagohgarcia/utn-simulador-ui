@@ -3,15 +3,15 @@
 <div mat-dialog-content>
     <form [formGroup]="cursoForm" class="form">
         <mat-form-field class="full-width">
-            <input matInput placeholder="Numero de curso" type="text" [formControl]="nombre"
+            <input matInput placeholder="Número de curso" type="text" [formControl]="nombre"
                 [(ngModel)]="curso.nombre" [(value)]="curso.nombre">
-            <mat-error *ngIf="clave.invalid">Required field</mat-error>
+            <mat-error *ngIf="clave.invalid">Campo requerido</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
-            <input matInput placeholder="Clave de Matriculacion" type="password"
+            <input matInput placeholder="Clave de Matriculación" type="password"
                 [formControl]="clave" [(ngModel)]="curso.clave"
                 [(value)]="curso.clave">
-            <mat-error *ngIf="clave.invalid">Required field</mat-error>
+            <mat-error *ngIf="clave.invalid">Campo requerido</mat-error>
         </mat-form-field>
     </form>
 </div>
