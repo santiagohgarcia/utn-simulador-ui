@@ -7,7 +7,7 @@
   </button>
   <div class="spacer"></div>
   <button *ngIf="!proyecto.entregado" mat-raised-button color="accent" (click)="entregarSimulacion()">ENTREGAR
-    SIMULACION</button>
+    SIMULACIÓN</button>
   <mat-button-toggle-group name="fontStyle" *ngIf="proyecto.entregado && forecast && escenarioCurso" [(value)]="seccion" >
     <mat-button-toggle value="RESULTADOS_FORECAST" [disabled]="forecast.length <= 0">Resultados Forecast</mat-button-toggle>
     <mat-button-toggle value="RESULTADOS_REALES" [disabled]="escenarioCurso.abierto">Resultados Reales</mat-button-toggle>
@@ -50,7 +50,7 @@
     <app-presupuesto-financiero [proyecto]="proyecto" [forecast]="true">
     </app-presupuesto-financiero>
   </mat-tab>
-  <mat-tab label="Presupuesto Economico">
+  <mat-tab label="Presupuesto Económico">
     <app-presupuesto-economico [proyecto]="proyecto" [forecast]="true">
     </app-presupuesto-economico>
   </mat-tab>
@@ -96,7 +96,7 @@
     <app-presupuesto-financiero [proyecto]="proyecto" [forecast]="false">
     </app-presupuesto-financiero>
   </mat-tab>
-  <mat-tab label="Presupuesto Economico">
+  <mat-tab label="Presupuesto Económico">
     <app-presupuesto-economico [proyecto]="proyecto" [forecast]="false">
     </app-presupuesto-economico>
   </mat-tab>

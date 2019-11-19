@@ -130,7 +130,7 @@ export class EstadoComponent implements OnInit {
   }
 
   getEvenNumber = function (num) {
-    return Math.floor(Number(num) / 2) > 0 ? new Array(Math.floor(Number(num) / 2)) : 0;
+    return Math.floor(Number(num) / 2) > 0 ? new Array(Math.floor(Number(num) / 2)) :  new Array(0);
   }
 
   getOddNumber = function (num) {

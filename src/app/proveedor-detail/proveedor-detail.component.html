@@ -15,17 +15,17 @@
   <mat-form-field class="full-width">
     <input autofocus matInput placeholder="Nombre" [formControl]="nombre" [(ngModel)]="proveedor.nombre"
       [(value)]="proveedor.nombre" required>
-    <mat-error *ngIf="nombre.invalid">Required field</mat-error>
+    <mat-error *ngIf="nombre.invalid">Campo requerido</mat-error>
   </mat-form-field>
   <mat-form-field class="full-width">
-    <input type="number" matInput placeholder="Variacion Costo Variable" [formControl]="variacionCostoVariable"
+    <input type="number" matInput placeholder="Variación Costo Variable" [formControl]="variacionCostoVariable"
       [(ngModel)]="proveedor.variacionCostoVariable" [(value)]="proveedor.variacionCostoVariable" required>
-    <mat-error *ngIf="variacionCostoVariable.invalid">Required field</mat-error>
+    <mat-error *ngIf="variacionCostoVariable.invalid">Campo requerido</mat-error>
   </mat-form-field>
   <mat-form-field class="full-width">
-    <input type="number" matInput placeholder="Variacion Calidad" [formControl]="variacionCalidad"
+    <input type="number" matInput placeholder="Variación Calidad" [formControl]="variacionCalidad"
       [(ngModel)]="proveedor.variacionCalidad" [(value)]="proveedor.variacionCalidad" required>
-    <mat-error *ngIf="variacionCalidad.invalid">Required field</mat-error>
+    <mat-error *ngIf="variacionCalidad.invalid">Campo requerido</mat-error>
   </mat-form-field>
 </form>
 
@@ -37,9 +37,9 @@
   <mat-card *ngFor="let modalidadPago of proveedor.modalidadPago">
     <mat-card-header class="modalidad-pago-container">
       <mat-card-title *ngIf="modalidadPago.offsetPeriodo === 0">Contado</mat-card-title>
-      <mat-card-title *ngIf="modalidadPago.offsetPeriodo === 1">30 dias</mat-card-title>
-      <mat-card-title *ngIf="modalidadPago.offsetPeriodo === 2">60 dias</mat-card-title>
-      <mat-card-title *ngIf="modalidadPago.offsetPeriodo === 3">90 dias</mat-card-title>
+      <mat-card-title *ngIf="modalidadPago.offsetPeriodo === 1">30 días</mat-card-title>
+      <mat-card-title *ngIf="modalidadPago.offsetPeriodo === 2">60 días</mat-card-title>
+      <mat-card-title *ngIf="modalidadPago.offsetPeriodo === 3">90 días</mat-card-title>
       <mat-form-field class="full-width" style="text-align: right; width:100px;">
         <input type="number" matInput placeholder="Porcentaje" style="text-align: right; width:100px;"
           [(ngModel)]="modalidadPago.porcentaje" [(value)]="modalidadPago.porcentaje" required>

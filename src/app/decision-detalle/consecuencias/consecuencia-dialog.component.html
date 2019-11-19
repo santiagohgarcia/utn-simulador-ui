@@ -3,24 +3,24 @@
 <div mat-dialog-content>
     <form [formGroup]="consecuenciaForm" class="form">
         <mat-form-field class="full-width">
-            <input matInput placeholder="Descripcion" type="text" [formControl]="descripcion"
+            <input matInput placeholder="Descripción" type="text" [formControl]="descripcion"
                 [(ngModel)]="consecuencia.descripcion" [(value)]="consecuencia.descripcion" required>
-            <mat-error *ngIf="descripcion.invalid">Required field</mat-error>
+            <mat-error *ngIf="descripcion.invalid">Campo requerido</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
             <input type="number" matInput placeholder="Monto" [formControl]="monto" [(ngModel)]="consecuencia.monto"
                 [(value)]="consecuencia.monto" required>
-            <mat-error *ngIf="monto.invalid">Required field</mat-error>
+            <mat-error *ngIf="monto.invalid">Campo requerido</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
-            <input type="number" matInput placeholder="Periodo Inicio" [formControl]="periodoInicio"
+            <input type="number" matInput placeholder="Período Inicio" [formControl]="periodoInicio"
                 [(ngModel)]="consecuencia.periodoInicio" [(value)]="consecuencia.periodoInicio" required>
-            <mat-error *ngIf="periodoInicio.invalid">Required field</mat-error>
+            <mat-error *ngIf="periodoInicio.invalid">Campo requerido</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
-            <input type="number" matInput placeholder="Cantidad Periodos" [formControl]="cantidadPeriodos"
+            <input type="number" matInput placeholder="Cantidad Períodos" [formControl]="cantidadPeriodos"
                 [(ngModel)]="consecuencia.cantidadPeriodos" [(value)]="consecuencia.cantidadPeriodos" required>
-            <mat-error *ngIf="cantidadPeriodos.invalid">Required field</mat-error>
+            <mat-error *ngIf="cantidadPeriodos.invalid">Campo requerido</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
             <mat-label>Tipo Cuenta</mat-label>
@@ -31,7 +31,7 @@
                 </mat-option>
             
             </mat-select>
-            <mat-error *ngIf="cantidadPeriodos.invalid">Required field</mat-error>
+            <mat-error *ngIf="cantidadPeriodos.invalid">Campo requerido</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
             <mat-label>Tipo Flujo de Fondos</mat-label>
@@ -41,7 +41,7 @@
                     {{tipoFlujoFondo.descripcion}}
                 </mat-option>
             </mat-select>
-            <mat-error *ngIf="tipoFlujoFondo.invalid">Required field</mat-error>
+            <mat-error *ngIf="tipoFlujoFondo.invalid">Campo requerido</mat-error>
         </mat-form-field>
     </form>
 </div>

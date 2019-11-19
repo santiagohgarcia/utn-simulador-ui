@@ -143,7 +143,7 @@
           <mat-card class="single-number-card">
             <mat-card-header>
               <div mat-card-avatar class="produccion-avatar"></div>
-              <mat-card-title>Produccion</mat-card-title>
+              <mat-card-title>Producción</mat-card-title>
             </mat-card-header>
             <mat-card-content>
               <h1 class="single-number">
@@ -225,7 +225,7 @@
           <table class="mat-table table">
 
             <tr class="mat-header-row">
-              <th class="mat-header-cell desc-column">Periodo</th>
+              <th class="mat-header-cell desc-column">Período</th>
               <th class="mat-header-cell value-column">Porcentaje</th>
             </tr>
 
@@ -255,7 +255,7 @@
           <table class="mat-table table">
 
             <tr class="mat-header-row">
-              <th class="mat-header-cell desc-column">Periodo</th>
+              <th class="mat-header-cell desc-column">Período</th>
               <th class="mat-header-cell value-column-cantidad">Cantidad</th>
               <th class="mat-header-cell value-column-cantidad">Precio Venta</th>
             </tr>
@@ -345,7 +345,7 @@
 
       </mat-card>
 
-      <mat-card class="creditos" *ngIf="credito">
+      <mat-card class="creditos" *ngIf="credito && financiaciones.length > 0">
 
         <mat-card-header>
           <div mat-card-avatar class="credito-avatar"></div>
@@ -369,7 +369,7 @@
           <table class="mat-table table">
 
             <tr class="mat-header-row">
-              <th class="mat-header-cell desc-column">Credito</th>
+              <th class="mat-header-cell desc-column">Crédito</th>
               <th class="mat-header-cell value-column">TEA</th>
               <th class="mat-header-cell value-column">Cuotas</th>
             </tr>

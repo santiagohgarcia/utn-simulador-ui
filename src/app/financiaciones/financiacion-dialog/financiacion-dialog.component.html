@@ -1,23 +1,23 @@
-<h1 mat-dialog-title>Editar Financiacion</h1>
+<h1 mat-dialog-title>Editar Financiación</h1>
 
 <div mat-dialog-content>
     <form [formGroup]="financiacionForm" class="form">
         <mat-form-field class="full-width">
-            <input matInput placeholder="Descripcion" type="text" [formControl]="descripcion"
+            <input matInput placeholder="Descripción" type="text" [formControl]="descripcion"
                 [(ngModel)]="financiacion.descripcion" [(value)]="financiacion.descripcion" required>
-            <mat-error *ngIf="descripcion.invalid">Required field</mat-error>
+            <mat-error *ngIf="descripcion.invalid">Campo requerido</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
             <input type="number" matInput placeholder="TEA" type="number"
                 [formControl]="tea" [(ngModel)]="financiacion.tea"
                 [(value)]="financiacion.tea" required>
-            <mat-error *ngIf="tea.invalid">Required field</mat-error>
+            <mat-error *ngIf="tea.invalid">Campo requerido</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
             <input type="number" matInput placeholder="Cantidad Cuotas" type="number"
                 [formControl]="cantidadCuotas" [(ngModel)]="financiacion.cantidadCuotas"
                 [(value)]="financiacion.cantidadCuotas" required>
-            <mat-error *ngIf="cantidadCuotas.invalid">Required field</mat-error>
+            <mat-error *ngIf="cantidadCuotas.invalid">Campo requerido</mat-error>
         </mat-form-field>
     </form>
 </div>
