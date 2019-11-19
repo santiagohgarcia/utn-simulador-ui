@@ -88,7 +88,7 @@ export class RankingsComponent implements OnInit {
       data: [
         {
           data: jugadoresPorCaja.map(j => j.cajaFinal),
-          label: 'Ventas'
+          label: 'Caja Final'
         }
       ]
     }
@@ -110,7 +110,7 @@ export class RankingsComponent implements OnInit {
       data: [
         {
           data: jugadoresPorRenta.map(j => j.renta),
-          label: 'Ventas'
+          label: 'Renta'
         }
       ]
     }
