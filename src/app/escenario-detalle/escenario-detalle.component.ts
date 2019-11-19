@@ -197,7 +197,7 @@ export class EscenarioDetalleComponent implements OnInit {
     this.getCursos();
   }
 
-  getHasProyectos(escenarioId){
+  getHasProyectos(escenarioId) {
     return this.escenariosService.getProyectosByEscenario(escenarioId).subscribe(proyectos => {
       this.hasProyectos = (proyectos.length > 0)
     })
@@ -243,13 +243,13 @@ export class EscenarioDetalleComponent implements OnInit {
   }
 
   private _filterCurso(value: string): string[] {
-    if(value.toLowerCase){
+    if (value.toLowerCase) {
       const filterValue = value.toLowerCase();
       return this.allCursos.filter(curso => curso.nombre.toLowerCase().indexOf(filterValue) === 0);
-    }else{
+    } else {
       return this.allCursos;
     }
-    
+
   }
 
   getEscenario(id) {
@@ -300,6 +300,13 @@ export class EscenarioDetalleComponent implements OnInit {
         this.setConfiguracionMercado(escenario)
       }
     })
+  }
+
+  getMercadosPeriodo() {
+    if (this.escenario.maximosPeriodos !== this.configuracionMercado.mercadosPeriodo.length && this.escenario.maximosPeriodos !== null) {
+      this.setConfiguracionMercado(this.escenario);
+    }
+    return this.configuracionMercado.mercadosPeriodo;
   }
 
   setConfiguracionMercado(escenario) {

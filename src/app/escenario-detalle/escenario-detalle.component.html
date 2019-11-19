@@ -257,14 +257,14 @@
             <mat-card-title>Demanda de Mercado</mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <table class="mat-table table">
+            <table class="mat-table table" *ngIf="configuracionMercado.mercadosPeriodo">
               <tr class="mat-header-row">
                 <th class="mat-header-cell desc-column">Valor</th>
                 <th class="mat-header-cell value-column-cantidad">Bajo</th>
                 <th class="mat-header-cell value-column-cantidad">Medio</th>
                 <th class="mat-header-cell value-column-cantidad">Alto</th>
               </tr>
-              <ng-container *ngFor="let forecast of configuracionMercado.mercadosPeriodo">
+              <ng-container  *ngFor="let forecast of getMercadosPeriodo()">
                 <tr class="mat-row">
                   <td class="mat-cell">
                     <span>{{escenario.nombrePeriodos}} {{forecast.periodo}}</span>
