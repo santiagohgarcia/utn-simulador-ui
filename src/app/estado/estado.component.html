@@ -1,5 +1,5 @@
-<div *ngIf="proyecto.periodoQuiebreCaja > 0">
-  <p class="danger-alert">Se produjo un quiebre de caja en el período {{ proyecto.periodoQuiebreCaja }}, no se realizó la simulación a partir de ese punto</p>
+<div *ngIf="this.estados && getPeriodoQuiebreCaja(this.estados) >= 0">
+  <p class="danger-alert">Se produjo un quiebre de caja en el período {{ getPeriodoQuiebreCaja(this.estados) }}, no se realizó la simulación a partir de ese punto</p>
 </div>
 
 <div class="card-container">  

@@ -43,6 +43,11 @@ export class EstadoComponent implements OnInit {
 
   }
 
+  getPeriodoQuiebreCaja(estados){
+    let estadoQuiebreCaja = estados.find(estado => estado.caja < 0);
+    return estados.indexOf(estadoQuiebreCaja);
+  }
+
   getEstadoActual(proyectoId) {
     this.estadoActual = this.proyectoService.getEstado(proyectoId, this.forecast).subscribe(estadoActual => {
       this.estadoActual = estadoActual;
