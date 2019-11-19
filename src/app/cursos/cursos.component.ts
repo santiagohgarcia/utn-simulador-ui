@@ -3,6 +3,7 @@ import { CursosService } from '../cursos.service';
 import { CursoDialogComponent } from './curso-dialog/curso-dialog.component';
 import { MatDialog } from '@angular/material';
 import { UsuarioService } from '../usuario.service';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-cursos',
@@ -47,7 +48,17 @@ export class CursosComponent implements OnInit {
   }
 
   removeCurso(curso) {
-    this.cursosService.removeCurso(curso).subscribe(_ => this.getCursos())
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '500px',
+      data: {
+        message: "Seguro que desea eliminar el curso?"
+      }
+    });
+    dialogRef.afterClosed().subscribe(response => {
+      if (response === "OK") {
+        this.cursosService.removeCurso(curso).subscribe(_ => this.getCursos())
+      }
+    });
   }
 
   createCurso() {
