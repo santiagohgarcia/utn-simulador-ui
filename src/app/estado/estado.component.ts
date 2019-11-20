@@ -43,7 +43,7 @@ export class EstadoComponent implements OnInit {
 
   }
 
-  getPeriodoQuiebreCaja(estados){
+  getPeriodoQuiebreCaja(estados) {
     let estadoQuiebreCaja = estados.find(estado => estado.caja < 0);
     return estados.indexOf(estadoQuiebreCaja);
   }
@@ -60,7 +60,10 @@ export class EstadoComponent implements OnInit {
       this.estados = estados;
       this.setCajaChartProps(this.estados);
       this.setVentasChartProps(this.estados);
-      this.setStockVsVentasChartProps(this.estados);
+      this.proyectoService.getForecast(proyectoId).subscribe(forecasts => {
+        this.setStockVsVentasChartProps(this.estados, forecasts);
+      })
+
     })
   }
 
@@ -106,7 +109,8 @@ export class EstadoComponent implements OnInit {
     }
   }
 
-  setStockVsVentasChartProps(estados) {
+  setStockVsVentasChartProps(estados, forecasts) {
+    var forecastForVentas = forecasts.filter((_, index) => index !== 0);
     this.ventasVsStockChartProps = {
       options: {
         scaleShowVerticalLines: false,
@@ -118,10 +122,17 @@ export class EstadoComponent implements OnInit {
       legend: true,
       data: [
         {
-          data: estados.filter((_, index) => index !== 0).map(e => e.ventas),
+          data: estados.filter((_, index) => index !== 0).map((e, index) => {
+            var precio = forecastForVentas[index].precio;
+            if (precio === 0) {
+              return 0;
+            } else {
+              return e.ventas / precio;
+            }
+          }),
           type: 'line',
           fill: false,
-          label: 'Ventas'
+          label: 'Cantidad Vendida'
         },
         {
           data: estados.filter((_, index) => index !== 0).map(e => e.stock),
@@ -135,7 +146,7 @@ export class EstadoComponent implements OnInit {
   }
 
   getEvenNumber = function (num) {
-    return Math.floor(Number(num) / 2) > 0 ? new Array(Math.floor(Number(num) / 2)) :  new Array(0);
+    return Math.floor(Number(num) / 2) > 0 ? new Array(Math.floor(Number(num) / 2)) : new Array(0);
   }
 
   getOddNumber = function (num) {
