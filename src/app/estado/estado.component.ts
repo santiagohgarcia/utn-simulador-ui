@@ -28,7 +28,6 @@ export class EstadoComponent implements OnInit {
 
   ngOnInit() {
     this.getEstadoActual(this.proyecto.id);
-    this.getEstados(this.proyecto.id);
     this.getUltimoPrecioProducto(this.proyecto.id);
   }
 
@@ -40,7 +39,6 @@ export class EstadoComponent implements OnInit {
     } else {
       this.ultimoPrecioProducto = 0;
     }
-
   }
 
   getPeriodoQuiebreCaja(estados) {
@@ -52,6 +50,7 @@ export class EstadoComponent implements OnInit {
     this.estadoActual = this.proyectoService.getEstado(proyectoId, this.forecast).subscribe(estadoActual => {
       this.estadoActual = estadoActual;
       this.escenario = estadoActual.proyecto.escenario;
+      this.getEstados(proyectoId);
     })
   }
 
