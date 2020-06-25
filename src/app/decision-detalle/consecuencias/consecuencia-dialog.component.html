@@ -43,6 +43,16 @@
             </mat-select>
             <mat-error *ngIf="tipoFlujoFondo.invalid">Campo requerido</mat-error>
         </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Tipo Balance</mat-label>
+            <mat-select [formControl]="tipoBalance" [(ngModel)]="consecuencia.tipoBalance"
+                [(value)]="consecuencia.tipoBalance">
+                <mat-option></mat-option>
+                <mat-option value="MAQUINARIAS">Maquinaria</mat-option>
+                <mat-option value="AMORTIZACION_MAQUINARIAS">Amortizacion Maquinaria</mat-option>
+            </mat-select>
+            <mat-error *ngIf="tipoFlujoFondo.invalid">Campo requerido</mat-error>
+        </mat-form-field>
     </form>
 </div>
 <div mat-dialog-actions>

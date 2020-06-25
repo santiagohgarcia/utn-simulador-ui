@@ -25,7 +25,7 @@ export class EscenarioDetalleComponent implements OnInit {
     id: null,
     titulo: '',
     maximosPeriodos: null,
-    nombrePeriodos: '',
+    nombrePeriodos: 'Mes',
     descripcion: '',
     impuestoPorcentaje: null,
     balanceInicial: {
@@ -64,7 +64,7 @@ export class EscenarioDetalleComponent implements OnInit {
   descripcion = new FormControl('', [Validators.required]);
   titulo = new FormControl('', [Validators.required]);
   maximosPeriodos = new FormControl(new Number(), [Validators.required, Validators.min(1)]);
-  nombrePeriodos = new FormControl('', [Validators.required]);
+  nombrePeriodos = new FormControl({ value: '', disabled: true }, [Validators.required]);
   impuestoPorcentaje = new FormControl(new Number(), [Validators.required, Validators.min(0), Validators.max(99.9)]);
   cursos = new FormControl();
   escenarioForm: FormGroup = new FormGroup({
