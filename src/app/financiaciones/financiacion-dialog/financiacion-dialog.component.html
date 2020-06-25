@@ -8,7 +8,7 @@
             <mat-error *ngIf="descripcion.invalid">Campo requerido</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
-            <input type="number" matInput placeholder="TEA" type="number"
+            <input type="number" matInput placeholder="Tasa Efectiva Mensual" type="number"
                 [formControl]="tea" [(ngModel)]="financiacion.tea"
                 [(value)]="financiacion.tea" required>
             <mat-error *ngIf="tea.invalid">Campo requerido</mat-error>

@@ -20,13 +20,15 @@ export class ConsecuenciaDialogComponent implements OnInit {
   cantidadPeriodos = new FormControl('', [Validators.required])
   tipoCuenta = new FormControl('', [Validators.required])
   tipoFlujoFondo = new FormControl('', [Validators.required])
+  tipoBalance = new FormControl(null);
   consecuenciaForm: FormGroup = new FormGroup({
     descripcion: this.descripcion,
     monto: this.monto,
     periodoInicio: this.periodoInicio,
     cantidadPeriodos: this.cantidadPeriodos,
     tipoCuenta: this.tipoCuenta,
-    tipoFlujoFondo: this.tipoFlujoFondo
+    tipoFlujoFondo: this.tipoFlujoFondo,
+    tipoBalance: this.tipoBalance
   });
 
   constructor(public dialogRef: MatDialogRef<ConsecuenciaDialogComponent>,
