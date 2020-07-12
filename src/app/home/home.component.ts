@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   }) sidenav: MatSidenav;
 
   user: any;
+  year = new Date().getFullYear();
   usuario;
   opened = true;
   pendingRequests;
